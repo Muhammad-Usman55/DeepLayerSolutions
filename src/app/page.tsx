@@ -1,0 +1,35 @@
+import { HeroSection } from "@/components/home/HeroSection";
+import { CapabilitiesStrip } from "@/components/home/CapabilitiesStrip";
+import { ServicesPreview } from "@/components/home/ServicesPreview";
+import { WhyChooseUs } from "@/components/home/WhyChooseUs";
+import { StatsStrip } from "@/components/home/StatsStrip";
+import { ShowcaseProjects } from "@/components/home/ShowcaseProjects";
+import { IndustriesPreview } from "@/components/home/IndustriesPreview";
+import { ProcessTimeline } from "@/components/home/ProcessTimeline";
+import { TechEcosystem } from "@/components/home/TechEcosystem";
+import { TestimonialsSection } from "@/components/home/TestimonialsSection";
+import { CTASection } from "@/components/common/CTASection";
+import { PageWrapper } from "@/components/layout/PageWrapper";
+
+export default function HomePage() {
+  return (
+    <PageWrapper>
+      <HeroSection />
+      <CapabilitiesStrip />
+      <ServicesPreview />
+      <WhyChooseUs />
+      <StatsStrip />
+      <ShowcaseProjects />
+      <IndustriesPreview />
+      <ProcessTimeline />
+      <TechEcosystem />
+      <TestimonialsSection />
+      <CTASection
+        title="Ready to Build Something Intelligent?"
+        subtitle="Let's turn your next big idea into a powerful digital solution. Our senior engineers and AI architects are ready to collaborate."
+        buttonText="Let's Discuss Your Project"
+        buttonHref="/contact"
+      />
+    </PageWrapper>
+  );
+}

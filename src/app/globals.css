@@ -1,0 +1,140 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-primary: #087A3D;
+  --color-brand-deep: #075C32;
+  --color-brand-secondary: #159B50;
+  --color-brand-light: #E8F5E9;
+  --color-brand-surface: #F4FAF3;
+  --color-brand-bg: #FAFCF9;
+  --color-brand-border: #E3EDE5;
+  --color-brand-text: #101C19;
+  --color-brand-muted: #65736D;
+  --color-brand-accent: #10B981;
+  --color-brand-accent-light: #34D399;
+}
+
+:root {
+  --background: #FAFCF9;
+  --foreground: #101C19;
+  --primary: #087A3D;
+  --primary-deep: #075C32;
+  --primary-secondary: #159B50;
+  --surface-light: #E8F5E9;
+  --surface-subtle: #F4FAF3;
+  --border-color: #E3EDE5;
+  --muted-text: #65736D;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  overflow-x: hidden;
+  selection-background-color: #E8F5E9;
+  selection-color: #075C32;
+}
+
+::selection {
+  background: #E8F5E9;
+  color: #075C32;
+}
+
+/* Glassmorphism & Soft Layers */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(227, 237, 229, 0.8);
+}
+
+.glass-panel-subtle {
+  background: rgba(244, 250, 243, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(227, 237, 229, 0.6);
+}
+
+.glass-panel-dark {
+  background: linear-gradient(135deg, rgba(7, 92, 50, 0.95) 0%, rgba(8, 122, 61, 0.9) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(52, 211, 153, 0.25);
+}
+
+/* Custom Green Glow */
+.glow-green-sm {
+  box-shadow: 0 4px 20px -2px rgba(8, 122, 61, 0.15);
+}
+
+.glow-green-md {
+  box-shadow: 0 10px 30px -5px rgba(8, 122, 61, 0.22);
+}
+
+.glow-green-lg {
+  box-shadow: 0 20px 45px -10px rgba(8, 122, 61, 0.28);
+}
+
+/* Subtle Grid Background */
+.bg-grid-pattern {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(8, 122, 61, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(8, 122, 61, 0.04) 1px, transparent 1px);
+}
+
+.bg-dot-pattern {
+  background-size: 24px 24px;
+  background-image: radial-gradient(rgba(8, 122, 61, 0.08) 1px, transparent 1px);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #FAFCF9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #C4D9C8;
+  border-radius: 9999px;
+}
+
+/* Infinite Marquee Ribbon Animation */
+@keyframes marquee-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee-ribbon {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 30s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-ribbon:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee-ribbon {
+    animation: none;
+    transform: none;
+  }
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #159B50;
+}

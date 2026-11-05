@@ -1,0 +1,50 @@
+<svg viewBox="0 0 400 400" width="800" height="800" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="gradBodyApp" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#059669"/>
+      <stop offset="100%" stop-color="#047857"/>
+    </linearGradient>
+    <style>
+      @keyframes stack-top {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-16px); }
+      }
+      @keyframes stack-mid {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-8px); }
+      }
+      @keyframes shadow-pulse {
+        0%, 100% { transform: scale(1); opacity: 0.6; }
+        50% { transform: scale(1.15); opacity: 0.2; }
+      }
+      .animate-3d-top { animation: stack-top 2.5s ease-in-out infinite; }
+      .animate-3d-mid { animation: stack-mid 2.5s ease-in-out infinite; }
+      .animate-3d-shadow { animation: shadow-pulse 2.5s ease-in-out infinite; transform-origin: center; }
+    </style>
+  </defs>
+
+  <g transform="translate(100, 60) scale(2.0)">
+    <!-- Dynamic Drop Shadow -->
+    <ellipse cx="50" cy="95" rx="35" ry="12" fill="rgba(5, 150, 105, 0.4)" class="animate-3d-shadow" style="filter: blur(4px);" />
+
+    <!-- Bottom Tier (Static Base) -->
+    <g>
+      <path d="M10 64 v16 a40 14 0 0 0 80 0 v-16 a40 14 0 0 1 -80 0 Z" fill="url(#gradBodyApp)" />
+    </g>
+
+    <!-- Middle Tier (Floats slightly) -->
+    <g class="animate-3d-mid">
+      <path d="M10 42 v16 a40 14 0 0 0 80 0 v-16 a40 14 0 0 1 -80 0 Z" fill="url(#gradBodyApp)" />
+    </g>
+
+    <!-- Top Tier (Floats highest) -->
+    <g class="animate-3d-top">
+      <path d="M10 20 v16 a40 14 0 0 0 80 0 v-16 Z" fill="url(#gradBodyApp)" />
+      <ellipse cx="50" cy="20" rx="40" ry="14" fill="#34D399" />
+    </g>
+  </g>
+
+  <!-- Text Area -->
+  <text x="200" y="320" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="48" font-weight="800" fill="#000000" text-anchor="middle">DeepLayer</text>
+  <text x="200" y="360" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="24" font-weight="600" letter-spacing="0.2em" fill="#059669" text-anchor="middle">Solutions</text>
+</svg>
