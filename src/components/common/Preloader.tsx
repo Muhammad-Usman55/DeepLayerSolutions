@@ -49,7 +49,7 @@ export function Preloader() {
             height={320}
             priority
             unoptimized
-            className="w-full h-full object-contain filter drop-shadow-[0_16px_36px_rgba(4,127,91,0.28)]"
+            className="w-full h-full object-contain"
           />
         </div>
       </div>

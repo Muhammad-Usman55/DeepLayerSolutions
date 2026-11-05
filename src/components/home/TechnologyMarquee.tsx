@@ -54,17 +54,17 @@ export function TechnologyMarquee() {
       </Container>
 
       {/* Marquee Track Container with Left & Right Gradient Fade Masks */}
-      <div className="relative w-full overflow-hidden">
+      <div className="relative w-full overflow-hidden [touch-action:pan-y]">
         {/* Left Edge Gradient Fade Mask */}
-        <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-36 lg:w-48 bg-gradient-to-r from-[#FAFCF9] via-[#FAFCF9]/90 to-transparent z-10 pointer-events-none" />
+        <div className="absolute left-0 top-0 bottom-0 w-12 sm:w-36 lg:w-48 bg-gradient-to-r from-[#FAFCF9] via-[#FAFCF9]/90 to-transparent z-10 pointer-events-none" />
 
         {/* Right Edge Gradient Fade Mask */}
-        <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-36 lg:w-48 bg-gradient-to-l from-[#FAFCF9] via-[#FAFCF9]/90 to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-12 sm:w-36 lg:w-48 bg-gradient-to-l from-[#FAFCF9] via-[#FAFCF9]/90 to-transparent z-10 pointer-events-none" />
 
         {/* Marquee Items Ribbon Track */}
         {shouldReduceMotion ? (
           // Reduced Motion Mode: Static responsive wrap layout
-          <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-8 px-4 py-2">
+          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-8 px-4 py-2">
             {technologyItems.map((item) => (
               <TechnologyNode key={item.id} item={item} />
             ))}
@@ -73,7 +73,6 @@ export function TechnologyMarquee() {
           // Animated Mode: Seamless continuous infinite loop marquee
           <div
             className="animate-marquee-ribbon flex items-center py-2"
-            style={{ animationDuration: "36s" }}
           >
             {marqueeItems.map((item, index) => {
               const isDuplicate = index >= technologyItems.length;

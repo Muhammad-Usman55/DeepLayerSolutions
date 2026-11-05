@@ -49,11 +49,18 @@ export function Navbar() {
     setServicesOpen(false);
   }
 
-  // Scroll detection (Top ~88px -> Scrolled ~70px)
+  // Throttled Scroll detection for 60-120fps smooth scrolling
   useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      const scrollY = window.scrollY;
-      setIsScrolled(scrollY > 15);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const scrolled = window.scrollY > 15;
+          setIsScrolled((prev) => (prev !== scrolled ? scrolled : prev));
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
 
     handleScroll();

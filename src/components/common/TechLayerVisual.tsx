@@ -30,6 +30,8 @@ export function TechLayerVisual({ className }: TechLayerVisualProps) {
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (shouldReduceMotion || !containerRef.current) return;
+    // Skip on touch/mobile devices to keep CPU 100% idle
+    if (window.matchMedia && !window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
     const rect = containerRef.current.getBoundingClientRect();
     const x = (e.clientX - rect.left) / rect.width - 0.5;
     const y = (e.clientY - rect.top) / rect.height - 0.5;
@@ -115,12 +117,8 @@ export function TechLayerVisual({ className }: TechLayerVisualProps) {
         </svg>
       </div>
 
-      {/* 4. DYNAMIC SYNCHRONIZED GROUND SHADOW (Green-Tinted Ambient) */}
-      <motion.div
-        animate={{ scale: [1, 1.15, 1], opacity: [0.5, 0.3, 0.5] }}
-        transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute bottom-10 w-64 h-16 rounded-[100%] bg-gradient-to-r from-[#173D2F]/30 via-[#047F5B]/40 to-[#173D2F]/30 blur-xl pointer-events-none"
-      />
+      {/* 4. DYNAMIC SYNCHRONIZED GROUND SHADOW (Green-Tinted Ambient, Compositor Thread) */}
+      <div className="absolute bottom-10 w-48 sm:w-64 h-12 sm:h-16 rounded-[100%] bg-gradient-to-r from-[#173D2F]/25 via-[#047F5B]/35 to-[#173D2F]/25 blur-xl pointer-events-none animate-pulse-shadow" />
 
       {/* 5. MAIN 3D ANIMATED WIREFRAME STRUCTURE (EMERALD, MINT & TRANSLUCENT PALE-MINT GLASS) */}
       <motion.div
@@ -131,19 +129,18 @@ export function TechLayerVisual({ className }: TechLayerVisualProps) {
           y: depthY,
           transformStyle: "preserve-3d",
         }}
-        className="relative z-10 w-full h-full max-w-[460px] aspect-square flex items-center justify-center p-4 transition-transform duration-300 group-hover:scale-105"
+        className="relative z-10 w-full h-full max-w-[320px] sm:max-w-[420px] lg:max-w-[480px] aspect-square flex items-center justify-center p-2 sm:p-4 transition-transform duration-300 group-hover:scale-105"
       >
-        {/* Floating Levitation wrapper */}
-        <motion.div
-          animate={{ y: [-10, 10, -10] }}
-          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-          className="relative w-full h-full flex items-center justify-center"
-        >
+        {/* Floating Levitation wrapper (Hardware-accelerated CSS float) */}
+        <div className="relative w-full h-full flex items-center justify-center animate-float-gentle">
           {/* Central Translucent Emerald Glass Nucleus with Controlled Inner Lighting */}
-          <div className="absolute w-48 h-48 sm:w-56 sm:h-56 rounded-full bg-gradient-to-tr from-[#047F5B]/25 via-[#34D399]/20 to-[#DDF5E9]/50 backdrop-blur-md border border-[#34D399]/40 shadow-[inset_0_0_45px_rgba(4,127,91,0.4),inset_0_0_18px_rgba(52,211,153,0.5),0_0_35px_rgba(4,127,91,0.22)] pointer-events-none" />
+          <div className="absolute w-40 h-40 sm:w-56 sm:h-56 rounded-full bg-gradient-to-tr from-[#047F5B]/25 via-[#34D399]/20 to-[#DDF5E9]/50 backdrop-blur-sm border border-[#34D399]/40 shadow-[inset_0_0_40px_rgba(4,127,91,0.35),0_0_30px_rgba(4,127,91,0.2)] pointer-events-none" />
 
           {/* Controlled Inner Luminescent Core */}
-          <div className="absolute w-32 h-32 sm:w-36 sm:h-36 rounded-full bg-gradient-to-tr from-[#047F5B]/35 via-[#34D399]/30 to-transparent blur-md pointer-events-none" />
+          <div className="absolute w-28 h-28 sm:w-36 sm:h-36 rounded-full bg-gradient-to-tr from-[#047F5B]/35 via-[#34D399]/30 to-transparent blur-md pointer-events-none" />
+
+          {/* Static Ambient Glow behind SVG (Zero runtime filter overhead) */}
+          <div className="absolute w-52 h-52 sm:w-72 sm:h-72 rounded-full bg-radial from-[#047F5B]/30 via-[#34D399]/15 to-transparent blur-2xl pointer-events-none -z-10" />
 
           {/* Animated 3D Generative Sculpture */}
           <div className="relative w-full h-full flex items-center justify-center">
@@ -154,26 +151,15 @@ export function TechLayerVisual({ className }: TechLayerVisualProps) {
               height={460}
               priority
               unoptimized
-              className="w-full h-full object-contain filter drop-shadow-[0_15px_35px_rgba(4,127,91,0.3)] group-hover:drop-shadow-[0_22px_48px_rgba(52,211,153,0.42)] transition-all duration-500"
+              className="w-full h-full object-contain transition-all duration-500"
             />
 
-            {/* Subtle Emerald / Mint Laser Scanner Sweep */}
-            <motion.div
-              animate={{
-                top: ["15%", "85%", "15%"],
-                opacity: [0.2, 0.55, 0.2],
-              }}
-              transition={{
-                duration: 4.2,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-              className="absolute left-[15%] right-[15%] h-[2px] bg-gradient-to-r from-transparent via-[#34D399] to-transparent shadow-[0_0_12px_rgba(52,211,153,0.55)] pointer-events-none"
-            >
-              <div className="absolute -top-4 left-0 right-0 h-8 bg-gradient-to-b from-transparent via-[#047F5B]/15 to-transparent blur-sm" />
-            </motion.div>
+            {/* Subtle Emerald / Mint Laser Scanner Sweep (Compositor Thread) */}
+            <div className="absolute left-[15%] right-[15%] h-[2px] bg-gradient-to-r from-transparent via-[#34D399] to-transparent shadow-[0_0_12px_rgba(52,211,153,0.55)] pointer-events-none animate-laser-sweep">
+              <div className="absolute -top-3 left-0 right-0 h-6 bg-gradient-to-b from-transparent via-[#047F5B]/15 to-transparent blur-xs" />
+            </div>
           </div>
-        </motion.div>
+        </div>
       </motion.div>
 
       {/* 6. AMBIENT EMERALD & MINT PARTICLES */}

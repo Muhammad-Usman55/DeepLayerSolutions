@@ -1,45 +1,20 @@
-"use client";
-
 import React from "react";
-import { motion } from "framer-motion";
 
 export function Central3DVisual() {
   return (
-    <div className="relative w-full max-w-[560px] lg:max-w-[620px] mx-auto aspect-[5/4] flex items-center justify-center select-none overflow-visible">
-      {/* 9. Green Ambient Lighting & Radial Glows */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[380px] h-[340px] sm:w-[460px] sm:h-[400px] bg-gradient-to-tr from-[#087A3D]/20 via-[#34D399]/25 to-transparent rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute top-1/3 left-1/3 -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-[#34D399]/20 rounded-full blur-2xl pointer-events-none" />
+    <div className="relative w-full max-w-[340px] sm:max-w-[480px] lg:max-w-[580px] mx-auto aspect-[5/4] flex items-center justify-center select-none overflow-visible">
+      {/* Green Ambient Lighting & Radial Glows (Static cached layers) */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[280px] sm:w-[420px] h-[260px] sm:h-[360px] bg-gradient-to-tr from-[#087A3D]/20 via-[#34D399]/25 to-transparent rounded-full blur-3xl pointer-events-none -z-10" />
+      <div className="absolute top-1/3 left-1/3 -translate-x-1/2 -translate-y-1/2 w-48 sm:w-64 h-48 sm:h-64 bg-[#34D399]/20 rounded-full blur-2xl pointer-events-none -z-10" />
 
       {/* Main 3D Composition SVG */}
-      <motion.svg
+      <svg
         viewBox="0 0 640 500"
-        className="w-full h-full relative z-10 drop-shadow-xl overflow-visible"
-        initial={{ opacity: 0, scale: 0.94 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="w-full h-full relative z-10 drop-shadow-md overflow-visible"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
         <defs>
-          {/* Luminous Glow Filter */}
-          <filter id="emeraldGlow" x="-30%" y="-30%" width="160%" height="160%">
-            <feGaussianBlur stdDeviation="8" result="blur1" />
-            <feGaussianBlur stdDeviation="16" result="blur2" />
-            <feMerge>
-              <feMergeNode in="blur2" />
-              <feMergeNode in="blur1" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
-
-          <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
-            <feGaussianBlur stdDeviation="4" result="blur" />
-            <feMerge>
-              <feMergeNode in="blur" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
-
           {/* Gradients */}
           <linearGradient id="codeGlowGrad" x1="0" y1="0" x2="1" y2="1">
             <stop offset="0%" stopColor="#6EE7B7" />
@@ -48,9 +23,9 @@ export function Central3DVisual() {
           </linearGradient>
 
           <linearGradient id="glassFaceGrad" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.85" />
-            <stop offset="40%" stopColor="#F4FAF6" stopOpacity="0.7" />
-            <stop offset="100%" stopColor="#DDF5E9" stopOpacity="0.8" />
+            <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.88" />
+            <stop offset="40%" stopColor="#F4FAF6" stopOpacity="0.75" />
+            <stop offset="100%" stopColor="#DDF5E9" stopOpacity="0.82" />
           </linearGradient>
 
           <linearGradient id="glassBorder" x1="0" y1="0" x2="1" y2="1">
@@ -131,26 +106,22 @@ export function Central3DVisual() {
         {/* 3. Layered Transparent Platforms Underneath */}
         {/* Tier 1: Large Base Isometric Diamond */}
         <g>
-          {/* Top Face */}
           <polygon
             points="320,340 490,405 320,470 150,405"
             fill="url(#basePlatformTop)"
             stroke="url(#glassBorder)"
             strokeWidth="1.5"
           />
-          {/* Left Thickness */}
           <polygon
             points="150,405 320,470 320,482 150,417"
             fill="#087A3D"
             fillOpacity="0.35"
           />
-          {/* Right Thickness */}
           <polygon
             points="490,405 320,470 320,482 490,417"
             fill="#075C32"
             fillOpacity="0.5"
           />
-          {/* Grid lines on platform */}
           <g stroke="#34D399" strokeWidth="0.8" strokeOpacity="0.3">
             <line x1="235" y1="372" x2="405" y2="437" />
             <line x1="405" y1="372" x2="235" y2="437" />
@@ -159,20 +130,17 @@ export function Central3DVisual() {
 
         {/* Tier 2: Stepped Upper Platform */}
         <g>
-          {/* Top Face */}
           <polygon
             points="320,315 445,362 320,410 195,362"
             fill="url(#tierPlatformTop)"
             stroke="#34D399"
             strokeWidth="1.2"
           />
-          {/* Left Thickness */}
           <polygon
             points="195,362 320,410 320,419 195,371"
             fill="#087A3D"
             fillOpacity="0.5"
           />
-          {/* Right Thickness */}
           <polygon
             points="445,362 320,410 320,419 445,371"
             fill="#075C32"
@@ -180,39 +148,29 @@ export function Central3DVisual() {
           />
         </g>
 
-        {/* 7. Subtle Database Visualization (Floating on Lower Left) */}
-        <motion.g
-          animate={{ y: [-4, 4, -4] }}
-          transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
-        >
-          {/* Database Disk 3 (Bottom) */}
+        {/* 7. Subtle Database Visualization (Compositor Thread Float) */}
+        <g className="animate-float-subtle">
           <ellipse cx="140" cy="330" rx="34" ry="14" fill="url(#dbDiskTop)" stroke="#087A3D" strokeWidth="1" />
           <path d="M106 330V342C106 350 121 356 140 356C159 356 174 350 174 342V330" fill="url(#dbDiskSide)" />
 
-          {/* Database Disk 2 (Middle) */}
           <ellipse cx="140" cy="315" rx="34" ry="14" fill="url(#dbDiskTop)" stroke="#087A3D" strokeWidth="1" />
           <path d="M106 315V325C106 333 121 339 140 339C159 339 174 333 174 325V315" fill="url(#dbDiskSide)" />
 
-          {/* Database Disk 1 (Top) */}
           <ellipse cx="140" cy="300" rx="34" ry="14" fill="url(#dbDiskTop)" stroke="#34D399" strokeWidth="1.2" />
           <path d="M106 300V310C106 318 121 324 140 324C159 324 174 318 174 310V300" fill="url(#dbDiskSide)" />
 
           {/* Database Glowing Indicator LEDs */}
-          <circle cx="125" cy="308" r="2.5" fill="#34D399" filter="url(#softGlow)" />
-          <circle cx="135" cy="308" r="2.5" fill="#6EE7B7" filter="url(#softGlow)" />
-          <circle cx="125" cy="323" r="2.5" fill="#34D399" filter="url(#softGlow)" />
-          <circle cx="135" cy="323" r="2.5" fill="#6EE7B7" filter="url(#softGlow)" />
-          <circle cx="125" cy="340" r="2.5" fill="#34D399" filter="url(#softGlow)" />
-          <circle cx="135" cy="340" r="2.5" fill="#6EE7B7" filter="url(#softGlow)" />
-        </motion.g>
+          <circle cx="125" cy="308" r="2.5" fill="#34D399" />
+          <circle cx="135" cy="308" r="2.5" fill="#6EE7B7" />
+          <circle cx="125" cy="323" r="2.5" fill="#34D399" />
+          <circle cx="135" cy="323" r="2.5" fill="#6EE7B7" />
+          <circle cx="125" cy="340" r="2.5" fill="#34D399" />
+          <circle cx="135" cy="340" r="2.5" fill="#6EE7B7" />
+        </g>
 
-        {/* 6. Green Cloud-Computing Object (Floating Upper Right) */}
-        <motion.g
-          animate={{ y: [4, -4, 4] }}
-          transition={{ duration: 4.8, repeat: Infinity, ease: "easeInOut" }}
-        >
-          {/* Cloud Base Glow */}
-          <ellipse cx="505" cy="195" rx="38" ry="12" fill="#34D399" fillOpacity="0.2" filter="url(#softGlow)" />
+        {/* 6. Green Cloud-Computing Object (Compositor Thread Float) */}
+        <g className="animate-float-reverse">
+          <ellipse cx="505" cy="195" rx="38" ry="12" fill="#34D399" fillOpacity="0.25" />
 
           {/* 3D Glassmorphic Cloud Cluster */}
           <path
@@ -220,7 +178,6 @@ export function Central3DVisual() {
             fill="url(#cloudGrad)"
             stroke="#087A3D"
             strokeWidth="1.8"
-            filter="url(#softGlow)"
           />
           {/* Cloud Specular Sheen */}
           <path
@@ -235,19 +192,15 @@ export function Central3DVisual() {
             <line x1="488" y1="188" x2="488" y2="225" />
             <line x1="518" y1="188" x2="518" y2="235" stroke="#087A3D" />
           </g>
-        </motion.g>
+        </g>
 
-        {/* 1 & 2. CENTRAL FLOATING GLASS TECHNOLOGY PANEL WITH LUMINOUS CODE SYMBOL (</>) */}
-        <motion.g
-          animate={{ y: [-6, 6, -6] }}
-          transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
-        >
+        {/* 1 & 2. CENTRAL FLOATING GLASS TECHNOLOGY PANEL WITH LUMINOUS CODE SYMBOL (Compositor Thread Float) */}
+        <g className="animate-float-gentle">
           {/* Drop shadow of floating panel */}
           <polygon
             points="230,300 410,240 410,380 230,440"
             fill="#075C32"
-            fillOpacity="0.08"
-            filter="url(#softGlow)"
+            fillOpacity="0.12"
             transform="translate(15, 20)"
           />
 
@@ -294,7 +247,7 @@ export function Central3DVisual() {
             deeplayer.core.ts
           </text>
 
-          {/* Background Syntax Silhouette Lines (Subtle code editor pattern) */}
+          {/* Background Syntax Silhouette Lines */}
           <g stroke="#34D399" strokeWidth="2" strokeOpacity="0.2" strokeLinecap="round" transform="skewY(-15)">
             <line x1="230" y1="210" x2="270" y2="210" />
             <line x1="230" y1="225" x2="310" y2="225" />
@@ -304,7 +257,7 @@ export function Central3DVisual() {
           </g>
 
           {/* 2. THE LUMINOUS GREEN CODE SYMBOL ( < / > ) */}
-          <g filter="url(#emeraldGlow)">
+          <g>
             {/* Left Chevron < */}
             <path
               d="M272 238L240 256L272 274"
@@ -356,51 +309,33 @@ export function Central3DVisual() {
           </g>
 
           {/* Luminous Core Star Highlight at Intersection */}
-          <circle cx="310" cy="256" r="4" fill="#FFFFFF" filter="url(#softGlow)" />
-        </motion.g>
+          <circle cx="310" cy="256" r="4" fill="#FFFFFF" />
+          <circle cx="310" cy="256" r="7" fill="#34D399" fillOpacity="0.4" />
+        </g>
 
-        {/* 4. Floating Glass Cubes */}
+        {/* 4. Floating Glass Cubes (Compositor Thread) */}
         {/* Cube 1 (Upper Left, Large) */}
-        <motion.g
-          animate={{ y: [-7, 7, -7], rotate: [0, 4, 0] }}
-          transition={{ duration: 4.2, repeat: Infinity, ease: "easeInOut" }}
-          transform="translate(110, 120)"
-        >
-          {/* Top */}
+        <g className="animate-float-reverse" transform="translate(110, 120)">
           <polygon points="25,0 50,14 25,28 0,14" fill="url(#cubeTop)" stroke="#34D399" strokeWidth="0.8" />
-          {/* Left */}
           <polygon points="0,14 25,28 25,56 0,42" fill="url(#cubeLeft)" />
-          {/* Right */}
           <polygon points="50,14 25,28 25,56 50,42" fill="url(#cubeRight)" />
-          {/* Highlight line */}
           <line x1="25" y1="28" x2="25" y2="56" stroke="#FFFFFF" strokeWidth="1" strokeOpacity="0.6" />
-        </motion.g>
+        </g>
 
         {/* Cube 2 (Lower Right, Medium) */}
-        <motion.g
-          animate={{ y: [6, -6, 6], rotate: [0, -3, 0] }}
-          transition={{ duration: 4.8, repeat: Infinity, ease: "easeInOut" }}
-          transform="translate(480, 270)"
-        >
-          {/* Top */}
+        <g className="animate-float-gentle" transform="translate(480, 270)">
           <polygon points="20,0 40,11 20,22 0,11" fill="url(#cubeTop)" stroke="#34D399" strokeWidth="0.8" />
-          {/* Left */}
           <polygon points="0,11 20,22 20,44 0,33" fill="url(#cubeLeft)" />
-          {/* Right */}
           <polygon points="40,11 20,22 20,44 40,33" fill="url(#cubeRight)" />
           <line x1="20" y1="22" x2="20" y2="44" stroke="#FFFFFF" strokeWidth="0.8" strokeOpacity="0.5" />
-        </motion.g>
+        </g>
 
         {/* Cube 3 (Upper Right, Small) */}
-        <motion.g
-          animate={{ y: [-5, 5, -5] }}
-          transition={{ duration: 3.6, repeat: Infinity, ease: "easeInOut" }}
-          transform="translate(430, 80)"
-        >
+        <g className="animate-float-subtle" transform="translate(430, 80)">
           <polygon points="12,0 24,7 12,14 0,7" fill="url(#cubeTop)" stroke="#34D399" strokeWidth="0.6" />
           <polygon points="0,7 12,14 12,28 0,21" fill="url(#cubeLeft)" />
           <polygon points="24,7 12,14 12,28 24,21" fill="url(#cubeRight)" />
-        </motion.g>
+        </g>
 
         {/* 5. Orbital Ring Front Segment with Satellite Node */}
         <g stroke="url(#codeGlowGrad)" strokeWidth="1.8" opacity="0.75">
@@ -410,15 +345,12 @@ export function Central3DVisual() {
           />
         </g>
 
-        {/* Orbiting Satellite Node */}
-        <motion.g
-          animate={{ x: [-12, 12, -12], y: [6, -6, 6] }}
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-        >
-          <circle cx="545" cy="285" r="7" fill="#087A3D" stroke="#34D399" strokeWidth="2" filter="url(#softGlow)" />
+        {/* Orbiting Satellite Node (Compositor Thread) */}
+        <g className="animate-float-reverse">
+          <circle cx="545" cy="285" r="7" fill="#087A3D" stroke="#34D399" strokeWidth="2" />
           <circle cx="545" cy="285" r="3" fill="#FFFFFF" />
-        </motion.g>
-      </motion.svg>
+        </g>
+      </svg>
     </div>
   );
 }

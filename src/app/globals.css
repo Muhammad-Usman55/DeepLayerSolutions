@@ -110,10 +110,10 @@ body {
 /* Infinite Marquee Ribbon Animation */
 @keyframes marquee-scroll {
   0% {
-    transform: translateX(0);
+    transform: translate3d(0, 0, 0);
   }
   100% {
-    transform: translateX(-50%);
+    transform: translate3d(-50%, 0, 0);
   }
 }
 
@@ -122,16 +122,109 @@ body {
   width: max-content;
   animation: marquee-scroll 30s linear infinite;
   will-change: transform;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
 }
 
 .animate-marquee-ribbon:hover {
   animation-play-state: paused;
 }
 
-@media (prefers-reduced-motion: reduce) {
+/* Compositor-Thread Hardware Accelerated Animations (Zero JS main-thread load) */
+@keyframes float-gentle {
+  0%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -6px, 0);
+  }
+}
+
+@keyframes float-reverse {
+  0%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, 6px, 0);
+  }
+}
+
+@keyframes float-subtle {
+  0%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -3px, 0);
+  }
+}
+
+@keyframes laser-sweep {
+  0%, 100% {
+    top: 15%;
+    opacity: 0.2;
+  }
+  50% {
+    top: 85%;
+    opacity: 0.55;
+  }
+}
+
+@keyframes pulse-shadow {
+  0%, 100% {
+    transform: scale3d(1, 1, 1);
+    opacity: 0.4;
+  }
+  50% {
+    transform: scale3d(1.12, 1.12, 1);
+    opacity: 0.25;
+  }
+}
+
+.animate-float-gentle {
+  animation: float-gentle 5s ease-in-out infinite;
+  will-change: transform;
+}
+
+.animate-float-reverse {
+  animation: float-reverse 5.5s ease-in-out infinite;
+  will-change: transform;
+}
+
+.animate-float-subtle {
+  animation: float-subtle 4s ease-in-out infinite;
+  will-change: transform;
+}
+
+.animate-laser-sweep {
+  animation: laser-sweep 4.2s ease-in-out infinite;
+}
+
+.animate-pulse-shadow {
+  animation: pulse-shadow 5.5s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+/* Mobile Performance Optimizations */
+@media (max-width: 768px) {
   .animate-marquee-ribbon {
-    animation: none;
-    transform: none;
+    animation-duration: 38s;
+  }
+  
+  html, body {
+    overflow-x: clip;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee-ribbon,
+  .animate-float-gentle,
+  .animate-float-reverse,
+  .animate-float-subtle,
+  .animate-laser-sweep,
+  .animate-pulse-shadow {
+    animation: none !important;
+    transform: none !important;
   }
 }
 

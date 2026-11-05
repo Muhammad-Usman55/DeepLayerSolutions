@@ -1,26 +1,20 @@
-"use client";
-
 import React from "react";
-import { motion } from "framer-motion";
 
 interface Card3DVisualProps {
   type: "ai" | "software" | "web" | "cloud";
 }
 
 export function Card3DVisual({ type }: Card3DVisualProps) {
-
   switch (type) {
     case "ai":
       return (
         <div className="relative w-full h-32 flex items-center justify-center overflow-visible">
           {/* Ambient Glow */}
-          <div className="absolute w-24 h-24 bg-[#34D399]/20 rounded-full blur-xl pointer-events-none" />
+          <div className="absolute w-24 h-24 bg-[#34D399]/20 rounded-full blur-xl pointer-events-none -z-10" />
 
-          <motion.svg
+          <svg
             viewBox="0 0 160 130"
-            className="w-36 h-28 drop-shadow-md"
-            animate={{ y: [-3, 3, -3] }}
-            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            className="w-36 h-28 drop-shadow-xs animate-float-subtle"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
@@ -34,13 +28,6 @@ export function Card3DVisual({ type }: Card3DVisualProps) {
                 <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.8" />
                 <stop offset="100%" stopColor="#34D399" stopOpacity="0.3" />
               </linearGradient>
-              <filter id="aiGlow" x="-20%" y="-20%" width="140%" height="140%">
-                <feGaussianBlur stdDeviation="3" result="blur" />
-                <feMerge>
-                  <feMergeNode in="blur" />
-                  <feMergeNode in="SourceGraphic" />
-                </feMerge>
-              </filter>
             </defs>
 
             {/* Ground shadow */}
@@ -73,12 +60,12 @@ export function Card3DVisual({ type }: Card3DVisualProps) {
             </g>
 
             {/* Central 3D Synaptic Nucleus */}
-            <circle cx="80" cy="65" r="18" fill="url(#aiCoreGrad)" filter="url(#aiGlow)" />
+            <circle cx="80" cy="65" r="18" fill="url(#aiCoreGrad)" />
             <circle cx="75" cy="60" r="15" fill="#34D399" fillOpacity="0.3" />
             <circle cx="73" cy="58" r="5" fill="#FFFFFF" fillOpacity="0.8" />
 
             {/* Synaptic Nodes */}
-            <g filter="url(#aiGlow)">
+            <g>
               <circle cx="80" cy="28" r="5" fill="#34D399" stroke="#FFFFFF" strokeWidth="1.5" />
               <circle cx="52" cy="42" r="5" fill="#087A3D" stroke="#34D399" strokeWidth="1.5" />
               <circle cx="108" cy="42" r="5" fill="#087A3D" stroke="#34D399" strokeWidth="1.5" />
@@ -86,7 +73,7 @@ export function Card3DVisual({ type }: Card3DVisualProps) {
               <circle cx="116" cy="78" r="4.5" fill="#34D399" stroke="#FFFFFF" strokeWidth="1.5" />
               <circle cx="80" cy="100" r="4.5" fill="#087A3D" stroke="#34D399" strokeWidth="1.5" />
             </g>
-          </motion.svg>
+          </svg>
         </div>
       );
 
@@ -94,13 +81,11 @@ export function Card3DVisual({ type }: Card3DVisualProps) {
       return (
         <div className="relative w-full h-32 flex items-center justify-center overflow-visible">
           {/* Ambient Glow */}
-          <div className="absolute w-24 h-24 bg-[#087A3D]/15 rounded-full blur-xl pointer-events-none" />
+          <div className="absolute w-24 h-24 bg-[#087A3D]/15 rounded-full blur-xl pointer-events-none -z-10" />
 
-          <motion.svg
+          <svg
             viewBox="0 0 160 130"
-            className="w-36 h-28 drop-shadow-md"
-            animate={{ y: [-3, 3, -3] }}
-            transition={{ duration: 4.4, repeat: Infinity, ease: "easeInOut" }}
+            className="w-36 h-28 drop-shadow-xs animate-float-subtle"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
@@ -158,7 +143,6 @@ export function Card3DVisual({ type }: Card3DVisualProps) {
               fill="url(#laptopScreen)"
               stroke="#087A3D"
               strokeWidth="1.5"
-              rx="4"
             />
             {/* Glass Display Shine */}
             <polygon
@@ -178,11 +162,11 @@ export function Card3DVisual({ type }: Card3DVisualProps) {
             </g>
 
             {/* Glowing Code Node Floating out of Screen */}
-            <g filter="url(#aiGlow)">
+            <g>
               <circle cx="118" cy="38" r="8" fill="#087A3D" stroke="#34D399" strokeWidth="1.5" />
               <text x="114" y="42" fill="#FFFFFF" fontSize="9" fontWeight="bold" fontFamily="monospace">&lt;&gt;</text>
             </g>
-          </motion.svg>
+          </svg>
         </div>
       );
 
@@ -190,13 +174,11 @@ export function Card3DVisual({ type }: Card3DVisualProps) {
       return (
         <div className="relative w-full h-32 flex items-center justify-center overflow-visible">
           {/* Ambient Glow */}
-          <div className="absolute w-24 h-24 bg-[#34D399]/20 rounded-full blur-xl pointer-events-none" />
+          <div className="absolute w-24 h-24 bg-[#34D399]/20 rounded-full blur-xl pointer-events-none -z-10" />
 
-          <motion.svg
+          <svg
             viewBox="0 0 160 130"
-            className="w-36 h-28 drop-shadow-md"
-            animate={{ y: [-3, 3, -3] }}
-            transition={{ duration: 4.8, repeat: Infinity, ease: "easeInOut" }}
+            className="w-36 h-28 drop-shadow-xs animate-float-subtle"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
@@ -245,7 +227,7 @@ export function Card3DVisual({ type }: Card3DVisualProps) {
 
             {/* Subtle Sphere Reflection Highlight */}
             <ellipse cx="68" cy="46" rx="14" ry="7" fill="#FFFFFF" fillOpacity="0.5" transform="rotate(-30 68 46)" />
-          </motion.svg>
+          </svg>
         </div>
       );
 
@@ -253,13 +235,11 @@ export function Card3DVisual({ type }: Card3DVisualProps) {
       return (
         <div className="relative w-full h-32 flex items-center justify-center overflow-visible">
           {/* Ambient Glow */}
-          <div className="absolute w-24 h-24 bg-[#087A3D]/20 rounded-full blur-xl pointer-events-none" />
+          <div className="absolute w-24 h-24 bg-[#087A3D]/20 rounded-full blur-xl pointer-events-none -z-10" />
 
-          <motion.svg
+          <svg
             viewBox="0 0 160 130"
-            className="w-36 h-28 drop-shadow-md"
-            animate={{ y: [-3, 3, -3] }}
-            transition={{ duration: 4.2, repeat: Infinity, ease: "easeInOut" }}
+            className="w-36 h-28 drop-shadow-xs animate-float-subtle"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
@@ -331,7 +311,7 @@ export function Card3DVisual({ type }: Card3DVisualProps) {
               strokeLinecap="round"
               strokeLinejoin="round"
             />
-          </motion.svg>
+          </svg>
         </div>
       );
 
