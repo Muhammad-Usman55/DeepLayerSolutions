@@ -134,7 +134,7 @@ export async function POST(req: NextRequest) {
       {
         success: false,
         message:
-          "An unexpected server error occurred while processing your message. Please try again or email us directly at hello@deeplayersolutionss.com.",
+          "An unexpected server error occurred while processing your message. Please try again or email us directly at deeplayersolutions@gmail.com.",
       },
       { status: 500 }
     );

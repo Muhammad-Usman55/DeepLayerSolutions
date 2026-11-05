@@ -13,6 +13,14 @@ function LinkedInIcon({ className }: { className?: string }) {
   );
 }
 
+function WhatsAppIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} fill="currentColor" viewBox="0 0 24 24">
+      <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.23 8.23 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.63c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.15.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.12-.56-1.34-.76-1.84-.2-.49-.4-.42-.56-.43h-.47c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.12.17 1.77 2.71 4.3 3.79.6.26 1.07.41 1.44.53.61.19 1.16.17 1.6.1.49-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.07-.12-.23-.19-.48-.31" />
+    </svg>
+  );
+}
+
 function GithubIcon({ className }: { className?: string }) {
   return (
     <svg className={className} fill="currentColor" viewBox="0 0 24 24">
@@ -68,6 +76,15 @@ export function Footer() {
                 aria-label="LinkedIn"
               >
                 <LinkedInIcon className="w-4 h-4" />
+              </a>
+              <a
+                href={siteConfig.contact.whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/70 hover:text-white hover:bg-[#25D366] hover:border-[#25D366] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#34D399]"
+                aria-label="WhatsApp"
+              >
+                <WhatsAppIcon className="w-4 h-4" />
               </a>
               <a
                 href={siteConfig.social.github}
@@ -164,6 +181,18 @@ export function Footer() {
                   className="hover:text-white transition-colors"
                 >
                   {siteConfig.contact.phone}
+                </a>
+              </li>
+              <li className="flex items-center gap-3">
+                <WhatsAppIcon className="w-4 h-4 text-[#25D366] shrink-0" />
+                <a
+                  href={siteConfig.contact.whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-[#25D366] transition-colors flex items-center gap-1.5"
+                >
+                  <span>Chat on WhatsApp</span>
+                  <span className="text-[10px] px-1.5 py-0.5 rounded bg-[#25D366]/20 text-[#25D366] font-semibold tracking-wider uppercase">Direct</span>
                 </a>
               </li>
             </ul>

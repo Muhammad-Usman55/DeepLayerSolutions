@@ -201,10 +201,30 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                 <ArrowRight className="w-4 h-4" />
               </Link>
 
-              <div className="text-xs text-[#61756B] space-y-1">
-                <p className="font-semibold text-[#101C18]">{siteConfig.name}</p>
-                <p>{siteConfig.contact.email}</p>
-                <p>{siteConfig.contact.phone}</p>
+              <div className="text-xs text-[#61756B] space-y-1.5">
+                <p className="font-semibold text-[#101C18] flex items-center justify-between">
+                  <span>{siteConfig.name}</span>
+                  <span className="text-[11px] text-[#047F5B] font-medium">{siteConfig.contact.address}</span>
+                </p>
+                <p>
+                  <a href={`mailto:${siteConfig.contact.email}`} className="hover:text-[#047F5B] transition-colors">
+                    {siteConfig.contact.email}
+                  </a>
+                </p>
+                <p className="flex items-center gap-2">
+                  <a href={`tel:${siteConfig.contact.phone.replace(/\s+/g, "")}`} className="hover:text-[#047F5B] transition-colors">
+                    {siteConfig.contact.phone}
+                  </a>
+                  <span>•</span>
+                  <a
+                    href={siteConfig.contact.whatsappUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[#25D366] font-semibold hover:underline"
+                  >
+                    WhatsApp
+                  </a>
+                </p>
               </div>
             </div>
           </motion.div>

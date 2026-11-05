@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Mail, Phone, MapPin, Headphones, ShieldCheck } from "lucide-react";
+import { Mail, Phone, MapPin, Headphones, ShieldCheck, ArrowUpRight } from "lucide-react";
 import { Container } from "@/components/common/Container";
 import { Breadcrumb } from "@/components/common/Breadcrumb";
 import { ContactForm } from "@/components/contact/ContactForm";
@@ -107,23 +107,68 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              {/* Phone Card */}
+              {/* Phone & WhatsApp Card */}
               <div className="p-6 rounded-2xl bg-white border border-[#E3EDE5] shadow-xs flex items-start gap-4">
                 <div className="w-12 h-12 rounded-xl bg-[#E8F5E9] text-[#087A3D] flex items-center justify-center shrink-0">
                   <Phone className="w-6 h-6" />
                 </div>
-                <div>
-                  <span className="text-xs font-bold uppercase tracking-wider text-[#A0AEA7] block">
-                    Call Us
-                  </span>
+                <div className="flex-1">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-bold uppercase tracking-wider text-[#A0AEA7] block">
+                      Call & WhatsApp
+                    </span>
+                    <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#087A3D] bg-[#E8F5E9] px-2 py-0.5 rounded-full">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#159B50] animate-pulse" />
+                      Active
+                    </span>
+                  </div>
                   <a
                     href={`tel:${siteConfig.contact.phone.replace(/\s+/g, "")}`}
                     className="text-base font-bold text-[#101C19] hover:text-[#087A3D] block mt-0.5"
                   >
                     {siteConfig.contact.phone}
                   </a>
-                  <span className="text-xs text-[#65736D] mt-1 block">
+                  <div className="mt-3 flex items-center gap-2">
+                    <a
+                      href={siteConfig.contact.whatsappUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-[#25D366] text-white text-xs font-bold shadow-xs hover:bg-[#20ba5a] transition-colors"
+                    >
+                      <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+                        <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.23 8.23 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.63c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.15.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.12-.56-1.34-.76-1.84-.2-.49-.4-.42-.56-.43h-.47c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.12.17 1.77 2.71 4.3 3.79.6.26 1.07.41 1.44.53.61.19 1.16.17 1.6.1.49-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.07-.12-.23-.19-.48-.31" />
+                      </svg>
+                      <span>Chat on WhatsApp</span>
+                    </a>
+                  </div>
+                  <span className="text-xs text-[#65736D] mt-2 block">
                     {siteConfig.contact.availability}
+                  </span>
+                </div>
+              </div>
+
+              {/* LinkedIn Direct Connect Card */}
+              <div className="p-6 rounded-2xl bg-white border border-[#E3EDE5] shadow-xs flex items-start gap-4">
+                <div className="w-12 h-12 rounded-xl bg-[#0077B5]/10 text-[#0077B5] flex items-center justify-center shrink-0">
+                  <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24">
+                    <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.25c-.91 0-1.64.73-1.64 1.64s.73 1.64 1.64 1.64 1.64-.73 1.64-1.64-.73-1.64-1.64-1.64Z" />
+                  </svg>
+                </div>
+                <div>
+                  <span className="text-xs font-bold uppercase tracking-wider text-[#A0AEA7] block">
+                    Company LinkedIn
+                  </span>
+                  <a
+                    href={siteConfig.social.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-base font-bold text-[#0077B5] hover:underline flex items-center gap-1.5 mt-0.5"
+                  >
+                    <span>DeepLayer Solutions</span>
+                    <ArrowUpRight className="w-4 h-4" />
+                  </a>
+                  <span className="text-xs text-[#65736D] mt-1 block">
+                    Official corporate updates & verified enterprise presence
                   </span>
                 </div>
               </div>

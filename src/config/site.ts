@@ -9,14 +9,16 @@ export const siteConfig = {
   url: "https://deeplayersolutions.com",
   ogImage: "/logo/logo.png",
   contact: {
-    // Editable contact details - replace with verified production credentials
-    email: "hello@deeplayersolutionss.com",
-    phone: "+92 300 123 4567",
-    address: "G-13, Islamabad, Pakistan",
+    // Official verified production contact endpoints
+    email: "deeplayersolutions@gmail.com",
+    phone: "+92 304 0403761",
+    whatsapp: "+92 3040403761",
+    whatsappUrl: "https://wa.me/923040403761",
+    address: "Lahore, Pakistan",
     availability: "Monday – Friday: 9:00 AM – 6:00 PM (PKT)",
   },
   social: {
-    linkedin: "https://linkedin.com/company/deeplayersolutions",
+    linkedin: "https://www.linkedin.com/company/deeplayersolutions/",
     github: "https://github.com/deeplayersolutions",
     x: "https://x.com/deeplayersol",
     youtube: "https://youtube.com/@deeplayersolutions",

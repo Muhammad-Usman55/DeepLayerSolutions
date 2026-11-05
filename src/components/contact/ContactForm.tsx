@@ -3,6 +3,7 @@
 import { useState, FormEvent } from "react";
 import { CheckCircle2, AlertCircle } from "lucide-react";
 import { Button } from "../common/Button";
+import { siteConfig } from "@/config/site";
 
 interface FormState {
   fullName: string;
@@ -84,7 +85,7 @@ export function ContactForm() {
         }
         setServerError(
           data?.message ||
-            "Unable to submit message at this time. Please try again or reach out directly at hello@deeplayersolutionss.com."
+            `Unable to submit message at this time. Please try again or reach out directly at ${siteConfig.contact.email}.`
         );
         setIsSubmitting(false);
         return;
@@ -96,7 +97,7 @@ export function ContactForm() {
       setServerError(null);
     } catch {
       setServerError(
-        "Network connection error. Please verify your connection or contact hello@deeplayersolutionss.com directly."
+        `Network connection error. Please verify your connection or contact ${siteConfig.contact.email} directly.`
       );
     } finally {
       setIsSubmitting(false);

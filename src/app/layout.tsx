@@ -94,8 +94,8 @@ const jsonLdSchema = {
       description: siteConfig.description,
       address: {
         "@type": "PostalAddress",
-        streetAddress: "G-13",
-        addressLocality: "Islamabad",
+        addressLocality: "Lahore",
+        addressRegion: "Punjab",
         addressCountry: "PK",
       },
       contactPoint: {
@@ -107,6 +107,7 @@ const jsonLdSchema = {
       },
       sameAs: [
         siteConfig.social.linkedin,
+        siteConfig.contact.whatsappUrl,
         siteConfig.social.github,
         siteConfig.social.x,
         siteConfig.social.youtube,
@@ -136,9 +137,9 @@ export default function RootLayout({
     >
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="icon" href="/logo/logo-cropped.png" type="image/png" />
-        <link rel="shortcut icon" href="/logo/logo-cropped.png" />
-        <link rel="apple-touch-icon" href="/logo/logo-cropped.png" />
+        <link rel="icon" href="/icon-32.png" sizes="32x32" type="image/png" />
+        <link rel="icon" href="/icon-192.png" sizes="192x192" type="image/png" />
+        <link rel="apple-touch-icon" href="/apple-icon.png" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdSchema) }}
