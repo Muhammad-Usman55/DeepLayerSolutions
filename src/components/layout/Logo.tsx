@@ -13,8 +13,8 @@ export function Logo({ className, variant = "default", size = "md" }: LogoProps)
   const isIconOnly = variant === "icon-only";
 
   const sizeMap = {
-    sm: { img: 32, height: 32, width: 32, textClass: "text-base", subClass: "text-[10px]" },
-    md: { img: 40, height: 40, width: 40, textClass: "text-xl", subClass: "text-xs" },
+    sm: { img: 28, height: 28, width: 28, textClass: "text-sm", subClass: "text-[9px]" },
+    md: { img: 34, height: 34, width: 34, textClass: "text-[18px]", subClass: "text-[10.5px]" },
     lg: { img: 52, height: 52, width: 52, textClass: "text-2xl", subClass: "text-sm" },
   };
 
