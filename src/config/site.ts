@@ -11,9 +11,9 @@ export const siteConfig = {
   contact: {
     // Official verified production contact endpoints
     email: "deeplayersolutions@gmail.com",
-    phone: "+92 304 0403761",
-    whatsapp: "+92 3040403761",
-    whatsappUrl: "https://wa.me/923040403761",
+    phone: "+92 316 6007316",
+    whatsapp: "+92 316 6007316",
+    whatsappUrl: "https://wa.me/923166007316",
     address: "Lahore, Pakistan",
     availability: "Monday – Friday: 9:00 AM – 6:00 PM (PKT)",
   },
