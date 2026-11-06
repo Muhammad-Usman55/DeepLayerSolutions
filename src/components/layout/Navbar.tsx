@@ -15,6 +15,7 @@ import {
   Eye,
   Brain,
   Sparkles,
+  SearchCheck,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Logo } from "./Logo";
@@ -31,6 +32,7 @@ const serviceIcons: Record<ServiceNavItem["iconName"], React.ComponentType<{ cla
   Bot,
   Eye,
   Brain,
+  SearchCheck,
 };
 
 export function Navbar() {
@@ -204,7 +206,7 @@ export function Navbar() {
                                 </Link>
                               </div>
 
-                              {/* 7 Services Grid */}
+                              {/* 8 Services Grid */}
                               <div className="grid grid-cols-2 gap-2">
                                 {servicesMegaMenuData.map((service) => {
                                   const IconComponent = serviceIcons[service.iconName];

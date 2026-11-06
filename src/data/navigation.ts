@@ -5,7 +5,7 @@ export interface ServiceNavItem {
   title: string;
   description: string;
   href: string;
-  iconName: "Globe" | "Gauge" | "Layout" | "Zap" | "Bot" | "Eye" | "Brain";
+  iconName: "Globe" | "Gauge" | "Layout" | "Zap" | "Bot" | "Eye" | "Brain" | "SearchCheck";
 }
 
 export const servicesMegaMenuData: ServiceNavItem[] = [
@@ -57,6 +57,13 @@ export const servicesMegaMenuData: ServiceNavItem[] = [
     description: "Predictive modeling, custom ML models & data analytics.",
     href: "/services/ai-machine-learning",
     iconName: "Brain",
+  },
+  {
+    id: "seo",
+    title: "Search Engine Optimization (SEO)",
+    description: "Technical SEO audits, Core Web Vitals & organic ranking.",
+    href: "/services/seo",
+    iconName: "SearchCheck",
   },
 ];
 

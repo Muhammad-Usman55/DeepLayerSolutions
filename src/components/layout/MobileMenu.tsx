@@ -14,6 +14,7 @@ import {
   Bot,
   Eye,
   Brain,
+  SearchCheck,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Logo } from "./Logo";
@@ -34,6 +35,7 @@ const serviceIcons: Record<ServiceNavItem["iconName"], React.ComponentType<{ cla
   Bot,
   Eye,
   Brain,
+  SearchCheck,
 };
 
 export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
