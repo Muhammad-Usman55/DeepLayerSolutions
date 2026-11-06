@@ -49,3 +49,4 @@ export const faqsData: FAQItem[] = [
       "We design all AI workflows with zero-data-retention parameters, enterprise VPC isolation, TLS 1.3 encryption in transit, and AES-256 encryption at rest. For sensitive enterprise workflows, we deploy self-hosted open-weights models (e.g. Llama 3, Mistral) on private VPC instances so proprietary data never touches public third-party APIs.",
   },
 ];
+
