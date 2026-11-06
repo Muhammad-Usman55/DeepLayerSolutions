@@ -111,7 +111,7 @@ export function ContactForm() {
   };
 
   return (
-    <div className="p-8 sm:p-10 rounded-3xl bg-white border border-[#DFEDE5] shadow-lg relative">
+    <div className="p-5 sm:p-10 rounded-2xl sm:rounded-3xl bg-white border border-[#DFEDE5] shadow-lg relative">
       {isSuccess ? (
         <div className="py-12 flex flex-col items-center text-center">
           <div className="w-16 h-16 rounded-full bg-[#E9FFF2] text-[#008F53] flex items-center justify-center mb-6 shadow-sm">
@@ -160,7 +160,7 @@ export function ContactForm() {
             />
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
             {/* Full Name */}
             <div>
               <label htmlFor="fullName" className="block text-xs font-bold uppercase tracking-wider text-[#142A27] mb-2">
@@ -212,7 +212,7 @@ export function ContactForm() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
             {/* Company Name */}
             <div>
               <label htmlFor="company" className="block text-xs font-bold uppercase tracking-wider text-[#142A27] mb-2">

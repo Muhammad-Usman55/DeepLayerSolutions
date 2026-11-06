@@ -47,7 +47,7 @@ export function FooterNewsletter() {
   };
 
   return (
-    <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#E9FFF2]/95 via-[#F3FFF7] to-[#E9FFF2]/95 border border-[#DFEDE5] shadow-[0_4px_28px_-6px_rgba(0,184,107,0.08)] p-6 sm:p-8 lg:p-9 mb-12 sm:mb-16">
+    <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl bg-gradient-to-r from-[#E9FFF2]/95 via-[#F3FFF7] to-[#E9FFF2]/95 border border-[#DFEDE5] shadow-[0_4px_28px_-6px_rgba(0,184,107,0.08)] p-5 sm:p-8 lg:p-9 mb-12 sm:mb-16">
       {/* Decorative Light Radial Ambience */}
       <div className="absolute -top-12 -right-12 w-64 h-64 bg-[#34D399]/20 rounded-full blur-3xl pointer-events-none" />
 
@@ -105,7 +105,7 @@ export function FooterNewsletter() {
           </div>
 
           <div>
-            <h3 className="text-xl sm:text-2xl font-extrabold text-[#142A27] tracking-tight">
+            <h3 className="text-lg sm:text-2xl font-extrabold text-[#142A27] tracking-tight">
               Stay Updated with <span className="text-[#00B86B]">DeepLayer Solutions</span>
             </h3>
             <p className="text-sm text-[#64736F] mt-1 font-normal">
@@ -117,24 +117,26 @@ export function FooterNewsletter() {
         {/* Right Side: Subscription Input Field */}
         <div className="w-full lg:max-w-md">
           <form onSubmit={handleSubmit} className="relative flex flex-col gap-2">
-            <div className="flex items-center bg-white border border-[#DFEDE5] rounded-full p-1.5 pl-4 shadow-2xs focus-within:border-[#00B86B] focus-within:ring-2 focus-within:ring-[#00B86B]/20 transition-all">
-              <Mail className="w-4 h-4 text-[#64736F] mr-2 shrink-0" />
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                  if (status === "error") setStatus("idle");
-                }}
-                placeholder="Enter your email address"
-                disabled={status === "loading"}
-                className="w-full bg-transparent text-sm text-[#142A27] placeholder:text-[#64736F]/70 focus:outline-none disabled:opacity-50"
-                aria-label="Email address for newsletter"
-              />
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center bg-white border border-[#DFEDE5] rounded-2xl sm:rounded-full p-2 sm:p-1.5 sm:pl-4 shadow-2xs focus-within:border-[#00B86B] focus-within:ring-2 focus-within:ring-[#00B86B]/20 transition-all gap-2 sm:gap-0">
+              <div className="flex items-center w-full px-2 py-1 sm:px-0 sm:py-0">
+                <Mail className="w-4 h-4 text-[#64736F] mr-2.5 shrink-0" />
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    if (status === "error") setStatus("idle");
+                  }}
+                  placeholder="Enter your email address"
+                  disabled={status === "loading"}
+                  className="w-full bg-transparent text-sm text-[#142A27] placeholder:text-[#64736F]/70 focus:outline-none disabled:opacity-50"
+                  aria-label="Email address for newsletter"
+                />
+              </div>
               <button
                 type="submit"
                 disabled={status === "loading"}
-                className="inline-flex items-center gap-1.5 px-5 sm:px-6 py-2.5 rounded-full bg-[#00B86B] hover:bg-[#008F53] text-white font-semibold text-xs sm:text-sm shadow-sm hover:shadow-md transition-all shrink-0 active:scale-95 disabled:opacity-70 cursor-pointer"
+                className="inline-flex items-center justify-center gap-1.5 w-full sm:w-auto px-5 sm:px-6 py-2.5 rounded-xl sm:rounded-full bg-[#00B86B] hover:bg-[#008F53] text-white font-semibold text-xs sm:text-sm shadow-sm hover:shadow-md transition-all shrink-0 active:scale-95 disabled:opacity-70 cursor-pointer"
               >
                 {status === "loading" ? (
                   <>

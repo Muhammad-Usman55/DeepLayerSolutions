@@ -52,19 +52,19 @@ export function HeroSection() {
             className="lg:col-span-7 xl:col-span-7 flex flex-col items-start text-left"
           >
             {/* Bespoke Studio Eyebrow Pill */}
-            <motion.div variants={itemVariants}>
+            <motion.div variants={itemVariants} className="max-w-full">
               <Link
                 href="/services"
-                className="group inline-flex items-center gap-2.5 pl-2.5 pr-3.5 py-1.5 rounded-full bg-white/95 backdrop-blur-sm border border-[#DFEDE5] hover:border-[#00B86B] shadow-[0_2px_10px_-2px_rgba(0,184,107,0.08)] hover:shadow-md transition-all duration-300 mb-6 cursor-pointer"
+                className="group inline-flex items-center gap-2 sm:gap-2.5 pl-2.5 pr-3 sm:pr-3.5 py-1.5 rounded-full bg-white/95 backdrop-blur-sm border border-[#DFEDE5] hover:border-[#00B86B] shadow-[0_2px_10px_-2px_rgba(0,184,107,0.08)] hover:shadow-md transition-all duration-300 mb-6 cursor-pointer max-w-full"
               >
                 <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#E9FFF2] text-[#008F53] font-mono text-[10px] font-bold tracking-wide">
                   <Sparkles className="w-3 h-3 text-[#00B86B]" />
                   DEEPLAYER SOLUTIONS
                 </span>
-                <span className="text-xs font-semibold text-[#142A27] tracking-tight">
+                <span className="text-xs font-semibold text-[#142A27] tracking-tight hidden sm:inline truncate">
                   Engineering What&apos;s Next
                 </span>
-                <span className="w-1 h-1 rounded-full bg-[#BCE8CF]" />
+                <span className="w-1 h-1 rounded-full bg-[#BCE8CF] hidden sm:inline" />
                 <span className="text-xs font-mono font-semibold text-[#008F53] flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
                   Explore <ArrowRight className="w-3 h-3" />
                 </span>
@@ -74,7 +74,7 @@ export function HeroSection() {
             {/* Main Headline with Highlight Reveal */}
             <motion.h1
               variants={itemVariants}
-              className="text-4xl sm:text-5xl lg:text-6xl xl:text-[68px] font-extrabold tracking-tight text-[#142A27] leading-[1.08]"
+              className="text-3xl sm:text-5xl lg:text-6xl xl:text-[68px] font-extrabold tracking-tight text-[#142A27] leading-[1.12] sm:leading-[1.08]"
             >
               We Build{" "}
               <span className="text-[#008F53] relative inline-block">
@@ -93,7 +93,7 @@ export function HeroSection() {
             {/* Supporting Copy */}
             <motion.p
               variants={itemVariants}
-              className="mt-6 text-lg sm:text-xl text-[#64736F] leading-relaxed max-w-2xl font-normal"
+              className="mt-5 sm:mt-6 text-base sm:text-lg lg:text-xl text-[#64736F] leading-relaxed max-w-2xl font-normal"
             >
               Cutting-edge software engineering, AI, and digital products to help your business innovate, grow, and stay ahead in the age of intelligence.
             </motion.p>
@@ -101,14 +101,14 @@ export function HeroSection() {
             {/* CTAs with hover lift */}
             <motion.div
               variants={itemVariants}
-              className="mt-8 sm:mt-10 flex flex-wrap items-center gap-4 w-full sm:w-auto"
+              className="mt-7 sm:mt-10 flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 sm:gap-4 w-full sm:w-auto"
             >
               <Button
                 href="/services"
                 variant="primary"
                 size="lg"
                 withArrow
-                className="w-full sm:w-auto font-semibold shadow-md shadow-[#087A3D]/15 hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5"
+                className="w-full sm:w-auto justify-center font-semibold shadow-md shadow-[#087A3D]/15 hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5"
               >
                 Explore Our Services
               </Button>
@@ -116,7 +116,7 @@ export function HeroSection() {
                 href="/contact"
                 variant="outline"
                 size="lg"
-                className="w-full sm:w-auto font-medium hover:-translate-y-0.5 transition-all duration-300"
+                className="w-full sm:w-auto justify-center font-medium hover:-translate-y-0.5 transition-all duration-300"
               >
                 Book a Consultation
               </Button>
@@ -125,41 +125,41 @@ export function HeroSection() {
             {/* Engineering Pillars & Architecture Spec Strip */}
             <motion.div
               variants={itemVariants}
-              className="mt-10 pt-7 border-t border-[#DFEDE5] w-full"
+              className="mt-8 sm:mt-10 pt-6 sm:pt-7 border-t border-[#DFEDE5] w-full"
             >
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-4 divide-y sm:divide-y-0 sm:divide-x divide-[#DFEDE5]">
-                <div className="sm:pr-4">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 sm:gap-4 divide-y sm:divide-y-0 sm:divide-x divide-[#DFEDE5]">
+                <div className="flex items-center justify-between sm:block pb-3.5 sm:pb-0 sm:pr-4">
                   <div className="flex items-center gap-2">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#008F53]" />
                     <span className="text-[11px] font-mono uppercase tracking-wider text-[#008F53] font-semibold">
                       01 · Capability
                     </span>
                   </div>
-                  <p className="mt-1.5 text-sm font-semibold text-[#142A27] tracking-tight">
+                  <p className="sm:mt-1.5 text-sm font-semibold text-[#142A27] tracking-tight">
                     Custom AI &amp; LLMs
                   </p>
                 </div>
 
-                <div className="sm:px-4 pt-3 sm:pt-0">
+                <div className="flex items-center justify-between sm:block py-3.5 sm:py-0 sm:px-4">
                   <div className="flex items-center gap-2">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#008F53]" />
                     <span className="text-[11px] font-mono uppercase tracking-wider text-[#008F53] font-semibold">
                       02 · Speed
                     </span>
                   </div>
-                  <p className="mt-1.5 text-sm font-semibold text-[#142A27] tracking-tight">
+                  <p className="sm:mt-1.5 text-sm font-semibold text-[#142A27] tracking-tight">
                     Sub-450ms Latency
                   </p>
                 </div>
 
-                <div className="sm:pl-4 pt-3 sm:pt-0">
+                <div className="flex items-center justify-between sm:block pt-3.5 sm:pt-0 sm:pl-4">
                   <div className="flex items-center gap-2">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#008F53]" />
                     <span className="text-[11px] font-mono uppercase tracking-wider text-[#008F53] font-semibold">
                       03 · Standard
                     </span>
                   </div>
-                  <p className="mt-1.5 text-sm font-semibold text-[#142A27] tracking-tight">
+                  <p className="sm:mt-1.5 text-sm font-semibold text-[#142A27] tracking-tight">
                     Production Verified
                   </p>
                 </div>

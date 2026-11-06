@@ -124,10 +124,10 @@ export function Navbar() {
               <Logo size="md" variant="navbar" />
             </div>
 
-            {/* Center: Desktop Navigation Floating Pill Container */}
+            {/* Center: Desktop Navigation Floating Pill Container (Desktop lg: 1024px+) */}
             <nav
               aria-label="Main Navigation"
-              className="hidden md:flex items-center gap-1 xl:gap-1.5 p-1 rounded-full bg-white/90 backdrop-blur-md border border-[#DFEDE5] shadow-[0_2px_12px_rgba(0,143,83,0.05)]"
+              className="hidden lg:flex items-center gap-1 xl:gap-1.5 p-1 rounded-full bg-white/90 backdrop-blur-md border border-[#DFEDE5] shadow-[0_2px_12px_rgba(0,143,83,0.05)]"
             >
               {headerNavLinks.map((item) => {
                 const isServices = item.label === "Services";
@@ -273,11 +273,11 @@ export function Navbar() {
                 <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
               </Link>
 
-              {/* Mobile Menu Hamburger Trigger (Only below md: 768px) */}
+              {/* Mobile Menu Hamburger Trigger (Mobile & Tablet below lg: 1024px) */}
               <button
                 type="button"
                 onClick={() => setMobileMenuOpen(true)}
-                className="p-2.5 rounded-xl text-[#142A27] hover:bg-[#E9FFF2] hover:text-[#008F53] active:scale-95 transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#008F53] md:hidden"
+                className="p-2.5 rounded-xl text-[#142A27] hover:bg-[#E9FFF2] hover:text-[#008F53] active:scale-95 transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#008F53] lg:hidden cursor-pointer"
                 aria-label="Open mobile navigation menu"
               >
                 <Menu className="w-6 h-6" />

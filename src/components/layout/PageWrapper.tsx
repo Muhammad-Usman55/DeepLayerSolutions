@@ -8,7 +8,11 @@ interface PageWrapperProps {
 
 export function PageWrapper({ children, className }: PageWrapperProps) {
   return (
-    <main id="main-content" tabIndex={-1} className={cn("flex-1 w-full outline-none", className)}>
+    <main
+      id="main-content"
+      tabIndex={-1}
+      className={cn("flex-1 w-full max-w-full overflow-x-clip outline-none", className)}
+    >
       {children}
     </main>
   );

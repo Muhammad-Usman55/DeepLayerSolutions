@@ -23,7 +23,7 @@ export function CTATechVisual() {
         };
 
   return (
-    <div className="relative w-full max-w-[340px] sm:max-w-[420px] lg:max-w-[480px] aspect-[4/3] sm:aspect-[1.15] mx-auto flex items-center justify-center select-none overflow-visible">
+    <div className="relative w-full max-w-[260px] xs:max-w-[300px] sm:max-w-[420px] lg:max-w-[480px] aspect-[4/3] sm:aspect-[1.15] mx-auto flex items-center justify-center select-none overflow-visible">
       {/* Background Volumetric Green Glows */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 sm:w-80 h-64 sm:h-80 bg-gradient-to-tr from-[#00B86B]/30 via-[#34D399]/25 to-transparent rounded-full blur-3xl pointer-events-none -z-10" />
       <div className="absolute top-1/4 right-8 w-44 h-44 bg-[#A7F3D0]/30 rounded-full blur-2xl pointer-events-none -z-10" />

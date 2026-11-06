@@ -145,13 +145,13 @@ export function FAQSection() {
                       onClick={() => toggleFaq(faq.id)}
                       aria-expanded={isOpen}
                       aria-controls={`faq-answer-${faq.id}`}
-                      className="w-full flex items-center justify-between gap-4 p-5 sm:p-6 text-left cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#008F53]"
+                      className="w-full flex items-center justify-between gap-3 sm:gap-4 p-4 sm:p-6 text-left cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#008F53]"
                     >
-                      <div className="flex items-center gap-3.5 min-w-0">
+                      <div className="flex items-center gap-3 sm:gap-3.5 min-w-0">
                         <span className="shrink-0 w-6 h-6 rounded-md bg-[#E9FFF2] text-[#008F53] font-mono text-xs font-bold flex items-center justify-center">
                           {String(index + 1).padStart(2, "0")}
                         </span>
-                        <span className="text-base sm:text-lg font-bold text-[#142A27] leading-snug">
+                        <span className="text-sm sm:text-lg font-bold text-[#142A27] leading-snug">
                           {faq.question}
                         </span>
                       </div>
@@ -206,7 +206,7 @@ export function FAQSection() {
                           }}
                           className="overflow-hidden"
                         >
-                          <div className="px-5 pb-5 sm:px-6 sm:pb-6 pt-0 border-t border-[#DFEDE5]/60 mt-1">
+                          <div className="px-4 pb-4 sm:px-6 sm:pb-6 pt-0 border-t border-[#DFEDE5]/60 mt-1">
                             <p className="text-sm sm:text-base text-[#64736F] leading-relaxed pt-3.5 font-normal">
                               {faq.answer}
                             </p>

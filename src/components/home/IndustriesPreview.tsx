@@ -115,7 +115,7 @@ export function IndustriesPreview() {
               >
                 <Link
                   href={`/industries#${card.slug}`}
-                  className="group relative flex flex-col justify-between rounded-[28px] sm:rounded-[32px] bg-white border border-[#DFEDE5] p-7 sm:p-8 transition-all duration-300 hover:border-[#008F53]/40 hover:-translate-y-2 shadow-[0_8px_24px_rgba(0,143,83,0.04)] hover:shadow-[0_20px_40px_rgba(0,143,83,0.1)] focus:outline-hidden focus:ring-2 focus:ring-[#008F53]"
+                  className="group relative flex flex-col justify-between rounded-2xl sm:rounded-[32px] bg-white border border-[#DFEDE5] p-5 sm:p-8 transition-all duration-300 hover:border-[#008F53]/40 hover:-translate-y-2 shadow-[0_8px_24px_rgba(0,143,83,0.04)] hover:shadow-[0_20px_40px_rgba(0,143,83,0.1)] focus:outline-hidden focus:ring-2 focus:ring-[#008F53]"
                   aria-label={`Explore ${card.title} domain solutions`}
                 >
                   {/* Top Row: Mini Pill/Circle Badge in Top Right */}

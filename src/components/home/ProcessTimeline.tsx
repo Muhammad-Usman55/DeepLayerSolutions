@@ -116,7 +116,7 @@ export function ProcessTimeline() {
                       delay: shouldReduceMotion ? 0 : idx * 0.12,
                       ease: "easeOut" as const,
                     }}
-                    className="group relative flex flex-col justify-between h-full p-6 sm:p-7 rounded-[22px] bg-white border border-[#DFEDE5] hover:border-[#00B86B]/50 shadow-[0_8px_24px_-4px_rgba(0,184,107,0.06)] hover:shadow-[0_16px_36px_-6px_rgba(0,184,107,0.14)] transition-all duration-300 hover:-translate-y-1.5"
+                    className="group relative flex flex-col justify-between h-full p-5 sm:p-7 rounded-2xl sm:rounded-[22px] bg-white border border-[#DFEDE5] hover:border-[#00B86B]/50 shadow-[0_8px_24px_-4px_rgba(0,184,107,0.06)] hover:shadow-[0_16px_36px_-6px_rgba(0,184,107,0.14)] transition-all duration-300 hover:-translate-y-1.5"
                   >
                     <div>
                       {/* Top Row: Step Number Badge & 3D Glass Icon */}

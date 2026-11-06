@@ -2,7 +2,7 @@ import React from "react";
 
 export function Central3DVisual() {
   return (
-    <div className="relative w-full max-w-[340px] sm:max-w-[480px] lg:max-w-[580px] mx-auto aspect-[5/4] flex items-center justify-center select-none overflow-visible">
+    <div className="relative w-full max-w-[270px] xs:max-w-[300px] sm:max-w-[480px] lg:max-w-[580px] mx-auto aspect-[5/4] flex items-center justify-center select-none overflow-visible">
       {/* Green Ambient Lighting & Radial Glows (Static cached layers) */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[280px] sm:w-[420px] h-[260px] sm:h-[360px] bg-gradient-to-tr from-[#087A3D]/20 via-[#34D399]/25 to-transparent rounded-full blur-3xl pointer-events-none -z-10" />
       <div className="absolute top-1/3 left-1/3 -translate-x-1/2 -translate-y-1/2 w-48 sm:w-64 h-48 sm:h-64 bg-[#34D399]/20 rounded-full blur-2xl pointer-events-none -z-10" />

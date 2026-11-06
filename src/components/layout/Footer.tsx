@@ -247,7 +247,7 @@ export function Footer() {
           </p>
 
           {/* Right: Legal Links */}
-          <div className="flex items-center gap-4">
+          <div className="flex flex-wrap items-center justify-center sm:justify-end gap-3 sm:gap-4">
             {footerLegalLinks.map((legal, index) => (
               <React.Fragment key={legal.href}>
                 <Link

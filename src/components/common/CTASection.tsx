@@ -33,7 +33,7 @@ export function CTASection({
   return (
     <section className={cn("py-16 sm:py-20 lg:py-24", className)} aria-label="Call to Action">
       <Container size="wide">
-        <div className="relative overflow-hidden rounded-[28px] sm:rounded-[36px] lg:rounded-[40px] bg-gradient-to-br from-[#FFFFFF] via-[#F0FAF4] to-[#D5F9E6]/80 p-8 sm:p-12 lg:p-16 border border-[#BCE8CF] shadow-[0_16px_48px_-12px_rgba(0,184,107,0.12)]">
+        <div className="relative overflow-hidden rounded-2xl sm:rounded-[36px] lg:rounded-[40px] bg-gradient-to-br from-[#FFFFFF] via-[#F0FAF4] to-[#D5F9E6]/80 p-6 sm:p-12 lg:p-16 border border-[#BCE8CF] shadow-[0_16px_48px_-12px_rgba(0,184,107,0.12)]">
           {/* Subtle Ambient Background Gradients & Soft Waves */}
           <div className="absolute top-0 right-0 w-[550px] h-[500px] bg-gradient-to-br from-[#34D399]/20 via-[#00B86B]/15 to-transparent rounded-full blur-3xl pointer-events-none -z-10" />
           <div className="absolute bottom-0 left-10 w-96 h-96 bg-[#86EFAC]/25 rounded-full blur-3xl pointer-events-none -z-10" />
@@ -66,14 +66,14 @@ export function CTASection({
             {/* Left Content Area (Cols 1-7 on desktop) */}
             <div className="lg:col-span-7 flex flex-col items-start text-left">
               {/* Eyebrow Badge Pill */}
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-[11px] sm:text-xs font-mono font-bold uppercase tracking-wider bg-white/90 border border-[#00B86B]/35 text-[#008F53] mb-5 shadow-2xs select-none">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-[11px] sm:text-xs font-mono font-bold uppercase tracking-wider bg-white/90 border border-[#00B86B]/35 text-[#008F53] mb-5 shadow-2xs select-none max-w-full flex-wrap sm:flex-nowrap">
                 <span className="w-2 h-2 rounded-full bg-[#00B86B] shrink-0 shadow-[0_0_6px_rgba(0,184,107,0.8)]" />
                 <span>{badge}</span>
                 <ArrowRight className="w-3.5 h-3.5 text-[#00B86B] shrink-0" />
               </div>
 
               {/* Main Headline */}
-              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-extrabold tracking-tight text-[#142A27] leading-[1.12]">
+              <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-[54px] font-extrabold tracking-tight text-[#142A27] leading-[1.12]">
                 {title}{" "}
                 <span className="text-[#00B86B] relative inline-block mt-1">
                   {highlight}

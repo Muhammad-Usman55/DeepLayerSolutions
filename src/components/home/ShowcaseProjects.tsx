@@ -58,8 +58,8 @@ export function ShowcaseProjects() {
             </p>
           </div>
 
-          <div className="shrink-0">
-            <Button href="/portfolio" variant="secondary" size="md" withArrow>
+          <div className="shrink-0 w-full sm:w-auto">
+            <Button href="/portfolio" variant="secondary" size="md" withArrow className="w-full sm:w-auto justify-center">
               View Full Portfolio
             </Button>
           </div>
@@ -91,7 +91,7 @@ export function ShowcaseProjects() {
               </div>
 
               {/* Card Body */}
-              <div className="p-6 sm:p-7 flex flex-col flex-1 justify-between">
+              <div className="p-5 sm:p-7 flex flex-col flex-1 justify-between">
                 <div>
                   <h3 className="text-xl font-bold text-[#101C19] group-hover:text-[#087A3D] transition-colors leading-snug">
                     {project.title}
@@ -101,7 +101,7 @@ export function ShowcaseProjects() {
                   </p>
 
                   {/* Technology Pills */}
-                  <div className="mt-5 flex flex-wrap gap-2">
+                  <div className="mt-4 sm:mt-5 flex flex-wrap gap-1.5 sm:gap-2">
                     {project.techStackFlat.map((tech) => (
                       <span
                         key={tech}

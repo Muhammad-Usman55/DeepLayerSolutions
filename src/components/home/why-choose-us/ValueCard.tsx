@@ -24,7 +24,7 @@ export function ValueCard({ card, index }: ValueCardProps) {
     >
       <Link
         href={card.href || "/services"}
-        className="group relative flex items-center justify-between gap-3 px-5 py-4 sm:px-6 sm:py-4.5 rounded-2xl sm:rounded-3xl bg-white/85 hover:bg-white/95 backdrop-blur-md border border-[#DFEDE5] hover:border-[#008F53]/60 shadow-[0_4px_20px_-4px_rgba(0,143,83,0.06)] hover:shadow-[0_12px_28px_-6px_rgba(0,143,83,0.14)] transition-all duration-300 hover:-translate-y-1 select-none overflow-hidden"
+        className="group relative flex items-center justify-between gap-3 px-4 py-3.5 sm:px-6 sm:py-4.5 rounded-2xl sm:rounded-3xl bg-white/85 hover:bg-white/95 backdrop-blur-md border border-[#DFEDE5] hover:border-[#008F53]/60 shadow-[0_4px_20px_-4px_rgba(0,143,83,0.06)] hover:shadow-[0_12px_28px_-6px_rgba(0,143,83,0.14)] transition-all duration-300 hover:-translate-y-1 select-none overflow-hidden"
         aria-label={`${card.title} - Learn more`}
       >
         {/* Subtle Top Specular Glass Reflection */}
