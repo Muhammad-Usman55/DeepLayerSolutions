@@ -53,7 +53,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const { fullName, email, company, service, budget, message, botField } = body;
+    const { fullName, email, company, service, subject, message, botField } = body;
 
     // 3. Honeypot Spam Check (bots often fill hidden inputs)
     if (botField) {
@@ -83,6 +83,12 @@ export async function POST(req: NextRequest) {
       errors.email = "Email address must be under 150 characters.";
     }
 
+    if (!subject || typeof subject !== "string" || subject.trim().length < 3) {
+      errors.subject = "Please provide a subject (at least 3 characters).";
+    } else if (subject.length > 200) {
+      errors.subject = "Subject must be under 200 characters.";
+    }
+
     if (!message || typeof message !== "string" || message.trim().length < 15) {
       errors.message =
         "Please provide at least 15 characters describing your project or architecture needs.";
@@ -107,7 +113,7 @@ export async function POST(req: NextRequest) {
       email: sanitize(email).toLowerCase(),
       company: company ? sanitize(String(company)) : "N/A",
       service: service ? sanitize(String(service)) : "General Inquiry",
-      budget: budget ? sanitize(String(budget)) : "Not Specified",
+      subject: sanitize(subject),
       message: sanitize(message),
       submittedAt: new Date().toISOString(),
       ip,
@@ -116,7 +122,7 @@ export async function POST(req: NextRequest) {
     // 6. Production Logging
     // In production with RESEND_API_KEY, emails can be dispatched here.
     console.info(
-      `[CONTACT INQUIRY] Received from ${sanitizedSubmission.fullName} (${sanitizedSubmission.email}) for service "${sanitizedSubmission.service}"`
+      `[CONTACT INQUIRY] Received from ${sanitizedSubmission.fullName} (${sanitizedSubmission.email}) - Subject: "${sanitizedSubmission.subject}" (Service: "${sanitizedSubmission.service}")`
     );
 
     return NextResponse.json(

@@ -10,7 +10,7 @@ interface FormState {
   email: string;
   company: string;
   service: string;
-  budget: string;
+  subject: string;
   message: string;
   botField: string;
 }
@@ -20,7 +20,7 @@ const initialForm: FormState = {
   email: "",
   company: "",
   service: "AI & Machine Learning",
-  budget: "$10k - $25k",
+  subject: "",
   message: "",
   botField: "",
 };
@@ -46,6 +46,12 @@ export function ContactForm() {
       newErrors.email = "Email address is required.";
     } else if (!emailRegex.test(form.email.trim())) {
       newErrors.email = "Please enter a valid business email.";
+    }
+
+    if (!form.subject.trim()) {
+      newErrors.subject = "Subject is required.";
+    } else if (form.subject.trim().length < 3) {
+      newErrors.subject = "Subject must be at least 3 characters.";
     }
 
     if (!form.message.trim()) {
@@ -245,23 +251,29 @@ export function ContactForm() {
             </div>
           </div>
 
-          {/* Project Budget (Optional) */}
+          {/* Subject */}
           <div>
-            <label htmlFor="budget" className="block text-xs font-bold uppercase tracking-wider text-[#142A27] mb-2">
-              Expected Project Budget
+            <label htmlFor="subject" className="block text-xs font-bold uppercase tracking-wider text-[#142A27] mb-2">
+              Subject <span className="text-red-500">*</span>
             </label>
-            <select
-              id="budget"
-              value={form.budget}
-              onChange={(e) => setForm({ ...form, budget: e.target.value })}
-              className="w-full px-4 py-3 rounded-xl bg-[#FAFCF9] border border-[#DFEDE5] text-sm text-[#142A27] focus:outline-none focus:ring-2 focus:ring-[#008F53] transition-colors cursor-pointer"
-            >
-              <option value="Under $10k">Under $10,000</option>
-              <option value="$10k - $25k">$10,000 – $25,000</option>
-              <option value="$25k - $50k">$25,000 – $50,000</option>
-              <option value="$50k - $100k+">$50,000 – $100,000+</option>
-              <option value="Advisory / Ongoing Retainer">Advisory / Ongoing Retainer</option>
-            </select>
+            <input
+              id="subject"
+              type="text"
+              placeholder="e.g. AI Architecture Consultation / Custom SaaS Build"
+              value={form.subject}
+              aria-invalid={Boolean(errors.subject)}
+              aria-describedby={errors.subject ? "subject-error" : undefined}
+              onChange={(e) => setForm({ ...form, subject: e.target.value })}
+              className={`w-full px-4 py-3 rounded-xl bg-[#FAFCF9] border text-sm text-[#142A27] placeholder:text-[#A0AEA7] focus:outline-none focus:ring-2 focus:ring-[#008F53] transition-colors ${
+                errors.subject ? "border-red-400 bg-red-50/20" : "border-[#DFEDE5]"
+              }`}
+            />
+            {errors.subject && (
+              <p id="subject-error" className="mt-1.5 text-xs text-red-600 flex items-center gap-1">
+                <AlertCircle className="w-3.5 h-3.5" />
+                <span>{errors.subject}</span>
+              </p>
+            )}
           </div>
 
           {/* Project Description */}
