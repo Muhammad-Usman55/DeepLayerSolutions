@@ -24,10 +24,10 @@ export const siteConfig = {
     youtube: "https://youtube.com/@deeplayersolutions",
   },
   stats: [
-    { value: "50+", label: "Projects Delivered", description: "Production deployments across AI and web" },
-    { value: "25+", label: "Happy Clients", description: "Global founders and enterprise partners" },
-    { value: "99%", label: "Client Satisfaction", description: "Measured by repeat collaborations" },
-    { value: "5+", label: "Years of Experience", description: "Deep engineering and machine learning mastery" },
+    { value: "26+", label: "Projects Delivered", description: "Production deployments across AI and web" },
+    { value: "9+", label: "Happy Clients", description: "Global founders and enterprise partners" },
+    { value: "18+", label: "Client Satisfaction", description: "Measured by repeat collaborations" },
+    { value: "2+", label: "Years of Experience", description: "Deep engineering and machine learning mastery" },
   ] satisfies StatItem[],
 };
 

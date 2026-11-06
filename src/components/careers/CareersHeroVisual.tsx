@@ -90,3 +90,4 @@ export function CareersHeroVisual({ className = "w-full h-64 sm:h-72" }: { class
     </div>
   );
 }
+
