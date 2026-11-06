@@ -13,7 +13,7 @@ export function TechnologyMarquee() {
 
   return (
     <section
-      className="relative overflow-hidden py-12 sm:py-16 border-t border-[#E3EDE5] bg-gradient-to-b from-[#FAFCF9] via-white to-[#FAFCF9] select-none"
+      className="relative overflow-hidden py-12 sm:py-16 bg-gradient-to-b from-[#FAFCF9] via-white to-[#FAFCF9] select-none"
       aria-label="Our Technology Universe"
     >
       {/* Ambient Lighting & Technical Dot Background */}

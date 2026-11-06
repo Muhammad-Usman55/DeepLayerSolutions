@@ -58,7 +58,7 @@ export function TechEcosystem() {
   const track2Loop = [...track2, ...track2, ...track2];
 
   return (
-    <section className="py-20 md:py-24 bg-[#FAFCF9] border-t border-[#DFEDE5] overflow-hidden">
+    <section className="py-20 md:py-24 bg-[#FAFCF9] overflow-hidden">
       <Container size="wide">
         <SectionHeading
           badge="Engineering Stack"
