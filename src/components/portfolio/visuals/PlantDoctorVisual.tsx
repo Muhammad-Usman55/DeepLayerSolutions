@@ -110,3 +110,4 @@ export function PlantDoctorVisual({ mode = "card", className = "" }: VisualProps
     </div>
   );
 }
+

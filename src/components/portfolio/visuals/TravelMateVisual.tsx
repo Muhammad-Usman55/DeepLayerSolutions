@@ -93,3 +93,4 @@ export function TravelMateVisual({ mode = "card", className = "" }: VisualProps)
     </div>
   );
 }
+

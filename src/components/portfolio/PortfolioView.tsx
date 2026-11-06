@@ -10,51 +10,56 @@ import { Layers } from "lucide-react";
 export function PortfolioView() {
   const [activeCategory, setActiveCategory] = useState<ProjectCategory>("All");
 
-  const categories = useMemo(() => {
-    const list: { id: ProjectCategory; label: string; count: number }[] = [
-      { id: "All", label: "All Projects", count: projectsData.length },
-      {
-        id: "AI & ML",
-        label: "AI & ML",
-        count: projectsData.filter((p) => p.category === "AI & ML").length,
-      },
-      {
-        id: "Computer Vision",
-        label: "Computer Vision",
-        count: projectsData.filter((p) => p.category === "Computer Vision").length,
-      },
-      {
-        id: "Voice & Conversational AI",
-        label: "Voice & Conversational AI",
-        count: projectsData.filter((p) => p.category === "Voice & Conversational AI").length,
-      },
-      {
-        id: "Automation",
-        label: "Automation",
-        count: projectsData.filter((p) => p.category === "Automation").length,
-      },
-    ];
-    return list;
-  }, []);
-
   const filteredProjects = useMemo(() => {
     if (activeCategory === "All") return projectsData;
-    return projectsData.filter((p) => p.category === activeCategory);
+
+    return projectsData.filter((p) => {
+      if (p.category === activeCategory) return true;
+      // Allow secondary category matching (e.g. Plant Doctor is also Mobile, TravelMate is also Web Apps)
+      if (activeCategory === "Mobile" && p.slug === "plant-doctor") return true;
+      if (activeCategory === "Web Apps" && (p.slug === "travelmate-ai" || p.slug === "smart-course-qa")) return true;
+      if (activeCategory === "Automation" && (p.slug === "auto-labeling" || p.slug === "voice-agent")) return true;
+      if (activeCategory === "AI & ML" && (p.slug === "plant-doctor" || p.slug === "gender-detection" || p.slug === "smart-course-qa" || p.slug === "travelmate-ai")) return true;
+      if (activeCategory === "Data Science" && p.slug === "finsecure-ml") return true;
+      return false;
+    });
   }, [activeCategory]);
 
   return (
-    <div className="space-y-8">
-      {/* Category Filter Pills */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 border-b border-[#E3EDE5]">
+    <div className="relative space-y-8">
+      {/* Background Fluid Wave Curves & Floating Sphere in Bottom Right (matching reference image) */}
+      <svg
+        className="absolute -bottom-10 -right-20 w-[600px] h-[400px] pointer-events-none opacity-40 overflow-visible"
+        viewBox="0 0 600 400"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M0 380 C200 380 400 300 600 150"
+          stroke="#C4E7D0"
+          strokeWidth="1.8"
+          fill="none"
+        />
+        <path
+          d="M100 400 C280 400 450 340 600 240"
+          stroke="#D8F3E2"
+          strokeWidth="2.2"
+          fill="none"
+        />
+      </svg>
+
+      {/* Floating Glass Sphere on Bottom Right Wave (as in reference image) */}
+      <div
+        className="absolute bottom-16 right-24 sm:right-32 w-7 h-7 rounded-full bg-gradient-to-tr from-[#087A3D] to-[#34D399] opacity-75 shadow-lg pointer-events-none hidden md:block"
+        style={{ filter: "drop-shadow(0 0 12px rgba(16,185,129,0.5))" }}
+      />
+
+      {/* Category Filter Pills Bar */}
+      <div className="flex items-center justify-between gap-4 pb-2">
         <PortfolioFilters
-          categories={categories}
           activeCategory={activeCategory}
           onSelectCategory={setActiveCategory}
         />
-
-        <div className="text-xs font-mono text-[#65736D] self-end sm:self-center shrink-0">
-          Showing <span className="font-bold text-[#101C19]">{filteredProjects.length}</span> of {projectsData.length} projects
-        </div>
       </div>
 
       {/* Projects Grid: 3 cols desktop, 2 cols tablet, 1 col mobile */}
@@ -65,7 +70,7 @@ export function PortfolioView() {
           ))}
         </div>
       ) : (
-        <div className="py-20 text-center rounded-2xl bg-[#FAFCF9] border border-[#E3EDE5]">
+        <div className="py-20 text-center rounded-2xl bg-white border border-[#E3EDE5]">
           <Layers className="w-10 h-10 text-[#65736D] mx-auto mb-3" />
           <h3 className="text-lg font-bold text-[#101C19]">No projects found</h3>
           <p className="mt-1 text-sm text-[#65736D]">
@@ -74,7 +79,7 @@ export function PortfolioView() {
           <button
             type="button"
             onClick={() => setActiveCategory("All")}
-            className="mt-4 px-4 py-2 rounded-full text-xs font-semibold bg-[#087A3D] text-white hover:bg-[#075C32] transition-colors cursor-pointer"
+            className="mt-4 px-5 py-2 rounded-full text-xs font-semibold bg-[#087A3D] text-white hover:bg-[#075C32] transition-colors cursor-pointer"
           >
             Show All Projects
           </button>

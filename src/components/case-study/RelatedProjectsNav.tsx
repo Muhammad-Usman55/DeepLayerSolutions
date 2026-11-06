@@ -93,3 +93,4 @@ export function RelatedProjectsNav({ project }: Props) {
     </section>
   );
 }
+

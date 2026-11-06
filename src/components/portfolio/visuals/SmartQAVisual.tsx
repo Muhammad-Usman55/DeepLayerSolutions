@@ -75,3 +75,4 @@ export function SmartQAVisual({ mode = "card", className = "" }: VisualProps) {
     </div>
   );
 }
+

@@ -60,3 +60,4 @@ export function TechnologyStackSection({ project }: Props) {
     </section>
   );
 }
+

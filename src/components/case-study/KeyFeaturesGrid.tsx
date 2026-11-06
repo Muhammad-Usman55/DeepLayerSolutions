@@ -142,3 +142,4 @@ export function KeyFeaturesGrid({ project }: Props) {
     </section>
   );
 }
+

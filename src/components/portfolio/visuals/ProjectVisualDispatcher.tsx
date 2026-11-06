@@ -1,13 +1,13 @@
 "use client";
 
 import React from "react";
-import { PlantDoctorVisual } from "./PlantDoctorVisual";
-import { TravelMateVisual } from "./TravelMateVisual";
-import { VisionSenseVisual } from "./VisionSenseVisual";
-import { DeepVoiceVisual } from "./DeepVoiceVisual";
-import { SmartQAVisual } from "./SmartQAVisual";
-import { AutoLabelerVisual } from "./AutoLabelerVisual";
-import { UrduDubbingVisual } from "./UrduDubbingVisual";
+import { PlantDoctor3DVisual } from "./PlantDoctor3DVisual";
+import { TravelMate3DVisual } from "./TravelMate3DVisual";
+import { VisionSense3DVisual } from "./VisionSense3DVisual";
+import { DeepVoice3DVisual } from "./DeepVoice3DVisual";
+import { SmartQA3DVisual } from "./SmartQA3DVisual";
+import { AutoLabeler3DVisual } from "./AutoLabeler3DVisual";
+import { FinSecure3DVisual } from "./FinSecure3DVisual";
 
 interface VisualDispatcherProps {
   visualType: string;
@@ -17,54 +17,67 @@ interface VisualDispatcherProps {
 
 export function ProjectVisualDispatcher({
   visualType,
-  mode = "card",
   className = "",
 }: VisualDispatcherProps) {
   switch (visualType) {
     case "plant-doctor":
-    case "plant-doctor-scanner":
-    case "plant-doctor-gradcam":
-    case "plant-doctor-treatment":
-      return <PlantDoctorVisual mode={mode} className={className} />;
+      return (
+        <div className={`w-full h-full ${className}`}>
+          <PlantDoctor3DVisual />
+        </div>
+      );
 
     case "travelmate-ai":
-    case "travelmate-timeline":
-    case "travelmate-graph":
-    case "travelmate-map":
-      return <TravelMateVisual mode={mode} className={className} />;
+      return (
+        <div className={`w-full h-full ${className}`}>
+          <TravelMate3DVisual />
+        </div>
+      );
 
     case "gender-detection":
-    case "gender-detection-hud":
-    case "gender-detection-pipeline":
-    case "gender-detection-dashboard":
-      return <VisionSenseVisual mode={mode} className={className} />;
+    case "visionsense":
+      return (
+        <div className={`w-full h-full ${className}`}>
+          <VisionSense3DVisual />
+        </div>
+      );
 
     case "voice-agent":
-    case "voice-agent-console":
-    case "voice-agent-bargein":
-    case "voice-agent-crm":
-      return <DeepVoiceVisual mode={mode} className={className} />;
+    case "deepvoice":
+      return (
+        <div className={`w-full h-full ${className}`}>
+          <DeepVoice3DVisual />
+        </div>
+      );
 
     case "smart-course-qa":
     case "smart-qa":
-    case "smart-qa-split":
-    case "smart-qa-math":
-    case "smart-qa-citation":
-      return <SmartQAVisual mode={mode} className={className} />;
+    case "smart-enterprise-qa":
+      return (
+        <div className={`w-full h-full ${className}`}>
+          <SmartQA3DVisual />
+        </div>
+      );
 
     case "auto-labeling":
-    case "auto-labeling-canvas":
-    case "auto-labeling-timeline":
-    case "auto-labeling-export":
-      return <AutoLabelerVisual mode={mode} className={className} />;
+      return (
+        <div className={`w-full h-full ${className}`}>
+          <AutoLabeler3DVisual />
+        </div>
+      );
 
-    case "urdu-dubbing":
-    case "urdu-dubbing-stems":
-    case "urdu-dubbing-editor":
-    case "urdu-dubbing-cloner":
-      return <UrduDubbingVisual mode={mode} className={className} />;
+    case "finsecure-ml":
+      return (
+        <div className={`w-full h-full ${className}`}>
+          <FinSecure3DVisual />
+        </div>
+      );
 
     default:
-      return <PlantDoctorVisual mode={mode} className={className} />;
+      return (
+        <div className={`w-full h-full ${className}`}>
+          <PlantDoctor3DVisual />
+        </div>
+      );
   }
 }

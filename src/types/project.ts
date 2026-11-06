@@ -1,9 +1,12 @@
 export type ProjectCategory =
   | "All"
   | "AI & ML"
+  | "Web Apps"
+  | "Mobile"
+  | "Data Science"
+  | "Automation"
   | "Computer Vision"
-  | "Voice & Conversational AI"
-  | "Automation";
+  | "Voice & Conversational AI";
 
 export type ProjectClassification =
   | "Independent Engineering Project"

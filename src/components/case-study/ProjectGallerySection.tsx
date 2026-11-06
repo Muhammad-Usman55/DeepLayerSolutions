@@ -82,3 +82,4 @@ export function ProjectGallerySection({ project }: Props) {
     </section>
   );
 }
+

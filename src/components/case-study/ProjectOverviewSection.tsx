@@ -59,3 +59,4 @@ export function ProjectOverviewSection({ project }: Props) {
     </section>
   );
 }
+

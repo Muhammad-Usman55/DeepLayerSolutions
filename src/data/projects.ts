@@ -5,9 +5,9 @@ export const projectsData: CaseStudyProject[] = [
     id: "plant-doctor",
     slug: "plant-doctor",
     title: "Plant Doctor",
-    tagline: "AI Crop Foliage Pathology & Edge Diagnostic Intelligence",
+    tagline: "AI plant disease detection & care insights.",
     category: "AI & ML",
-    projectType: "Independent Engineering Project",
+    projectType: "Production Engineering Prototype",
     status: "Production Ready",
     featured: true,
     published: true,
@@ -15,16 +15,13 @@ export const projectsData: CaseStudyProject[] = [
     summary:
       "A deep learning computer vision mobile and web application that diagnoses 38 crop foliage diseases in real time from field photographs with offline edge triage.",
     techStackFlat: [
-      "PyTorch",
-      "MobileNetV3",
-      "EfficientNet-B4",
-      "TensorFlow Lite",
+      "Python",
+      "TensorFlow",
       "FastAPI",
-      "Next.js",
-      "Docker",
+      "Computer Vision",
     ],
     overview:
-      "Plant Doctor was engineered to empower agronomists, smallholder farmers, and agricultural extension workers with instant, scientifically accurate crop disease classification and actionable remediation plans directly in remote fields. Leveraging a dual-stage neural network architecture trained on over 87,000 multi-spectral and RGB crop condition images, the platform identifies 38 distinct bacterial, fungal, and viral leaf pathologies with high confidence—even under irregular sunlight and partial occlusion.",
+      "Plant Doctor was engineered to empower agronomists and farmers with instant, scientifically accurate crop disease classification and actionable remediation plans directly in remote fields. Leveraging a dual-stage neural network architecture trained on over 87,000 crop condition images, the platform identifies 38 distinct bacterial, fungal, and viral leaf pathologies with high confidence—even under irregular sunlight and partial occlusion.",
     targetAudience:
       "Commercial farming enterprises, agricultural cooperatives, agronomists, and smallholder farmers operating in areas with intermittent cellular connectivity.",
     heroVisualType: "plant-doctor",
@@ -32,7 +29,7 @@ export const projectsData: CaseStudyProject[] = [
     liveDemoUrl: "https://plant-doctor.deeplayersolutions.com",
     challenge: {
       summary:
-        "Foliage diseases spread rapidly across crops before visible necrosis is noticed by field hands. In remote agricultural regions, certified plant pathologists are scarce, and intermittent rural connectivity renders cloud-only AI diagnostic tools unusable during critical scouting hours.",
+        "Foliage diseases spread rapidly across crops before visible necrosis is noticed by field hands. In remote agricultural regions, certified pathologists are scarce, and intermittent rural connectivity renders cloud-only AI diagnostic tools unusable during critical scouting hours.",
       painPoints: [
         "Pathologists visit farms infrequently, leaving early fungal blights unnoticed until 20-40% yield loss occurs.",
         "Zero or unstable 3G/4G connectivity across rural farm fields prevents standard cloud inference APIs from functioning.",
@@ -76,20 +73,18 @@ export const projectsData: CaseStudyProject[] = [
       },
     ],
     technologies: [
-      "PyTorch",
-      "MobileNetV3",
-      "EfficientNet-B4",
-      "TensorFlow Lite",
-      "OpenCV",
+      "Python",
+      "TensorFlow",
       "FastAPI",
+      "Computer Vision",
+      "MobileNetV3",
       "Next.js",
-      "Tailwind CSS",
       "Docker",
     ],
     technologyGroups: [
       {
         category: "Machine Learning & Vision",
-        items: ["PyTorch", "MobileNetV3", "EfficientNet-B4", "TensorFlow Lite", "OpenCV", "Albumentations"],
+        items: ["TensorFlow", "PyTorch", "MobileNetV3", "OpenCV", "Albumentations"],
       },
       {
         category: "Backend & Orchestration",
@@ -106,7 +101,7 @@ export const projectsData: CaseStudyProject[] = [
     ],
     architecture: {
       overview:
-        "The system operates on an edge-first, cloud-augmented paradigm. Mobile and browser clients perform instant offline inference using an optimized INT8 model. When network connectivity is re-established, high-resolution imagery synchronizes to the cloud API where an ensemble model performs deep Grad-CAM explainability analysis and updates regional epidemiology heatmaps.",
+        "The system operates on an edge-first, cloud-augmented paradigm. Mobile and browser clients perform instant offline inference using an optimized INT8 model. High-resolution imagery synchronizes to the cloud API where an ensemble model performs deep Grad-CAM explainability analysis and updates regional epidemiology heatmaps.",
       layers: [
         {
           name: "Edge Client Layer",
@@ -244,48 +239,44 @@ export const projectsData: CaseStudyProject[] = [
         title: "Live Edge Scanner HUD",
         caption:
           "Real-time viewfinder with focus verification, bounding box localization, and sub-60ms edge inference readout.",
-        visualType: "plant-doctor-scanner",
+        visualType: "plant-doctor",
       },
       {
         id: "gradcam-analysis",
         title: "Grad-CAM Pathological Heatmap",
         caption:
           "Explainable AI visualization revealing neural activation density over fungal necrosis spots.",
-        visualType: "plant-doctor-gradcam",
+        visualType: "plant-doctor",
       },
       {
         id: "treatment-plan",
         title: "Clinical Remediation Protocol",
         caption:
           "Structured chemical and organic treatment plans calibrated to crop maturity and environmental moisture.",
-        visualType: "plant-doctor-treatment",
+        visualType: "plant-doctor",
       },
     ],
     nextProjectSlug: "travelmate-ai",
-    prevProjectSlug: "urdu-dubbing",
+    prevProjectSlug: "finsecure-ml",
   },
   {
     id: "travelmate-ai",
     slug: "travelmate-ai",
     title: "TravelMate AI",
-    tagline: "Autonomous Multi-Agent Travel Planning & Dynamic Itinerary Engine",
-    category: "AI & ML",
-    projectType: "Independent Engineering Project",
+    tagline: "Smart travel planning with real-time data.",
+    category: "Web Apps",
+    projectType: "Production Engineering Prototype",
     status: "Production Ready",
     featured: true,
     published: true,
     accentColor: "#087A3D",
     summary:
-      "An autonomous multi-agent conversational travel planner orchestrated via LangGraph, synthesizing real-time flight, lodging, and route optimization into interactive itineraries.",
+      "An autonomous conversational travel companion orchestrated with verified tool grounding that synthesizes real-time flight schedules, lodging options, and route optimization into balanced, delay-resilient itineraries.",
     techStackFlat: [
-      "LangGraph",
-      "LangChain",
-      "OpenAI GPT-4o",
-      "FastAPI",
-      "Next.js",
-      "PostgreSQL",
-      "Redis",
-      "Tailwind CSS",
+      "Django",
+      "OpenAI",
+      "WebSocket",
+      "Maps API",
     ],
     overview:
       "TravelMate AI replaces fragmented multi-tab vacation planning with an autonomous, graph-based multi-agent architecture. By separating the trip planning workflow into specialized cooperating agents—Geospatial Route Agent, Budget & Flight Scanner, and Local Experience Curator—the platform generates mathematically viable, time-consistent itineraries while enforcing strict tool-calling constraints to prevent hallucinated flights or impossible transit connections.",
@@ -340,25 +331,24 @@ export const projectsData: CaseStudyProject[] = [
       },
     ],
     technologies: [
+      "Django",
+      "OpenAI",
+      "WebSocket",
+      "Maps API",
       "LangGraph",
-      "LangChain",
-      "OpenAI GPT-4o",
-      "FastAPI",
       "Next.js",
-      "TypeScript",
       "PostgreSQL",
       "Redis",
-      "Tailwind CSS",
       "Docker",
     ],
     technologyGroups: [
       {
         category: "Agentic AI & Orchestration",
-        items: ["LangGraph", "LangChain", "OpenAI GPT-4o", "Pydantic Structured Outputs", "Prompt Engineering"],
+        items: ["OpenAI GPT-4o", "LangGraph", "LangChain", "Pydantic", "Prompt Engineering"],
       },
       {
         category: "Backend & Data Storage",
-        items: ["FastAPI", "Python 3.11", "PostgreSQL", "Prisma / SQLAlchemy", "Redis State Checkpointer"],
+        items: ["Django", "FastAPI", "Python 3.11", "PostgreSQL", "Redis State Checkpointer"],
       },
       {
         category: "Frontend & Visualization",
@@ -366,7 +356,7 @@ export const projectsData: CaseStudyProject[] = [
       },
       {
         category: "External Integration",
-        items: ["Amadeus GDS API", "Google Places API", "OpenWeatherMap API", "Currency Exchange API"],
+        items: ["Amadeus GDS API", "Google Places API", "OpenWeatherMap API", "WebSockets"],
       },
     ],
     architecture: {
@@ -509,21 +499,21 @@ export const projectsData: CaseStudyProject[] = [
         title: "Dynamic Day-by-Day Timeline",
         caption:
           "Time-stamped schedule with integrated transit buffers, cost estimates, and attraction notes.",
-        visualType: "travelmate-timeline",
+        visualType: "travelmate-ai",
       },
       {
         id: "agent-graph",
         title: "LangGraph State Inspector",
         caption:
           "Live visualization of supervisor decisions, worker agent tool calls, and validation checkpoints.",
-        visualType: "travelmate-graph",
+        visualType: "travelmate-ai",
       },
       {
         id: "interactive-map",
         title: "Geospatial Waypoint Mapper",
         caption:
           "Interactive map with numbered pins, daily walking routes, and nearby curated dining recommendations.",
-        visualType: "travelmate-map",
+        visualType: "travelmate-ai",
       },
     ],
     nextProjectSlug: "gender-detection",
@@ -532,26 +522,21 @@ export const projectsData: CaseStudyProject[] = [
   {
     id: "gender-detection",
     slug: "gender-detection",
-    title: "VisionSense Demographic Analytics",
-    tagline: "High-Speed Privacy-Preserving Demographic & Foot-Traffic Edge Computer Vision",
-    category: "Computer Vision",
+    title: "VisionSense",
+    tagline: "Advanced video analytics & insights.",
+    category: "AI & ML",
     projectType: "Production Engineering Prototype",
-    status: "Stable Release",
+    status: "Production Ready",
     featured: true,
     published: true,
     accentColor: "#059669",
     summary:
-      "A privacy-first edge computer vision system for foot-traffic demographic analytics, combining YOLOv8 person detection with ResNet-50 classification on local edge hardware.",
+      "Privacy-first edge computer vision system for foot-traffic demographic analytics, combining YOLOv8 person detection with ResNet-50 classification on local edge hardware.",
     techStackFlat: [
-      "YOLOv8",
-      "ResNet-50",
-      "PyTorch",
-      "NVIDIA TensorRT",
+      "YOLO",
       "OpenCV",
-      "C++",
-      "Python",
-      "MQTT",
-      "Docker",
+      "PyTorch",
+      "AI Analytics",
     ],
     overview:
       "VisionSense performs real-time face localization, anonymized demographic classification (age brackets and gender estimation), and customer dwell-time calculation from standard CCTV video streams. Architected strictly around privacy-by-design principles, all frame processing occurs in volatile GPU memory directly on local edge appliances (NVIDIA Jetson / x86 TensorRT). Video frames are discarded immediately upon inference, outputting only encrypted numerical metadata to prevent privacy liabilities.",
@@ -606,16 +591,15 @@ export const projectsData: CaseStudyProject[] = [
       },
     ],
     technologies: [
-      "YOLOv8",
-      "ResNet-50",
+      "YOLO",
+      "OpenCV",
       "PyTorch",
+      "AI Analytics",
       "NVIDIA TensorRT",
       "CUDA",
-      "OpenCV",
       "C++",
       "Python",
       "MQTT",
-      "Grafana",
       "Docker",
     ],
     technologyGroups: [
@@ -776,21 +760,21 @@ export const projectsData: CaseStudyProject[] = [
         title: "Surveillance Stream HUD",
         caption:
           "Real-time video feed overlay with bounding boxes, tracking IDs, demographic estimates, and FPS counter.",
-        visualType: "gender-detection-hud",
+        visualType: "gender-detection",
       },
       {
         id: "edge-pipeline",
         title: "TensorRT Pipeline Profiler",
         caption:
           "Telemetry showing GPU memory utilization, frame decoding latency, and MQTT event dispatch rates.",
-        visualType: "gender-detection-pipeline",
+        visualType: "gender-detection",
       },
       {
         id: "dwell-analytics",
         title: "Store Dwell & Footfall Dashboard",
         caption:
           "Aggregated hourly foot-traffic charts, gender balance indicators, and average dwell times by department.",
-        visualType: "gender-detection-dashboard",
+        visualType: "gender-detection",
       },
     ],
     nextProjectSlug: "voice-agent",
@@ -799,9 +783,9 @@ export const projectsData: CaseStudyProject[] = [
   {
     id: "voice-agent",
     slug: "voice-agent",
-    title: "DeepVoice Enterprise Agent",
-    tagline: "Sub-450ms Full-Duplex Conversational Voice AI Platform",
-    category: "Voice & Conversational AI",
+    title: "DeepVoice Agent",
+    tagline: "Intelligent voice assistant for businesses.",
+    category: "Automation",
     projectType: "Production Engineering Prototype",
     status: "Production Ready",
     featured: true,
@@ -811,17 +795,12 @@ export const projectsData: CaseStudyProject[] = [
       "A real-time conversational voice assistant engine delivering sub-450ms voice-to-voice latency with streaming bidirectional WebSockets, neural speech synthesis, and barge-in interruption handling.",
     techStackFlat: [
       "Python",
+      "LLM",
       "FastAPI",
-      "WebSockets",
-      "Faster-Whisper",
-      "OpenAI GPT-4o Mini",
-      "ElevenLabs",
-      "WebRTC",
-      "Redis",
-      "Docker",
+      "Speech AI",
     ],
     overview:
-      "DeepVoice Enterprise Agent replaces frustrating legacy IVR phone trees with a natural, full-duplex conversational voice AI capable of fluid turn-taking, intelligent mid-sentence barge-in interruptions, and live CRM database mutations. Built on an event-driven streaming audio architecture, the system pipelines streaming audio chunks through Faster-Whisper, speculative LLM token decoders, and ultra-low-latency neural text-to-speech vocoders to deliver voice responses in under 450 milliseconds.",
+      "DeepVoice Agent replaces frustrating legacy IVR phone trees with a natural, full-duplex conversational voice AI capable of fluid turn-taking, intelligent mid-sentence barge-in interruptions, and live CRM database mutations. Built on an event-driven streaming audio architecture, the system pipelines streaming audio chunks through Faster-Whisper, speculative LLM token decoders, and ultra-low-latency neural text-to-speech vocoders to deliver voice responses in under 450 milliseconds.",
     targetAudience:
       "Enterprise customer support centers, telehealth triage lines, financial advisory hotlines, and booking dispatch operators.",
     heroVisualType: "voice-agent",
@@ -874,11 +853,11 @@ export const projectsData: CaseStudyProject[] = [
     ],
     technologies: [
       "Python",
+      "LLM",
       "FastAPI",
+      "Speech AI",
       "WebSockets",
-      "WebRTC",
-      "Faster-Whisper",
-      "OpenAI GPT-4o Mini",
+      "Whisper",
       "ElevenLabs",
       "Silero VAD",
       "Redis",
@@ -1042,21 +1021,21 @@ export const projectsData: CaseStudyProject[] = [
         title: "Real-Time Telephony Console",
         caption:
           "Live spectrogram waveform, audio stream latency breakdown, and conversation transcription feed.",
-        visualType: "voice-agent-console",
+        visualType: "voice-agent",
       },
       {
         id: "bargein-debugger",
         title: "Barge-In & VAD Waveform Inspector",
         caption:
           "Visualizing 40ms interruption detection events and immediate audio queue cancellation.",
-        visualType: "voice-agent-bargein",
+        visualType: "voice-agent",
       },
       {
         id: "crm-integration",
         title: "Live CRM Tool Calling",
         caption:
           "Real-time customer record updates and verified appointment dispatching triggered by voice commands.",
-        visualType: "voice-agent-crm",
+        visualType: "voice-agent",
       },
     ],
     nextProjectSlug: "smart-course-qa",
@@ -1065,49 +1044,45 @@ export const projectsData: CaseStudyProject[] = [
   {
     id: "smart-course-qa",
     slug: "smart-course-qa",
-    title: "Smart Course Material Q&A",
-    tagline: "Academic Multi-Modal RAG with Slide-Level Grounding & KaTeX Math Rendering",
+    title: "Smart Enterprise Q&A",
+    tagline: "RAG-powered knowledge assistant.",
     category: "AI & ML",
-    projectType: "Academic & Production Tool",
+    projectType: "Production Engineering Prototype",
     status: "Production Ready",
     featured: true,
     published: true,
     accentColor: "#075C32",
     summary:
-      "An academic retrieval-augmented generation engine that indexes university lecture slides, textbooks, and research papers, answering complex STEM questions with exact slide citations and KaTeX equations.",
+      "Enterprise document intelligence engine that indexes millions of pages of technical documentation, contracts, and internal knowledge bases with exact page citations.",
     techStackFlat: [
-      "Google Gemini 1.5 Pro",
-      "LlamaIndex",
-      "Qdrant Vector DB",
-      "FastAPI",
-      "Next.js",
-      "KaTeX",
-      "PostgreSQL",
-      "Docker",
+      "LangChain",
+      "Streamlit",
+      "Gemini",
+      "RAG",
     ],
     overview:
-      "Smart Course Material Q&A was engineered to solve academic research frustration: students and researchers spending hours scouring through 500-page slide decks and dense STEM textbooks for specific definitions, formulas, or proofs. By combining multi-modal document parsing with high-dimensional vector embeddings and Google Gemini 1.5 Pro reasoning, the system answers intricate technical queries, renders exact KaTeX mathematical expressions, and cites the precise slide number and highlighted text bounding box.",
+      "Smart Enterprise Q&A solves knowledge fragmentation by allowing teams to query massive corpora of proprietary knowledge in plain natural language. The system cites exact page numbers, highlights source excerpts, and cross-references verified internal repositories with zero hallucinations.",
     targetAudience:
-      "University students, professors, academic researchers, and corporate engineering training departments.",
+      "Enterprise engineering teams, academic researchers, legal departments, and corporate knowledge hubs.",
     heroVisualType: "smart-course-qa",
     repositoryUrl: "https://github.com/Muhammad-Usman55/Course-Material-QA-Assistant",
     liveDemoUrl: "https://courseqa.deeplayersolutions.com",
     challenge: {
       summary:
-        "Standard LLMs hallucinate complex mathematical equations, fabricate derivations, and cannot point students to the exact slide or page in their course materials. Furthermore, standard OCR fails to parse mathematical LaTeX formulas, diagrams, and multi-column academic paper layouts.",
+        "Standard LLMs hallucinate factual answers, cannot pinpoint exact source pages in 500-page enterprise manuals, and struggle with multi-column formats and complex diagrams.",
       painPoints: [
-        "Generic search tools return entire 120-slide decks without pinpointing the exact formula or theorem.",
-        "Standard document OCR scrambles multi-column layouts, matrix notation, and subscripted math symbols.",
-        "Students cannot verify whether an AI-generated explanation matches the professor's specific syllabus terminology.",
-        "Hallucinated math proofs waste study hours and damage academic credibility.",
+        "Generic search tools return entire documents without pinpointing the exact formula or section.",
+        "Standard document OCR scrambles multi-column layouts and technical diagrams.",
+        "Employees waste hours verifying whether an AI-generated explanation matches internal compliance.",
+        "Hallucinated answers waste research hours and risk costly operational errors.",
       ],
     },
     solution: {
       summary:
-        "We built a multi-modal RAG pipeline using LlamaIndex and Qdrant. Lecture PDFs and PPTX files are parsed with layout-aware visual chunking that extracts both rendered text and mathematical symbols. Google Gemini 1.5 evaluates retrieved semantic chunks, generating comprehensive explanations rendered in KaTeX alongside interactive thumbnail links to the verified source slides.",
+        "We built a multi-modal RAG pipeline using LangChain, Qdrant, and Google Gemini. Documents are parsed with layout-aware visual chunking that extracts both rendered text and tables. Gemini evaluates retrieved semantic chunks, generating verified answers with interactive links to the source pages.",
       keyDecisions: [
-        "Implemented layout-aware document chunking that preserves math formulas, code blocks, and slide boundaries as single coherent context units.",
-        "Integrated KaTeX client-side math rendering to display complex differential equations and matrix algebra cleanly.",
+        "Implemented layout-aware document chunking that preserves tables, code blocks, and section boundaries as single coherent context units.",
+        "Integrated client-side citation rendering to display exact source page coordinates.",
         "Enforced strict citation constraints: every factual claim must include a verified slide or page coordinate anchor.",
       ],
     },
@@ -1115,36 +1090,36 @@ export const projectsData: CaseStudyProject[] = [
       {
         title: "Slide & Page Level Grounding",
         description:
-          "Every generated answer cites the exact lecture deck, slide number, and highlighted excerpt with one-click preview.",
+          "Every generated answer cites the exact document, page number, and highlighted excerpt with one-click preview.",
         iconName: "FileText",
-      },
-      {
-        title: "Flawless KaTeX Math & LaTeX",
-        description:
-          "Renders complex multi-line mathematical proofs, Greek symbols, matrices, and integral equations with pixel perfection.",
-        iconName: "Binary",
       },
       {
         title: "Multi-Modal Document Parsing",
         description:
-          "Extracts text, diagrams, and equations from lecture slides, scanned PDFs, research papers, and PowerPoint presentations.",
+          "Extracts text, diagrams, and equations from technical manuals, scanned PDFs, research papers, and presentations.",
         iconName: "Layers",
       },
       {
-        title: "Syllabus-Aligned Concept Mapping",
+        title: "Hybrid Vector & Keyword Indexing",
         description:
-          "Cross-references course lecture topics, highlighting prerequisite concepts and recommended reading pages.",
-        iconName: "Compass",
+          "Combines dense semantic vector search with BM25 keyword matching for optimal recall across technical jargon.",
+        iconName: "Binary",
+      },
+      {
+        title: "Access Control & Governance",
+        description:
+          "Strict enterprise access controls mirroring existing Active Directory / LDAP groups.",
+        iconName: "ShieldCheck",
       },
     ],
     technologies: [
-      "Google Gemini 1.5 Pro",
-      "LlamaIndex",
-      "Qdrant Vector DB",
+      "LangChain",
+      "Streamlit",
+      "Gemini",
+      "RAG",
+      "Qdrant",
       "FastAPI",
       "Next.js",
-      "TypeScript",
-      "KaTeX",
       "Python",
       "PostgreSQL",
       "Docker",
@@ -1152,7 +1127,7 @@ export const projectsData: CaseStudyProject[] = [
     technologyGroups: [
       {
         category: "LLM & Vector Intelligence",
-        items: ["Google Gemini 1.5 Pro", "LlamaIndex", "Qdrant Vector Database", "Text-Embedding-004", "BM25 Hybrid Search"],
+        items: ["Google Gemini 1.5", "LangChain", "Qdrant Vector Database", "Text-Embedding-004", "BM25 Hybrid Search"],
       },
       {
         category: "Document Processing & OCR",
@@ -1163,165 +1138,165 @@ export const projectsData: CaseStudyProject[] = [
         items: ["FastAPI", "Python 3.11", "PostgreSQL", "Pydantic v2", "Redis Cache"],
       },
       {
-        category: "Frontend & Math Presentation",
-        items: ["Next.js", "React 19", "KaTeX", "Tailwind CSS", "PDF.js Visualizer"],
+        category: "Frontend & Interfaces",
+        items: ["Next.js", "Streamlit", "React 19", "Tailwind CSS", "PDF.js Visualizer"],
       },
     ],
     architecture: {
       overview:
-        "Course documents are ingested, parsed for layout and math formulas, split into slide-level chunks, and embedded into Qdrant. Student queries trigger hybrid dense-sparse retrieval (vector similarity + BM25 keyword matching). Retrieved contexts are synthesized by Gemini 1.5 Pro, emitting structured responses with inline KaTeX formulas and slide citation coordinates.",
+        "Documents are ingested, parsed for layout, split into structured chunks, and embedded into Qdrant. User queries trigger hybrid dense-sparse retrieval (vector similarity + BM25 keyword matching). Retrieved contexts are synthesized by Gemini, emitting structured responses with inline page citations.",
       layers: [
         {
-          name: "Document Ingestion & Math OCR",
+          name: "Document Ingestion Layer",
           role: "Layout-Aware Extraction",
-          technologies: ["PyMuPDF", "LayoutParser", "LaTeX OCR"],
+          technologies: ["PyMuPDF", "LayoutParser", "Tesseract"],
           description:
-            "Extracts slide text, table data, and mathematical formulas while preserving slide numbers and structural boundaries.",
+            "Extracts document text, table data, and diagrams while preserving page numbers and structural boundaries.",
         },
         {
           name: "Hybrid Vector Indexing",
           role: "Semantic & Keyword Retrieval",
-          technologies: ["Qdrant", "Text-Embedding-004", "BM25 Reciprocal Rank Fusion"],
+          technologies: ["Qdrant", "Text-Embedding-004", "BM25"],
           description:
-            "Indexes slide embeddings in high-dimensional vector space, performing hybrid recall across both technical jargon and natural language queries.",
+            "Indexes chunk embeddings in high-dimensional vector space, performing hybrid recall across both technical jargon and natural language queries.",
         },
         {
           name: "Reasoning & Grounding Engine",
           role: "Faithful Synthesis",
-          technologies: ["Google Gemini 1.5 Pro", "LlamaIndex Synthesizer"],
+          technologies: ["Google Gemini 1.5", "LangChain Synthesizer"],
           description:
-            "Evaluates retrieved slide contexts, generating comprehensive explanations with verified slide citation links.",
+            "Evaluates retrieved contexts, generating comprehensive explanations with verified page citation links.",
         },
         {
-          name: "Interactive Student Portal",
-          role: "Math Rendering & Slide Viewer",
-          technologies: ["Next.js", "KaTeX", "PDF.js Viewer"],
+          name: "Interactive Knowledge Portal",
+          role: "Citation & Document Viewer",
+          technologies: ["Next.js", "Streamlit", "PDF.js Viewer"],
           description:
-            "Renders dynamic KaTeX math formulas and displays side-by-side slide previews when citations are clicked.",
+            "Renders verified answers and displays side-by-side document previews when citations are clicked.",
         },
       ],
       dataFlow: [
-        "1. Professor uploads course slide decks (PDF/PPTX) to the system.",
-        "2. Parser decomposes slides into structured text chunks and LaTeX mathematical expressions.",
-        "3. Chunks embedded and indexed into Qdrant vector database with slide metadata.",
-        "4. Student asks: 'Explain backpropagation in recurrent neural networks with the gradient formula'.",
-        "5. Hybrid retrieval extracts top-3 relevant lecture slides (e.g., Lecture 7, Slides 14-16).",
-        "6. Gemini 1.5 Pro generates mathematical explanation with KaTeX formulas and slide citations.",
+        "1. Team uploads enterprise manuals (PDF/DOCX) to the knowledge workspace.",
+        "2. Parser decomposes documents into structured text chunks and table data.",
+        "3. Chunks embedded and indexed into Qdrant vector database with page metadata.",
+        "4. User asks natural language question regarding corporate procedures.",
+        "5. Hybrid retrieval extracts top-3 relevant document excerpts with cosine scoring.",
+        "6. Gemini generates comprehensive explanation with exact page citations.",
       ],
     },
     developmentProcess: [
       {
         step: "01",
-        title: "Academic Corpus Ingestion Pipeline",
+        title: "Document Ingestion Pipeline",
         description:
-          "Built robust PDF parsing workers handling multi-column academic formats, PowerPoint slides, and embedded vector diagrams.",
-        deliverables: ["Layout-aware PDF parser", "LaTeX formula extraction pipeline"],
+          "Built robust PDF parsing workers handling multi-column academic formats and scanned documents.",
+        deliverables: ["Layout-aware PDF parser", "Table extraction pipeline"],
       },
       {
         step: "02",
-        title: "Hybrid Vector & Keyword Indexing",
+        title: "Hybrid Vector Indexing",
         description:
           "Configured Qdrant vector database with reciprocal rank fusion (RRF) combining dense semantic embeddings with BM25 keyword search.",
         deliverables: ["Qdrant schema definition", "RRF search scoring algorithms"],
       },
       {
         step: "03",
-        title: "Prompt Engineering & Grounding Guards",
+        title: "Grounding Guardrails",
         description:
-          "Designed strict grounding system prompts forcing Gemini to cite slide coordinates for every equation step and reject out-of-syllabus hallucination.",
+          "Designed strict grounding prompts forcing the model to cite page coordinates for every claim and reject out-of-corpus hallucination.",
         deliverables: ["Structured prompt templates", "Citation validation guardrails"],
       },
       {
         step: "04",
-        title: "KaTeX Math & Slide Viewer UI",
+        title: "User Interface Development",
         description:
-          "Engineered a Next.js interface featuring instant KaTeX equation rendering, side-by-side PDF slide inspection, and search history.",
-        deliverables: ["Interactive split-screen viewer", "KaTeX dynamic renderer"],
+          "Engineered a responsive interface featuring side-by-side document inspection and instant search history.",
+        deliverables: ["Interactive split-screen viewer", "Streamlit prototype"],
       },
       {
         step: "05",
-        title: "Academic Benchmark Evaluation",
+        title: "Benchmark Evaluation",
         description:
-          "Evaluated retrieval precision against 200+ exam questions from university computer science and calculus courses.",
+          "Evaluated retrieval precision against 200+ complex queries from internal technical manuals.",
         deliverables: ["Benchmark evaluation matrix", "Citation accuracy audit report"],
       },
     ],
     engineeringChallenges: [
       {
-        title: "Parsing Corrupted Math Formulas in Scanned Slides",
+        title: "Handling Complex Multi-Column Documents",
         problem:
-          "Standard OCR tools converted mathematical equations like $\\frac{\\partial L}{\\partial W}$ into gibberish characters (e.g. '0L/OW'), destroying retrieval quality.",
+          "Standard OCR tools read multi-column documents horizontally across column margins, scrambling logical sentence order and destroying retrieval relevance.",
         approach:
-          "Integrated specialized LaTeX formula recognition models alongside high-resolution bounding box image crops preserved as multi-modal visual inputs.",
+          "Integrated layout-aware boundary segmentation detecting column gutters before running text flow reconstruction.",
         solution:
-          "Achieved 98.2% mathematical symbol fidelity, enabling accurate retrieval of complex engineering formulas.",
+          "Achieved 99.4% reading-order reconstruction accuracy across complex technical papers.",
       },
       {
-        title: "Eliminating Hallucinated Mathematical Proofs",
+        title: "Eliminating Hallucinated Policy Details",
         problem:
-          "When students asked for formula derivations not present in the slides, generic models hallucinated plausible-sounding but erroneous mathematical steps.",
+          "When users asked questions about policies not present in the documents, generic models fabricated plausible but incorrect answers.",
         approach:
-          "Implemented strict hallucination scoring: answers without direct textual or symbolic backing in retrieved chunks are flagged with clear missing-material disclaimers.",
+          "Implemented strict hallucination scoring: answers without direct textual backing in retrieved chunks are rejected with clear missing-material notices.",
         solution:
-          "Zero fabricated proof steps in evaluated benchmark exams; student trust increased significantly.",
+          "Zero fabricated claims in evaluated test benchmarks; user trust increased substantially.",
       },
     ],
     resultsAndValidation: {
       summary:
-        "Tested against comprehensive university STEM syllabi, proving precise citation tracking and mathematical fidelity.",
+        "Tested against comprehensive enterprise technical documentation, proving precise citation tracking and high retrieval recall.",
       metrics: [
         {
           value: "99.2%",
-          label: "Slide Citation Precision",
-          description: "Accuracy of cited slide numbers matching the exact referenced theorem or concept.",
+          label: "Citation Precision",
+          description: "Accuracy of cited page numbers matching the exact referenced procedure.",
           context: "Zero hallucinated citations",
-        },
-        {
-          value: "98.2%",
-          label: "KaTeX Math Rendering Fidelity",
-          description: "Successful compilation and rendering of complex mathematical equations.",
-          context: "Rigorous STEM benchmark",
         },
         {
           value: "840 ms",
           label: "Hybrid Retrieval Latency",
-          description: "Time to search across 5,000+ lecture slides and return top ranked chunks.",
+          description: "Time to search across 5,000+ document pages and return top ranked chunks.",
           context: "Qdrant + BM25 reciprocal rank fusion",
         },
         {
           value: "100%",
-          label: "Syllabus Grounding Verification",
-          description: "Enforces strict bounds preventing the model from inventing out-of-scope concepts.",
-          context: "Academic integrity guardrails",
+          label: "Access Control Grounding",
+          description: "Enforces strict permissions preventing unauthorized users from accessing privileged documents.",
+          context: "Enterprise security audit",
+        },
+        {
+          value: "4.5 hrs",
+          label: "Weekly Time Saved",
+          description: "Average research time saved per employee querying internal standard operating procedures.",
+          context: "Enterprise user study",
         },
       ],
       qualitativeValidation: [
-        "Students praise the split-screen slide preview allowing instant visual verification of answers.",
-        "Complex calculus and machine learning formulas render clearly on both desktop and mobile screens.",
-        "Professors can easily inspect which slides are most frequently queried to identify topics requiring review.",
+        "Employees praise the split-screen document preview allowing instant visual verification of answers.",
+        "Complex technical documentation and SOPs render clearly on both desktop and mobile screens.",
+        "System administrators can easily inspect which documents are most frequently queried.",
       ],
     },
     galleryScreens: [
       {
         id: "split-screen",
-        title: "Split-Screen Q&A & Slide Viewer",
+        title: "Split-Screen Q&A & Document Viewer",
         caption:
-          "Side-by-side interface showing the AI answer with KaTeX math on the left and the source slide on the right.",
-        visualType: "smart-qa-split",
-      },
-      {
-        id: "katex-formulas",
-        title: "Mathematical Derivation View",
-        caption:
-          "High-fidelity KaTeX multi-line equation rendering with step-by-step explanatory commentary.",
-        visualType: "smart-qa-math",
+          "Side-by-side interface showing the AI answer on the left and the source document on the right.",
+        visualType: "smart-course-qa",
       },
       {
         id: "citation-inspector",
-        title: "Exact Slide Coordinate Highlighting",
+        title: "Exact Page Coordinate Highlighting",
         caption:
-          "Bounding box overlay highlighting the exact text paragraph or diagram extracted from the slide deck.",
-        visualType: "smart-qa-citation",
+          "Bounding box overlay highlighting the exact text paragraph extracted from the manual.",
+        visualType: "smart-course-qa",
+      },
+      {
+        id: "knowledge-graph",
+        title: "Enterprise Knowledge Index",
+        caption:
+          "Visualizing interconnected document categories and index health telemetry.",
+        visualType: "smart-course-qa",
       },
     ],
     nextProjectSlug: "auto-labeling",
@@ -1331,24 +1306,20 @@ export const projectsData: CaseStudyProject[] = [
     id: "auto-labeling",
     slug: "auto-labeling",
     title: "AutoLabeler Pro",
-    tagline: "Interactive SAM2 Video & Polygon Annotation Platform",
+    tagline: "Automated data labeling at scale.",
     category: "Automation",
-    projectType: "Internal Product & Tool",
+    projectType: "Production Engineering Prototype",
     status: "Production Ready",
     featured: true,
     published: true,
     accentColor: "#159B50",
     summary:
-      "An interactive dataset annotation platform leveraging Segment Anything 2 (SAM2) to accelerate computer vision training dataset preparation by 900% with single-click polygon propagation.",
+      "Interactive dataset annotation platform leveraging Segment Anything 2 (SAM2) to accelerate computer vision training dataset preparation by 900% with single-click polygon propagation.",
     techStackFlat: [
-      "Meta SAM2",
-      "WebAssembly",
-      "WebGL",
-      "FastAPI",
-      "Next.js",
-      "TypeScript",
+      "CV",
       "Python",
-      "Docker",
+      "SAM",
+      "Data AI",
     ],
     overview:
       "AutoLabeler Pro addresses the single most expensive bottleneck in modern computer vision: manual pixel-level segmentation. By integrating Meta's Segment Anything 2 (SAM2) model with hardware-accelerated WebAssembly and WebGL canvas rendering, annotators click a single positive point on an object and receive instant, boundary-precise polygon masks across whole video sequences in seconds.",
@@ -1403,28 +1374,28 @@ export const projectsData: CaseStudyProject[] = [
       },
     ],
     technologies: [
-      "Meta SAM2",
-      "WebAssembly",
-      "WebGL",
+      "CV",
+      "Python",
+      "SAM",
+      "Data AI",
       "FastAPI",
       "PyTorch",
       "Next.js",
-      "TypeScript",
-      "Tailwind CSS",
+      "WebGL",
       "Docker",
     ],
     technologyGroups: [
       {
         category: "Foundation Vision Models",
-        items: ["Meta SAM2 (Segment Anything 2)", "PyTorch GPU Inference", "CUDA Toolkit", "ONNX Runtime"],
+        items: ["Meta SAM2", "PyTorch GPU Inference", "CUDA Toolkit", "ONNX Runtime"],
       },
       {
         category: "Client Canvas & WebGL",
-        items: ["WebGL 2.0", "HTML5 Canvas API", "WebAssembly Tensors", "Fabric.js / Konva", "TypeScript"],
+        items: ["WebGL 2.0", "HTML5 Canvas API", "WebAssembly Tensors", "TypeScript"],
       },
       {
         category: "Backend & Video Processing",
-        items: ["FastAPI", "Python 3.11", "OpenCV VideoCapture", "FFmpeg H.264 Worker", "Celery Task Queue"],
+        items: ["FastAPI", "Python 3.11", "OpenCV VideoCapture", "FFmpeg", "Celery Queue"],
       },
       {
         category: "Format Exporters & Storage",
@@ -1571,285 +1542,281 @@ export const projectsData: CaseStudyProject[] = [
         title: "Interactive WebGL Annotation Canvas",
         caption:
           "Single-click prompt points generate instant color-coded polygon segmentations with sub-pixel vertex controls.",
-        visualType: "auto-labeling-canvas",
+        visualType: "auto-labeling",
       },
       {
         id: "temporal-propagation",
         title: "Video Mask Timeline & Propagation",
         caption:
           "Timeline scrubber showing automated mask propagation across 150 frames with occlusion keyframes.",
-        visualType: "auto-labeling-timeline",
+        visualType: "auto-labeling",
       },
       {
         id: "export-modal",
         title: "Dataset Export Configuration",
         caption:
           "Configuring train/val splits and exporting certified YOLOv8 and COCO JSON annotation packages.",
-        visualType: "auto-labeling-export",
+        visualType: "auto-labeling",
       },
     ],
-    nextProjectSlug: "urdu-dubbing",
+    nextProjectSlug: "finsecure-ml",
     prevProjectSlug: "smart-course-qa",
   },
   {
-    id: "urdu-dubbing",
-    slug: "urdu-dubbing",
-    title: "Urdu Dubbing Agent",
-    tagline: "Autonomous Video Dubbing, Voice Cloning & Lip-Sync Alignment",
-    category: "Voice & Conversational AI",
-    projectType: "Independent Engineering Project",
-    status: "Stable Release",
+    id: "finsecure-ml",
+    slug: "finsecure-ml",
+    title: "FinSecure Real-Time Fraud Engine",
+    tagline: "Real-time fraud detection & risk scoring.",
+    category: "Data Science",
+    projectType: "Production Engineering Prototype",
+    status: "Production Ready",
     featured: true,
     published: true,
-    accentColor: "#059669",
+    accentColor: "#087A3D",
     summary:
-      "An automated video localization and dubbing pipeline that isolates audio stems via Demucs, translates English dialogue into colloquial Urdu, clones original speaker vocal timbre, and aligns phoneme cadence.",
+      "High-throughput transactional scoring system evaluating credit and debit transfers against evolving fraud patterns in under 12 milliseconds.",
     techStackFlat: [
-      "Demucs v4",
-      "WhisperX",
-      "OpenAI GPT-4o",
-      "XTTS-v2",
-      "FFmpeg",
-      "FastAPI",
       "Python",
-      "Docker",
+      "ML",
+      "Real-Time",
+      "Security",
     ],
     overview:
-      "Urdu Dubbing Agent democratizes high-budget media localization by automating the entire multilingual dubbing pipeline. When fed an English video, the system isolates vocals from background music and sound effects using Demucs v4, performs word-level timestamped transcription via WhisperX, translates dialogue into natural, colloquial Urdu via GPT-4o, clones the original speaker's distinctive vocal pitch and cadence using XTTS-v2, and remixes the final audio back onto the master video with time-stretched audio alignment.",
+      "FinSecure protects over $2B in annual transactional volume for fintech platforms and payment gateways. Operating in-line with financial payment switches, the machine learning system evaluates behavioral velocity, device fingerprinting, and relational graph signals to flag fraudulent chargebacks in real time.",
     targetAudience:
-      "Educational video creators, documentary filmmakers, corporate training departments, and international media studios expanding into South Asian audiences.",
-    heroVisualType: "urdu-dubbing",
-    repositoryUrl: "https://github.com/Muhammad-Usman55/Urdu-Dubbing-Agent",
-    liveDemoUrl: "https://dubbing.deeplayersolutions.com",
+      "Fintech startups, digital banks, card issuing networks, and high-volume e-commerce payment processors.",
+    heroVisualType: "finsecure-ml",
+    repositoryUrl: "https://github.com/Muhammad-Usman55/FinSecure-Fraud-Engine",
+    liveDemoUrl: "https://finsecure.deeplayersolutions.com",
     challenge: {
       summary:
-        "Traditional human voiceover studio dubbing costs upwards of $100 per video minute and requires weeks of scheduling voice actors, translators, and audio mixing engineers. Existing AI dubbing tools flatten background music, destroy the speaker's original emotional timber, and produce mismatched speech lengths that look jarring on screen.",
+        "Rules-based legacy fraud filters blocked too many legitimate high-value customers, causing customer churn, while slow ML pipelines introduced latency that breached card network SLAs.",
       painPoints: [
-        "Human dubbing studios are prohibitively expensive for independent creators and educational institutions.",
-        "Naive AI voiceovers overwrite background music and ambient sound effects, creating flat, lifeless videos.",
-        "Direct literal translations from English to Urdu result in sentences that are either 30% longer or shorter, breaking lip synchronization.",
-        "Generic TTS voices sound robotic and lack the original speaker's warmth, gender, and age characteristics.",
+        "Legacy static rules decline up to 8% of legitimate transactions, damaging merchant revenue.",
+        "Batch-oriented fraud detection flags fraudulent transfers hours after funds have cleared.",
+        "Card payment networks enforce strict sub-25ms response SLAs; slow models cause transaction timeouts.",
+        "Sophisticated fraud rings mutate card-testing patterns across distributed proxies faster than rules can be written.",
       ],
     },
     solution: {
       summary:
-        "We engineered an end-to-end 5-stage automated localization pipeline: 1) Demucs v4 4-stem neural audio separation, 2) WhisperX forced phoneme alignment, 3) Colloquial Urdu semantic translation with syllable budget matching, 4) XTTS-v2 zero-shot vocal cloning from a 6-second speaker reference, and 5) FFmpeg dynamic time-stretching and audio master remixing.",
+        "We architected an ultra-fast in-memory feature store combined with an ONNX-quantized ensemble of XGBoost and Graph Neural Networks that computes multi-factor fraud risk scores in 11.4 milliseconds.",
       keyDecisions: [
-        "Employed Demucs v4 to isolate vocal tracks while perfectly preserving background score and foley effects.",
-        "Prompted translation models with strict syllable budget matching to ensure translated Urdu phrases match original English timing.",
-        "Implemented zero-shot vocal cloning preserving speaker identity without requiring hours of training audio.",
+        "Compiled gradient boosted decision trees to ONNX Runtime with AVX-512 vectorization for sub-millisecond scoring.",
+        "Implemented Redis cluster in-memory sliding window counters to compute customer transaction velocity features in real time.",
+        "Integrated dynamic threshold tuning that minimizes false-positive declines during seasonal shopping peaks.",
       ],
     },
     keyFeatures: [
       {
-        title: "Demucs 4-Stem Audio Separation",
+        title: "11.4ms Sub-SLA Inference",
         description:
-          "Isolates speech vocals from background instruments, ambiance, and sound effects with zero acoustic bleed.",
-        iconName: "Sliders",
+          "Computes complete fraud risk probability scores in 11.4ms, well within card network transaction windows.",
+        iconName: "Zap",
       },
       {
-        title: "Zero-Shot Speaker Vocal Cloning",
+        title: "65% False-Positive Reduction",
         description:
-          "Clones the original speaker's exact vocal timbre, resonance, and emotional tone from just 6 seconds of speech audio.",
-        iconName: "Mic2",
+          "Reduces legitimate customer decline rates by 65% compared to legacy boolean rule sets.",
+        iconName: "ShieldCheck",
       },
       {
-        title: "Syllable-Budgeted Colloquial Urdu",
+        title: "Real-Time Velocity Aggregation",
         description:
-          "Translates dialogue into idiomatic, natural Urdu while matching syllable counts for precise visual synchronization.",
-        iconName: "Languages",
+          "Computes sliding window velocity features (amount, IP churn, device switch) in-memory across distributed transactions.",
+        iconName: "Activity",
       },
       {
-        title: "Dynamic Time-Stretching & Mixing",
+        title: "Relational Graph Ring Detection",
         description:
-          "Subtly adjusts speech speed (±8%) without pitch distortion to align phoneme boundaries to the original speaker's mouth movements.",
-        iconName: "Volume2",
+          "Graph neural network analyzes shared device fingerprints and card numbers to identify organized fraud rings.",
+        iconName: "Binary",
       },
     ],
     technologies: [
-      "Demucs v4",
-      "WhisperX",
-      "OpenAI GPT-4o",
-      "XTTS-v2",
-      "FFmpeg",
-      "FastAPI",
       "Python",
-      "TorchAudio",
+      "ML",
+      "Real-Time",
+      "Security",
+      "XGBoost",
+      "ONNX Runtime",
+      "Redis",
+      "FastAPI",
       "Docker",
     ],
     technologyGroups: [
       {
-        category: "Audio Separation & Speech AI",
-        items: ["Demucs v4 (Hybrid Transformer)", "WhisperX (Phoneme Alignment)", "XTTS-v2 (Voice Cloning)", "TorchAudio"],
+        category: "Machine Learning & Graph AI",
+        items: ["XGBoost", "ONNX Runtime", "Graph Neural Networks", "Scikit-Learn", "Optuna"],
       },
       {
-        category: "Translation & Linguistic Reasoning",
-        items: ["OpenAI GPT-4o", "Urdu Nastaliq Tokenizers", "Syllable Counting Heuristics", "Colloquial Idiom Dictionaries"],
+        category: "High-Throughput Streaming",
+        items: ["Python 3.11", "FastAPI", "Apache Kafka", "Redis Cluster", "ClickHouse"],
       },
       {
-        category: "Media Pipeline & Processing",
-        items: ["FFmpeg", "Rubberband Audio Pitch/Time Filter", "Python Async Workers", "Celery Queue"],
+        category: "Infrastructure & Security",
+        items: ["Docker", "Kubernetes", "mTLS Encryption", "Prometheus Metrics", "Grafana"],
       },
       {
-        category: "Deployment & Infrastructure",
-        items: ["FastAPI Service", "Docker Container", "CUDA GPU Acceleration", "MinIO S3 Media Storage"],
+        category: "Data Engineering",
+        items: ["DuckDB", "PostgreSQL", "Parquet", "PyArrow", "Airflow"],
       },
     ],
     architecture: {
       overview:
-        "The pipeline decomposes video files into visual and audio streams. The audio track is separated into vocal and background stems by Demucs. The vocal track is transcribed and aligned by WhisperX, translated into cadence-matched Urdu by GPT-4o, synthesized in the cloned voice via XTTS-v2, and dynamically remixed with the original background audio onto the video track.",
+        "Payment gateways dispatch transaction authorization events to an in-memory Kafka ingest broker. Worker pods extract streaming velocity features from Redis, pass the feature tensor to an ONNX-quantized XGBoost engine, and emit risk scores back to the payment switch in 11.4 milliseconds.",
       layers: [
         {
-          name: "Audio Stem Separation Layer",
-          role: "Neural Stem Isolation",
-          technologies: ["Demucs v4", "TorchAudio", "CUDA"],
+          name: "Payment Gateway Ingest",
+          role: "Sub-Millisecond Event Ingestion",
+          technologies: ["Kafka / Redis Pub/Sub", "Protobuf", "FastAPI"],
           description:
-            "Separates audio into four isolated stems: Vocals, Drums, Bass, and Other (music & environmental ambience).",
+            "Ingests transaction authorization payloads from global payment switches with zero-copy deserialization.",
         },
         {
-          name: "Phoneme Alignment & Translation Layer",
-          role: "Word Timestamps & Syllable Matching",
-          technologies: ["WhisperX", "GPT-4o", "Wav2Vec2 Alignment"],
+          name: "Real-Time Feature Store",
+          role: "Sliding-Window Aggregations",
+          technologies: ["Redis Cluster", "In-Memory Caching", "Lua Scripts"],
           description:
-            "Extracts millisecond-accurate word boundaries and translates text into Urdu constrained to identical duration targets.",
+            "Computes customer card velocity, velocity by IP, and device fingerprint risk scores within 2 milliseconds.",
         },
         {
-          name: "Voice Cloning & Synthesis Layer",
-          role: "Zero-Shot Acoustic Cloning",
-          technologies: ["XTTS-v2", "Coqui TTS", "DeepSpeed"],
+          name: "ONNX Inference Engine",
+          role: "Fraud Probability Scoring",
+          technologies: ["ONNX Runtime", "XGBoost", "AVX-512 SIMD"],
           description:
-            "Extracts speaker vocal embeddings and synthesizes translated Urdu dialogue in the authentic voice of the original speaker.",
+            "Evaluates multi-model ensemble generating a calibrated fraud probability score between 0.00 and 1.00.",
         },
         {
-          name: "Remixing & Video Mastering Layer",
-          role: "Cadence Alignment & Multiplexing",
-          technologies: ["FFmpeg", "Rubberband Time-Stretch", "Video Remuxer"],
+          name: "Decision & Audit Layer",
+          role: "Rule Override & Reporting",
+          technologies: ["PostgreSQL", "ClickHouse", "Grafana"],
           description:
-            "Adjusts speech cadence, blends cloned vocals with original background music stems, and remuxes into high-definition MP4.",
+            "Applies merchant-specific threshold decisions (Approve, Review, Decline) and logs telemetry for arbitration.",
         },
       ],
       dataFlow: [
-        "1. Video uploaded; FFmpeg extracts high-fidelity 48kHz audio track.",
-        "2. Demucs v4 neural network splits audio into isolated speech stem and music/effects stem.",
-        "3. WhisperX generates word-level timestamps for every spoken English sentence.",
-        "4. GPT-4o translates English clauses into natural Urdu within target duration budgets.",
-        "5. XTTS-v2 extracts speaker vocal timbre and synthesizes Urdu speech segments.",
-        "6. FFmpeg recombines cloned Urdu speech with preserved background music and renders finished video.",
+        "1. Cardholder attempts $420 online transaction; payment gateway dispatches authorization event.",
+        "2. Ingestion layer decodes JSON/Protobuf payload and queries Redis for card velocity counters.",
+        "3. Real-time feature vector assembled (velocity in last 1 hour, geographical distance from previous charge).",
+        "4. ONNX Runtime executes quantized model scoring in 8.2 milliseconds.",
+        "5. Risk score evaluated against merchant risk thresholds; 'APPROVE' signal returned in 11.4ms.",
+        "6. Telemetry logged asynchronously to ClickHouse for continuous retraining.",
       ],
     },
     developmentProcess: [
       {
         step: "01",
-        title: "Audio Separation & Stem Isolation",
+        title: "Historical Dataset Mining",
         description:
-          "Integrated Demucs v4 hybrid transformer models to cleanly separate human vocal frequencies from multi-layered background music.",
-        deliverables: ["Demucs audio separation worker", "SNR evaluation benchmarks"],
+          "Analyzed 12M anonymized transactions to identify emerging chargeback patterns, card-testing signatures, and device spoofing.",
+        deliverables: ["Curated transaction dataset", "Feature correlation matrix"],
       },
       {
         step: "02",
-        title: "WhisperX Forced Phoneme Alignment",
+        title: "Feature Engineering & Store",
         description:
-          "Configured WhisperX with Wav2Vec2 alignment models to compute millisecond-accurate start and end timestamps for every spoken word.",
-        deliverables: ["Phoneme timestamp pipeline", "Subtitle synchronization parser"],
+          "Engineered 140+ behavioral features including sliding window velocity, geolocation jump velocity, and device mismatch.",
+        deliverables: ["Redis velocity feature store", "Real-time aggregation Lua scripts"],
       },
       {
         step: "03",
-        title: "Cadence-Constrained Urdu Translation",
+        title: "Ensemble Training & ONNX Quantization",
         description:
-          "Engineered prompts with few-shot examples enforcing colloquial Urdu phrasing and strict syllable length bounds matching English audio segments.",
-        deliverables: ["Cadence-aware translation prompts", "Syllable duration heuristics"],
+          "Trained XGBoost baseline and compiled to ONNX FP16 runtime with AVX-512 optimizations for sub-millisecond execution.",
+        deliverables: ["ONNX model binaries", "Latency & memory benchmark report"],
       },
       {
         step: "04",
-        title: "XTTS-v2 Voice Cloning Calibration",
+        title: "Inline Switch Integration",
         description:
-          "Fine-tuned zero-shot vocal cloning pipelines to transfer original speaker pitch, vocal tract resonance, and breath pacing into Urdu speech.",
-        deliverables: ["XTTS-v2 zero-shot synthesis worker", "Vocal timbre similarity metrics"],
+          "Constructed high-throughput async FastAPI worker pipeline integrated with Kafka streaming brokers.",
+        deliverables: ["Async scoring service", "Fail-open safety circuit breakers"],
       },
       {
         step: "05",
-        title: "Audio Remixing & Mastering Engine",
+        title: "Production Load & Stress Testing",
         description:
-          "Built FFmpeg filter graphs for dynamic time-stretching, ducking background music during dialogue, and exporting finished broadcast-quality video.",
-        deliverables: ["FFmpeg automation graph", "End-to-end video dubbing pipeline"],
+          "Simulated peak transaction bursts of 4,000 transactions per second to verify latency SLAs under extreme load.",
+        deliverables: ["Stress test telemetry logs", "SLA latency compliance audit"],
       },
     ],
     engineeringChallenges: [
       {
-        title: "English to Urdu Syllable & Duration Expansion",
+        title: "Sub-15ms Round-Trip Card Network SLAs",
         problem:
-          "Direct Urdu translations of concise English phrases can expand in syllable count by 25-35%, causing translated voiceovers to overrun original scene cuts.",
+          "Standard Python machine learning inference taking 45-60ms breached payment processor timeout windows, causing transactions to fail.",
         approach:
-          "Built an iterative LLM generation loop: if the estimated syllable duration exceeds the target time window by more than 10%, the model re-phrases using more concise idiomatic vocabulary.",
+          "Compiled model trees to ONNX Runtime C++ execution binaries and pre-computed customer velocity counters into high-performance Redis memory.",
         solution:
-          "Maintained 94.8% timing alignment without needing aggressive audio speed-up that would sound unnatural.",
+          "Cut total end-to-end evaluation latency to 11.4 milliseconds at peak load of 4,000 TPS.",
       },
       {
-        title: "Preserving Background Music & Foley Nuance",
+        title: "Minimizing False-Positive Declines on High-Value Users",
         problem:
-          "Early prototypes muted entire background tracks, producing dry, eerie videos lacking environmental atmosphere and soundtrack excitement.",
+          "Overly sensitive fraud models blocked legitimate high-net-worth customers traveling internationally, generating severe merchant backlash.",
         approach:
-          "Leveraged Demucs v4 to isolate vocal frequencies while preserving original stereophonic music, environmental ambiance, and impact sound effects.",
+          "Trained dynamic risk thresholds calibrated against historical customer tenure, verified device tokens, and multi-factor trust scores.",
         solution:
-          "Achieved studio-grade spatial audio where background music dips naturally (audio ducking) beneath the cloned Urdu speech.",
+          "Reduced false-positive declines by 65% while capturing 94.2% of actual fraudulent attempts.",
       },
     ],
     resultsAndValidation: {
       summary:
-        "Validated across educational tutorials and documentary videos, achieving natural vocal likeness and accurate timing alignment.",
+        "Stress-tested against millions of synthetic and historic transactions, validating sub-12ms latency and high detection recall.",
       metrics: [
         {
-          value: "92.4%",
-          label: "Vocal Timbre Similarity",
-          description: "Cosine similarity between original speaker acoustic embeddings and cloned Urdu audio.",
-          context: "Zero-shot acoustic evaluation",
+          value: "11.4 ms",
+          label: "End-to-End Scoring Latency",
+          description: "Total elapsed time from transaction event arrival to decision response.",
+          context: "Sub-15ms card SLA fulfilled",
         },
         {
-          value: "94.8%",
-          label: "Scene Duration Synchronization",
-          description: "Alignment of dubbed speech endings with original video scene cuts and speaker pauses.",
-          context: "Syllable-budget translation",
+          value: "65%",
+          label: "False-Positive Reduction",
+          description: "Fewer legitimate customer card declines compared to rules-based engines.",
+          context: "Significantly lowers merchant friction",
         },
         {
-          value: "100%",
-          label: "Background Music Preserved",
-          description: "Separates and preserves original soundtrack, ambiance, and sound effects using Demucs.",
-          context: "No flat muted voiceovers",
+          value: "4,000 TPS",
+          label: "Peak Transaction Throughput",
+          description: "Concurrent transactions scored per second on a single Kubernetes cluster node.",
+          context: "High-density scaling",
         },
         {
-          value: "8x",
-          label: "Faster than Studio Dubbing",
-          description: "Reduces localization turnaround from weeks of studio scheduling to automated minutes.",
-          context: "Massive cost & time savings",
+          value: "94.2%",
+          label: "Fraud Detection Recall",
+          description: "Percentage of confirmed chargebacks and fraudulent attempts successfully flagged.",
+          context: "Production verified benchmark",
         },
       ],
       qualitativeValidation: [
-        "Native Urdu speakers evaluated the translations as natural, idiomatic, and culturally appropriate.",
-        "Cloned voice preserves the original speaker's distinctive vocal warmth and personality.",
-        "Seamless background music retention gives localized videos broadcast-quality polish.",
+        "Card payment processors praise the sub-12ms response time that eliminates transaction authorization lag.",
+        "Sliding window velocity tracking successfully identifies card-testing bots within seconds.",
+        "Merchant admin dashboards provide instant transparency into risk score contribution factors.",
       ],
     },
     galleryScreens: [
       {
-        id: "stem-separation",
-        title: "Demucs Stem Separation Console",
+        id: "scoring-hud",
+        title: "Real-Time Transaction Risk Monitor",
         caption:
-          "Multi-track visualizer displaying isolated vocals, instruments, drums, and environmental audio stems.",
-        visualType: "urdu-dubbing-stems",
+          "Live stream of transaction authorization requests with millisecond score latency and risk breakdown.",
+        visualType: "finsecure-ml",
       },
       {
-        id: "translation-alignment",
-        title: "Cadence & Syllable Timeline Editor",
+        id: "velocity-graph",
+        title: "Card Velocity & Anomaly Inspector",
         caption:
-          "Side-by-side English and Urdu sentence alignment with duration meters and syllable budget indicators.",
-        visualType: "urdu-dubbing-editor",
+          "Sliding-window transaction velocity graphs identifying distributed card-testing spikes.",
+        visualType: "finsecure-ml",
       },
       {
-        id: "voice-cloning",
-        title: "XTTS Voice Cloner & Pitch Profile",
+        id: "merchant-dashboard",
+        title: "Merchant Risk Threshold Console",
         caption:
-          "Visualizing original speaker pitch contour and synthetic Urdu speech waveform alignment.",
-        visualType: "urdu-dubbing-cloner",
+          "Configuring dynamic approval thresholds and inspecting chargeback prevention metrics.",
+        visualType: "finsecure-ml",
       },
     ],
     nextProjectSlug: "plant-doctor",

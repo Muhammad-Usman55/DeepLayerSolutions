@@ -76,3 +76,4 @@ export function ResultsValidationSection({ project }: Props) {
     </section>
   );
 }
+

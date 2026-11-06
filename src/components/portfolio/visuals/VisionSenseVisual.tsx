@@ -100,3 +100,4 @@ export function VisionSenseVisual({ mode = "card", className = "" }: VisualProps
     </div>
   );
 }
+

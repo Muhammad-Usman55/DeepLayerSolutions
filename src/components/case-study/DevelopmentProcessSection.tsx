@@ -67,3 +67,4 @@ export function DevelopmentProcessSection({ project }: Props) {
     </section>
   );
 }
+

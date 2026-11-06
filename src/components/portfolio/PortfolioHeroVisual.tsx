@@ -1,192 +1,254 @@
 "use client";
 
 import React from "react";
-import { Code2, TrendingUp, Cpu, Sparkles, Layers, Box } from "lucide-react";
 
 export function PortfolioHeroVisual() {
   return (
-    <div className="relative w-full aspect-[4/3] max-w-[500px] mx-auto flex items-center justify-center select-none perspective-[1200px]">
-      {/* Ambient Radial Mint Glow (CSS gradient, zero SVG blur filters) */}
+    <div className="relative w-full aspect-[4/3] max-w-[520px] mx-auto flex items-center justify-center select-none">
+      {/* Soft Radial Mint Glow */}
       <div
-        className="absolute w-72 h-72 sm:w-88 sm:h-88 rounded-full pointer-events-none opacity-60"
+        className="absolute w-80 h-80 sm:w-96 sm:h-96 rounded-full pointer-events-none opacity-80"
         style={{
           background:
-            "radial-gradient(circle, rgba(21, 155, 80, 0.22) 0%, rgba(8, 122, 61, 0.08) 50%, transparent 75%)",
-          transform: "translate3d(0, 0, 0)",
+            "radial-gradient(circle, rgba(34, 197, 94, 0.28) 0%, rgba(16, 185, 129, 0.12) 45%, transparent 75%)",
         }}
       />
 
-      {/* Orbital Glowing Ellipse Ring 1 */}
-      <div
-        className="absolute w-[360px] h-[190px] sm:w-[440px] sm:h-[220px] rounded-[50%] border border-[#159B50]/30 pointer-events-none"
-        style={{
-          transform: "rotateX(68deg) rotateZ(-22deg) translate3d(0, 0, 0)",
-          boxShadow: "0 0 25px rgba(21, 155, 80, 0.15)",
-        }}
-      />
-
-      {/* Orbital Ring 2 (Inner faint) */}
-      <div
-        className="absolute w-[280px] h-[140px] sm:w-[330px] sm:h-[160px] rounded-[50%] border border-dashed border-[#159B50]/20 pointer-events-none"
-        style={{
-          transform: "rotateX(68deg) rotateZ(35deg) translate3d(0, 0, 0)",
-        }}
-      />
-
-      {/* Base Glass Platform Layer 1 (Bottom pedestal) */}
-      <div
-        className="absolute w-64 sm:w-80 h-28 sm:h-32 rounded-3xl bg-gradient-to-tr from-[#E8F5E9]/90 via-[#FAFCF9]/80 to-[#E8F5E9]/60 border-2 border-[#159B50]/30 shadow-2xl backdrop-blur-md"
-        style={{
-          transform: "rotateX(58deg) rotateZ(-18deg) translateY(40px) translate3d(0, 0, 0)",
-        }}
-      />
-
-      {/* Base Glass Platform Layer 2 (Middle stepped glass) */}
-      <div
-        className="absolute w-56 sm:w-68 h-24 sm:h-28 rounded-2xl bg-gradient-to-tr from-[#159B50]/20 via-[#FAFCF9]/90 to-[#E8F5E9]/70 border border-[#159B50]/40 shadow-lg backdrop-blur-md"
-        style={{
-          transform: "rotateX(58deg) rotateZ(-18deg) translateY(18px) translate3d(0, 0, 0)",
-        }}
-      />
-
-      {/* Floating Center Glass Plaque: Growth Graph & Code */}
-      <div
-        className="relative z-20 w-48 sm:w-56 p-4 rounded-2xl bg-white/85 border border-[#159B50]/40 shadow-[0_20px_50px_rgba(4,127,91,0.18)] backdrop-blur-md"
-        style={{
-          animation: "floatSlow 6s ease-in-out infinite alternate",
-          transform: "translate3d(0, 0, 0)",
-        }}
+      {/* SVG 3D Hero Structure */}
+      <svg
+        viewBox="0 0 460 380"
+        className="w-full h-full drop-shadow-xl"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
       >
-        {/* Top Header of Plaque */}
-        <div className="flex items-center justify-between pb-2 mb-2 border-b border-[#E3EDE5]">
-          <div className="flex items-center gap-1.5">
-            <span className="w-2 h-2 rounded-full bg-[#159B50] animate-pulse" />
-            <span className="text-[10px] font-mono font-bold tracking-wider text-[#075C32] uppercase">
-              SYSTEM ONLINE
-            </span>
-          </div>
-          <span className="text-[9px] font-mono font-semibold text-[#159B50] px-1.5 py-0.5 rounded bg-[#E8F5E9]">
-            AI ENGINE
-          </span>
-        </div>
+        <defs>
+          <linearGradient id="heroGlassTop" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.9" />
+            <stop offset="50%" stopColor="#D5F5E3" stopOpacity="0.7" />
+            <stop offset="100%" stopColor="#86EFAC" stopOpacity="0.55" />
+          </linearGradient>
+          <linearGradient id="heroGlassSide" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#10B981" stopOpacity="0.75" />
+            <stop offset="100%" stopColor="#047857" stopOpacity="0.95" />
+          </linearGradient>
+          <linearGradient id="heroCubeTop" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#86EFAC" />
+            <stop offset="100%" stopColor="#22C55E" />
+          </linearGradient>
+          <linearGradient id="heroCubeLeft" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#16A34A" />
+            <stop offset="100%" stopColor="#14532D" />
+          </linearGradient>
+          <linearGradient id="heroCubeRight" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#15803D" />
+            <stop offset="100%" stopColor="#052E16" />
+          </linearGradient>
+          <linearGradient id="heroBarGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+            <stop offset="0%" stopColor="#059669" />
+            <stop offset="100%" stopColor="#34D399" />
+          </linearGradient>
+        </defs>
 
-        {/* Central Metric Graphic: Rising Bar Charts with Arrow */}
-        <div className="py-1">
-          <div className="flex items-end justify-between h-14 px-2 pt-2 bg-[#F4FAF3] rounded-xl border border-[#E3EDE5]">
-            <div className="w-3 bg-[#C4D9C8] rounded-t-sm h-5" />
-            <div className="w-3 bg-[#A3E5B9] rounded-t-sm h-8" />
-            <div className="w-3 bg-[#159B50]/70 rounded-t-sm h-11" />
-            <div className="w-3 bg-[#087A3D] rounded-t-sm h-14 shadow-sm" />
-            <div className="flex items-center justify-center p-1 rounded-full bg-[#087A3D] text-white shadow-md -translate-y-2">
-              <TrendingUp className="w-3.5 h-3.5" />
-            </div>
-          </div>
-        </div>
+        {/* Ambient Pedestal Shadow */}
+        <ellipse cx="230" cy="275" rx="140" ry="38" fill="#064E3B" fillOpacity="0.18" />
 
-        {/* Mini Label */}
-        <div className="mt-2.5 flex items-center justify-between text-[10px] font-mono text-[#65736D]">
-          <span>VERIFIED DEPLOYMENTS</span>
-          <span className="font-bold text-[#075C32]">99.8% SLA</span>
-        </div>
-      </div>
+        {/* Orbital Glowing Glass Rings around structure */}
+        <ellipse
+          cx="230"
+          cy="190"
+          rx="180"
+          ry="65"
+          stroke="#34D399"
+          strokeWidth="1.5"
+          strokeDasharray="5 3"
+          strokeOpacity="0.6"
+          transform="rotate(-12, 230, 190)"
+        />
+        <ellipse
+          cx="230"
+          cy="190"
+          rx="160"
+          ry="55"
+          stroke="#10B981"
+          strokeWidth="1"
+          strokeOpacity="0.35"
+          transform="rotate(18, 230, 190)"
+        />
 
-      {/* Floating Card 1: Top-Left Code Panel */}
-      <div
-        className="absolute top-6 sm:top-8 left-2 sm:left-4 z-30 p-3 rounded-xl bg-white/90 border border-[#159B50]/30 shadow-lg backdrop-blur-md flex items-center gap-2.5"
-        style={{
-          animation: "floatLeft 5s ease-in-out infinite alternate",
-          transform: "translate3d(0, 0, 0)",
-        }}
-      >
-        <div className="w-8 h-8 rounded-lg bg-[#E8F5E9] border border-[#C4D9C8] flex items-center justify-center text-[#087A3D]">
-          <Code2 className="w-4 h-4" />
-        </div>
-        <div className="font-mono text-[10px]">
-          <div className="font-bold text-[#101C19]">&lt;Autonomous /&gt;</div>
-          <div className="text-[#65736D] text-[9px]">LangGraph Multi-Agent</div>
-        </div>
-      </div>
+        {/* Base Layer: Large Stepped Glass Platform */}
+        <g transform="translate(0, 35)">
+          <path
+            d="M110 210 L230 258 L350 210 L350 225 L230 273 L110 225 Z"
+            fill="url(#heroGlassSide)"
+            stroke="#10B981"
+            strokeWidth="1"
+          />
+          <path
+            d="M110 210 L230 162 L350 210 L230 258 Z"
+            fill="url(#heroGlassTop)"
+            stroke="#6EE7B7"
+            strokeWidth="1.5"
+          />
+        </g>
 
-      {/* Floating Card 2: Right AI Hardware Chip */}
-      <div
-        className="absolute top-16 sm:top-20 -right-2 sm:right-2 z-30 p-2.5 rounded-xl bg-white/90 border border-[#159B50]/30 shadow-lg backdrop-blur-md flex items-center gap-2"
-        style={{
-          animation: "floatRight 5.5s ease-in-out infinite alternate",
-          transform: "translate3d(0, 0, 0)",
-        }}
-      >
-        <div className="w-8 h-8 rounded-lg bg-[#E8F5E9] border border-[#C4D9C8] flex items-center justify-center text-[#159B50]">
-          <Cpu className="w-4 h-4" />
-        </div>
-        <div className="font-mono text-[10px]">
-          <div className="font-bold text-[#101C19]">Sub-450ms</div>
-          <div className="text-[#65736D] text-[9px]">Edge Neural Pipeline</div>
-        </div>
-      </div>
+        {/* Middle Layer: Intermediate Stepped Glass Platform */}
+        <g transform="translate(0, 18)">
+          <path
+            d="M135 200 L230 238 L325 200 L325 214 L230 252 L135 214 Z"
+            fill="url(#heroGlassSide)"
+            stroke="#059669"
+            strokeWidth="1"
+          />
+          <path
+            d="M135 200 L230 162 L325 200 L230 238 Z"
+            fill="url(#heroGlassTop)"
+            stroke="#86EFAC"
+            strokeWidth="1.5"
+          />
+        </g>
 
-      {/* Floating Glass Cube 1 (Accent) */}
-      <div
-        className="absolute bottom-6 left-8 sm:left-14 z-25 w-9 h-9 rounded-lg bg-gradient-to-tr from-[#159B50]/40 to-[#E8F5E9]/80 border border-[#159B50]/50 shadow-md backdrop-blur-sm flex items-center justify-center text-[#075C32]"
-        style={{
-          animation: "floatCube 4.8s ease-in-out infinite alternate",
-          transform: "rotate(15deg) translate3d(0, 0, 0)",
-        }}
-      >
-        <Box className="w-4 h-4" />
-      </div>
+        {/* Top Platform Layer */}
+        <g transform="translate(0, 0)">
+          <path
+            d="M160 190 L230 218 L300 190 L300 202 L230 230 L160 202 Z"
+            fill="url(#heroGlassSide)"
+            stroke="#047857"
+            strokeWidth="1"
+          />
+          <path
+            d="M160 190 L230 162 L300 190 L230 218 Z"
+            fill="url(#heroGlassTop)"
+            stroke="#A7F3D0"
+            strokeWidth="1.5"
+          />
+        </g>
 
-      {/* Floating Glowing Sphere (Accent) */}
-      <div
-        className="absolute bottom-10 right-10 sm:right-16 z-25 w-7 h-7 rounded-full bg-gradient-to-br from-[#34D399] to-[#087A3D] shadow-[0_0_15px_rgba(21,155,80,0.6)]"
-        style={{
-          animation: "floatSphere 4.2s ease-in-out infinite alternate",
-          transform: "translate3d(0, 0, 0)",
-        }}
-      />
+        {/* Central Floating Glowing Green Translucent Cube */}
+        <g id="centerCube" transform="translate(0, -18)">
+          {/* Top Face */}
+          <path
+            d="M200 132 L230 116 L260 132 L230 148 Z"
+            fill="url(#heroCubeTop)"
+            stroke="#DCFCE7"
+            strokeWidth="1.2"
+            filter="drop-shadow(0 0 16px rgba(34,197,94,0.6))"
+          />
+          {/* Left Face */}
+          <path
+            d="M200 132 L230 148 L230 188 L200 172 Z"
+            fill="url(#heroCubeLeft)"
+            stroke="#22C55E"
+            strokeWidth="1"
+          />
+          {/* Right Face */}
+          <path
+            d="M260 132 L230 148 L230 188 L260 172 Z"
+            fill="url(#heroCubeRight)"
+            stroke="#15803D"
+            strokeWidth="1"
+          />
+          {/* Glass Inner Reflection Glow */}
+          <ellipse cx="230" cy="148" rx="14" ry="7" fill="#FFFFFF" fillOpacity="0.4" />
+        </g>
 
-      {/* Pure GPU compositor animations */}
-      <style jsx>{`
-        @keyframes floatSlow {
-          0% {
-            transform: translateY(0px) rotate(-1deg);
-          }
-          100% {
-            transform: translateY(-10px) rotate(1deg);
-          }
-        }
-        @keyframes floatLeft {
-          0% {
-            transform: translateY(0px) rotate(2deg);
-          }
-          100% {
-            transform: translateY(-8px) rotate(-1deg);
-          }
-        }
-        @keyframes floatRight {
-          0% {
-            transform: translateY(0px) rotate(-2deg);
-          }
-          100% {
-            transform: translateY(-9px) rotate(1.5deg);
-          }
-        }
-        @keyframes floatCube {
-          0% {
-            transform: translateY(0px) rotate(15deg);
-          }
-          100% {
-            transform: translateY(-12px) rotate(25deg);
-          }
-        }
-        @keyframes floatSphere {
-          0% {
-            transform: translateY(0px) scale(0.95);
-          }
-          100% {
-            transform: translateY(-14px) scale(1.05);
-          }
-        }
-      `}</style>
+        {/* Floating Top-Left Glass Code Panel: `</>` */}
+        <g transform="translate(75, 45) rotate(-6)">
+          <rect
+            width="72"
+            height="52"
+            rx="12"
+            fill="#FFFFFF"
+            fillOpacity="0.85"
+            stroke="#10B981"
+            strokeWidth="1.5"
+            filter="drop-shadow(0 6px 16px rgba(16,185,129,0.25))"
+          />
+          {/* Code Icon `</>` */}
+          <path
+            d="M24 26 L16 32 L24 38 M48 26 L56 32 L48 38 M38 20 L34 44"
+            stroke="#047857"
+            strokeWidth="3"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </g>
+
+        {/* Floating Top-Right Glass Picture / Landscape Panel */}
+        <g transform="translate(315, 40) rotate(8)">
+          <rect
+            width="68"
+            height="50"
+            rx="12"
+            fill="#FFFFFF"
+            fillOpacity="0.85"
+            stroke="#10B981"
+            strokeWidth="1.5"
+            filter="drop-shadow(0 6px 16px rgba(16,185,129,0.25))"
+          />
+          {/* Landscape / Mountain Graphic */}
+          <circle cx="24" cy="20" r="5" fill="#34D399" />
+          <path
+            d="M14 38 L28 24 L42 38"
+            stroke="#059669"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <path
+            d="M36 38 L46 28 L56 38"
+            stroke="#10B981"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </g>
+
+        {/* Floating Bottom-Right Glass Analytics Bar Chart Panel */}
+        <g transform="translate(310, 140) rotate(-4)">
+          <rect
+            width="78"
+            height="62"
+            rx="12"
+            fill="#FFFFFF"
+            fillOpacity="0.88"
+            stroke="#10B981"
+            strokeWidth="1.5"
+            filter="drop-shadow(0 8px 20px rgba(16,185,129,0.22))"
+          />
+          {/* 4 Rising Green Bars */}
+          <rect x="14" y="38" width="8" height="14" rx="2" fill="#86EFAC" />
+          <rect x="28" y="30" width="8" height="22" rx="2" fill="#34D399" />
+          <rect x="42" y="22" width="8" height="30" rx="2" fill="#10B981" />
+          <rect x="56" y="14" width="8" height="38" rx="2" fill="#047857" />
+          {/* Upward Trend Line */}
+          <path
+            d="M18 36 L32 28 L46 18 L60 10"
+            stroke="#052E16"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+          />
+          <circle cx="60" cy="10" r="2.5" fill="#22C55E" />
+        </g>
+
+        {/* Floating Small Green Glass Spheres & Cubes */}
+        {/* Sphere 1 - Left */}
+        <circle cx="95" cy="180" r="8" fill="#34D399" filter="drop-shadow(0 0 10px rgba(52,211,153,0.6))" />
+        <ellipse cx="93" cy="178" rx="3" ry="2" fill="#FFFFFF" fillOpacity="0.7" />
+
+        {/* Sphere 2 - Right */}
+        <circle cx="375" cy="225" r="7" fill="#10B981" filter="drop-shadow(0 0 8px rgba(16,185,129,0.6))" />
+        <ellipse cx="373" cy="223" rx="2.5" ry="1.5" fill="#FFFFFF" fillOpacity="0.7" />
+
+        {/* Sphere 3 - Top Right Orbit */}
+        <circle cx="365" cy="115" r="5" fill="#86EFAC" />
+
+        {/* Floating Mini Cube Left */}
+        <g transform="translate(145, 120)">
+          <path d="M0 4 L6 0 L12 4 L6 8 Z" fill="#86EFAC" stroke="#10B981" strokeWidth="0.6" />
+          <path d="M0 4 L6 8 L6 14 L0 10 Z" fill="#059669" stroke="#10B981" strokeWidth="0.6" />
+          <path d="M12 4 L6 8 L6 14 L12 10 Z" fill="#10B981" stroke="#10B981" strokeWidth="0.6" />
+        </g>
+      </svg>
     </div>
   );
 }

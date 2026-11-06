@@ -77,3 +77,4 @@ export function UrduDubbingVisual({ mode = "card", className = "" }: VisualProps
     </div>
   );
 }
+

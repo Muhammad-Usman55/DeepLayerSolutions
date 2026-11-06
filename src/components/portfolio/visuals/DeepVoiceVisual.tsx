@@ -103,3 +103,4 @@ export function DeepVoiceVisual({ mode = "card", className = "" }: VisualProps) 
     </div>
   );
 }
+

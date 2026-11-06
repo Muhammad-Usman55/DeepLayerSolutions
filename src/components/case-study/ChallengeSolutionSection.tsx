@@ -94,3 +94,4 @@ export function ChallengeSolutionSection({ project }: Props) {
     </section>
   );
 }
+
