@@ -44,12 +44,12 @@ export function HeroSection() {
 
       <Container size="wide">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-          {/* Left Hero Content (Cols 1-7 on lg, Cols 1-6 on xl) */}
+          {/* Left Hero Content (Cols 1-6 on lg/xl) */}
           <motion.div
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="lg:col-span-7 xl:col-span-6 flex flex-col items-start text-left"
+            className="lg:col-span-6 xl:col-span-6 flex flex-col items-start text-left"
           >
             {/* Bespoke Studio Eyebrow Pill */}
             <motion.div variants={itemVariants}>
@@ -167,8 +167,8 @@ export function HeroSection() {
             </motion.div>
           </motion.div>
 
-          {/* Right Hero Visual (Cols 8-12 on lg, Cols 7-12 on xl) with subtle floating motion */}
-          <div className="lg:col-span-5 xl:col-span-6 flex items-center justify-center lg:justify-end w-full">
+          {/* Right Hero Visual (Cols 7-12 on lg/xl) with subtle floating motion */}
+          <div className="lg:col-span-6 xl:col-span-6 flex items-center justify-center lg:justify-end w-full">
             <FloatingElement duration={6.5} distance={10} rotation={1.2} className="w-full flex items-center justify-center">
               <TechLayerVisual />
             </FloatingElement>

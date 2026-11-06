@@ -50,7 +50,7 @@ export function TechLayerVisual({ className }: TechLayerVisualProps) {
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       className={cn(
-        "relative w-full aspect-square max-w-[420px] sm:max-w-[520px] md:max-w-[580px] lg:max-w-[620px] xl:max-w-[680px] mx-auto flex items-center justify-center select-none group perspective-[1200px]",
+        "relative w-full aspect-square max-w-[460px] sm:max-w-[560px] md:max-w-[620px] lg:max-w-[680px] xl:max-w-[740px] mx-auto flex items-center justify-center select-none group perspective-[1200px]",
         className
       )}
     >
@@ -129,29 +129,29 @@ export function TechLayerVisual({ className }: TechLayerVisualProps) {
           y: depthY,
           transformStyle: "preserve-3d",
         }}
-        className="relative z-10 w-full h-full max-w-[360px] sm:max-w-[460px] md:max-w-[520px] lg:max-w-[560px] xl:max-w-[620px] aspect-square flex items-center justify-center p-1 sm:p-2 transition-transform duration-300 group-hover:scale-105"
+        className="relative z-10 w-full h-full max-w-[380px] sm:max-w-[480px] md:max-w-[540px] lg:max-w-[600px] xl:max-w-[660px] aspect-square flex items-center justify-center p-1 sm:p-2 transition-transform duration-300 group-hover:scale-105"
       >
         {/* Floating Levitation wrapper (Hardware-accelerated CSS float) */}
         <div className="relative w-full h-full flex items-center justify-center animate-float-gentle">
           {/* Central Translucent Emerald Glass Nucleus with Controlled Inner Lighting */}
-          <div className="absolute w-44 h-44 sm:w-60 sm:h-60 lg:w-72 lg:h-72 xl:w-80 xl:h-80 rounded-full bg-gradient-to-tr from-[#008F53]/25 via-[#00B86B]/20 to-[#D5F9E6]/50 backdrop-blur-sm border border-[#00B86B]/40 shadow-[inset_0_0_40px_rgba(0,143,83,0.35),0_0_30px_rgba(0,143,83,0.2)] pointer-events-none" />
+          <div className="absolute w-48 h-48 sm:w-64 sm:h-64 lg:w-76 lg:h-76 xl:w-84 xl:h-84 rounded-full bg-gradient-to-tr from-[#008F53]/25 via-[#00B86B]/20 to-[#D5F9E6]/50 backdrop-blur-sm border border-[#00B86B]/40 shadow-[inset_0_0_40px_rgba(0,143,83,0.35),0_0_30px_rgba(0,143,83,0.2)] pointer-events-none" />
 
           {/* Controlled Inner Luminescent Core */}
-          <div className="absolute w-32 h-32 sm:w-42 sm:h-42 lg:w-48 lg:h-48 xl:w-54 xl:h-54 rounded-full bg-gradient-to-tr from-[#008F53]/35 via-[#00B86B]/30 to-transparent blur-md pointer-events-none" />
+          <div className="absolute w-34 h-34 sm:w-44 sm:h-44 lg:w-52 lg:h-52 xl:w-58 xl:h-58 rounded-full bg-gradient-to-tr from-[#008F53]/35 via-[#00B86B]/30 to-transparent blur-md pointer-events-none" />
 
           {/* Static Ambient Glow behind SVG (Zero runtime filter overhead) */}
-          <div className="absolute w-60 h-60 sm:w-80 sm:h-80 lg:w-96 lg:h-96 xl:w-[440px] xl:h-[440px] rounded-full bg-radial from-[#008F53]/30 via-[#00B86B]/15 to-transparent blur-2xl pointer-events-none -z-10" />
+          <div className="absolute w-64 h-64 sm:w-84 sm:h-84 lg:w-[420px] lg:h-[420px] xl:w-[460px] xl:h-[460px] rounded-full bg-radial from-[#008F53]/30 via-[#00B86B]/15 to-transparent blur-2xl pointer-events-none -z-10" />
 
           {/* Animated 3D Generative Sculpture */}
           <div className="relative w-full h-full flex items-center justify-center">
             <Image
               src="/koeRHQn0tk.svg"
               alt="DeepLayer Solutions Neural Architecture"
-              width={620}
-              height={620}
+              width={640}
+              height={640}
               priority
               unoptimized
-              className="w-full h-full object-contain transition-all duration-500 scale-105 sm:scale-110 md:scale-115"
+              className="w-full h-full object-contain transition-all duration-500 scale-110 sm:scale-120 md:scale-125"
             />
 
             {/* Subtle Emerald / Mint Laser Scanner Sweep (Compositor Thread) */}
