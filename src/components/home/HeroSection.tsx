@@ -59,7 +59,7 @@ export function HeroSection() {
               >
                 <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#E9FFF2] text-[#008F53] font-mono text-[10px] font-bold tracking-wide">
                   <Sparkles className="w-3 h-3 text-[#00B86B]" />
-                  DEEPLAYER
+                  DEEPLAYER SOLUTIONS
                 </span>
                 <span className="text-xs font-semibold text-[#142A27] tracking-tight">
                   Engineering What&apos;s Next

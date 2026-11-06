@@ -34,7 +34,7 @@ export function FooterNewsletter() {
 
       if (res.ok && data.success) {
         setStatus("success");
-        setMessage(data.message || "Thank you! You're subscribed to DeepLayer insights.");
+        setMessage(data.message || "Thank you! You're subscribed to DeepLayer Solutions insights.");
         setEmail("");
       } else {
         setStatus("error");
@@ -106,7 +106,7 @@ export function FooterNewsletter() {
 
           <div>
             <h3 className="text-xl sm:text-2xl font-extrabold text-[#142A27] tracking-tight">
-              Stay Updated with <span className="text-[#00B86B]">DeepLayer</span>
+              Stay Updated with <span className="text-[#00B86B]">DeepLayer Solutions</span>
             </h3>
             <p className="text-sm text-[#64736F] mt-1 font-normal">
               Get the latest updates, tech insights and exclusive offers.

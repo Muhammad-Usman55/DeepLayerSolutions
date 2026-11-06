@@ -31,7 +31,7 @@ export async function generateMetadata({
   const url = `${siteConfig.url}/blog/${post.slug}`;
 
   return {
-    title: `${post.title} — DeepLayer Blog`,
+    title: `${post.title} — DeepLayer Solutions Blog`,
     description: post.excerpt,
     alternates: {
       canonical: url,

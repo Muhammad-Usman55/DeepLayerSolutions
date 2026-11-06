@@ -45,6 +45,6 @@
   </g>
 
   <!-- Text Area -->
-  <text x="200" y="320" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="48" font-weight="800" fill="#000000" text-anchor="middle">DeepLayer</text>
-  <text x="200" y="360" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="24" font-weight="600" letter-spacing="0.2em" fill="#059669" text-anchor="middle">Solutions</text>
+  <text x="200" y="320" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="48" font-weight="800" fill="#142A27" text-anchor="middle">DeepLayer</text>
+  <text x="200" y="360" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="24" font-weight="600" letter-spacing="0.2em" fill="#008F53" text-anchor="middle">Solutions</text>
 </svg>
