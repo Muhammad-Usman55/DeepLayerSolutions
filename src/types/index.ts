@@ -40,22 +40,10 @@ export interface IndustryItem {
   tags: string[];
 }
 
-export interface ProjectItem {
-  id: string;
-  slug: string;
-  title: string;
-  tagline: string;
-  category: "AI & ML" | "Web Apps" | "Mobile" | "Data Science" | "Automation";
-  summary: string;
-  overview: string;
-  challenge: string;
-  solution: string;
-  keyFeatures: string[];
-  technologies: string[];
-  featured?: boolean;
-  image?: string;
-  accentColor?: string;
-}
+export * from "./project";
+import { CaseStudyProject } from "./project";
+
+export type ProjectItem = CaseStudyProject;
 
 export interface BlogPostItem {
   id: string;

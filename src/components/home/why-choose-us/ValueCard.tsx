@@ -58,3 +58,4 @@ export function ValueCard({ card, index }: ValueCardProps) {
     </motion.div>
   );
 }
+

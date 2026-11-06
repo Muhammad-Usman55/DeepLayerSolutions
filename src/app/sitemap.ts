@@ -2,6 +2,7 @@ import { MetadataRoute } from "next";
 import { siteConfig } from "@/config/site";
 import { servicesData } from "@/data/services";
 import { blogPostsData } from "@/data/blog";
+import { projectsData } from "@/data/projects";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = siteConfig.url;
@@ -77,6 +78,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...staticRoutes, ...serviceRoutes, ...blogRoutes];
+  const portfolioRoutes: MetadataRoute.Sitemap = projectsData.map((project) => ({
+    url: `${baseUrl}/portfolio/${project.slug}`,
+    lastModified: new Date("2026-11-01"),
+    changeFrequency: "weekly",
+    priority: 0.85,
+  }));
+
+  return [...staticRoutes, ...serviceRoutes, ...portfolioRoutes, ...blogRoutes];
 }
 

@@ -39,3 +39,4 @@ export const valueCardsData: ValueCardItem[] = [
     href: "/about",
   },
 ];
+

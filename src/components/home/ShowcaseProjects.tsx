@@ -80,7 +80,7 @@ export function ShowcaseProjects() {
                 {/* Footer Action */}
                 <div className="mt-6 pt-3 flex items-center justify-between">
                   <Link
-                    href={`/portfolio?highlight=${project.slug}`}
+                    href={`/portfolio/${project.slug}`}
                     className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#047F5B] group-hover:text-[#173D2F] transition-colors"
                   >
                     <span>View Case Study</span>
