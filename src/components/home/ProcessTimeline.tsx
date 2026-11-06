@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { ArrowRight, Check } from "lucide-react";
 import { Container } from "../common/Container";
 import { Eyebrow } from "../common/Eyebrow";
@@ -48,8 +48,6 @@ const processSteps = [
 ];
 
 export function ProcessTimeline() {
-  const shouldReduceMotion = useReducedMotion();
-
   return (
     <section
       id="approach"
@@ -108,12 +106,12 @@ export function ProcessTimeline() {
               return (
                 <div key={step.number} className="relative flex flex-col h-full">
                   <motion.div
-                    initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 22 }}
+                    initial={{ opacity: 0, y: 22 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{
-                      duration: shouldReduceMotion ? 0.15 : 0.5,
-                      delay: shouldReduceMotion ? 0 : idx * 0.12,
+                      duration: 0.5,
+                      delay: idx * 0.12,
                       ease: "easeOut" as const,
                     }}
                     className="group relative flex flex-col justify-between h-full p-5 sm:p-7 rounded-2xl sm:rounded-[22px] bg-white border border-[#DFEDE5] hover:border-[#00B86B]/50 shadow-[0_8px_24px_-4px_rgba(0,184,107,0.06)] hover:shadow-[0_16px_36px_-6px_rgba(0,184,107,0.14)] transition-all duration-300 hover:-translate-y-1.5"

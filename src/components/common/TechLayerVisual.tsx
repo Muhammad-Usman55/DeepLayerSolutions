@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import Image from "next/image";
-import { motion, useMotionValue, useSpring, useTransform, useReducedMotion } from "framer-motion";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 interface TechLayerVisualProps {
@@ -11,7 +11,6 @@ interface TechLayerVisualProps {
 
 export function TechLayerVisual({ className }: TechLayerVisualProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const shouldReduceMotion = useReducedMotion();
 
   // Normalized cursor coordinates (-0.5 to 0.5)
   const mouseX = useMotionValue(0);
@@ -23,13 +22,14 @@ export function TechLayerVisual({ className }: TechLayerVisualProps) {
   const smoothY = useSpring(mouseY, springConfig);
 
   // 3D Perspective Tilt for the entire canvas
-  const rotateX = useTransform(smoothY, [-0.5, 0.5], shouldReduceMotion ? [0, 0] : [8, -8]);
-  const rotateY = useTransform(smoothX, [-0.5, 0.5], shouldReduceMotion ? [0, 0] : [-10, 10]);
-  const depthX = useTransform(smoothX, [-0.5, 0.5], shouldReduceMotion ? [0, 0] : [-14, 14]);
-  const depthY = useTransform(smoothY, [-0.5, 0.5], shouldReduceMotion ? [0, 0] : [-14, 14]);
+  const rotateX = useTransform(smoothY, [-0.5, 0.5], [8, -8]);
+  const rotateY = useTransform(smoothX, [-0.5, 0.5], [-10, 10]);
+  const depthX = useTransform(smoothX, [-0.5, 0.5], [-14, 14]);
+  const depthY = useTransform(smoothY, [-0.5, 0.5], [-14, 14]);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (shouldReduceMotion || !containerRef.current) return;
+    if (!containerRef.current) return;
+    if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     // Skip on touch/mobile devices to keep CPU 100% idle
     if (window.matchMedia && !window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
     const rect = containerRef.current.getBoundingClientRect();

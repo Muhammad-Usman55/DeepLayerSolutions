@@ -1,26 +1,21 @@
 "use client";
 
 import React from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 
 export function CTATechVisual() {
-  const shouldReduceMotion = useReducedMotion();
-
   // Floating animations for technology cards
-  const floatAnim = (yOffset: number, duration: number, delay: number) =>
-    shouldReduceMotion
-      ? {}
-      : {
-          animate: {
-            y: [0, yOffset, 0],
-          },
-          transition: {
-            duration,
-            repeat: Infinity,
-            ease: "easeInOut" as const,
-            delay,
-          },
-        };
+  const floatAnim = (yOffset: number, duration: number, delay: number) => ({
+    animate: {
+      y: [0, yOffset, 0],
+    },
+    transition: {
+      duration,
+      repeat: Infinity,
+      ease: "easeInOut" as const,
+      delay,
+    },
+  });
 
   return (
     <div className="relative w-full max-w-[260px] xs:max-w-[300px] sm:max-w-[420px] lg:max-w-[480px] aspect-[4/3] sm:aspect-[1.15] mx-auto flex items-center justify-center select-none overflow-visible">

@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import {
   Stethoscope,
   TrendingUp,
@@ -144,7 +144,6 @@ const industriesList: IndustryShowcase[] = [
 ];
 
 export function IndustriesContent() {
-  const shouldReduceMotion = useReducedMotion();
   const [activeFilter, setActiveFilter] = useState<string>("all");
 
   const filteredIndustries =
@@ -225,12 +224,12 @@ export function IndustriesContent() {
                 <motion.div
                   key={ind.id}
                   id={ind.slug}
-                  initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-40px" }}
                   transition={{
                     duration: 0.5,
-                    delay: shouldReduceMotion ? 0 : (index % 2) * 0.1,
+                    delay: (index % 2) * 0.1,
                     ease: [0.16, 1, 0.3, 1],
                   }}
                   className="group relative flex flex-col justify-between rounded-[28px] sm:rounded-[32px] bg-white border border-[#DFEDE5] p-7 sm:p-9 transition-all duration-300 hover:border-[#008F53]/40 hover:-translate-y-1.5 shadow-[0_6px_24px_rgba(0,143,83,0.03)] hover:shadow-[0_20px_45px_rgba(0,143,83,0.09)]"

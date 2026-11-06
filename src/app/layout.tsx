@@ -4,6 +4,7 @@ import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Preloader } from "@/components/common/Preloader";
+import { MotionProvider } from "@/components/common/MotionProvider";
 import { siteConfig } from "@/config/site";
 
 const geistSans = Geist({
@@ -151,10 +152,12 @@ export default function RootLayout({
         >
           Skip to main content
         </a>
-        <Preloader />
-        <Navbar />
-        {children}
-        <Footer />
+        <MotionProvider>
+          <Preloader />
+          <Navbar />
+          {children}
+          <Footer />
+        </MotionProvider>
       </body>
     </html>
   );

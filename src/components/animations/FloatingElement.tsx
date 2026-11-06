@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 
 interface FloatingElementProps {
   children: React.ReactNode;
@@ -20,12 +20,6 @@ export function FloatingElement({
   delay = 0,
   className = "",
 }: FloatingElementProps) {
-  const shouldReduceMotion = useReducedMotion();
-
-  if (shouldReduceMotion) {
-    return <div className={className}>{children}</div>;
-  }
-
   return (
     <motion.div
       animate={{

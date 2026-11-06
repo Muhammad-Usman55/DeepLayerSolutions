@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import { motion, useReducedMotion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { CarouselControls } from "./CarouselControls";
 import { CarouselDots } from "./CarouselDots";
 import { cn } from "@/lib/utils";
@@ -34,7 +34,6 @@ export function Carousel({
   ariaLabel = "Featured showcase",
 }: CarouselProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const shouldReduceMotion = useReducedMotion();
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [visibleItems, setVisibleItems] = useState(desktopVisible);
@@ -89,7 +88,7 @@ export function Carousel({
 
   // Autoplay handler
   useEffect(() => {
-    if (!autoSlide || isPaused || shouldReduceMotion || maxIndex <= 0) return;
+    if (!autoSlide || isPaused || maxIndex <= 0) return;
 
     const timer = setInterval(() => {
       // Pause if tab is in background
@@ -98,7 +97,7 @@ export function Carousel({
     }, interval);
 
     return () => clearInterval(timer);
-  }, [autoSlide, isPaused, shouldReduceMotion, maxIndex, interval, handleNext]);
+  }, [autoSlide, isPaused, maxIndex, interval, handleNext]);
 
   // Keyboard navigation
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -160,7 +159,7 @@ export function Carousel({
             damping: 30,
             stiffness: 200,
             mass: 0.8,
-            duration: shouldReduceMotion ? 0.1 : 0.55,
+            duration: 0.55,
           }}
           className="flex cursor-grab active:cursor-grabbing"
           style={{

@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Plus, Minus, ArrowRight, MessageSquare, Mail, Phone } from "lucide-react";
 import { Container } from "../common/Container";
 import { Eyebrow } from "../common/Eyebrow";
@@ -13,7 +13,6 @@ import { cn } from "@/lib/utils";
 const categories = ["All", "AI & Tech", "Process & Timeline", "Security & IP"] as const;
 
 export function FAQSection() {
-  const shouldReduceMotion = useReducedMotion();
   const [activeCategory, setActiveCategory] = useState<string>("All");
   const [openId, setOpenId] = useState<string | null>("faq-1"); // First one open by default
 
@@ -184,11 +183,11 @@ export function FAQSection() {
                             opacity: 1,
                             transition: {
                               height: {
-                                duration: shouldReduceMotion ? 0.1 : 0.3,
+                                duration: 0.3,
                                 ease: [0.16, 1, 0.3, 1],
                               },
                               opacity: {
-                                duration: shouldReduceMotion ? 0.1 : 0.25,
+                                duration: 0.25,
                                 delay: 0.05,
                               },
                             },
@@ -198,7 +197,7 @@ export function FAQSection() {
                             opacity: 0,
                             transition: {
                               height: {
-                                duration: shouldReduceMotion ? 0.1 : 0.25,
+                                duration: 0.25,
                                 ease: [0.16, 1, 0.3, 1],
                               },
                               opacity: { duration: 0.15 },

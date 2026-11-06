@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { Container } from "../common/Container";
 import { SectionHeading } from "../common/SectionHeading";
 import { Terminal, Cpu, Database, Cloud, Layers, ShieldCheck, Box, Code2 } from "lucide-react";
@@ -54,8 +54,6 @@ function TechBadge({ item }: { item: TechItem }) {
 }
 
 export function TechEcosystem() {
-  const shouldReduceMotion = useReducedMotion();
-
   const track1Loop = [...track1, ...track1, ...track1];
   const track2Loop = [...track2, ...track2, ...track2];
 
@@ -76,18 +74,9 @@ export function TechEcosystem() {
         <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-36 lg:w-48 bg-gradient-to-r from-[#FAFCF9] via-[#FAFCF9]/90 to-transparent z-10 pointer-events-none" />
         <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-36 lg:w-48 bg-gradient-to-l from-[#FAFCF9] via-[#FAFCF9]/90 to-transparent z-10 pointer-events-none" />
 
-        {shouldReduceMotion ? (
-          <Container size="wide">
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 py-4">
-              {[...track1, ...track2].map((item, idx) => (
-                <TechBadge key={idx} item={item} />
-              ))}
-            </div>
-          </Container>
-        ) : (
-          <div className="space-y-4">
-            {/* Track 1 (Left to Right / standard loop) */}
-            <div className="flex items-center gap-4 animate-marquee-ribbon hover:[animation-play-state:paused]">
+        <div className="space-y-4">
+          {/* Track 1 (Left to Right / standard loop) */}
+          <div className="flex items-center gap-4 animate-marquee-ribbon hover:[animation-play-state:paused]">
               {track1Loop.map((item, idx) => {
                 const isDuplicate = idx >= track1.length;
                 return (
@@ -119,8 +108,7 @@ export function TechEcosystem() {
               })}
             </div>
           </div>
-        )}
-      </div>
-    </section>
+        </div>
+      </section>
   );
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { motion, useReducedMotion, type HTMLMotionProps } from "framer-motion";
+import { motion, type HTMLMotionProps } from "framer-motion";
 
 interface FadeInProps extends HTMLMotionProps<"div"> {
   children: React.ReactNode;
@@ -21,10 +21,8 @@ export function FadeIn({
   className = "",
   ...props
 }: FadeInProps) {
-  const shouldReduceMotion = useReducedMotion();
-
   const getInitialPosition = () => {
-    if (shouldReduceMotion || direction === "none") return { x: 0, y: 0 };
+    if (direction === "none") return { x: 0, y: 0 };
     switch (direction) {
       case "up":
         return { x: 0, y: distance };
@@ -55,7 +53,7 @@ export function FadeIn({
       initial={initial}
       animate={animate}
       transition={{
-        duration: shouldReduceMotion ? 0.15 : duration,
+        duration,
         delay,
         ease: "easeOut" as const,
       }}

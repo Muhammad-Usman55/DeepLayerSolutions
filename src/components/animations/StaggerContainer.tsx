@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { motion, useReducedMotion, type HTMLMotionProps } from "framer-motion";
+import { motion, type HTMLMotionProps } from "framer-motion";
 
 interface StaggerContainerProps extends HTMLMotionProps<"div"> {
   children: React.ReactNode;
@@ -17,15 +17,13 @@ export function StaggerContainer({
   className = "",
   ...props
 }: StaggerContainerProps) {
-  const shouldReduceMotion = useReducedMotion();
-
   const containerVariants = {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
       transition: {
-        staggerChildren: shouldReduceMotion ? 0 : staggerDelay,
-        delayChildren: shouldReduceMotion ? 0 : initialDelay,
+        staggerChildren: staggerDelay,
+        delayChildren: initialDelay,
       },
     },
   };
@@ -51,15 +49,13 @@ export function StaggerItem({
   children: React.ReactNode;
   className?: string;
 }) {
-  const shouldReduceMotion = useReducedMotion();
-
   const itemVariants = {
-    hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 20 },
+    hidden: { opacity: 0, y: 20 },
     show: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: shouldReduceMotion ? 0.15 : 0.5,
+        duration: 0.5,
         ease: "easeOut" as const,
       },
     },

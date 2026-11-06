@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { Activity, BarChart3, GraduationCap, ArrowRight } from "lucide-react";
 import { Container } from "../common/Container";
 import {
@@ -48,7 +48,6 @@ const industryCards: IndustryCardData[] = [
 ];
 
 export function IndustriesPreview() {
-  const shouldReduceMotion = useReducedMotion();
   const [activeDot, setActiveDot] = useState(0);
 
   return (
@@ -68,7 +67,7 @@ export function IndustriesPreview() {
       <Container size="wide">
         {/* Section Header */}
         <motion.div
-          initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
@@ -103,7 +102,7 @@ export function IndustriesPreview() {
             return (
               <motion.div
                 key={card.id}
-                initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 24 }}
+                initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-40px" }}
                 transition={{

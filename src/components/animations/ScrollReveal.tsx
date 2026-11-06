@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { motion, useReducedMotion, type HTMLMotionProps } from "framer-motion";
+import { motion, type HTMLMotionProps } from "framer-motion";
 
 interface ScrollRevealProps extends HTMLMotionProps<"div"> {
   children: React.ReactNode;
@@ -25,10 +25,8 @@ export function ScrollReveal({
   className = "",
   ...props
 }: ScrollRevealProps) {
-  const shouldReduceMotion = useReducedMotion();
-
   const getInitialPosition = () => {
-    if (shouldReduceMotion || direction === "none") return { x: 0, y: 0 };
+    if (direction === "none") return { x: 0, y: 0 };
     switch (direction) {
       case "up":
         return { x: 0, y: distance };
@@ -58,7 +56,7 @@ export function ScrollReveal({
       }}
       viewport={{ once, amount: threshold }}
       transition={{
-        duration: shouldReduceMotion ? 0.2 : duration,
+        duration,
         delay,
         ease: "easeOut" as const,
       }}

@@ -1,11 +1,9 @@
 "use client";
 
 import React from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 
 export function FooterDatabaseVisual() {
-  const shouldReduceMotion = useReducedMotion();
-
   return (
     <div className="relative w-[180px] sm:w-[220px] lg:w-[240px] aspect-square flex items-center justify-center select-none pointer-events-none">
       {/* Ambient Radial Green Light Behind Database */}
@@ -13,13 +11,9 @@ export function FooterDatabaseVisual() {
 
       {/* Floating 3D Database Container */}
       <motion.div
-        animate={
-          shouldReduceMotion
-            ? {}
-            : {
-                y: [0, -6, 0],
-              }
-        }
+        animate={{
+          y: [0, -6, 0],
+        }}
         transition={{
           duration: 4.5,
           repeat: Infinity,

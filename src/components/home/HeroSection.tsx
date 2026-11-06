@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "../common/Button";
 import { Container } from "../common/Container";
@@ -10,27 +10,25 @@ import { TechLayerVisual } from "../common/TechLayerVisual";
 import { FloatingElement } from "../animations/FloatingElement";
 
 export function HeroSection() {
-  const shouldReduceMotion = useReducedMotion();
-
   // Staggered motion variants
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: shouldReduceMotion ? 0 : 0.12,
+        staggerChildren: 0.12,
         delayChildren: 0.05,
       },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 22 },
+    hidden: { opacity: 0, y: 22 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: shouldReduceMotion ? 0.2 : 0.65,
+        duration: 0.65,
         ease: "easeOut" as const,
       },
     },

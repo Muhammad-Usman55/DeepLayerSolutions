@@ -2,14 +2,12 @@
 
 import React from "react";
 import Link from "next/link";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { Container } from "../common/Container";
 import { Eyebrow } from "../common/Eyebrow";
 import { technologyItems, TechnologyItem } from "./technology-marquee/types";
 
 export function TechnologyMarquee() {
-  const shouldReduceMotion = useReducedMotion();
-
   // Duplicate items for continuous infinite marquee loop
   const marqueeItems = [...technologyItems, ...technologyItems];
 
@@ -62,41 +60,31 @@ export function TechnologyMarquee() {
         <div className="absolute right-0 top-0 bottom-0 w-12 sm:w-36 lg:w-48 bg-gradient-to-l from-[#FAFCF9] via-[#FAFCF9]/90 to-transparent z-10 pointer-events-none" />
 
         {/* Marquee Items Ribbon Track */}
-        {shouldReduceMotion ? (
-          // Reduced Motion Mode: Static responsive wrap layout
-          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-8 px-4 py-2">
-            {technologyItems.map((item) => (
-              <TechnologyNode key={item.id} item={item} />
-            ))}
-          </div>
-        ) : (
-          // Animated Mode: Seamless continuous infinite loop marquee
-          <div
-            className="animate-marquee-ribbon hover:[animation-play-state:paused] flex items-center py-2"
-          >
-            {marqueeItems.map((item, index) => {
-              const isDuplicate = index >= technologyItems.length;
-              return (
+        <div
+          className="animate-marquee-ribbon hover:[animation-play-state:paused] flex items-center py-2"
+        >
+          {marqueeItems.map((item, index) => {
+            const isDuplicate = index >= technologyItems.length;
+            return (
+              <div
+                key={`${item.id}-${index}`}
+                className="flex items-center shrink-0"
+                aria-hidden={isDuplicate ? "true" : undefined}
+              >
+                <TechnologyNode item={item} />
+                {/* Architectural Separator */}
                 <div
-                  key={`${item.id}-${index}`}
-                  className="flex items-center shrink-0"
-                  aria-hidden={isDuplicate ? "true" : undefined}
+                  className="flex items-center gap-2 px-5 sm:px-7 select-none opacity-40 shrink-0"
+                  aria-hidden="true"
                 >
-                  <TechnologyNode item={item} />
-                  {/* Architectural Separator */}
-                  <div
-                    className="flex items-center gap-2 px-5 sm:px-7 select-none opacity-40 shrink-0"
-                    aria-hidden="true"
-                  >
-                    <span className="w-1.5 h-1.5 rotate-45 bg-[#34D399]" />
-                    <span className="w-6 sm:w-8 h-px bg-gradient-to-r from-transparent via-[#047F5B] to-transparent" />
-                    <span className="w-1.5 h-1.5 rotate-45 bg-[#34D399]" />
-                  </div>
+                  <span className="w-1.5 h-1.5 rotate-45 bg-[#34D399]" />
+                  <span className="w-6 sm:w-8 h-px bg-gradient-to-r from-transparent via-[#047F5B] to-transparent" />
+                  <span className="w-1.5 h-1.5 rotate-45 bg-[#34D399]" />
                 </div>
-              );
-            })}
-          </div>
-        )}
+              </div>
+            );
+          })}
+        </div>
       </div>
     </section>
   );
