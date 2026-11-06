@@ -141,3 +141,4 @@ export function AutoLabeler3DVisual() {
     </div>
   );
 }
+

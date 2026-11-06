@@ -177,3 +177,4 @@ export function PlantDoctor3DVisual() {
     </div>
   );
 }
+
