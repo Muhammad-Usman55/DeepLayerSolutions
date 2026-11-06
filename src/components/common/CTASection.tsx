@@ -1,104 +1,131 @@
-import { Button } from "./Button";
+"use client";
+
+import React from "react";
+import Link from "next/link";
+import { ArrowRight, Play } from "lucide-react";
 import { Container } from "./Container";
+import { CTATechVisual } from "./CTATechVisual";
 import { cn } from "@/lib/utils";
 
 interface CTASectionProps {
+  badge?: string;
   title?: string;
+  highlight?: string;
   subtitle?: string;
   buttonText?: string;
   buttonHref?: string;
+  secondaryText?: string;
+  secondaryHref?: string;
   className?: string;
 }
 
 export function CTASection({
-  title = "Ready to Build Something Intelligent?",
+  badge = "START YOUR DIGITAL TRANSFORMATION",
+  title = "Ready to Build Something",
+  highlight = "Intelligent?",
   subtitle = "Let's turn your next big idea into a powerful digital solution. Our senior engineers and AI architects are ready to collaborate.",
   buttonText = "Let's Discuss Your Project",
   buttonHref = "/contact",
+  secondaryText = "View Capabilities",
+  secondaryHref = "/services",
   className,
 }: CTASectionProps) {
   return (
-    <section className={cn("py-16 md:py-20", className)}>
-      <Container>
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#173D2F] via-[#047F5B] to-[#112920] p-8 sm:p-12 lg:p-16 text-white shadow-2xl border border-white/15">
-          {/* Ambient Lighting Gradients */}
-          <div className="absolute top-0 right-0 -mt-16 -mr-16 w-96 h-96 rounded-full bg-[#34D399]/20 blur-3xl pointer-events-none" />
-          <div className="absolute bottom-0 left-1/3 -mb-16 w-80 h-80 rounded-full bg-[#10B981]/15 blur-2xl pointer-events-none" />
+    <section className={cn("py-16 sm:py-20 lg:py-24", className)} aria-label="Call to Action">
+      <Container size="wide">
+        <div className="relative overflow-hidden rounded-[28px] sm:rounded-[36px] lg:rounded-[40px] bg-gradient-to-br from-[#FFFFFF] via-[#F0FAF4] to-[#D5F9E6]/80 p-8 sm:p-12 lg:p-16 border border-[#BCE8CF] shadow-[0_16px_48px_-12px_rgba(0,184,107,0.12)]">
+          {/* Subtle Ambient Background Gradients & Soft Waves */}
+          <div className="absolute top-0 right-0 w-[550px] h-[500px] bg-gradient-to-br from-[#34D399]/20 via-[#00B86B]/15 to-transparent rounded-full blur-3xl pointer-events-none -z-10" />
+          <div className="absolute bottom-0 left-10 w-96 h-96 bg-[#86EFAC]/25 rounded-full blur-3xl pointer-events-none -z-10" />
 
-          {/* Background Grid Pattern */}
-          <div className="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none" />
-
-          {/* Decorative 3D Glass Rings SVG with subtle ambient floating motion */}
-          <div
-            className="absolute -right-12 sm:right-6 lg:right-16 top-1/2 -translate-y-1/2 w-64 h-64 lg:w-96 lg:h-96 opacity-30 lg:opacity-60 pointer-events-none"
-            style={{
-              animation: "floatSlow 8s ease-in-out infinite alternate",
-            }}
+          {/* Background Decorative Soft Fluid Curves */}
+          <svg
+            className="absolute inset-0 w-full h-full pointer-events-none opacity-30 -z-10"
+            viewBox="0 0 1200 500"
+            fill="none"
+            preserveAspectRatio="none"
+            xmlns="http://www.w3.org/2000/svg"
           >
-            <svg viewBox="0 0 400 400" fill="none" className="w-full h-full">
-              <ellipse
-                cx="200"
-                cy="200"
-                rx="160"
-                ry="80"
-                transform="rotate(-25 200 200)"
-                stroke="url(#ctaTorusGrad)"
-                strokeWidth="18"
-                opacity="0.85"
-              />
-              <ellipse
-                cx="200"
-                cy="200"
-                rx="130"
-                ry="65"
-                transform="rotate(-25 200 200)"
-                stroke="#6EE7B7"
-                strokeWidth="4"
-                strokeDasharray="12 8"
-                opacity="0.9"
-              />
-              <defs>
-                <linearGradient id="ctaTorusGrad" x1="40" y1="120" x2="360" y2="280">
-                  <stop offset="0%" stopColor="#34D399" />
-                  <stop offset="50%" stopColor="#059669" stopOpacity="0.4" />
-                  <stop offset="100%" stopColor="#A7F3D0" />
-                </linearGradient>
-              </defs>
-            </svg>
-          </div>
+            <path
+              d="M0 250 C 350 150, 750 450, 1200 300"
+              stroke="#A7F3D0"
+              strokeWidth="2"
+              fill="none"
+            />
+            <path
+              d="M0 380 C 450 300, 850 500, 1200 400"
+              stroke="#6EE7B7"
+              strokeWidth="1.5"
+              strokeDasharray="6 6"
+              fill="none"
+            />
+          </svg>
 
-          <div className="relative z-10 max-w-2xl">
-            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-white/10 text-[#A7F3D0] border border-white/20 mb-4 backdrop-blur-sm">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#34D399] animate-ping" />
-              Start Your Digital Transformation
-            </span>
+          {/* Two-Column Grid: Text on Left, 3D Laptop Visual on Right */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center relative z-10">
+            {/* Left Content Area (Cols 1-7 on desktop) */}
+            <div className="lg:col-span-7 flex flex-col items-start text-left">
+              {/* Eyebrow Badge Pill */}
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-[11px] sm:text-xs font-mono font-bold uppercase tracking-wider bg-white/90 border border-[#00B86B]/35 text-[#008F53] mb-5 shadow-2xs select-none">
+                <span className="w-2 h-2 rounded-full bg-[#00B86B] shrink-0 shadow-[0_0_6px_rgba(0,184,107,0.8)]" />
+                <span>{badge}</span>
+                <ArrowRight className="w-3.5 h-3.5 text-[#00B86B] shrink-0" />
+              </div>
 
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
-              {title}
-            </h2>
+              {/* Main Headline */}
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-extrabold tracking-tight text-[#142A27] leading-[1.12]">
+                {title}{" "}
+                <span className="text-[#00B86B] relative inline-block mt-1">
+                  {highlight}
+                  {/* Curved Accent Underline */}
+                  <svg
+                    className="absolute -bottom-2 left-0 w-full h-3 text-[#34D399] -z-10"
+                    viewBox="0 0 160 16"
+                    fill="none"
+                    preserveAspectRatio="none"
+                  >
+                    <path
+                      d="M4 11 C 45 4, 115 4, 156 12"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                      strokeLinecap="round"
+                    />
+                  </svg>
+                </span>
+              </h2>
 
-            <p className="mt-4 text-base sm:text-lg text-emerald-100/90 leading-relaxed max-w-xl">
-              {subtitle}
-            </p>
+              {/* Supporting Copy */}
+              <p className="mt-5 text-base sm:text-lg text-[#64736F] leading-relaxed max-w-xl font-normal">
+                {subtitle}
+              </p>
 
-            <div className="mt-8 flex flex-wrap items-center gap-4">
-              <Button
-                href={buttonHref}
-                variant="white"
-                size="lg"
-                withArrow
-                className="font-semibold"
-              >
-                {buttonText}
-              </Button>
-              <Button
-                href="/services"
-                variant="outline"
-                size="lg"
-                className="text-white border-white/40 hover:bg-white/10 hover:border-white hover:text-white"
-              >
-                View Capabilities
-              </Button>
+              {/* Action Buttons */}
+              <div className="mt-8 sm:mt-10 flex flex-wrap items-center gap-3.5 sm:gap-4 w-full sm:w-auto">
+                {/* Primary Button */}
+                <Link
+                  href={buttonHref}
+                  className="group inline-flex items-center justify-center gap-2.5 px-6 sm:px-7 py-3.5 rounded-full bg-gradient-to-r from-[#00B86B] to-[#009455] hover:from-[#00A862] hover:to-[#00804A] text-white font-semibold text-sm sm:text-base shadow-[0_8px_20px_rgba(0,184,107,0.32)] hover:shadow-[0_12px_28px_rgba(0,184,107,0.42)] transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 w-full sm:w-auto select-none"
+                >
+                  <span>{buttonText}</span>
+                  <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
+                </Link>
+
+                {/* Secondary Button */}
+                <Link
+                  href={secondaryHref}
+                  className="group inline-flex items-center justify-center gap-2.5 px-6 sm:px-7 py-3.5 rounded-full bg-white/80 hover:bg-white border border-[#00B86B]/35 hover:border-[#00B86B] text-[#142A27] hover:text-[#008F53] font-semibold text-sm sm:text-base shadow-2xs transition-all duration-300 w-full sm:w-auto select-none"
+                >
+                  <span className="w-5 h-5 rounded-full border border-[#00B86B] text-[#00B86B] flex items-center justify-center shrink-0">
+                    <Play className="w-2.5 h-2.5 fill-[#00B86B] ml-0.5" />
+                  </span>
+                  <span>{secondaryText}</span>
+                </Link>
+              </div>
+            </div>
+
+            {/* Right Side: 3D Laptop Visualization (Cols 8-12 on desktop) */}
+            <div className="lg:col-span-5 flex items-center justify-center relative mt-4 lg:mt-0">
+              <CTATechVisual />
             </div>
           </div>
         </div>
@@ -106,4 +133,3 @@ export function CTASection({
     </section>
   );
 }
-
