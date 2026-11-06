@@ -107,10 +107,8 @@ const jsonLdSchema = {
       },
       sameAs: [
         siteConfig.social.linkedin,
+        siteConfig.social.facebook,
         siteConfig.contact.whatsappUrl,
-        siteConfig.social.github,
-        siteConfig.social.x,
-        siteConfig.social.youtube,
       ],
     },
     {

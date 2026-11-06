@@ -19,9 +19,7 @@ export const siteConfig = {
   },
   social: {
     linkedin: "https://www.linkedin.com/company/deeplayersolutions/",
-    github: "https://github.com/deeplayersolutions",
-    x: "https://x.com/deeplayersol",
-    youtube: "https://youtube.com/@deeplayersolutions",
+    facebook: "https://www.facebook.com/people/DeepLayer-Solutions/61596345801437/",
   },
   stats: [
     { value: "26+", label: "Projects Delivered", description: "Production deployments across AI and web" },
