@@ -85,3 +85,34 @@ export interface StatItem {
   description?: string;
 }
 
+export interface JobOpeningItem {
+  id: string;
+  slug: string;
+  title: string;
+  department: "Engineering & AI" | "Growth & Marketing" | "Business & Sales" | "Design & Product";
+  type: "Internship" | "Full-time" | "Contract";
+  location: string;
+  duration: string;
+  stipend: string;
+  iconName: string;
+  shortDescription: string;
+  description: string;
+  responsibilities: string[];
+  requirements: string[];
+  preferredQualifications?: string[];
+  perks: string[];
+  isFeatured?: boolean;
+}
+
+export interface CareerApplicationPayload {
+  fullName: string;
+  email: string;
+  phone: string;
+  position: string;
+  linkedin: string;
+  portfolioOrGithub?: string;
+  resumeUrl: string;
+  coverNote?: string;
+  botField?: string;
+}
+

@@ -156,7 +156,14 @@ export function Footer() {
                     href={link.href}
                     className="group flex items-center justify-between text-sm text-[#64736F] hover:text-[#00B86B] transition-colors py-0.5"
                   >
-                    <span>{link.label}</span>
+                    <span className="flex items-center gap-2">
+                      <span>{link.label}</span>
+                      {link.badge && (
+                        <span className="px-1.5 py-0.5 text-[9px] font-mono font-bold uppercase rounded-md bg-[#E9FFF2] text-[#008F53] border border-[#BCE8CF]">
+                          {link.badge}
+                        </span>
+                      )}
+                    </span>
                     <ChevronRight className="w-3.5 h-3.5 opacity-30 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all text-[#00B86B]" />
                   </Link>
                 </li>

@@ -76,6 +76,7 @@ export const footerQuickLinks: NavItem[] = [
   { label: "Industries", href: "/industries" },
   { label: "About Us", href: "/about" },
   { label: "Portfolio", href: "/portfolio" },
+  { label: "Careers", href: "/careers", badge: "Hiring" },
   { label: "Blog", href: "/blog" },
   { label: "Contact", href: "/contact" },
 ];
