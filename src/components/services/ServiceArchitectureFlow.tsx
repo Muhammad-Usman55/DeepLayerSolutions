@@ -235,6 +235,33 @@ const serviceArchitectureMap: Record<
       },
     ],
   },
+  "seo": {
+    heading: "Algorithmic Search & Ranking Architecture",
+    subheading: "Technical crawler auditing, semantic schema graphs, and Core Web Vitals optimization.",
+    tiers: [
+      {
+        tier: "Tier 01",
+        name: "Crawl & Speed Ingress",
+        highlight: "Technical SEO & Bot Indexing",
+        specs: ["Zero redirect loops", "Canonical architecture", "Sitemap & robots.txt"],
+        latency: "<0.6s FCP",
+      },
+      {
+        tier: "Tier 02",
+        name: "Semantic Schema Mesh",
+        highlight: "JSON-LD Entity Graph",
+        specs: ["Rich snippet markup", "Semantic topical cluster", "Knowledge graph sync"],
+        latency: "100% Valid",
+      },
+      {
+        tier: "Tier 03",
+        name: "SERP Dominance",
+        highlight: "Rank & Traffic Telemetry",
+        specs: ["Keyword position alerts", "Google Search Console API", "Top 3 SERP goals"],
+        latency: "Top 3 Rank",
+      },
+    ],
+  },
 };
 
 export function ServiceArchitectureFlow({ slug }: { slug: string }) {

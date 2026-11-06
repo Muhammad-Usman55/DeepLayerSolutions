@@ -85,6 +85,7 @@ export const footerServiceLinks: NavItem[] = [
   { label: "AI & Machine Learning", href: "/services/ai-machine-learning" },
   { label: "Custom Software", href: "/services/custom-software-development" },
   { label: "Web Platforms", href: "/services/web-development" },
+  { label: "Search Engine Optimization (SEO)", href: "/services/seo" },
   { label: "Cloud & DevOps", href: "/services/cloud-solutions-devops" },
   { label: "Data Engineering", href: "/services/data-engineering" },
   { label: "IT Consulting", href: "/services/it-consulting" },

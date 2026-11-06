@@ -12,6 +12,7 @@ import {
   Cloud,
   Smartphone,
   Compass,
+  SearchCheck,
   Cpu,
   Layers,
   ShieldCheck,
@@ -38,10 +39,16 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Cloud,
   Smartphone,
   Compass,
+  SearchCheck,
 };
 
 // Key quantitative telemetry metrics for each service
 const serviceMetricsMap: Record<string, { label: string; value: string }[]> = {
+  "seo": [
+    { label: "SERP Rankings", value: "Top 3 Target" },
+    { label: "Core Web Vitals", value: "100/100" },
+    { label: "Organic Growth", value: "+300% Trajectory" },
+  ],
   "ai-machine-learning": [
     { label: "Precision Rate", value: "99.4%" },
     { label: "Inference Latency", value: "<45ms" },

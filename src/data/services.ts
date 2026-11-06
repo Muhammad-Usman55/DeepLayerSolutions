@@ -527,4 +527,70 @@ export const servicesData: ServiceItem[] = [
     ],
     relatedServices: ["custom-software-development", "cloud-solutions-devops", "ai-machine-learning"],
   },
+  {
+    id: "seo",
+    slug: "seo",
+    title: "Search Engine Optimization (SEO)",
+    category: "Search & Visibility",
+    featured: true,
+    iconName: "SearchCheck",
+    shortDescription:
+      "Data-driven technical SEO, semantic structured schemas, Core Web Vitals optimization, and organic search dominance.",
+    heroTagline: "Engineered Organic Visibility That Captures High-Intent Traffic",
+    fullDescription:
+      "We engineer search engine optimization into the foundational architecture of your digital platform — pairing deep technical audits, semantic entity modeling, and Core Web Vitals optimization to capture top search rankings.",
+    challenges: [
+      "Low organic search visibility allowing competitors to capture valuable customer searches.",
+      "Technical debt, slow page speeds, and poor Core Web Vitals dragging down Google rankings.",
+      "Lack of structured schema markup preventing rich snippets and knowledge graph placement.",
+      "Unstructured URL hierarchies and indexing errors causing crawl budget waste.",
+    ],
+    approach: [
+      "Deep technical crawl audits eliminating canonical, redirect, and indexing errors.",
+      "JSON-LD semantic entity graph engineering to maximize Google rich results.",
+      "Sub-second server rendering and asset compression to achieve 100/100 Core Web Vitals.",
+      "Targeted keyword architecture mapping high-intent commercial terms to landing pages.",
+    ],
+    capabilities: [
+      "Technical SEO Audits & Crawl Optimization",
+      "Core Web Vitals & PageSpeed Engineering",
+      "Semantic JSON-LD Structured Data",
+      "Programmatic SEO & Content Architecture",
+      "Competitor Keyword & SERP Analysis",
+      "Google Search Console & Rank Telemetry",
+    ],
+    techStack: [
+      "Google Search Console",
+      "Ahrefs",
+      "SEMrush",
+      "Screaming Frog",
+      "JSON-LD Schema",
+      "Lighthouse",
+      "Next.js Metadata API",
+      "Google Analytics 4",
+    ],
+    process: [
+      {
+        step: "01",
+        title: "Crawl & Technical Audit",
+        description: "Audit indexing status, canonical tags, mobile responsiveness, and Core Web Vitals bottlenecks.",
+      },
+      {
+        step: "02",
+        title: "Keyword & Entity Mapping",
+        description: "Identify high-value commercial keywords and map semantic entities across site taxonomy.",
+      },
+      {
+        step: "03",
+        title: "On-Page & Schema Build",
+        description: "Implement structured JSON-LD schemas, optimize metadata, and eliminate rendering delays.",
+      },
+      {
+        step: "04",
+        title: "Rank Tracking & Scale",
+        description: "Monitor search rankings, indexation rates, and organic traffic growth with live telemetry.",
+      },
+    ],
+    relatedServices: ["web-development", "custom-software-development", "ai-machine-learning"],
+  },
 ];

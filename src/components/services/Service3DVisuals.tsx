@@ -669,6 +669,100 @@ export function ITConsulting3DVisual({ className = "w-full h-64 sm:h-72" }: { cl
 }
 
 // ==========================================
+// 9. SEO & Search Engine Optimization 3D Visual
+// 3D SERP Pedestal, Organic Growth Graph & Search Radar
+// ==========================================
+export function SEO3DVisual({ className = "w-full h-64 sm:h-72" }: { className?: string }) {
+  return (
+    <div className={`relative ${className} flex items-center justify-center select-none`}>
+      <svg
+        viewBox="0 0 340 240"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className="w-full h-full max-h-72 overflow-visible drop-shadow-[0_16px_32px_rgba(0,143,83,0.14)]"
+      >
+        <defs>
+          <radialGradient id="seoShadow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="#008F53" stopOpacity="0.25" />
+            <stop offset="60%" stopColor="#008F53" stopOpacity="0.08" />
+            <stop offset="100%" stopColor="#008F53" stopOpacity="0" />
+          </radialGradient>
+          <linearGradient id="seoGlassPed" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="#FFFFFF" />
+            <stop offset="50%" stopColor="#F0FDF4" />
+            <stop offset="100%" stopColor="#D5F9E6" />
+          </linearGradient>
+          <linearGradient id="seoBarGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#00B86B" />
+            <stop offset="100%" stopColor="#075B3E" />
+          </linearGradient>
+        </defs>
+
+        <ellipse cx="170" cy="195" rx="110" ry="26" fill="url(#seoShadow)" />
+
+        {/* Base Pedestal */}
+        <g>
+          <path d="M75 150 L170 185 L170 194 L75 159 Z" fill="#9BD8B6" fillOpacity="0.85" />
+          <path d="M170 185 L265 150 L265 159 L170 194 Z" fill="#81C8A4" fillOpacity="0.8" />
+          <path d="M75 150 L170 115 L265 150 L170 185 Z" fill="url(#seoGlassPed)" stroke="#FFFFFF" strokeWidth="1.5" />
+        </g>
+
+        {/* 3D SERP Architecture & Upward Growth Vectors */}
+        <g transform="translate(170, 110)">
+          {/* Ascending Metric Bars */}
+          <g transform="translate(-40, 20)">
+            <rect x="0" y="-18" width="14" height="18" rx="3" fill="#D5F9E6" stroke="#00B86B" strokeWidth="1" />
+          </g>
+          <g transform="translate(-20, 20)">
+            <rect x="0" y="-32" width="14" height="32" rx="3" fill="#A7F3D0" stroke="#00B86B" strokeWidth="1" />
+          </g>
+          <g transform="translate(0, 20)">
+            <rect x="0" y="-48" width="14" height="48" rx="3" fill="#34D399" stroke="#008F53" strokeWidth="1" />
+          </g>
+          <g transform="translate(20, 20)">
+            <rect x="0" y="-68" width="14" height="68" rx="3" fill="url(#seoBarGrad)" stroke="#FFFFFF" strokeWidth="1.2" filter="drop-shadow(0 4px 10px rgba(0,143,83,0.3))" />
+            {/* Rank 1 Star Badge */}
+            <circle cx="7" cy="-76" r="6" fill="#F59E0B" stroke="#FFFFFF" strokeWidth="1" />
+            <text x="5" y="-73" fill="#FFFFFF" fontSize="8" fontWeight="bold">1</text>
+          </g>
+
+          {/* Upward Growth Trendline */}
+          <path
+            d="M-45 8 Q-10 -20 28 -66"
+            fill="none"
+            stroke="#008F53"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+          />
+
+          {/* Search Radar Magnifier Glass */}
+          <g transform="translate(-25, -28) rotate(-15)">
+            <circle cx="0" cy="0" r="18" fill="#FFFFFF" stroke="#00B86B" strokeWidth="2.5" fillOpacity="0.9" filter="drop-shadow(0 6px 14px rgba(0,143,83,0.18))" />
+            <line x1="12" y1="12" x2="24" y2="24" stroke="#008F53" strokeWidth="4" strokeLinecap="round" />
+            {/* Inner check inside search glass */}
+            <path d="M-6 0 L-2 4 L6 -4" fill="none" stroke="#008F53" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          </g>
+
+          {/* SERP Search Query Pill */}
+          <g transform="translate(-50, 32)">
+            <rect x="0" y="0" width="100" height="20" rx="10" fill="#FFFFFF" stroke="#00B86B" strokeWidth="1.2" filter="drop-shadow(0 4px 8px rgba(0,0,0,0.06))" />
+            <circle cx="10" cy="10" r="4" fill="#00B86B" />
+            <text x="20" y="14" fill="#142A27" fontSize="9" fontFamily="monospace" fontWeight="bold">google rank #1</text>
+          </g>
+        </g>
+
+        {/* Telemetry Pill Badge */}
+        <g transform="translate(195, 42)">
+          <rect x="0" y="0" width="130" height="30" rx="15" fill="#FFFFFF" stroke="#DFEDE5" strokeWidth="1" filter="drop-shadow(0 4px 12px rgba(0,0,0,0.06))" />
+          <circle cx="15" cy="15" r="4" fill="#00B86B" />
+          <text x="26" y="19" fill="#142A27" fontSize="11" fontFamily="monospace" fontWeight="bold">Top 3 SERP Rank</text>
+        </g>
+      </svg>
+    </div>
+  );
+}
+
+// ==========================================
 // Main Dispatcher: ServiceHero3DVisual
 // Returns the correct bespoke visual for any slug
 // ==========================================
@@ -690,6 +784,8 @@ export function ServiceHero3DVisual({ slug, className }: { slug: string; classNa
       return <MobileApp3DVisual className={className} />;
     case "it-consulting":
       return <ITConsulting3DVisual className={className} />;
+    case "seo":
+      return <SEO3DVisual className={className} />;
     default:
       return <AIMachineLearning3DVisual className={className} />;
   }

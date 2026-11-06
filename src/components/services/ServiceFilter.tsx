@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { ArrowRight, Brain, Sparkles, Code2, Globe, Database, Cloud, Smartphone, Compass } from "lucide-react";
+import { ArrowRight, Brain, Sparkles, Code2, Globe, Database, Cloud, Smartphone, Compass, SearchCheck } from "lucide-react";
 import { servicesData } from "@/data/services";
 import { cn } from "@/lib/utils";
 
@@ -15,6 +15,7 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Cloud,
   Smartphone,
   Compass,
+  SearchCheck,
 };
 
 const categories = [
@@ -23,6 +24,7 @@ const categories = [
   "Next-Gen AI",
   "Core Engineering",
   "Digital Platforms",
+  "Search & Visibility",
   "Infrastructure",
   "Mobile Platforms",
   "Strategic Advisory",

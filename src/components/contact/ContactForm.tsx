@@ -246,6 +246,7 @@ export function ContactForm() {
                 <option value="Cloud Solutions & DevOps">Cloud Solutions & DevOps</option>
                 <option value="Data Engineering">Data Engineering</option>
                 <option value="Mobile App Development">Mobile App Development</option>
+                <option value="SEO">SEO &amp; Search Engine Optimization</option>
                 <option value="IT Consulting">IT Consulting & Modernization</option>
               </select>
             </div>
