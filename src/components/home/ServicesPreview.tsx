@@ -18,8 +18,8 @@ export function ServicesPreview() {
       aria-label="Our Services Preview"
     >
       {/* Background Ambient Lighting & Subtle Grid Lines */}
-      <div className="absolute top-0 right-1/4 -z-10 w-[600px] h-[500px] bg-gradient-to-br from-[#E8F5E9]/60 via-[#F4FAF6] to-transparent rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-10 left-10 -z-10 w-[450px] h-[450px] bg-[#34D399]/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-0 left-1/6 -z-10 w-[600px] h-[500px] bg-gradient-to-br from-[#E8F5E9]/70 via-[#F4FAF6] to-transparent rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-10 right-10 -z-10 w-[450px] h-[450px] bg-[#34D399]/10 rounded-full blur-3xl pointer-events-none" />
 
       {/* Subtle Orbital Background Grid Pattern */}
       <div
@@ -31,10 +31,15 @@ export function ServicesPreview() {
       />
 
       <Container size="wide">
-        {/* Upper Zone: Left Content Block & Right 3D Central Visual */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
-          {/* Left Content Area (Cols 1-5 on desktop) */}
-          <div className="lg:col-span-5 flex flex-col items-start text-left">
+        {/* Upper Zone: Left 3D Central Visual & Right Content Block */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+          {/* Left 3D Visualization Area (Cols 1-7 on desktop, 2nd on mobile) */}
+          <div className="order-2 lg:order-1 lg:col-span-7 flex items-center justify-center relative">
+            <Central3DVisual />
+          </div>
+
+          {/* Right Content Area (Cols 8-12 on desktop, 1st on mobile) */}
+          <div className="order-1 lg:order-2 lg:col-span-5 flex flex-col items-start text-left">
             {/* Eyebrow Label */}
             <motion.div
               initial={{ opacity: 0, y: 12 }}
@@ -90,11 +95,6 @@ export function ServicesPreview() {
                 </span>
               </Link>
             </motion.div>
-          </div>
-
-          {/* Right 3D Visualization Area (Cols 6-12 on desktop) */}
-          <div className="lg:col-span-7 flex items-center justify-center relative">
-            <Central3DVisual />
           </div>
         </div>
 
