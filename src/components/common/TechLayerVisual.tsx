@@ -55,19 +55,19 @@ export function TechLayerVisual({ className }: TechLayerVisualProps) {
       )}
     >
       {/* 1. ATMOSPHERIC VOLUMETRIC RADIAL LIGHTING (Controlled Emerald & Mint Ambient Glow) */}
-      <div className="absolute inset-0 bg-radial from-[#34D399]/20 via-[#047F5B]/10 to-transparent blur-3xl pointer-events-none" />
-      <div className="absolute top-1/4 -right-6 w-80 h-80 bg-[#047F5B]/16 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-6 -left-6 w-80 h-80 bg-[#34D399]/18 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute inset-0 bg-radial from-[#00B86B]/20 via-[#008F53]/10 to-transparent blur-3xl pointer-events-none" />
+      <div className="absolute top-1/4 -right-6 w-80 h-80 bg-[#008F53]/16 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-6 -left-6 w-80 h-80 bg-[#00B86B]/18 rounded-full blur-3xl pointer-events-none" />
 
       {/* 2. ISOMETRIC CYBERNETIC GROUND GRID & SONAR PEDESTAL (Emerald & Mint) */}
       <div className="absolute bottom-4 inset-x-8 h-32 flex items-center justify-center pointer-events-none">
-        <div className="absolute w-80 h-24 rounded-[100%] border border-[#047F5B]/30 animate-ping opacity-25" />
+        <div className="absolute w-80 h-24 rounded-[100%] border border-[#008F53]/30 animate-ping opacity-25" />
         <svg viewBox="0 0 400 120" className="w-full h-full opacity-55">
-          <ellipse cx="200" cy="60" rx="180" ry="48" fill="none" stroke="#047F5B" strokeWidth="1" strokeDasharray="6 6" opacity="0.35" />
-          <ellipse cx="200" cy="60" rx="130" ry="34" fill="none" stroke="#047F5B" strokeWidth="1.2" strokeDasharray="4 4" opacity="0.45" />
-          <ellipse cx="200" cy="60" rx="75" ry="20" fill="none" stroke="#34D399" strokeWidth="1.2" opacity="0.6" />
-          <line x1="20" y1="60" x2="380" y2="60" stroke="#047F5B" strokeWidth="1" strokeDasharray="4 4" opacity="0.3" />
-          <line x1="200" y1="12" x2="200" y2="108" stroke="#047F5B" strokeWidth="1" strokeDasharray="4 4" opacity="0.3" />
+          <ellipse cx="200" cy="60" rx="180" ry="48" fill="none" stroke="#008F53" strokeWidth="1" strokeDasharray="6 6" opacity="0.35" />
+          <ellipse cx="200" cy="60" rx="130" ry="34" fill="none" stroke="#008F53" strokeWidth="1.2" strokeDasharray="4 4" opacity="0.45" />
+          <ellipse cx="200" cy="60" rx="75" ry="20" fill="none" stroke="#00B86B" strokeWidth="1.2" opacity="0.6" />
+          <line x1="20" y1="60" x2="380" y2="60" stroke="#008F53" strokeWidth="1" strokeDasharray="4 4" opacity="0.3" />
+          <line x1="200" y1="12" x2="200" y2="108" stroke="#008F53" strokeWidth="1" strokeDasharray="4 4" opacity="0.3" />
         </svg>
       </div>
 
@@ -76,14 +76,14 @@ export function TechLayerVisual({ className }: TechLayerVisualProps) {
         <svg viewBox="0 0 520 520" className="w-full h-full animate-[spin_50s_linear_infinite]">
           <defs>
             <linearGradient id="orbTrailGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#047F5B" stopOpacity="0.85" />
-              <stop offset="50%" stopColor="#34D399" stopOpacity="0.9" />
-              <stop offset="100%" stopColor="#047F5B" stopOpacity="0.3" />
+              <stop offset="0%" stopColor="#008F53" stopOpacity="0.85" />
+              <stop offset="50%" stopColor="#00B86B" stopOpacity="0.9" />
+              <stop offset="100%" stopColor="#008F53" stopOpacity="0.3" />
             </linearGradient>
             <linearGradient id="orbTrailGrad2" x1="100%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stopColor="#34D399" stopOpacity="0.85" />
-              <stop offset="50%" stopColor="#047F5B" stopOpacity="0.85" />
-              <stop offset="100%" stopColor="#173D2F" stopOpacity="0.35" />
+              <stop offset="0%" stopColor="#00B86B" stopOpacity="0.85" />
+              <stop offset="50%" stopColor="#008F53" stopOpacity="0.85" />
+              <stop offset="100%" stopColor="#075B3E" stopOpacity="0.35" />
             </linearGradient>
           </defs>
 
@@ -112,13 +112,13 @@ export function TechLayerVisual({ className }: TechLayerVisualProps) {
             transform="rotate(40 260 260)"
           />
           {/* Orbital Satellite Telemetry Nodes */}
-          <circle cx="490" cy="235" r="5" fill="#34D399" stroke="#047F5B" strokeWidth="1.5" />
-          <circle cx="100" cy="335" r="4.5" fill="#047F5B" stroke="#34D399" strokeWidth="1.5" />
+          <circle cx="490" cy="235" r="5" fill="#00B86B" stroke="#008F53" strokeWidth="1.5" />
+          <circle cx="100" cy="335" r="4.5" fill="#008F53" stroke="#00B86B" strokeWidth="1.5" />
         </svg>
       </div>
 
       {/* 4. DYNAMIC SYNCHRONIZED GROUND SHADOW (Green-Tinted Ambient, Compositor Thread) */}
-      <div className="absolute bottom-10 w-48 sm:w-64 h-12 sm:h-16 rounded-[100%] bg-gradient-to-r from-[#173D2F]/25 via-[#047F5B]/35 to-[#173D2F]/25 blur-xl pointer-events-none animate-pulse-shadow" />
+      <div className="absolute bottom-10 w-48 sm:w-64 h-12 sm:h-16 rounded-[100%] bg-gradient-to-r from-[#075B3E]/25 via-[#008F53]/35 to-[#075B3E]/25 blur-xl pointer-events-none animate-pulse-shadow" />
 
       {/* 5. MAIN 3D ANIMATED WIREFRAME STRUCTURE (EMERALD, MINT & TRANSLUCENT PALE-MINT GLASS) */}
       <motion.div
@@ -134,13 +134,13 @@ export function TechLayerVisual({ className }: TechLayerVisualProps) {
         {/* Floating Levitation wrapper (Hardware-accelerated CSS float) */}
         <div className="relative w-full h-full flex items-center justify-center animate-float-gentle">
           {/* Central Translucent Emerald Glass Nucleus with Controlled Inner Lighting */}
-          <div className="absolute w-40 h-40 sm:w-56 sm:h-56 rounded-full bg-gradient-to-tr from-[#047F5B]/25 via-[#34D399]/20 to-[#DDF5E9]/50 backdrop-blur-sm border border-[#34D399]/40 shadow-[inset_0_0_40px_rgba(4,127,91,0.35),0_0_30px_rgba(4,127,91,0.2)] pointer-events-none" />
+          <div className="absolute w-40 h-40 sm:w-56 sm:h-56 rounded-full bg-gradient-to-tr from-[#008F53]/25 via-[#00B86B]/20 to-[#D5F9E6]/50 backdrop-blur-sm border border-[#00B86B]/40 shadow-[inset_0_0_40px_rgba(0,143,83,0.35),0_0_30px_rgba(0,143,83,0.2)] pointer-events-none" />
 
           {/* Controlled Inner Luminescent Core */}
-          <div className="absolute w-28 h-28 sm:w-36 sm:h-36 rounded-full bg-gradient-to-tr from-[#047F5B]/35 via-[#34D399]/30 to-transparent blur-md pointer-events-none" />
+          <div className="absolute w-28 h-28 sm:w-36 sm:h-36 rounded-full bg-gradient-to-tr from-[#008F53]/35 via-[#00B86B]/30 to-transparent blur-md pointer-events-none" />
 
           {/* Static Ambient Glow behind SVG (Zero runtime filter overhead) */}
-          <div className="absolute w-52 h-52 sm:w-72 sm:h-72 rounded-full bg-radial from-[#047F5B]/30 via-[#34D399]/15 to-transparent blur-2xl pointer-events-none -z-10" />
+          <div className="absolute w-52 h-52 sm:w-72 sm:h-72 rounded-full bg-radial from-[#008F53]/30 via-[#00B86B]/15 to-transparent blur-2xl pointer-events-none -z-10" />
 
           {/* Animated 3D Generative Sculpture */}
           <div className="relative w-full h-full flex items-center justify-center">
@@ -155,17 +155,17 @@ export function TechLayerVisual({ className }: TechLayerVisualProps) {
             />
 
             {/* Subtle Emerald / Mint Laser Scanner Sweep (Compositor Thread) */}
-            <div className="absolute left-[15%] right-[15%] h-[2px] bg-gradient-to-r from-transparent via-[#34D399] to-transparent shadow-[0_0_12px_rgba(52,211,153,0.55)] pointer-events-none animate-laser-sweep">
-              <div className="absolute -top-3 left-0 right-0 h-6 bg-gradient-to-b from-transparent via-[#047F5B]/15 to-transparent blur-xs" />
+            <div className="absolute left-[15%] right-[15%] h-[2px] bg-gradient-to-r from-transparent via-[#00B86B] to-transparent shadow-[0_0_12px_rgba(0,184,107,0.55)] pointer-events-none animate-laser-sweep">
+              <div className="absolute -top-3 left-0 right-0 h-6 bg-gradient-to-b from-transparent via-[#008F53]/15 to-transparent blur-xs" />
             </div>
           </div>
         </div>
       </motion.div>
 
       {/* 6. AMBIENT EMERALD & MINT PARTICLES */}
-      <div className="absolute top-16 left-12 w-2 h-2 rounded-full bg-[#34D399]/60 animate-ping pointer-events-none" />
-      <div className="absolute top-1/3 right-10 w-2.5 h-2.5 rounded-full bg-[#047F5B]/50 animate-pulse pointer-events-none" />
-      <div className="absolute bottom-20 left-16 w-1.5 h-1.5 rounded-full bg-[#34D399]/40 animate-ping pointer-events-none" />
+      <div className="absolute top-16 left-12 w-2 h-2 rounded-full bg-[#00B86B]/60 animate-ping pointer-events-none" />
+      <div className="absolute top-1/3 right-10 w-2.5 h-2.5 rounded-full bg-[#008F53]/50 animate-pulse pointer-events-none" />
+      <div className="absolute bottom-20 left-16 w-1.5 h-1.5 rounded-full bg-[#00B86B]/40 animate-ping pointer-events-none" />
     </div>
   );
 }

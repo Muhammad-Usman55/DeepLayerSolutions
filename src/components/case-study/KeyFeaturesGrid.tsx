@@ -40,73 +40,73 @@ interface Props {
 function renderFeatureIcon(iconName?: string) {
   switch (iconName) {
     case "Zap":
-      return <Zap className="w-5 h-5 text-[#159B50]" />;
+      return <Zap className="w-5 h-5 text-[#008F53]" />;
     case "ShieldCheck":
-      return <ShieldCheck className="w-5 h-5 text-[#159B50]" />;
+      return <ShieldCheck className="w-5 h-5 text-[#008F53]" />;
     case "Layers":
-      return <Layers className="w-5 h-5 text-[#159B50]" />;
+      return <Layers className="w-5 h-5 text-[#008F53]" />;
     case "FileCheck":
-      return <FileCheck className="w-5 h-5 text-[#159B50]" />;
+      return <FileCheck className="w-5 h-5 text-[#008F53]" />;
     case "Workflow":
-      return <Workflow className="w-5 h-5 text-[#159B50]" />;
+      return <Workflow className="w-5 h-5 text-[#008F53]" />;
     case "CheckCircle2":
-      return <CheckCircle2 className="w-5 h-5 text-[#159B50]" />;
+      return <CheckCircle2 className="w-5 h-5 text-[#008F53]" />;
     case "RefreshCw":
-      return <RefreshCw className="w-5 h-5 text-[#159B50]" />;
+      return <RefreshCw className="w-5 h-5 text-[#008F53]" />;
     case "MapPin":
-      return <MapPin className="w-5 h-5 text-[#159B50]" />;
+      return <MapPin className="w-5 h-5 text-[#008F53]" />;
     case "Shield":
-      return <Shield className="w-5 h-5 text-[#159B50]" />;
+      return <Shield className="w-5 h-5 text-[#008F53]" />;
     case "Eye":
-      return <Eye className="w-5 h-5 text-[#159B50]" />;
+      return <Eye className="w-5 h-5 text-[#008F53]" />;
     case "Radio":
-      return <Radio className="w-5 h-5 text-[#159B50]" />;
+      return <Radio className="w-5 h-5 text-[#008F53]" />;
     case "Mic":
-      return <Mic className="w-5 h-5 text-[#159B50]" />;
+      return <Mic className="w-5 h-5 text-[#008F53]" />;
     case "PhoneCall":
-      return <PhoneCall className="w-5 h-5 text-[#159B50]" />;
+      return <PhoneCall className="w-5 h-5 text-[#008F53]" />;
     case "Database":
-      return <Database className="w-5 h-5 text-[#159B50]" />;
+      return <Database className="w-5 h-5 text-[#008F53]" />;
     case "FileText":
-      return <FileText className="w-5 h-5 text-[#159B50]" />;
+      return <FileText className="w-5 h-5 text-[#008F53]" />;
     case "Binary":
-      return <Binary className="w-5 h-5 text-[#159B50]" />;
+      return <Binary className="w-5 h-5 text-[#008F53]" />;
     case "Compass":
-      return <Compass className="w-5 h-5 text-[#159B50]" />;
+      return <Compass className="w-5 h-5 text-[#008F53]" />;
     case "MousePointerClick":
-      return <MousePointerClick className="w-5 h-5 text-[#159B50]" />;
+      return <MousePointerClick className="w-5 h-5 text-[#008F53]" />;
     case "Film":
-      return <Film className="w-5 h-5 text-[#159B50]" />;
+      return <Film className="w-5 h-5 text-[#008F53]" />;
     case "Scissors":
-      return <Scissors className="w-5 h-5 text-[#159B50]" />;
+      return <Scissors className="w-5 h-5 text-[#008F53]" />;
     case "Download":
-      return <Download className="w-5 h-5 text-[#159B50]" />;
+      return <Download className="w-5 h-5 text-[#008F53]" />;
     case "Sliders":
-      return <Sliders className="w-5 h-5 text-[#159B50]" />;
+      return <Sliders className="w-5 h-5 text-[#008F53]" />;
     case "Mic2":
-      return <Mic2 className="w-5 h-5 text-[#159B50]" />;
+      return <Mic2 className="w-5 h-5 text-[#008F53]" />;
     case "Languages":
-      return <Languages className="w-5 h-5 text-[#159B50]" />;
+      return <Languages className="w-5 h-5 text-[#008F53]" />;
     case "Volume2":
-      return <Volume2 className="w-5 h-5 text-[#159B50]" />;
+      return <Volume2 className="w-5 h-5 text-[#008F53]" />;
     default:
-      return <Cpu className="w-5 h-5 text-[#159B50]" />;
+      return <Cpu className="w-5 h-5 text-[#008F53]" />;
   }
 }
 
 export function KeyFeaturesGrid({ project }: Props) {
   return (
-    <section className="py-14 sm:py-20 bg-white border-b border-[#E3EDE5]">
+    <section className="py-14 sm:py-20 bg-white border-b border-[#DFEDE5]">
       <Container size="wide">
         <div className="max-w-3xl mx-auto text-center mb-12 sm:mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-[#E8F5E9] text-[#075C32] border border-[#C4D9C8] mb-4">
-            <Layers className="w-3.5 h-3.5 text-[#159B50]" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-[#E9FFF2] text-[#008F53] border border-[#DFEDE5] mb-4">
+            <Layers className="w-3.5 h-3.5 text-[#00B86B]" />
             <span>CAPABILITIES</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#101C19]">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#142A27]">
             Key Architectural Features
           </h2>
-          <p className="mt-3 text-base text-[#65736D]">
+          <p className="mt-3 text-base text-[#64736F]">
             Modular capabilities engineered into the core runtime of {project.title}.
           </p>
         </div>
@@ -115,25 +115,25 @@ export function KeyFeaturesGrid({ project }: Props) {
           {project.keyFeatures.map((feature, idx) => (
             <div
               key={idx}
-              className="p-6 rounded-2xl bg-[#FAFCF9] border border-[#E3EDE5] hover:border-[#159B50]/50 hover:bg-white shadow-2xs hover:shadow-md transition-all duration-300 flex flex-col justify-between group"
+              className="p-6 rounded-2xl bg-[#FAFCF9] border border-[#DFEDE5] hover:border-[#00B86B]/50 hover:bg-white shadow-2xs hover:shadow-md transition-all duration-300 flex flex-col justify-between group"
             >
               <div>
-                <div className="w-12 h-12 rounded-xl bg-[#E8F5E9] border border-[#C4D9C8] flex items-center justify-center mb-5 group-hover:scale-105 transition-transform duration-200">
+                <div className="w-12 h-12 rounded-xl bg-[#E9FFF2] border border-[#DFEDE5] flex items-center justify-center mb-5 group-hover:scale-105 transition-transform duration-200">
                   {renderFeatureIcon(feature.iconName)}
                 </div>
 
-                <h3 className="text-lg font-bold text-[#101C19] group-hover:text-[#087A3D] transition-colors mb-2.5">
+                <h3 className="text-lg font-bold text-[#142A27] group-hover:text-[#008F53] transition-colors mb-2.5">
                   {feature.title}
                 </h3>
 
-                <p className="text-xs sm:text-sm text-[#65736D] leading-relaxed">
+                <p className="text-xs sm:text-sm text-[#64736F] leading-relaxed">
                   {feature.description}
                 </p>
               </div>
 
-              <div className="mt-6 pt-3 border-t border-[#E3EDE5] flex items-center justify-between text-[11px] font-mono text-[#A0AEA7]">
+              <div className="mt-6 pt-3 border-t border-[#DFEDE5] flex items-center justify-between text-[11px] font-mono text-[#64736F]">
                 <span>FEATURE_0{idx + 1}</span>
-                <span className="text-[#075C32] font-semibold">VERIFIED</span>
+                <span className="text-[#008F53] font-semibold">VERIFIED</span>
               </div>
             </div>
           ))}

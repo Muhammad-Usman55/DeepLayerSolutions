@@ -66,12 +66,12 @@ export default function AboutPage() {
                 Innovating Today for a Smarter Tomorrow
               </Eyebrow>
 
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#101C19] leading-tight">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#142A27] leading-tight">
                 Building Tomorrow Through{" "}
-                <span className="text-[#087A3D]">Intelligent Technology.</span>
+                <span className="text-[#008F53]">Intelligent Technology.</span>
               </h1>
 
-              <p className="mt-5 text-lg sm:text-xl text-[#65736D] leading-relaxed font-normal">
+              <p className="mt-5 text-lg sm:text-xl text-[#64736F] leading-relaxed font-normal">
                 DeepLayer Solutions brings deep software engineering principles and modern artificial intelligence together to construct meaningful digital experiences that scale.
               </p>
 
@@ -126,13 +126,13 @@ export default function AboutPage() {
 
             {/* Story Text */}
             <div className="lg:col-span-7 order-1 lg:order-2">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold tracking-wider uppercase bg-[#E8F5E9] text-[#075C32] border border-[#C4D9C8] mb-4">
+              <Eyebrow variant="chip" className="mb-4">
                 Our Narrative
-              </div>
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-[#101C19] leading-tight">
+              </Eyebrow>
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-[#142A27] leading-tight">
                 Architecting Digital Foundations for Modern Enterprise.
               </h2>
-              <div className="mt-6 space-y-4 text-base text-[#65736D] leading-relaxed">
+              <div className="mt-6 space-y-4 text-base text-[#64736F] leading-relaxed">
                 <p>
                   We established DeepLayer Solutions to provide founders and enterprise executives with a reliable, technically uncompromising software and AI development partner. Too often, agencies build brittle prototypes that quickly collapse under scale or incur massive technical debt.
                 </p>
@@ -149,37 +149,37 @@ export default function AboutPage() {
       </section>
 
       {/* Mission & Vision Split */}
-      <section className="py-16 md:py-20 bg-[#F4FAF3]/60 border-y border-[#E3EDE5]">
+      <section className="py-16 md:py-20 bg-[#FAFCF9] border-t border-b border-[#DFEDE5]">
         <Container size="wide">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
             {/* Mission Card */}
-            <div className="p-8 sm:p-10 rounded-3xl bg-white border border-[#E3EDE5] shadow-xs">
-              <div className="w-12 h-12 rounded-2xl bg-[#E8F5E9] text-[#087A3D] flex items-center justify-center mb-6">
+            <div className="p-8 sm:p-10 rounded-3xl bg-white border border-[#DFEDE5] shadow-xs">
+              <div className="w-12 h-12 rounded-2xl bg-[#E9FFF2] text-[#008F53] flex items-center justify-center mb-6">
                 <Target className="w-6 h-6" />
               </div>
-              <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#087A3D]">
+              <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#008F53]">
                 Our Mission
               </span>
-              <h3 className="text-2xl font-extrabold text-[#101C19] mt-2 mb-4">
+              <h3 className="text-2xl font-extrabold text-[#142A27] mt-2 mb-4">
                 Empower businesses through intelligent, reliable, and innovative digital solutions.
               </h3>
-              <p className="text-sm sm:text-base text-[#65736D] leading-relaxed">
+              <p className="text-sm sm:text-base text-[#64736F] leading-relaxed">
                 To equip progressive businesses with robust software architecture, automated machine learning pipelines, and intuitive user experiences that amplify operational leverage and unlock new market growth.
               </p>
             </div>
 
             {/* Vision Card */}
-            <div className="p-8 sm:p-10 rounded-3xl bg-white border border-[#E3EDE5] shadow-xs">
-              <div className="w-12 h-12 rounded-2xl bg-[#E8F5E9] text-[#087A3D] flex items-center justify-center mb-6">
+            <div className="p-8 sm:p-10 rounded-3xl bg-white border border-[#DFEDE5] shadow-xs">
+              <div className="w-12 h-12 rounded-2xl bg-[#E9FFF2] text-[#008F53] flex items-center justify-center mb-6">
                 <Eye className="w-6 h-6" />
               </div>
-              <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#087A3D]">
+              <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#008F53]">
                 Our Vision
               </span>
-              <h3 className="text-2xl font-extrabold text-[#101C19] mt-2 mb-4">
+              <h3 className="text-2xl font-extrabold text-[#142A27] mt-2 mb-4">
                 A future where technology creates meaningful opportunities and sustainable growth.
               </h3>
-              <p className="text-sm sm:text-base text-[#65736D] leading-relaxed">
+              <p className="text-sm sm:text-base text-[#64736F] leading-relaxed">
                 To contribute to a global economy where artificial intelligence and ethical digital systems eliminate tedious human toil, accelerate scientific discovery, and empower organizations of every size to realize their highest potential.
               </p>
             </div>
@@ -191,13 +191,13 @@ export default function AboutPage() {
       <section className="py-20 md:py-28">
         <Container size="wide">
           <div className="text-center max-w-2xl mx-auto mb-16">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold tracking-wider uppercase bg-[#E8F5E9] text-[#075C32] border border-[#C4D9C8] mb-4">
+            <Eyebrow variant="chip" className="mb-4">
               Guiding Principles
-            </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#101C19]">
+            </Eyebrow>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#142A27]">
               Our Core Values
             </h2>
-            <p className="mt-4 text-[#65736D] text-base sm:text-lg">
+            <p className="mt-4 text-[#64736F] text-base sm:text-lg">
               The fundamental standards that steer every architecture decision, code review, and partner engagement.
             </p>
           </div>
@@ -208,17 +208,17 @@ export default function AboutPage() {
               return (
                 <div
                   key={v.title}
-                  className="p-7 rounded-2xl bg-white border border-[#E3EDE5] shadow-xs hover:shadow-xl hover:border-[#159B50]/60 transition-all duration-300 flex flex-col justify-between"
+                  className="p-7 rounded-2xl bg-white border border-[#DFEDE5] shadow-xs hover:shadow-xl hover:border-[#008F53]/60 transition-all duration-300 flex flex-col justify-between"
                 >
                   <div>
-                    <div className="w-12 h-12 rounded-xl bg-[#E8F5E9] text-[#087A3D] flex items-center justify-center mb-5">
+                    <div className="w-12 h-12 rounded-xl bg-[#E9FFF2] text-[#008F53] flex items-center justify-center mb-5">
                       <Icon className="w-6 h-6" />
                     </div>
-                    <h3 className="text-xl font-bold text-[#101C19]">{v.title}</h3>
-                    <span className="text-xs font-semibold text-[#159B50] block mt-1">
+                    <h3 className="text-xl font-bold text-[#142A27]">{v.title}</h3>
+                    <span className="text-xs font-semibold text-[#008F53] block mt-1">
                       {v.tagline}
                     </span>
-                    <p className="mt-3 text-sm text-[#65736D] leading-relaxed">
+                    <p className="mt-3 text-sm text-[#64736F] leading-relaxed">
                       {v.description}
                     </p>
                   </div>

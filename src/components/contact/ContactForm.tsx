@@ -105,25 +105,25 @@ export function ContactForm() {
   };
 
   return (
-    <div className="p-8 sm:p-10 rounded-3xl bg-white border border-[#E3EDE5] shadow-lg relative">
+    <div className="p-8 sm:p-10 rounded-3xl bg-white border border-[#DFEDE5] shadow-lg relative">
       {isSuccess ? (
         <div className="py-12 flex flex-col items-center text-center">
-          <div className="w-16 h-16 rounded-full bg-[#DDF5E9] text-[#047F5B] flex items-center justify-center mb-6 shadow-sm">
+          <div className="w-16 h-16 rounded-full bg-[#E9FFF2] text-[#008F53] flex items-center justify-center mb-6 shadow-sm">
             <CheckCircle2 className="w-8 h-8" />
           </div>
 
-          <h3 className="text-2xl font-extrabold text-[#101C19]">
+          <h3 className="text-2xl font-extrabold text-[#142A27]">
             Inquiry Received!
           </h3>
 
-          <p className="mt-3 text-sm sm:text-base text-[#65736D] max-w-md leading-relaxed">
+          <p className="mt-3 text-sm sm:text-base text-[#64736F] max-w-md leading-relaxed">
             Thank you for reaching out to DeepLayer Solutions. One of our technical architects will review your project requirements and respond within 24 business hours.
           </p>
 
           <button
             type="button"
             onClick={() => setIsSuccess(false)}
-            className="mt-8 px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#047F5B] text-white hover:bg-[#173D2F] transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#047F5B]"
+            className="mt-8 px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#008F53] text-white hover:bg-[#007343] transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#008F53]"
           >
             Send Another Message
           </button>
@@ -157,7 +157,7 @@ export function ContactForm() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {/* Full Name */}
             <div>
-              <label htmlFor="fullName" className="block text-xs font-bold uppercase tracking-wider text-[#101C19] mb-2">
+              <label htmlFor="fullName" className="block text-xs font-bold uppercase tracking-wider text-[#142A27] mb-2">
                 Your Name <span className="text-red-500">*</span>
               </label>
               <input
@@ -168,8 +168,8 @@ export function ContactForm() {
                 aria-invalid={Boolean(errors.fullName)}
                 aria-describedby={errors.fullName ? "fullName-error" : undefined}
                 onChange={(e) => setForm({ ...form, fullName: e.target.value })}
-                className={`w-full px-4 py-3 rounded-xl bg-[#FAFCF9] border text-sm text-[#101C19] placeholder:text-[#A0AEA7] focus:outline-none focus:ring-2 focus:ring-[#047F5B] transition-colors ${
-                  errors.fullName ? "border-red-400 bg-red-50/20" : "border-[#E3EDE5]"
+                className={`w-full px-4 py-3 rounded-xl bg-[#FAFCF9] border text-sm text-[#142A27] placeholder:text-[#A0AEA7] focus:outline-none focus:ring-2 focus:ring-[#008F53] transition-colors ${
+                  errors.fullName ? "border-red-400 bg-red-50/20" : "border-[#DFEDE5]"
                 }`}
               />
               {errors.fullName && (
@@ -182,7 +182,7 @@ export function ContactForm() {
 
             {/* Email Address */}
             <div>
-              <label htmlFor="email" className="block text-xs font-bold uppercase tracking-wider text-[#101C19] mb-2">
+              <label htmlFor="email" className="block text-xs font-bold uppercase tracking-wider text-[#142A27] mb-2">
                 Your Email <span className="text-red-500">*</span>
               </label>
               <input
@@ -193,8 +193,8 @@ export function ContactForm() {
                 aria-invalid={Boolean(errors.email)}
                 aria-describedby={errors.email ? "email-error" : undefined}
                 onChange={(e) => setForm({ ...form, email: e.target.value })}
-                className={`w-full px-4 py-3 rounded-xl bg-[#FAFCF9] border text-sm text-[#101C19] placeholder:text-[#A0AEA7] focus:outline-none focus:ring-2 focus:ring-[#047F5B] transition-colors ${
-                  errors.email ? "border-red-400 bg-red-50/20" : "border-[#E3EDE5]"
+                className={`w-full px-4 py-3 rounded-xl bg-[#FAFCF9] border text-sm text-[#142A27] placeholder:text-[#A0AEA7] focus:outline-none focus:ring-2 focus:ring-[#008F53] transition-colors ${
+                  errors.email ? "border-red-400 bg-red-50/20" : "border-[#DFEDE5]"
                 }`}
               />
               {errors.email && (
@@ -209,7 +209,7 @@ export function ContactForm() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {/* Company Name */}
             <div>
-              <label htmlFor="company" className="block text-xs font-bold uppercase tracking-wider text-[#101C19] mb-2">
+              <label htmlFor="company" className="block text-xs font-bold uppercase tracking-wider text-[#142A27] mb-2">
                 Company / Organization
               </label>
               <input
@@ -218,20 +218,20 @@ export function ContactForm() {
                 placeholder="Your company name"
                 value={form.company}
                 onChange={(e) => setForm({ ...form, company: e.target.value })}
-                className="w-full px-4 py-3 rounded-xl bg-[#FAFCF9] border border-[#E3EDE5] text-sm text-[#101C19] placeholder:text-[#A0AEA7] focus:outline-none focus:ring-2 focus:ring-[#047F5B] transition-colors"
+                className="w-full px-4 py-3 rounded-xl bg-[#FAFCF9] border border-[#DFEDE5] text-sm text-[#142A27] placeholder:text-[#A0AEA7] focus:outline-none focus:ring-2 focus:ring-[#008F53] transition-colors"
               />
             </div>
 
             {/* Service Required */}
             <div>
-              <label htmlFor="service" className="block text-xs font-bold uppercase tracking-wider text-[#101C19] mb-2">
+              <label htmlFor="service" className="block text-xs font-bold uppercase tracking-wider text-[#142A27] mb-2">
                 Service Required
               </label>
               <select
                 id="service"
                 value={form.service}
                 onChange={(e) => setForm({ ...form, service: e.target.value })}
-                className="w-full px-4 py-3 rounded-xl bg-[#FAFCF9] border border-[#E3EDE5] text-sm text-[#101C19] focus:outline-none focus:ring-2 focus:ring-[#047F5B] transition-colors cursor-pointer"
+                className="w-full px-4 py-3 rounded-xl bg-[#FAFCF9] border border-[#DFEDE5] text-sm text-[#142A27] focus:outline-none focus:ring-2 focus:ring-[#008F53] transition-colors cursor-pointer"
               >
                 <option value="AI & Machine Learning">AI & Machine Learning</option>
                 <option value="Generative AI & LLMs">Generative AI & LLMs</option>
@@ -247,14 +247,14 @@ export function ContactForm() {
 
           {/* Project Budget (Optional) */}
           <div>
-            <label htmlFor="budget" className="block text-xs font-bold uppercase tracking-wider text-[#101C19] mb-2">
+            <label htmlFor="budget" className="block text-xs font-bold uppercase tracking-wider text-[#142A27] mb-2">
               Expected Project Budget
             </label>
             <select
               id="budget"
               value={form.budget}
               onChange={(e) => setForm({ ...form, budget: e.target.value })}
-              className="w-full px-4 py-3 rounded-xl bg-[#FAFCF9] border border-[#E3EDE5] text-sm text-[#101C19] focus:outline-none focus:ring-2 focus:ring-[#047F5B] transition-colors cursor-pointer"
+              className="w-full px-4 py-3 rounded-xl bg-[#FAFCF9] border border-[#DFEDE5] text-sm text-[#142A27] focus:outline-none focus:ring-2 focus:ring-[#008F53] transition-colors cursor-pointer"
             >
               <option value="Under $10k">Under $10,000</option>
               <option value="$10k - $25k">$10,000 – $25,000</option>
@@ -266,7 +266,7 @@ export function ContactForm() {
 
           {/* Project Description */}
           <div>
-            <label htmlFor="message" className="block text-xs font-bold uppercase tracking-wider text-[#101C19] mb-2">
+            <label htmlFor="message" className="block text-xs font-bold uppercase tracking-wider text-[#142A27] mb-2">
               Project Description <span className="text-red-500">*</span>
             </label>
             <textarea
@@ -277,8 +277,8 @@ export function ContactForm() {
               aria-invalid={Boolean(errors.message)}
               aria-describedby={errors.message ? "message-error" : undefined}
               onChange={(e) => setForm({ ...form, message: e.target.value })}
-              className={`w-full px-4 py-3 rounded-xl bg-[#FAFCF9] border text-sm text-[#101C19] placeholder:text-[#A0AEA7] focus:outline-none focus:ring-2 focus:ring-[#047F5B] transition-colors ${
-                errors.message ? "border-red-400 bg-red-50/20" : "border-[#E3EDE5]"
+              className={`w-full px-4 py-3 rounded-xl bg-[#FAFCF9] border text-sm text-[#142A27] placeholder:text-[#A0AEA7] focus:outline-none focus:ring-2 focus:ring-[#008F53] transition-colors ${
+                errors.message ? "border-red-400 bg-red-50/20" : "border-[#DFEDE5]"
               }`}
             />
             {errors.message && (
@@ -297,12 +297,12 @@ export function ContactForm() {
               size="lg"
               withArrow
               isLoading={isSubmitting}
-              className="w-full justify-center shadow-md shadow-[#047F5B]/20 font-bold"
+              className="w-full justify-center shadow-md shadow-[#008F53]/20 font-bold"
             >
               Send Message
             </Button>
 
-            <p className="mt-3 text-center text-xs text-[#A0AEA7]">
+            <p className="mt-3 text-center text-xs text-[#64736F]">
               Strict NDA protection • Direct architect review • Response within 24 business hours
             </p>
           </div>

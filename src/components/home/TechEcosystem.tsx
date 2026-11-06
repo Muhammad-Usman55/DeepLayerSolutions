@@ -37,15 +37,15 @@ const track2: TechItem[] = [
 function TechBadge({ item }: { item: TechItem }) {
   const Icon = item.icon;
   return (
-    <div className="flex items-center gap-3 px-5 py-3 rounded-2xl bg-white border border-[#E3EDE5] hover:border-[#159B50] shadow-xs hover:shadow-md transition-all duration-300 group select-none shrink-0">
-      <div className="w-9 h-9 rounded-xl bg-[#F4FAF3] border border-[#E3EDE5] flex items-center justify-center text-[#087A3D] group-hover:bg-[#087A3D] group-hover:text-white transition-all duration-200">
+    <div className="flex items-center gap-3 px-5 py-3 rounded-2xl bg-white border border-[#DFEDE5] hover:border-[#008F53] shadow-xs hover:shadow-md transition-all duration-300 group select-none shrink-0">
+      <div className="w-9 h-9 rounded-xl bg-[#E9FFF2] border border-[#DFEDE5] flex items-center justify-center text-[#008F53] group-hover:bg-[#008F53] group-hover:text-white transition-all duration-200">
         <Icon className="w-4 h-4" />
       </div>
       <div className="text-left">
-        <span className="text-[10px] font-mono uppercase tracking-wider text-[#159B50] font-semibold block leading-tight">
+        <span className="text-[10px] font-mono uppercase tracking-wider text-[#008F53] font-semibold block leading-tight">
           {item.category}
         </span>
-        <span className="text-sm font-bold text-[#101C19] group-hover:text-[#087A3D] transition-colors block leading-tight">
+        <span className="text-sm font-bold text-[#142A27] group-hover:text-[#008F53] transition-colors block leading-tight">
           {item.name}
         </span>
       </div>
@@ -60,7 +60,7 @@ export function TechEcosystem() {
   const track2Loop = [...track2, ...track2, ...track2];
 
   return (
-    <section className="py-20 md:py-24 bg-[#FAFCF9] border-t border-[#E3EDE5] overflow-hidden">
+    <section className="py-20 md:py-24 bg-[#FAFCF9] border-t border-[#DFEDE5] overflow-hidden">
       <Container size="wide">
         <SectionHeading
           badge="Engineering Stack"

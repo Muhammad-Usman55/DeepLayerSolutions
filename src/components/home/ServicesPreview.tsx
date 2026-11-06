@@ -58,10 +58,10 @@ export function ServicesPreview() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-3xl sm:text-4xl lg:text-5xl xl:text-[54px] font-extrabold tracking-tight text-[#101C19] leading-[1.12]"
+              className="text-3xl sm:text-4xl lg:text-5xl xl:text-[54px] font-extrabold tracking-tight text-[#142A27] leading-[1.12]"
             >
               Technology That Moves Your{" "}
-              <span className="text-[#087A3D] relative inline-block">
+              <span className="text-[#008F53] relative inline-block">
                 Business
                 <svg
                   className="absolute -bottom-1.5 left-0 w-full h-2.5 text-[#34D399]/40 -z-10"

@@ -11,7 +11,7 @@ import { valueCardsData } from "./why-choose-us/types";
 export function WhyChooseUs() {
   return (
     <section
-      className="relative overflow-hidden py-16 sm:py-20 lg:py-28 bg-gradient-to-b from-[#FAFCF9] via-[#F4FAF6] to-[#FAFCF9] border-y border-[#E3EDE5] select-none"
+      className="relative overflow-hidden py-16 sm:py-20 lg:py-28 bg-gradient-to-b from-[#FAFCF9] via-[#F4FAF6] to-[#FAFCF9] border-t border-[#E3EDE5] select-none"
       aria-label="Why Choose Us"
     >
       {/* Background Volumetric Ambient Lighting & Subtle Grid Lines */}
@@ -42,10 +42,10 @@ export function WhyChooseUs() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-3xl sm:text-4xl lg:text-5xl xl:text-[54px] font-extrabold tracking-tight text-[#101C19] leading-[1.12]"
+              className="text-3xl sm:text-4xl lg:text-5xl xl:text-[54px] font-extrabold tracking-tight text-[#142A27] leading-[1.12]"
             >
               Your Growth, <br />
-              <span className="text-[#047F5B] relative inline-block mt-1">
+              <span className="text-[#008F53] relative inline-block mt-1">
                 Our Mission.
                 {/* Curved Green Underline Accent Matching Reference Design */}
                 <svg
@@ -71,7 +71,7 @@ export function WhyChooseUs() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="mt-6 text-base sm:text-lg text-[#3D5448] font-normal leading-relaxed max-w-md"
+              className="mt-6 text-base sm:text-lg text-[#64736F] font-normal leading-relaxed max-w-md"
             >
               We turn bold ideas into intelligent digital solutions.
             </motion.p>

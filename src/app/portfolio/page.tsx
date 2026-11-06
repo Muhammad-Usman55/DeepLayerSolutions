@@ -23,7 +23,7 @@ export default function PortfolioPage() {
         <Container size="wide">
           <Suspense
             fallback={
-              <div className="py-20 text-center text-sm font-mono text-[#65736D]">
+              <div className="py-20 text-center text-sm font-mono text-[#64736F]">
                 Loading verified projects...
               </div>
             }

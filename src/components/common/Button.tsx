@@ -28,7 +28,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     ref
   ) => {
     const baseStyles =
-      "inline-flex items-center justify-center font-medium rounded-full transition-all duration-200 select-none cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#047F5B] focus-visible:ring-offset-2 disabled:opacity-60 disabled:cursor-not-allowed active:scale-[0.98]";
+      "inline-flex items-center justify-center font-medium rounded-full transition-all duration-200 select-none cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#008F53] focus-visible:ring-offset-2 disabled:opacity-60 disabled:cursor-not-allowed active:scale-[0.98]";
 
     const sizeStyles = {
       sm: "text-xs px-3.5 py-1.5 gap-1.5",
@@ -38,17 +38,17 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
     const variantStyles = {
       primary:
-        "bg-[#047F5B] text-white hover:bg-[#173D2F] shadow-sm hover:shadow-md hover:shadow-[#047F5B]/20 border border-transparent",
+        "bg-[#008F53] text-white hover:bg-[#007343] shadow-sm hover:shadow-md hover:shadow-[#008F53]/20 border border-transparent",
       secondary:
-        "bg-[#E8F5E9] text-[#173D2F] hover:bg-[#D4EBD6] border border-[#C4D9C8]",
+        "bg-[#E9FFF2] text-[#008F53] hover:bg-[#D5F9E6] border border-[#DFEDE5]",
       outline:
-        "bg-transparent text-[#101C19] border border-[#E3EDE5] hover:border-[#047F5B] hover:text-[#047F5B] hover:bg-[#F4FAF3]",
+        "bg-transparent text-[#142A27] border border-[#DFEDE5] hover:border-[#008F53] hover:text-[#008F53] hover:bg-[#E9FFF2]/60",
       ghost:
-        "bg-transparent text-[#101C19] hover:text-[#047F5B] hover:bg-[#F4FAF3]",
+        "bg-transparent text-[#142A27] hover:text-[#008F53] hover:bg-[#E9FFF2]/60",
       dark:
-        "bg-[#101C19] text-white hover:bg-[#1a2d28] border border-transparent shadow-sm",
+        "bg-[#142A27] text-white hover:bg-[#075B3E] border border-transparent shadow-sm",
       white:
-        "bg-white text-[#173D2F] hover:bg-[#F4FAF3] shadow-md border border-white/40",
+        "bg-white text-[#008F53] hover:bg-[#E9FFF2]/60 shadow-md border border-white/40",
     };
 
     const content = (

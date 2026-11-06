@@ -49,8 +49,8 @@ export function ServiceFilter() {
             className={cn(
               "px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 whitespace-nowrap cursor-pointer",
               activeCategory === cat
-                ? "bg-[#047F5B] text-white shadow-sm"
-                : "bg-white text-[#101C19] hover:bg-[#F4FAF3] hover:text-[#047F5B] border border-[#E3EDE5]"
+                ? "bg-[#008F53] text-white shadow-sm"
+                : "bg-white text-[#142A27] hover:bg-[#E9FFF2] hover:text-[#008F53] border border-[#DFEDE5]"
             )}
           >
             {cat}
@@ -65,35 +65,35 @@ export function ServiceFilter() {
           return (
             <div
               key={service.id}
-              className="group flex flex-col justify-between p-7 sm:p-8 rounded-2xl bg-white border border-[#E3EDE5] shadow-xs hover:shadow-xl hover:border-[#159B50]/60 transition-all duration-300 hover:-translate-y-1"
+              className="group flex flex-col justify-between p-7 sm:p-8 rounded-2xl bg-white border border-[#DFEDE5] shadow-xs hover:shadow-xl hover:border-[#008F53]/60 transition-all duration-300 hover:-translate-y-1"
             >
               <div>
                 <div className="flex items-center justify-between mb-6">
-                  <div className="w-12 h-12 rounded-xl bg-[#E8F5E9] text-[#087A3D] flex items-center justify-center group-hover:bg-[#087A3D] group-hover:text-white transition-all duration-300 shadow-xs">
+                  <div className="w-12 h-12 rounded-xl bg-[#E9FFF2] text-[#008F53] flex items-center justify-center group-hover:bg-[#008F53] group-hover:text-white transition-all duration-300 shadow-xs">
                     <Icon className="w-6 h-6" />
                   </div>
-                  <span className="text-[11px] font-mono font-semibold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-[#F4FAF3] text-[#075C32] border border-[#C4D9C8]">
+                  <span className="text-[11px] font-mono font-semibold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-[#E9FFF2] text-[#008F53] border border-[#DFEDE5]">
                     {service.category}
                   </span>
                 </div>
 
-                <h3 className="text-xl font-bold text-[#101C19] group-hover:text-[#087A3D] transition-colors">
+                <h3 className="text-xl font-bold text-[#142A27] group-hover:text-[#008F53] transition-colors">
                   {service.title}
                 </h3>
 
-                <p className="mt-3 text-sm text-[#65736D] leading-relaxed">
+                <p className="mt-3 text-sm text-[#64736F] leading-relaxed">
                   {service.shortDescription}
                 </p>
 
                 {/* Capabilities List */}
-                <div className="mt-6 pt-5 border-t border-[#E3EDE5]">
-                  <span className="text-xs font-bold uppercase tracking-wider text-[#101C19] block mb-2.5">
+                <div className="mt-6 pt-5 border-t border-[#DFEDE5]">
+                  <span className="text-xs font-bold uppercase tracking-wider text-[#142A27] block mb-2.5">
                     Key Capabilities:
                   </span>
                   <ul className="space-y-1.5">
                     {service.capabilities.slice(0, 3).map((cap) => (
-                      <li key={cap} className="text-xs text-[#65736D] flex items-center gap-2">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#159B50] shrink-0" />
+                      <li key={cap} className="text-xs text-[#64736F] flex items-center gap-2">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#008F53] shrink-0" />
                         <span>{cap}</span>
                       </li>
                     ))}
@@ -102,16 +102,16 @@ export function ServiceFilter() {
               </div>
 
               {/* Action Link */}
-              <div className="mt-8 pt-4 border-t border-[#E3EDE5] flex items-center justify-between">
+              <div className="mt-8 pt-4 border-t border-[#DFEDE5] flex items-center justify-between">
                 <Link
                   href={`/services/${service.slug}`}
-                  className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#087A3D] group-hover:text-[#075C32] transition-colors"
+                  className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#008F53] group-hover:text-[#007343] transition-colors"
                 >
                   <span>Explore Service</span>
                   <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-1" />
                 </Link>
 
-                <div className="flex items-center gap-1 text-[11px] text-[#A0AEA7] font-mono">
+                <div className="flex items-center gap-1 text-[11px] text-[#64736F] font-mono">
                   <span>{service.techStack.length}+ Technologies</span>
                 </div>
               </div>

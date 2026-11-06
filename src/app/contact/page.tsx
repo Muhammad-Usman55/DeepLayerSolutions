@@ -17,7 +17,7 @@ export default function ContactPage() {
   return (
     <PageWrapper>
       {/* Contact Hero */}
-      <section className="relative overflow-hidden pt-8 pb-16 lg:pt-12 lg:pb-20 bg-gradient-to-b from-[#E8F5E9]/50 via-[#FAFCF9] to-transparent border-b border-[#E3EDE5]">
+      <section className="relative overflow-hidden pt-8 pb-16 lg:pt-12 lg:pb-20 bg-gradient-to-b from-[#E9FFF2]/50 via-[#FAFCF9] to-transparent border-b border-[#DFEDE5]">
         <Container size="wide">
           <Breadcrumb
             items={[{ label: "Contact", href: "/contact" }]}
@@ -30,21 +30,21 @@ export default function ContactPage() {
                 Let&apos;s Connect
               </Eyebrow>
 
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#101C19] leading-tight">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#142A27] leading-tight">
                 Let&apos;s Build Something <br />
-                <span className="text-[#087A3D]">Amazing Together.</span>
+                <span className="text-[#008F53]">Amazing Together.</span>
               </h1>
 
-              <p className="mt-5 text-lg sm:text-xl text-[#65736D] leading-relaxed max-w-2xl font-normal">
+              <p className="mt-5 text-lg sm:text-xl text-[#64736F] leading-relaxed max-w-2xl font-normal">
                 Tell us about your project, system architecture, or machine learning challenges, and let&apos;s explore how DeepLayer Solutions can engineer the right solution.
               </p>
             </div>
 
             {/* Stylized Headphones / Support Communication Tech Visual */}
             <div className="lg:col-span-4 hidden lg:flex justify-end">
-              <div className="relative w-64 h-64 rounded-full bg-gradient-to-br from-[#E8F5E9] to-[#D4EBD6] p-8 flex items-center justify-center border border-[#C4D9C8] shadow-lg">
-                <div className="absolute inset-0 rounded-full bg-radial from-[#34D399]/20 to-transparent blur-xl" />
-                <div className="relative z-10 w-24 h-24 rounded-3xl bg-white shadow-xl border border-[#E3EDE5] flex items-center justify-center text-[#087A3D]">
+              <div className="relative w-64 h-64 rounded-full bg-gradient-to-br from-[#E9FFF2] to-[#D5F9E6] p-8 flex items-center justify-center border border-[#DFEDE5] shadow-lg">
+                <div className="absolute inset-0 rounded-full bg-radial from-[#00B86B]/20 to-transparent blur-xl" />
+                <div className="relative z-10 w-24 h-24 rounded-3xl bg-white shadow-xl border border-[#DFEDE5] flex items-center justify-center text-[#008F53]">
                   <Headphones className="w-12 h-12" />
                 </div>
               </div>
@@ -60,71 +60,71 @@ export default function ContactPage() {
             {/* Contact Details (Cols 1-5) */}
             <div className="lg:col-span-5 space-y-6">
               <div>
-                <h2 className="text-2xl font-extrabold text-[#101C19]">
+                <h2 className="text-2xl font-extrabold text-[#142A27]">
                   Get in Touch Directly
                 </h2>
-                <p className="mt-2 text-sm text-[#65736D] leading-relaxed">
+                <p className="mt-2 text-sm text-[#64736F] leading-relaxed">
                   Have an urgent inquiry or prefer discussing via direct channels? Reach out using the verified endpoints below.
                 </p>
               </div>
 
               {/* Office Location Card */}
-              <div className="p-6 rounded-2xl bg-white border border-[#E3EDE5] shadow-xs flex items-start gap-4">
-                <div className="w-12 h-12 rounded-xl bg-[#E8F5E9] text-[#087A3D] flex items-center justify-center shrink-0">
+              <div className="p-6 rounded-2xl bg-white border border-[#DFEDE5] shadow-xs flex items-start gap-4">
+                <div className="w-12 h-12 rounded-xl bg-[#E9FFF2] text-[#008F53] flex items-center justify-center shrink-0">
                   <MapPin className="w-6 h-6" />
                 </div>
                 <div>
-                  <span className="text-xs font-bold uppercase tracking-wider text-[#A0AEA7] block">
+                  <span className="text-xs font-bold uppercase tracking-wider text-[#64736F] block">
                     Our Office
                   </span>
-                  <span className="text-base font-bold text-[#101C19] block mt-0.5">
+                  <span className="text-base font-bold text-[#142A27] block mt-0.5">
                     {siteConfig.contact.address}
                   </span>
-                  <span className="text-xs text-[#65736D] mt-1 block">
+                  <span className="text-xs text-[#64736F] mt-1 block">
                     Engineering Operations & Innovation Hub
                   </span>
                 </div>
               </div>
 
               {/* Email Card */}
-              <div className="p-6 rounded-2xl bg-white border border-[#E3EDE5] shadow-xs flex items-start gap-4">
-                <div className="w-12 h-12 rounded-xl bg-[#E8F5E9] text-[#087A3D] flex items-center justify-center shrink-0">
+              <div className="p-6 rounded-2xl bg-white border border-[#DFEDE5] shadow-xs flex items-start gap-4">
+                <div className="w-12 h-12 rounded-xl bg-[#E9FFF2] text-[#008F53] flex items-center justify-center shrink-0">
                   <Mail className="w-6 h-6" />
                 </div>
                 <div>
-                  <span className="text-xs font-bold uppercase tracking-wider text-[#A0AEA7] block">
+                  <span className="text-xs font-bold uppercase tracking-wider text-[#64736F] block">
                     Email Us
                   </span>
                   <a
                     href={`mailto:${siteConfig.contact.email}`}
-                    className="text-base font-bold text-[#087A3D] hover:underline block mt-0.5"
+                    className="text-base font-bold text-[#008F53] hover:underline block mt-0.5"
                   >
                     {siteConfig.contact.email}
                   </a>
-                  <span className="text-xs text-[#65736D] mt-1 block">
+                  <span className="text-xs text-[#64736F] mt-1 block">
                     Average response time: &lt; 24 hours
                   </span>
                 </div>
               </div>
 
               {/* Phone & WhatsApp Card */}
-              <div className="p-6 rounded-2xl bg-white border border-[#E3EDE5] shadow-xs flex items-start gap-4">
-                <div className="w-12 h-12 rounded-xl bg-[#E8F5E9] text-[#087A3D] flex items-center justify-center shrink-0">
+              <div className="p-6 rounded-2xl bg-white border border-[#DFEDE5] shadow-xs flex items-start gap-4">
+                <div className="w-12 h-12 rounded-xl bg-[#E9FFF2] text-[#008F53] flex items-center justify-center shrink-0">
                   <Phone className="w-6 h-6" />
                 </div>
                 <div className="flex-1">
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-bold uppercase tracking-wider text-[#A0AEA7] block">
+                    <span className="text-xs font-bold uppercase tracking-wider text-[#64736F] block">
                       Call & WhatsApp
                     </span>
-                    <span className="inline-flex items-center gap-1.5 text-[11px] font-mono font-bold text-[#047F5B] bg-[#E8F5E9] border border-[#D8E6DC] px-2 py-0.5 rounded-md">
-                      <span className="w-1.5 h-1.5 rounded-[2px] bg-[#047F5B]" />
+                    <span className="inline-flex items-center gap-1.5 text-[11px] font-mono font-bold text-[#008F53] bg-[#E9FFF2] border border-[#DFEDE5] px-2 py-0.5 rounded-md">
+                      <span className="w-1.5 h-1.5 rounded-[2px] bg-[#008F53]" />
                       Active
                     </span>
                   </div>
                   <a
                     href={`tel:${siteConfig.contact.phone.replace(/\s+/g, "")}`}
-                    className="text-base font-bold text-[#101C19] hover:text-[#087A3D] block mt-0.5"
+                    className="text-base font-bold text-[#142A27] hover:text-[#008F53] block mt-0.5"
                   >
                     {siteConfig.contact.phone}
                   </a>
@@ -141,21 +141,21 @@ export default function ContactPage() {
                       <span>Chat on WhatsApp</span>
                     </a>
                   </div>
-                  <span className="text-xs text-[#65736D] mt-2 block">
+                  <span className="text-xs text-[#64736F] mt-2 block">
                     {siteConfig.contact.availability}
                   </span>
                 </div>
               </div>
 
               {/* LinkedIn Direct Connect Card */}
-              <div className="p-6 rounded-2xl bg-white border border-[#E3EDE5] shadow-xs flex items-start gap-4">
+              <div className="p-6 rounded-2xl bg-white border border-[#DFEDE5] shadow-xs flex items-start gap-4">
                 <div className="w-12 h-12 rounded-xl bg-[#0077B5]/10 text-[#0077B5] flex items-center justify-center shrink-0">
                   <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24">
                     <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.25c-.91 0-1.64.73-1.64 1.64s.73 1.64 1.64 1.64 1.64-.73 1.64-1.64-.73-1.64-1.64-1.64Z" />
                   </svg>
                 </div>
                 <div>
-                  <span className="text-xs font-bold uppercase tracking-wider text-[#A0AEA7] block">
+                  <span className="text-xs font-bold uppercase tracking-wider text-[#64736F] block">
                     Company LinkedIn
                   </span>
                   <a
@@ -167,16 +167,16 @@ export default function ContactPage() {
                     <span>DeepLayer Solutions</span>
                     <ArrowUpRight className="w-4 h-4" />
                   </a>
-                  <span className="text-xs text-[#65736D] mt-1 block">
+                  <span className="text-xs text-[#64736F] mt-1 block">
                     Official corporate updates & verified enterprise presence
                   </span>
                 </div>
               </div>
 
               {/* Assurance Banner */}
-              <div className="p-5 rounded-2xl bg-[#F4FAF3] border border-[#C4D9C8] flex items-start gap-3">
-                <ShieldCheck className="w-5 h-5 text-[#159B50] shrink-0 mt-0.5" />
-                <p className="text-xs text-[#075C32] leading-relaxed">
+              <div className="p-5 rounded-2xl bg-[#E9FFF2] border border-[#DFEDE5] flex items-start gap-3">
+                <ShieldCheck className="w-5 h-5 text-[#008F53] shrink-0 mt-0.5" />
+                <p className="text-xs text-[#008F53] leading-relaxed">
                   <strong>Strict Confidentiality:</strong> All shared technical blueprints, designs, and inquiries are protected under strict non-disclosure obligations.
                 </p>
               </div>

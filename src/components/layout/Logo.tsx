@@ -24,7 +24,7 @@ export function Logo({ className, variant = "default", size = "md" }: LogoProps)
     <Link
       href="/"
       className={cn(
-        "inline-flex items-center gap-2.5 transition-opacity hover:opacity-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#047F5B] rounded-lg",
+        "inline-flex items-center gap-2.5 transition-opacity hover:opacity-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#008F53] rounded-lg",
         className
       )}
       aria-label="DeepLayer Solutions Home"
@@ -48,7 +48,7 @@ export function Logo({ className, variant = "default", size = "md" }: LogoProps)
               className={cn(
                 "font-extrabold tracking-tight",
                 textClass,
-                isLight ? "text-white" : "text-[#101C19]"
+                isLight ? "text-white" : "text-[#142A27]"
               )}
             >
               DeepLayer
@@ -58,7 +58,7 @@ export function Logo({ className, variant = "default", size = "md" }: LogoProps)
             className={cn(
               "font-semibold tracking-[0.16em] uppercase -mt-0.5",
               subClass,
-              isLight ? "text-[#34D399]" : "text-[#047F5B]"
+              isLight ? "text-[#00B86B]" : "text-[#008F53]"
             )}
           >
             Solutions

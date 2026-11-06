@@ -65,14 +65,14 @@ export function SectionHeading({
           <h2
             className={cn(
               "text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight leading-[1.15]",
-              isDark ? "text-white" : "text-[#101C19]",
+              isDark ? "text-white" : "text-[#142A27]",
               titleClassName
             )}
           >
             {titleParts ? (
               <>
                 {titleParts.before}
-                <span className="text-[#087A3D]">{titleParts.highlighted}</span>
+                <span className="text-[#008F53]">{titleParts.highlighted}</span>
                 {titleParts.after}
               </>
             ) : (
@@ -84,7 +84,7 @@ export function SectionHeading({
             <p
               className={cn(
                 "mt-4 text-base sm:text-lg leading-relaxed",
-                isDark ? "text-white/70" : "text-[#65736D]"
+                isDark ? "text-white/70" : "text-[#64736F]"
               )}
             >
               {subtitle}

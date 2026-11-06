@@ -3,7 +3,7 @@ import { siteConfig } from "@/config/site";
 
 export function StatsStrip() {
   return (
-    <section className="py-12 bg-white border-b border-[#E3EDE5]">
+    <section className="py-12 bg-white border-t border-[#E3EDE5]">
       <Container size="wide">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 lg:divide-x divide-[#E3EDE5]">
           {siteConfig.stats.map((stat) => (

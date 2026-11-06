@@ -44,8 +44,8 @@ export function CarouselControls({
           "rounded-full flex items-center justify-center transition-all duration-200 border cursor-pointer select-none",
           sizeClasses[size],
           canPrev
-            ? "bg-white text-[#101C19] border-[#E3EDE5] hover:border-[#159B50] hover:text-[#087A3D] hover:bg-[#F4FAF3] shadow-xs active:scale-95"
-            : "bg-[#FAFCF9] text-[#A0AEA7] border-[#E3EDE5]/60 cursor-not-allowed opacity-50"
+            ? "bg-white text-[#142A27] border-[#DFEDE5] hover:border-[#008F53] hover:text-[#008F53] hover:bg-[#E9FFF2]/60 shadow-xs active:scale-95"
+            : "bg-[#FAFCF9] text-[#A0AEA7] border-[#DFEDE5]/60 cursor-not-allowed opacity-50"
         )}
       >
         <ArrowLeft className={iconSizes[size]} />
@@ -60,8 +60,8 @@ export function CarouselControls({
           "rounded-full flex items-center justify-center transition-all duration-200 border cursor-pointer select-none",
           sizeClasses[size],
           canNext
-            ? "bg-[#087A3D] text-white border-[#087A3D] hover:bg-[#075C32] shadow-sm hover:shadow-md active:scale-95"
-            : "bg-[#FAFCF9] text-[#A0AEA7] border-[#E3EDE5]/60 cursor-not-allowed opacity-50"
+            ? "bg-[#008F53] text-white border-[#008F53] hover:bg-[#007343] shadow-sm hover:shadow-md active:scale-95"
+            : "bg-[#FAFCF9] text-[#A0AEA7] border-[#DFEDE5]/60 cursor-not-allowed opacity-50"
         )}
       >
         <ArrowRight className={iconSizes[size]} />

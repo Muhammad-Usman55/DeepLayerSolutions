@@ -55,17 +55,17 @@ export function HeroSection() {
             <motion.div variants={itemVariants}>
               <Link
                 href="/services"
-                className="group inline-flex items-center gap-2.5 pl-2.5 pr-3.5 py-1.5 rounded-full bg-white/95 backdrop-blur-sm border border-[#D8E6DC] hover:border-[#047F5B] shadow-[0_2px_10px_-2px_rgba(4,127,91,0.08)] hover:shadow-md transition-all duration-300 mb-6 cursor-pointer"
+                className="group inline-flex items-center gap-2.5 pl-2.5 pr-3.5 py-1.5 rounded-full bg-white/95 backdrop-blur-sm border border-[#DFEDE5] hover:border-[#00B86B] shadow-[0_2px_10px_-2px_rgba(0,184,107,0.08)] hover:shadow-md transition-all duration-300 mb-6 cursor-pointer"
               >
-                <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#E8F5E9] text-[#047F5B] font-mono text-[10px] font-bold tracking-wide">
-                  <Sparkles className="w-3 h-3 text-[#047F5B]" />
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#E9FFF2] text-[#008F53] font-mono text-[10px] font-bold tracking-wide">
+                  <Sparkles className="w-3 h-3 text-[#00B86B]" />
                   DEEPLAYER
                 </span>
-                <span className="text-xs font-semibold text-[#101C19] tracking-tight">
+                <span className="text-xs font-semibold text-[#142A27] tracking-tight">
                   Engineering What&apos;s Next
                 </span>
-                <span className="w-1 h-1 rounded-full bg-[#C4D9C8]" />
-                <span className="text-xs font-mono font-semibold text-[#047F5B] flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
+                <span className="w-1 h-1 rounded-full bg-[#BCE8CF]" />
+                <span className="text-xs font-mono font-semibold text-[#008F53] flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
                   Explore <ArrowRight className="w-3 h-3" />
                 </span>
               </Link>
@@ -74,10 +74,10 @@ export function HeroSection() {
             {/* Main Headline with Highlight Reveal */}
             <motion.h1
               variants={itemVariants}
-              className="text-4xl sm:text-5xl lg:text-6xl xl:text-[68px] font-extrabold tracking-tight text-[#101C19] leading-[1.08]"
+              className="text-4xl sm:text-5xl lg:text-6xl xl:text-[68px] font-extrabold tracking-tight text-[#142A27] leading-[1.08]"
             >
               We Build{" "}
-              <span className="text-[#047F5B] relative inline-block">
+              <span className="text-[#008F53] relative inline-block">
                 Intelligent
                 <svg
                   className="absolute -bottom-1.5 left-0 w-full h-3 text-[#34D399]/40 -z-10"
@@ -93,7 +93,7 @@ export function HeroSection() {
             {/* Supporting Copy */}
             <motion.p
               variants={itemVariants}
-              className="mt-6 text-lg sm:text-xl text-[#2D4A3E] leading-relaxed max-w-2xl font-normal"
+              className="mt-6 text-lg sm:text-xl text-[#64736F] leading-relaxed max-w-2xl font-normal"
             >
               Cutting-edge software engineering, AI, and digital products to help your business innovate, grow, and stay ahead in the age of intelligence.
             </motion.p>
@@ -125,41 +125,41 @@ export function HeroSection() {
             {/* Engineering Pillars & Architecture Spec Strip */}
             <motion.div
               variants={itemVariants}
-              className="mt-10 pt-7 border-t border-[#E3EDE5] w-full"
+              className="mt-10 pt-7 border-t border-[#DFEDE5] w-full"
             >
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-4 divide-y sm:divide-y-0 sm:divide-x divide-[#E3EDE5]">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-4 divide-y sm:divide-y-0 sm:divide-x divide-[#DFEDE5]">
                 <div className="sm:pr-4">
                   <div className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#047F5B]" />
-                    <span className="text-[11px] font-mono uppercase tracking-wider text-[#047F5B] font-semibold">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#008F53]" />
+                    <span className="text-[11px] font-mono uppercase tracking-wider text-[#008F53] font-semibold">
                       01 · Capability
                     </span>
                   </div>
-                  <p className="mt-1.5 text-sm font-semibold text-[#101C19] tracking-tight">
+                  <p className="mt-1.5 text-sm font-semibold text-[#142A27] tracking-tight">
                     Custom AI &amp; LLMs
                   </p>
                 </div>
 
                 <div className="sm:px-4 pt-3 sm:pt-0">
                   <div className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#047F5B]" />
-                    <span className="text-[11px] font-mono uppercase tracking-wider text-[#047F5B] font-semibold">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#008F53]" />
+                    <span className="text-[11px] font-mono uppercase tracking-wider text-[#008F53] font-semibold">
                       02 · Speed
                     </span>
                   </div>
-                  <p className="mt-1.5 text-sm font-semibold text-[#101C19] tracking-tight">
+                  <p className="mt-1.5 text-sm font-semibold text-[#142A27] tracking-tight">
                     Sub-450ms Latency
                   </p>
                 </div>
 
                 <div className="sm:pl-4 pt-3 sm:pt-0">
                   <div className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#047F5B]" />
-                    <span className="text-[11px] font-mono uppercase tracking-wider text-[#047F5B] font-semibold">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#008F53]" />
+                    <span className="text-[11px] font-mono uppercase tracking-wider text-[#008F53] font-semibold">
                       03 · Standard
                     </span>
                   </div>
-                  <p className="mt-1.5 text-sm font-semibold text-[#101C19] tracking-tight">
+                  <p className="mt-1.5 text-sm font-semibold text-[#142A27] tracking-tight">
                     Production Verified
                   </p>
                 </div>

@@ -77,7 +77,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#047F5B",
+  themeColor: "#008F53",
   width: "device-width",
   initialScale: 1,
 };
@@ -145,11 +145,11 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdSchema) }}
         />
       </head>
-      <body className="min-h-full flex flex-col bg-[#FAFCF9] text-[#101C19]">
+      <body className="min-h-full flex flex-col bg-[#FAFCF9] text-[#142A27]">
         {/* Skip to Main Content Link for WCAG 2.2 AA Compliance */}
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 z-[10000] px-4 py-2.5 bg-[#047F5B] text-white font-semibold rounded-lg shadow-xl outline-none ring-2 ring-white"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 z-[10000] px-4 py-2.5 bg-[#008F53] text-white font-semibold rounded-lg shadow-xl outline-none ring-2 ring-white"
         >
           Skip to main content
         </a>

@@ -11,17 +11,17 @@ interface Props {
 
 export function EngineeringChallengesSection({ project }: Props) {
   return (
-    <section className="py-14 sm:py-20 bg-white border-b border-[#E3EDE5]">
+    <section className="py-14 sm:py-20 bg-white border-b border-[#DFEDE5]">
       <Container size="wide">
         <div className="max-w-3xl mx-auto text-center mb-12 sm:mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-[#E8F5E9] text-[#075C32] border border-[#C4D9C8] mb-4">
-            <Wrench className="w-3.5 h-3.5 text-[#159B50]" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-[#E9FFF2] text-[#008F53] border border-[#DFEDE5] mb-4">
+            <Wrench className="w-3.5 h-3.5 text-[#00B86B]" />
             <span>AUTHENTIC TRIALS</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#101C19]">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#142A27]">
             Genuine Engineering Hurdles &amp; Solutions
           </h2>
-          <p className="mt-3 text-base text-[#65736D]">
+          <p className="mt-3 text-base text-[#64736F]">
             Real technical roadblocks encountered during development and how we resolved them.
           </p>
         </div>
@@ -30,51 +30,51 @@ export function EngineeringChallengesSection({ project }: Props) {
           {project.engineeringChallenges.map((item, idx) => (
             <div
               key={idx}
-              className="p-7 sm:p-9 rounded-3xl bg-[#FAFCF9] border border-[#E3EDE5] shadow-xs flex flex-col justify-between"
+              className="p-7 sm:p-9 rounded-3xl bg-[#FAFCF9] border border-[#DFEDE5] shadow-xs flex flex-col justify-between"
             >
               <div>
-                <div className="flex items-center justify-between pb-3 mb-4 border-b border-[#E3EDE5]">
-                  <span className="text-xs font-mono font-bold text-[#087A3D]">
+                <div className="flex items-center justify-between pb-3 mb-4 border-b border-[#DFEDE5]">
+                  <span className="text-xs font-mono font-bold text-[#008F53]">
                     CHALLENGE_0{idx + 1}
                   </span>
-                  <span className="text-[11px] font-mono font-semibold text-[#65736D]">
+                  <span className="text-[11px] font-mono font-semibold text-[#64736F]">
                     RESOLVED
                   </span>
                 </div>
 
-                <h3 className="text-xl font-bold text-[#101C19] mb-4">
+                <h3 className="text-xl font-bold text-[#142A27] mb-4">
                   {item.title}
                 </h3>
 
                 {/* Problem Statement */}
-                <div className="mb-4 p-4 rounded-xl bg-white border border-[#E3EDE5]">
+                <div className="mb-4 p-4 rounded-xl bg-white border border-[#DFEDE5]">
                   <div className="flex items-center gap-1.5 text-xs font-mono font-bold uppercase text-[#B45309] mb-1">
                     <AlertTriangle className="w-3.5 h-3.5 text-[#D97706]" />
                     <span>The Problem:</span>
                   </div>
-                  <p className="text-xs sm:text-sm text-[#4A5568] leading-relaxed">
+                  <p className="text-xs sm:text-sm text-[#64736F] leading-relaxed">
                     {item.problem}
                   </p>
                 </div>
 
                 {/* Research Approach */}
                 <div className="mb-4 px-2">
-                  <div className="text-xs font-mono font-bold uppercase text-[#65736D] mb-1">
+                  <div className="text-xs font-mono font-bold uppercase text-[#64736F] mb-1">
                     Engineering Approach:
                   </div>
-                  <p className="text-xs sm:text-sm text-[#65736D] leading-relaxed">
+                  <p className="text-xs sm:text-sm text-[#64736F] leading-relaxed">
                     {item.approach}
                   </p>
                 </div>
               </div>
 
               {/* The Technical Solution */}
-              <div className="mt-4 p-4 rounded-xl bg-[#F4FAF3] border border-[#C4D9C8]">
-                <div className="flex items-center gap-1.5 text-xs font-mono font-bold uppercase text-[#075C32] mb-1">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-[#159B50]" />
+              <div className="mt-4 p-4 rounded-xl bg-[#E9FFF2] border border-[#DFEDE5]">
+                <div className="flex items-center gap-1.5 text-xs font-mono font-bold uppercase text-[#008F53] mb-1">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#00B86B]" />
                   <span>The Resolution:</span>
                 </div>
-                <p className="text-xs sm:text-sm text-[#101C19] font-medium leading-relaxed">
+                <p className="text-xs sm:text-sm text-[#142A27] font-medium leading-relaxed">
                   {item.solution}
                 </p>
               </div>

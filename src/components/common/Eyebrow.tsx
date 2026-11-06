@@ -31,11 +31,11 @@ export function Eyebrow({
       <div
         className={cn(
           "inline-flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-[0.16em] mb-3 select-none",
-          isDark ? "text-[#34D399]" : "text-[#047F5B]",
+          isDark ? "text-[#34D399]" : "text-[#008F53]",
           className
         )}
       >
-        <span className="w-1.5 h-1.5 rounded-[2px] bg-[#047F5B] opacity-90" />
+        <span className="w-1.5 h-1.5 rounded-[2px] bg-[#008F53] opacity-90" />
         <span>{content}</span>
       </div>
     );
@@ -48,7 +48,7 @@ export function Eyebrow({
         variant === "pill" ? "rounded-full" : "rounded-md",
         isDark
           ? "bg-white/10 text-white border border-white/15 backdrop-blur-xs"
-          : "bg-white text-[#047F5B] border border-[#D8E6DC] shadow-[0_1px_3px_rgba(4,127,91,0.06)] hover:border-[#047F5B]/40",
+          : "bg-white text-[#008F53] border border-[#DFEDE5] shadow-[0_1px_3px_rgba(0,184,107,0.06)] hover:border-[#008F53]/40",
         className
       )}
     >
@@ -58,7 +58,7 @@ export function Eyebrow({
         <span
           className={cn(
             "w-1.5 h-1.5 rounded-[2px] shrink-0",
-            isDark ? "bg-[#34D399]" : "bg-[#047F5B]"
+            isDark ? "bg-[#34D399]" : "bg-[#008F53]"
           )}
         />
       )}

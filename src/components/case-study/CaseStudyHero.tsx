@@ -26,13 +26,13 @@ interface CaseStudyHeroProps {
 
 export function CaseStudyHero({ project }: CaseStudyHeroProps) {
   return (
-    <section className="relative overflow-hidden pt-8 pb-14 lg:pt-12 lg:pb-20 bg-gradient-to-b from-[#E8F5E9]/50 via-[#FAFCF9] to-white border-b border-[#E3EDE5]">
+    <section className="relative overflow-hidden pt-8 pb-14 lg:pt-12 lg:pb-20 bg-gradient-to-b from-[#E9FFF2]/50 via-[#FAFCF9] to-white border-b border-[#DFEDE5]">
       {/* Subtle Background Pattern */}
       <div
         className="absolute inset-0 pointer-events-none opacity-40"
         style={{
           backgroundImage:
-            "radial-gradient(#159B50 0.75px, transparent 0.75px), radial-gradient(#087A3D 0.75px, transparent 0.75px)",
+            "radial-gradient(#00B86B 0.75px, transparent 0.75px), radial-gradient(#008F53 0.75px, transparent 0.75px)",
           backgroundSize: "28px 28px",
           backgroundPosition: "0 0, 14px 14px",
         }}
@@ -49,7 +49,7 @@ export function CaseStudyHero({ project }: CaseStudyHeroProps) {
           />
           <Link
             href="/portfolio"
-            className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#087A3D] hover:text-[#075C32] transition-colors"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#008F53] hover:text-[#007343] transition-colors"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             <span>All Projects</span>
@@ -58,42 +58,42 @@ export function CaseStudyHero({ project }: CaseStudyHeroProps) {
 
         {/* Hero Top Badges */}
         <div className="flex flex-wrap items-center gap-2.5 mb-5">
-          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-mono font-bold uppercase tracking-wider bg-white text-[#047F5B] border border-[#D8E6DC] shadow-2xs">
-            <span className="w-1.5 h-1.5 rounded-[2px] bg-[#047F5B]" />
+          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-mono font-bold uppercase tracking-wider bg-white text-[#008F53] border border-[#DFEDE5] shadow-2xs">
+            <span className="w-1.5 h-1.5 rounded-[2px] bg-[#008F53]" />
             {project.category}
           </span>
-          <span className="px-2.5 py-1 rounded-md text-xs font-mono font-semibold bg-white text-[#101C19] border border-[#E3EDE5]">
+          <span className="px-2.5 py-1 rounded-md text-xs font-mono font-semibold bg-white text-[#142A27] border border-[#DFEDE5]">
             {project.projectType}
           </span>
-          <span className="px-2.5 py-1 rounded-md text-xs font-mono font-semibold bg-[#F4FAF3] text-[#047F5B] border border-[#D8E6DC]">
+          <span className="px-2.5 py-1 rounded-md text-xs font-mono font-semibold bg-[#E9FFF2] text-[#008F53] border border-[#DFEDE5]">
             {project.status}
           </span>
         </div>
 
         {/* Main Title & Tagline */}
         <div className="max-w-4xl">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#101C19] leading-tight">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#142A27] leading-tight">
             {project.title}
           </h1>
-          <p className="mt-3 text-lg sm:text-2xl font-semibold text-[#087A3D] leading-snug">
+          <p className="mt-3 text-lg sm:text-2xl font-semibold text-[#008F53] leading-snug">
             {project.tagline}
           </p>
-          <p className="mt-5 text-base sm:text-lg text-[#65736D] leading-relaxed max-w-3xl">
+          <p className="mt-5 text-base sm:text-lg text-[#64736F] leading-relaxed max-w-3xl">
             {project.summary}
           </p>
         </div>
 
         {/* Quick Action Links & Tech Pills */}
-        <div className="mt-8 pt-6 border-t border-[#E3EDE5] flex flex-col md:flex-row md:items-center justify-between gap-6">
+        <div className="mt-8 pt-6 border-t border-[#DFEDE5] flex flex-col md:flex-row md:items-center justify-between gap-6">
           {/* Tech Stack Pills */}
           <div className="flex flex-wrap items-center gap-2">
-            <span className="text-xs font-mono font-bold uppercase text-[#65736D] mr-1">
+            <span className="text-xs font-mono font-bold uppercase text-[#64736F] mr-1">
               Stack:
             </span>
             {project.techStackFlat.map((tech) => (
               <span
                 key={tech}
-                className="px-2.5 py-1 rounded-md text-xs font-mono bg-white text-[#075C32] border border-[#E3EDE5] shadow-2xs"
+                className="px-2.5 py-1 rounded-md text-xs font-mono bg-white text-[#008F53] border border-[#DFEDE5] shadow-2xs"
               >
                 {tech}
               </span>
@@ -107,7 +107,7 @@ export function CaseStudyHero({ project }: CaseStudyHeroProps) {
                 href={project.liveDemoUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-[#087A3D] text-white hover:bg-[#075C32] transition-colors shadow-sm"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-[#008F53] text-white hover:bg-[#007343] transition-colors shadow-sm"
               >
                 <span>Live Prototype</span>
                 <ExternalLink className="w-3.5 h-3.5" />
@@ -118,9 +118,9 @@ export function CaseStudyHero({ project }: CaseStudyHeroProps) {
                 href={project.repositoryUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-white text-[#101C19] hover:bg-[#F4FAF3] border border-[#E3EDE5] hover:border-[#159B50]/60 transition-colors shadow-2xs"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-white text-[#142A27] hover:bg-[#E9FFF2] border border-[#DFEDE5] hover:border-[#008F53]/60 transition-colors shadow-2xs"
               >
-                <GithubIcon className="w-4 h-4 text-[#101C19]" />
+                <GithubIcon className="w-4 h-4 text-[#142A27]" />
                 <span>Source Repository</span>
               </a>
             )}
@@ -128,7 +128,7 @@ export function CaseStudyHero({ project }: CaseStudyHeroProps) {
         </div>
 
         {/* Large Bespoke Project Visual Display */}
-        <div className="mt-10 rounded-2xl sm:rounded-3xl border border-[#E3EDE5] overflow-hidden shadow-xl bg-[#062418]">
+        <div className="mt-10 rounded-2xl sm:rounded-3xl border border-[#DFEDE5] overflow-hidden shadow-xl bg-[#062418]">
           <div className="h-72 sm:h-96 md:h-[460px] w-full">
             <ProjectVisualDispatcher
               visualType={project.heroVisualType || project.slug}

@@ -62,13 +62,13 @@ export function PortfolioHero() {
             </Eyebrow>
 
             {/* Main Heading */}
-            <h1 className="text-4xl sm:text-5xl lg:text-[56px] font-extrabold tracking-tight text-[#101C19] leading-[1.12]">
+            <h1 className="text-4xl sm:text-5xl lg:text-[56px] font-extrabold tracking-tight text-[#142A27] leading-[1.12]">
               Ideas We&apos;ve Built. <br />
-              <span className="text-[#087A3D]">Solutions We&apos;ve Delivered.</span>
+              <span className="text-[#008F53]">Solutions We&apos;ve Delivered.</span>
             </h1>
 
             {/* Supporting Description */}
-            <p className="mt-5 text-base sm:text-lg text-[#65736D] leading-relaxed max-w-2xl font-normal">
+            <p className="mt-5 text-base sm:text-lg text-[#64736F] leading-relaxed max-w-2xl font-normal">
               Explore selected software and AI engineering projects demonstrating our technical capabilities across computer vision, agentic reasoning, and high-concurrency web applications.
             </p>
           </div>

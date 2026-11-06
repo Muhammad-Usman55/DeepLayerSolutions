@@ -11,17 +11,17 @@ interface Props {
 
 export function TechnologyStackSection({ project }: Props) {
   return (
-    <section className="py-14 sm:py-20 bg-white border-b border-[#E3EDE5]">
+    <section className="py-14 sm:py-20 bg-white border-b border-[#DFEDE5]">
       <Container size="wide">
         <div className="max-w-3xl mx-auto text-center mb-12 sm:mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-[#E8F5E9] text-[#075C32] border border-[#C4D9C8] mb-4">
-            <Terminal className="w-3.5 h-3.5 text-[#159B50]" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-[#E9FFF2] text-[#008F53] border border-[#DFEDE5] mb-4">
+            <Terminal className="w-3.5 h-3.5 text-[#00B86B]" />
             <span>TECH STACK COMPOSITION</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#101C19]">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#142A27]">
             Technologies &amp; Frameworks
           </h2>
-          <p className="mt-3 text-base text-[#65736D]">
+          <p className="mt-3 text-base text-[#64736F]">
             Production-grade tooling selected for reliability, low latency, and deterministic execution.
           </p>
         </div>
@@ -30,10 +30,10 @@ export function TechnologyStackSection({ project }: Props) {
           {project.technologyGroups.map((group, idx) => (
             <div
               key={idx}
-              className="p-6 rounded-2xl bg-[#FAFCF9] border border-[#E3EDE5] flex flex-col justify-between"
+              className="p-6 rounded-2xl bg-[#FAFCF9] border border-[#DFEDE5] flex flex-col justify-between"
             >
               <div>
-                <h3 className="text-sm font-mono font-bold uppercase tracking-wider text-[#087A3D] pb-3 mb-4 border-b border-[#E3EDE5]">
+                <h3 className="text-sm font-mono font-bold uppercase tracking-wider text-[#008F53] pb-3 mb-4 border-b border-[#DFEDE5]">
                   {group.category}
                 </h3>
 
@@ -41,16 +41,16 @@ export function TechnologyStackSection({ project }: Props) {
                   {group.items.map((item) => (
                     <li
                       key={item}
-                      className="flex items-center gap-2 text-xs sm:text-sm font-mono text-[#101C19] py-1 px-2.5 rounded-lg bg-white border border-[#E3EDE5]"
+                      className="flex items-center gap-2 text-xs sm:text-sm font-mono text-[#142A27] py-1 px-2.5 rounded-lg bg-white border border-[#DFEDE5]"
                     >
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#159B50]" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#008F53]" />
                       <span>{item}</span>
                     </li>
                   ))}
                 </ul>
               </div>
 
-              <div className="mt-6 pt-3 text-[11px] font-mono text-[#65736D]">
+              <div className="mt-6 pt-3 text-[11px] font-mono text-[#64736F]">
                 <span>{group.items.length} Production Packages</span>
               </div>
             </div>

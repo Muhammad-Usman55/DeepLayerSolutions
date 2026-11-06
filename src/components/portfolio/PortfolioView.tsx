@@ -50,8 +50,8 @@ export function PortfolioView() {
 
       {/* Floating Glass Sphere on Bottom Right Wave (as in reference image) */}
       <div
-        className="absolute bottom-16 right-24 sm:right-32 w-7 h-7 rounded-full bg-gradient-to-tr from-[#087A3D] to-[#34D399] opacity-75 shadow-lg pointer-events-none hidden md:block"
-        style={{ filter: "drop-shadow(0 0 12px rgba(16,185,129,0.5))" }}
+        className="absolute bottom-16 right-24 sm:right-32 w-7 h-7 rounded-full bg-gradient-to-tr from-[#008F53] to-[#00B86B] opacity-75 shadow-lg pointer-events-none hidden md:block"
+        style={{ filter: "drop-shadow(0 0 12px rgba(0,184,107,0.5))" }}
       />
 
       {/* Category Filter Pills Bar */}
@@ -70,16 +70,16 @@ export function PortfolioView() {
           ))}
         </div>
       ) : (
-        <div className="py-20 text-center rounded-2xl bg-white border border-[#E3EDE5]">
-          <Layers className="w-10 h-10 text-[#65736D] mx-auto mb-3" />
-          <h3 className="text-lg font-bold text-[#101C19]">No projects found</h3>
-          <p className="mt-1 text-sm text-[#65736D]">
+        <div className="py-20 text-center rounded-2xl bg-white border border-[#DFEDE5]">
+          <Layers className="w-10 h-10 text-[#64736F] mx-auto mb-3" />
+          <h3 className="text-lg font-bold text-[#142A27]">No projects found</h3>
+          <p className="mt-1 text-sm text-[#64736F]">
             No projects currently match the selected filter category.
           </p>
           <button
             type="button"
             onClick={() => setActiveCategory("All")}
-            className="mt-4 px-5 py-2 rounded-full text-xs font-semibold bg-[#087A3D] text-white hover:bg-[#075C32] transition-colors cursor-pointer"
+            className="mt-4 px-5 py-2 rounded-full text-xs font-semibold bg-[#008F53] text-white hover:bg-[#007343] transition-colors cursor-pointer"
           >
             Show All Projects
           </button>

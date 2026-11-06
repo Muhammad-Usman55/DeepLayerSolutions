@@ -47,13 +47,13 @@ export function ShowcaseProjects() {
             </Eyebrow>
 
             {/* Main Headline */}
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#101C19] leading-[1.12]">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#142A27] leading-[1.12]">
               Ideas We&apos;ve Built. <br />
-              <span className="text-[#087A3D]">Solutions We&apos;ve Delivered.</span>
+              <span className="text-[#008F53]">Solutions We&apos;ve Delivered.</span>
             </h2>
 
             {/* Subtitle */}
-            <p className="mt-4 text-base sm:text-lg text-[#65736D] leading-relaxed">
+            <p className="mt-4 text-base sm:text-lg text-[#64736F] leading-relaxed">
               Explore selected software and AI engineering projects demonstrating our technical capabilities across computer vision, agentic reasoning, and high-concurrency applications.
             </p>
           </div>

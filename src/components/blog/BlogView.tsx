@@ -30,7 +30,7 @@ export function BlogView() {
   return (
     <div>
       {/* Category Tabs & Search Bar */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-8 mb-10 border-b border-[#E3EDE5]">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-8 mb-10 border-b border-[#DFEDE5]">
         <div className="flex items-center gap-2 overflow-x-auto no-scrollbar">
           {categories.map((cat) => (
             <button
@@ -41,8 +41,8 @@ export function BlogView() {
               className={cn(
                 "px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 whitespace-nowrap cursor-pointer",
                 activeCategory === cat
-                  ? "bg-[#047F5B] text-white shadow-sm"
-                  : "bg-white text-[#101C19] hover:bg-[#F4FAF3] hover:text-[#047F5B] border border-[#E3EDE5]"
+                  ? "bg-[#008F53] text-white shadow-sm"
+                  : "bg-white text-[#142A27] hover:bg-[#E9FFF2] hover:text-[#008F53] border border-[#DFEDE5]"
               )}
             >
               {cat}
@@ -52,14 +52,14 @@ export function BlogView() {
 
         {/* Search Input */}
         <div className="relative w-full sm:w-64">
-          <Search className="w-4 h-4 text-[#65736D] absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+          <Search className="w-4 h-4 text-[#64736F] absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
           <input
             type="search"
             aria-label="Search articles"
             placeholder="Search articles..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-9 pr-4 py-2 text-xs sm:text-sm rounded-full bg-white border border-[#E3EDE5] focus:outline-none focus:border-[#047F5B] focus:ring-1 focus:ring-[#047F5B]"
+            className="w-full pl-9 pr-4 py-2 text-xs sm:text-sm rounded-full bg-white border border-[#DFEDE5] focus:outline-none focus:border-[#008F53] focus:ring-1 focus:ring-[#008F53]"
           />
         </div>
       </div>
@@ -69,12 +69,12 @@ export function BlogView() {
         {filteredPosts.map((post) => (
           <article
             key={post.id}
-            className="group flex flex-col justify-between rounded-2xl bg-white border border-[#E3EDE5] hover:border-[#159B50]/60 shadow-xs hover:shadow-xl transition-all duration-300 overflow-hidden hover:-translate-y-1"
+            className="group flex flex-col justify-between rounded-2xl bg-white border border-[#DFEDE5] hover:border-[#008F53]/60 shadow-xs hover:shadow-xl transition-all duration-300 overflow-hidden hover:-translate-y-1"
           >
             {/* Visual Header Banner */}
-            <div className="relative h-44 w-full bg-gradient-to-br from-[#E8F5E9] to-[#FAFCF9] border-b border-[#E3EDE5] flex items-center justify-center p-6">
+            <div className="relative h-44 w-full bg-gradient-to-br from-[#E9FFF2] to-[#FAFCF9] border-b border-[#DFEDE5] flex items-center justify-center p-6">
               <div className="absolute inset-0 bg-grid-pattern opacity-10" />
-              <div className="w-12 h-12 rounded-2xl bg-white shadow-md border border-[#E3EDE5] flex items-center justify-center text-[#087A3D] group-hover:scale-110 transition-transform">
+              <div className="w-12 h-12 rounded-2xl bg-white shadow-md border border-[#DFEDE5] flex items-center justify-center text-[#008F53] group-hover:scale-110 transition-transform">
                 <BookOpen className="w-6 h-6" />
               </div>
             </div>
@@ -82,8 +82,8 @@ export function BlogView() {
             {/* Post Meta & Content */}
             <div className="p-6 sm:p-7 flex flex-col flex-1 justify-between">
               <div>
-                <div className="flex items-center justify-between text-xs text-[#65736D] mb-3">
-                  <span className="font-mono font-semibold uppercase text-[#075C32] px-2.5 py-0.5 rounded-full bg-[#E8F5E9] border border-[#C4D9C8]">
+                <div className="flex items-center justify-between text-xs text-[#64736F] mb-3">
+                  <span className="font-mono font-semibold uppercase text-[#008F53] px-2.5 py-0.5 rounded-full bg-[#E9FFF2] border border-[#DFEDE5]">
                     {post.category}
                   </span>
                   <div className="flex items-center gap-1">
@@ -92,25 +92,25 @@ export function BlogView() {
                   </div>
                 </div>
 
-                <h3 className="text-xl font-bold text-[#101C19] group-hover:text-[#087A3D] transition-colors line-clamp-2">
+                <h3 className="text-xl font-bold text-[#142A27] group-hover:text-[#008F53] transition-colors line-clamp-2">
                   {post.title}
                 </h3>
 
-                <p className="mt-3 text-sm text-[#65736D] leading-relaxed line-clamp-3">
+                <p className="mt-3 text-sm text-[#64736F] leading-relaxed line-clamp-3">
                   {post.excerpt}
                 </p>
               </div>
 
               {/* Card Footer */}
-              <div className="mt-6 pt-4 border-t border-[#E3EDE5] flex items-center justify-between">
-                <div className="flex items-center gap-1.5 text-xs text-[#65736D]">
-                  <Calendar className="w-3.5 h-3.5 text-[#087A3D]" />
+              <div className="mt-6 pt-4 border-t border-[#DFEDE5] flex items-center justify-between">
+                <div className="flex items-center gap-1.5 text-xs text-[#64736F]">
+                  <Calendar className="w-3.5 h-3.5 text-[#008F53]" />
                   <span>{formatDate(post.publishedAt)}</span>
                 </div>
 
                 <Link
                   href={`/blog/${post.slug}`}
-                  className="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-[#087A3D] group-hover:text-[#075C32] transition-colors"
+                  className="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-[#008F53] group-hover:text-[#007343] transition-colors"
                 >
                   <span>Read Article</span>
                   <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />

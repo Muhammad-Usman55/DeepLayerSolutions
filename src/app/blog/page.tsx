@@ -16,7 +16,7 @@ export default function BlogPage() {
   return (
     <PageWrapper>
       {/* Blog Hero */}
-      <section className="relative overflow-hidden pt-8 pb-16 lg:pt-12 lg:pb-20 bg-gradient-to-b from-[#E8F5E9]/50 via-[#FAFCF9] to-transparent border-b border-[#E3EDE5]">
+      <section className="relative overflow-hidden pt-8 pb-16 lg:pt-12 lg:pb-20 bg-gradient-to-b from-[#E9FFF2]/50 via-[#FAFCF9] to-transparent border-b border-[#DFEDE5]">
         <Container size="wide">
           <Breadcrumb
             items={[{ label: "Blog", href: "/blog" }]}
@@ -28,12 +28,12 @@ export default function BlogPage() {
               Technical Editorial
             </Eyebrow>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#101C19] leading-tight">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#142A27] leading-tight">
               Insights, Ideas & <br />
-              <span className="text-[#087A3D]">Innovations.</span>
+              <span className="text-[#008F53]">Innovations.</span>
             </h1>
 
-            <p className="mt-5 text-lg sm:text-xl text-[#65736D] leading-relaxed font-normal">
+            <p className="mt-5 text-lg sm:text-xl text-[#64736F] leading-relaxed font-normal">
               Exploring state-of-the-art advances in artificial intelligence, software engineering paradigms, and digital product scaling directly from our practitioners.
             </p>
           </div>

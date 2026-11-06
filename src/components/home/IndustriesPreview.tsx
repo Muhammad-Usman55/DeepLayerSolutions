@@ -85,70 +85,70 @@ function IndustryGraphic({ slug }: { slug: string }) {
   switch (slug) {
     case "healthcare":
       return (
-        <div className="relative w-full h-36 flex items-center justify-center bg-gradient-to-b from-[#F2FAF4] to-[#E3F2E8] overflow-hidden">
-          <div className="w-16 h-16 rounded-2xl bg-white shadow-md border border-[#C4D9C8] flex items-center justify-center text-[#159B50] group-hover:scale-110 transition-transform duration-300">
+        <div className="relative w-full h-36 flex items-center justify-center bg-gradient-to-b from-[#F8FCF9] to-[#E9FFF2] overflow-hidden">
+          <div className="w-16 h-16 rounded-2xl bg-white shadow-md border border-[#DFEDE5] flex items-center justify-center text-[#008F53] group-hover:scale-110 transition-transform duration-300">
             <Stethoscope className="w-8 h-8" />
           </div>
           {/* Subtle ECG pulse wave */}
-          <svg className="absolute bottom-3 left-4 right-4 h-6 text-[#159B50]/30" viewBox="0 0 100 20" fill="none">
+          <svg className="absolute bottom-3 left-4 right-4 h-6 text-[#008F53]/30" viewBox="0 0 100 20" fill="none">
             <path d="M0 10 H35 L40 2 L45 18 L50 6 L55 12 L60 10 H100" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
           </svg>
         </div>
       );
     case "finance-fintech":
       return (
-        <div className="relative w-full h-36 flex items-center justify-center bg-gradient-to-b from-[#F2FAF4] to-[#E3F2E8] overflow-hidden">
-          <div className="w-16 h-16 rounded-2xl bg-white shadow-md border border-[#C4D9C8] flex items-center justify-center text-[#087A3D] group-hover:scale-110 transition-transform duration-300">
+        <div className="relative w-full h-36 flex items-center justify-center bg-gradient-to-b from-[#F8FCF9] to-[#E9FFF2] overflow-hidden">
+          <div className="w-16 h-16 rounded-2xl bg-white shadow-md border border-[#DFEDE5] flex items-center justify-center text-[#008F53] group-hover:scale-110 transition-transform duration-300">
             <TrendingUp className="w-8 h-8" />
           </div>
           {/* Subtle Bar Chart Indicator */}
           <div className="absolute bottom-3 right-6 flex items-end gap-1.5 opacity-40">
-            <div className="w-2 h-4 bg-[#159B50] rounded-xs" />
-            <div className="w-2 h-7 bg-[#159B50] rounded-xs" />
-            <div className="w-2 h-10 bg-[#087A3D] rounded-xs" />
+            <div className="w-2 h-4 bg-[#00B86B] rounded-xs" />
+            <div className="w-2 h-7 bg-[#00B86B] rounded-xs" />
+            <div className="w-2 h-10 bg-[#008F53] rounded-xs" />
           </div>
         </div>
       );
     case "education-edtech":
       return (
-        <div className="relative w-full h-36 flex items-center justify-center bg-gradient-to-b from-[#F2FAF4] to-[#E3F2E8] overflow-hidden">
-          <div className="w-16 h-16 rounded-2xl bg-white shadow-md border border-[#C4D9C8] flex items-center justify-center text-[#159B50] group-hover:scale-110 transition-transform duration-300">
+        <div className="relative w-full h-36 flex items-center justify-center bg-gradient-to-b from-[#F8FCF9] to-[#E9FFF2] overflow-hidden">
+          <div className="w-16 h-16 rounded-2xl bg-white shadow-md border border-[#DFEDE5] flex items-center justify-center text-[#008F53] group-hover:scale-110 transition-transform duration-300">
             <GraduationCap className="w-8 h-8" />
           </div>
-          <div className="absolute bottom-3 left-6 text-[10px] font-mono text-[#087A3D]/50 font-bold tracking-widest">
+          <div className="absolute bottom-3 left-6 text-[10px] font-mono text-[#008F53]/50 font-bold tracking-widest">
             RAG // CITATION GUARANTEE
           </div>
         </div>
       );
     case "ecommerce-retail":
       return (
-        <div className="relative w-full h-36 flex items-center justify-center bg-gradient-to-b from-[#F2FAF4] to-[#E3F2E8] overflow-hidden">
-          <div className="w-16 h-16 rounded-2xl bg-white shadow-md border border-[#C4D9C8] flex items-center justify-center text-[#087A3D] group-hover:scale-110 transition-transform duration-300">
+        <div className="relative w-full h-36 flex items-center justify-center bg-gradient-to-b from-[#F8FCF9] to-[#E9FFF2] overflow-hidden">
+          <div className="w-16 h-16 rounded-2xl bg-white shadow-md border border-[#DFEDE5] flex items-center justify-center text-[#008F53] group-hover:scale-110 transition-transform duration-300">
             <ShoppingBag className="w-8 h-8" />
           </div>
-          <div className="absolute bottom-3 right-6 text-[10px] font-mono text-[#087A3D]/50 font-bold tracking-widest">
+          <div className="absolute bottom-3 right-6 text-[10px] font-mono text-[#008F53]/50 font-bold tracking-widest">
             STORE DWELL // 48 FPS
           </div>
         </div>
       );
     case "manufacturing":
       return (
-        <div className="relative w-full h-36 flex items-center justify-center bg-gradient-to-b from-[#F2FAF4] to-[#E3F2E8] overflow-hidden">
-          <div className="w-16 h-16 rounded-2xl bg-white shadow-md border border-[#C4D9C8] flex items-center justify-center text-[#159B50] group-hover:scale-110 transition-transform duration-300">
+        <div className="relative w-full h-36 flex items-center justify-center bg-gradient-to-b from-[#F8FCF9] to-[#E9FFF2] overflow-hidden">
+          <div className="w-16 h-16 rounded-2xl bg-white shadow-md border border-[#DFEDE5] flex items-center justify-center text-[#008F53] group-hover:scale-110 transition-transform duration-300">
             <Factory className="w-8 h-8" />
           </div>
-          <div className="absolute bottom-3 left-6 text-[10px] font-mono text-[#087A3D]/50 font-bold tracking-widest">
+          <div className="absolute bottom-3 left-6 text-[10px] font-mono text-[#008F53]/50 font-bold tracking-widest">
             PREDICTIVE TELEMETRY
           </div>
         </div>
       );
     default:
       return (
-        <div className="relative w-full h-36 flex items-center justify-center bg-gradient-to-b from-[#F2FAF4] to-[#E3F2E8] overflow-hidden">
-          <div className="w-16 h-16 rounded-2xl bg-white shadow-md border border-[#C4D9C8] flex items-center justify-center text-[#087A3D] group-hover:scale-110 transition-transform duration-300">
+        <div className="relative w-full h-36 flex items-center justify-center bg-gradient-to-b from-[#F8FCF9] to-[#E9FFF2] overflow-hidden">
+          <div className="w-16 h-16 rounded-2xl bg-white shadow-md border border-[#DFEDE5] flex items-center justify-center text-[#008F53] group-hover:scale-110 transition-transform duration-300">
             <Building2 className="w-8 h-8" />
           </div>
-          <div className="absolute bottom-3 right-6 text-[10px] font-mono text-[#087A3D]/50 font-bold tracking-widest">
+          <div className="absolute bottom-3 right-6 text-[10px] font-mono text-[#008F53]/50 font-bold tracking-widest">
             DIGITAL TWIN 3D
           </div>
         </div>
@@ -158,7 +158,7 @@ function IndustryGraphic({ slug }: { slug: string }) {
 
 export function IndustriesPreview() {
   return (
-    <section className="py-20 md:py-28 bg-[#F4FAF3]/40 border-t border-[#E3EDE5]">
+    <section className="py-20 md:py-28 bg-[#F8FCF9] border-t border-[#DFEDE5]">
       <Container size="wide">
         <SectionHeading
           badge="Sectors & Domains"
@@ -187,7 +187,7 @@ export function IndustriesPreview() {
               <Link
                 key={ind.slug}
                 href={`/industries/${ind.slug}`}
-                className="group flex flex-col justify-between rounded-2xl bg-white border border-[#E3EDE5] hover:border-[#159B50]/60 shadow-xs hover:shadow-xl transition-all duration-300 overflow-hidden hover:-translate-y-1.5 h-full focus:outline-hidden focus:ring-2 focus:ring-[#087A3D]"
+                className="group flex flex-col justify-between rounded-2xl bg-white border border-[#DFEDE5] hover:border-[#008F53]/60 shadow-xs hover:shadow-xl transition-all duration-300 overflow-hidden hover:-translate-y-1.5 h-full focus:outline-hidden focus:ring-2 focus:ring-[#008F53]"
               >
                 {/* Visual Header */}
                 <IndustryGraphic slug={ind.slug} />
@@ -196,26 +196,26 @@ export function IndustriesPreview() {
                 <div className="p-6 sm:p-7 flex flex-col flex-1 justify-between">
                   <div>
                     <div className="flex items-center justify-between gap-2 mb-2">
-                      <span className="text-[10px] font-mono font-bold tracking-wider uppercase text-[#075C32] px-2.5 py-0.5 rounded-full bg-[#E8F5E9] border border-[#C4D9C8]">
+                      <span className="text-[10px] font-mono font-bold tracking-wider uppercase text-[#008F53] px-2.5 py-0.5 rounded-full bg-[#E9FFF2] border border-[#DFEDE5]">
                         {ind.badge}
                       </span>
                     </div>
 
-                    <h3 className="text-xl font-bold text-[#101C19] group-hover:text-[#087A3D] transition-colors">
+                    <h3 className="text-xl font-bold text-[#142A27] group-hover:text-[#008F53] transition-colors">
                       {ind.title}
                     </h3>
-                    <p className="mt-1 text-xs font-semibold text-[#159B50]">
+                    <p className="mt-1 text-xs font-semibold text-[#008F53]">
                       {ind.tagline}
                     </p>
-                    <p className="mt-3 text-sm text-[#65736D] leading-relaxed line-clamp-3">
+                    <p className="mt-3 text-sm text-[#64736F] leading-relaxed line-clamp-3">
                       {ind.description}
                     </p>
                   </div>
 
                   {/* Footer Arrow */}
-                  <div className="mt-6 pt-4 border-t border-[#E3EDE5] flex items-center justify-between text-xs font-bold uppercase tracking-wider text-[#087A3D] group-hover:text-[#065F34]">
+                  <div className="mt-6 pt-4 border-t border-[#DFEDE5] flex items-center justify-between text-xs font-bold uppercase tracking-wider text-[#008F53] group-hover:text-[#007343]">
                     <span>Explore Domain</span>
-                    <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1.5 text-[#159B50]" />
+                    <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1.5 text-[#008F53]" />
                   </div>
                 </div>
               </Link>

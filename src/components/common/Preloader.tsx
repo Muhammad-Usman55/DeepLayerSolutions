@@ -36,8 +36,8 @@ export function Preloader() {
       aria-label="Loading DeepLayer Solutions"
     >
       {/* Scaled Volumetric Ambient Glows */}
-      <div className="absolute w-[440px] h-[440px] sm:w-[520px] sm:h-[520px] bg-[#047F5B]/18 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute w-[320px] h-[320px] sm:w-[400px] sm:h-[400px] bg-[#34D399]/25 rounded-full blur-2xl pointer-events-none" />
+      <div className="absolute w-[440px] h-[440px] sm:w-[520px] sm:h-[520px] bg-[#008F53]/18 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute w-[320px] h-[320px] sm:w-[400px] sm:h-[400px] bg-[#00B86B]/20 rounded-full blur-2xl pointer-events-none" />
 
       {/* Brand Animated Loader SVG (Increased Prominent Size) */}
       <div className="relative z-10 flex flex-col items-center">

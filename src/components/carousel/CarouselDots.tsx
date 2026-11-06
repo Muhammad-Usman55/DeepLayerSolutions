@@ -37,8 +37,8 @@ export function CarouselDots({
             className={cn(
               "h-2 rounded-full transition-all duration-300 cursor-pointer",
               isActive
-                ? "w-8 bg-[#087A3D]"
-                : "w-2 bg-[#C4D9C8] hover:bg-[#159B50]/60"
+                ? "w-8 bg-[#008F53]"
+                : "w-2 bg-[#DFEDE5] hover:bg-[#008F53]/60"
             )}
           />
         );

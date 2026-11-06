@@ -113,7 +113,7 @@ export function Navbar() {
         className={cn(
           "sticky top-0 z-50 w-full h-[72px] sm:h-[78px] transition-[background-color,border-color,box-shadow,backdrop-filter] duration-300 ease-out will-change-[background-color,backdrop-filter]",
           isScrolled
-            ? "bg-white/88 backdrop-blur-md shadow-[0_4px_24px_-4px_rgba(4,127,91,0.08)] border-b border-[#E3EDE5]"
+            ? "bg-white/90 backdrop-blur-md shadow-[0_4px_24px_-4px_rgba(0,143,83,0.08)] border-b border-[#DFEDE5]"
             : "bg-[#FAFCF9]/80 backdrop-blur-xs border-b border-transparent"
         )}
       >
@@ -127,7 +127,7 @@ export function Navbar() {
             {/* Center: Desktop Navigation Floating Pill Container */}
             <nav
               aria-label="Main Navigation"
-              className="hidden md:flex items-center gap-1 xl:gap-1.5 p-1 rounded-full bg-white/90 backdrop-blur-md border border-[#D8E6DC] shadow-[0_2px_12px_rgba(4,127,91,0.05)]"
+              className="hidden md:flex items-center gap-1 xl:gap-1.5 p-1 rounded-full bg-white/90 backdrop-blur-md border border-[#DFEDE5] shadow-[0_2px_12px_rgba(0,143,83,0.05)]"
             >
               {headerNavLinks.map((item) => {
                 const isServices = item.label === "Services";
@@ -151,25 +151,25 @@ export function Navbar() {
                         aria-expanded={servicesOpen}
                         aria-haspopup="true"
                         className={cn(
-                          "relative px-4 py-1.5 text-sm font-medium rounded-full transition-colors duration-200 inline-flex items-center gap-1 select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#047F5B]",
+                          "relative px-4 py-1.5 text-sm font-medium rounded-full transition-colors duration-200 inline-flex items-center gap-1 select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#008F53]",
                           isActive
-                            ? "text-[#047F5B] font-semibold"
-                            : "text-[#101C19] hover:text-[#047F5B] hover:bg-[#E8F5E9]/50"
+                            ? "text-[#008F53] font-semibold"
+                            : "text-[#142A27] hover:text-[#008F53] hover:bg-[#E9FFF2]/60"
                         )}
                       >
                         {isActive && (
                           <motion.span
                             layoutId="active-navbar-pill"
-                            className="absolute inset-0 rounded-full bg-[#E8F5E9] border border-[#C4D9C8]/70 shadow-[0_1px_2px_rgba(4,127,91,0.05)] -z-10"
+                            className="absolute inset-0 rounded-full bg-[#E9FFF2] border border-[#DFEDE5] shadow-[0_1px_2px_rgba(0,143,83,0.05)] -z-10"
                             transition={{ type: "spring", stiffness: 380, damping: 30 }}
                           />
                         )}
                         <span className="relative z-10">{item.label}</span>
                         <ChevronDown
                           className={cn(
-                            "w-3.5 h-3.5 relative z-10 transition-transform duration-250 ease-out text-[#65736D]",
-                            servicesOpen && "rotate-180 text-[#047F5B]",
-                            isActive && "text-[#047F5B]"
+                            "w-3.5 h-3.5 relative z-10 transition-transform duration-250 ease-out text-[#64736F]",
+                            servicesOpen && "rotate-180 text-[#008F53]",
+                            isActive && "text-[#008F53]"
                           )}
                         />
                       </button>
@@ -187,17 +187,17 @@ export function Navbar() {
                             {/* Invisible bridge prevents mouse dropout */}
                             <div className="absolute -top-3 left-0 right-0 h-4 pointer-events-auto" />
 
-                            <div className="bg-white/95 backdrop-blur-md rounded-2xl p-5 shadow-[0_16px_40px_-8px_rgba(4,127,91,0.14),0_4px_16px_rgba(16,28,25,0.06)] border border-[#D8E6DC] overflow-hidden">
+                            <div className="bg-white/95 backdrop-blur-md rounded-2xl p-5 shadow-[0_16px_40px_-8px_rgba(0,143,83,0.14),0_4px_16px_rgba(20,42,39,0.06)] border border-[#DFEDE5] overflow-hidden">
                               {/* Header Badge */}
-                              <div className="flex items-center justify-between pb-3 mb-3 border-b border-[#E3EDE5]">
-                                <span className="text-[11px] font-mono font-bold tracking-wider uppercase text-[#047F5B] flex items-center gap-1.5">
-                                  <Sparkles className="w-3.5 h-3.5 text-[#159B50]" />
+                              <div className="flex items-center justify-between pb-3 mb-3 border-b border-[#DFEDE5]">
+                                <span className="text-[11px] font-mono font-bold tracking-wider uppercase text-[#008F53] flex items-center gap-1.5">
+                                  <Sparkles className="w-3.5 h-3.5 text-[#00B86B]" />
                                   Specialized Capabilities
                                 </span>
                                 <Link
                                   href="/services"
                                   onClick={() => setServicesOpen(false)}
-                                  className="text-xs font-semibold text-[#047F5B] hover:text-[#03684A] transition-colors inline-flex items-center gap-1 group"
+                                  className="text-xs font-semibold text-[#008F53] hover:text-[#007343] transition-colors inline-flex items-center gap-1 group"
                                 >
                                   <span>View all services</span>
                                   <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5" />
@@ -213,17 +213,17 @@ export function Navbar() {
                                       key={service.id}
                                       href={service.href}
                                       onClick={() => setServicesOpen(false)}
-                                      className="group/item flex items-start gap-3 p-2.5 rounded-xl hover:bg-[#E8F5E9]/60 transition-all duration-200"
+                                      className="group/item flex items-start gap-3 p-2.5 rounded-xl hover:bg-[#E9FFF2]/60 transition-all duration-200"
                                     >
-                                      <div className="shrink-0 w-9 h-9 rounded-lg bg-[#E8F5E9] group-hover/item:bg-[#047F5B] text-[#047F5B] group-hover/item:text-white flex items-center justify-center transition-colors duration-200 shadow-2xs">
+                                      <div className="shrink-0 w-9 h-9 rounded-lg bg-[#E9FFF2] group-hover/item:bg-[#008F53] text-[#008F53] group-hover/item:text-white flex items-center justify-center transition-colors duration-200 shadow-2xs">
                                         <IconComponent className="w-4 h-4" />
                                       </div>
                                       <div className="flex-1 min-w-0">
-                                        <p className="text-sm font-semibold text-[#101C19] group-hover/item:text-[#047F5B] transition-colors flex items-center gap-1">
+                                        <p className="text-sm font-semibold text-[#142A27] group-hover/item:text-[#008F53] transition-colors flex items-center gap-1">
                                           <span>{service.title}</span>
-                                          <ArrowRight className="w-3 h-3 opacity-0 -translate-x-1 group-hover/item:opacity-100 group-hover/item:translate-x-0 transition-all duration-150 text-[#047F5B]" />
+                                          <ArrowRight className="w-3 h-3 opacity-0 -translate-x-1 group-hover/item:opacity-100 group-hover/item:translate-x-0 transition-all duration-150 text-[#008F53]" />
                                         </p>
-                                        <p className="text-xs text-[#65736D] line-clamp-1 mt-0.5 font-normal">
+                                        <p className="text-xs text-[#64736F] line-clamp-1 mt-0.5 font-normal">
                                           {service.description}
                                         </p>
                                       </div>
@@ -244,16 +244,16 @@ export function Navbar() {
                     key={item.href}
                     href={item.href}
                     className={cn(
-                      "relative px-4 py-1.5 text-sm font-medium rounded-full transition-colors duration-200 select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#047F5B]",
+                      "relative px-4 py-1.5 text-sm font-medium rounded-full transition-colors duration-200 select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#008F53]",
                       isActive
-                        ? "text-[#047F5B] font-semibold"
-                        : "text-[#101C19] hover:text-[#047F5B] hover:bg-[#E8F5E9]/50"
+                        ? "text-[#008F53] font-semibold"
+                        : "text-[#142A27] hover:text-[#008F53] hover:bg-[#E9FFF2]/50"
                     )}
                   >
                     {isActive && (
                       <motion.span
                         layoutId="active-navbar-pill"
-                        className="absolute inset-0 rounded-full bg-[#E8F5E9] border border-[#C4D9C8]/70 shadow-[0_1px_2px_rgba(4,127,91,0.05)] -z-10"
+                        className="absolute inset-0 rounded-full bg-[#E9FFF2] border border-[#DFEDE5] shadow-[0_1px_2px_rgba(0,143,83,0.05)] -z-10"
                         transition={{ type: "spring", stiffness: 380, damping: 30 }}
                       />
                     )}
@@ -267,7 +267,7 @@ export function Navbar() {
             <div className="flex items-center gap-3">
               <Link
                 href="/contact"
-                className="group relative hidden sm:inline-flex items-center justify-center gap-2 px-5 py-2 text-sm font-semibold rounded-full bg-[#047F5B] text-white hover:bg-[#03684A] shadow-[0_2px_8px_rgba(4,127,91,0.18)] hover:shadow-[0_4px_16px_rgba(4,127,91,0.26)] transition-all duration-250 active:scale-[0.98] select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#047F5B] focus-visible:ring-offset-2"
+                className="group relative hidden sm:inline-flex items-center justify-center gap-2 px-5 py-2 text-sm font-semibold rounded-full bg-[#008F53] text-white hover:bg-[#007343] shadow-[0_2px_8px_rgba(0,143,83,0.18)] hover:shadow-[0_4px_16px_rgba(0,143,83,0.26)] transition-all duration-250 active:scale-[0.98] select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#008F53] focus-visible:ring-offset-2"
               >
                 <span>Let&apos;s Talk</span>
                 <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
@@ -277,7 +277,7 @@ export function Navbar() {
               <button
                 type="button"
                 onClick={() => setMobileMenuOpen(true)}
-                className="p-2.5 rounded-xl text-[#101C19] hover:bg-[#E8F5E9] hover:text-[#047F5B] active:scale-95 transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#047F5B] md:hidden"
+                className="p-2.5 rounded-xl text-[#142A27] hover:bg-[#E9FFF2] hover:text-[#008F53] active:scale-95 transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#008F53] md:hidden"
                 aria-label="Open mobile navigation menu"
               >
                 <Menu className="w-6 h-6" />

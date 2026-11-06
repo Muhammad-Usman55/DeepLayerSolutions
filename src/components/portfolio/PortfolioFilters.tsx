@@ -20,7 +20,7 @@ const filterTabs: FilterItem[] = [
 ];
 
 function getCategoryIcon(id: ProjectCategory, isActive: boolean) {
-  const iconClass = cn("w-4 h-4 transition-colors", isActive ? "text-white" : "text-[#159B50]");
+  const iconClass = cn("w-4 h-4 transition-colors", isActive ? "text-white" : "text-[#008F53]");
 
   switch (id) {
     case "All":
@@ -62,8 +62,8 @@ export function PortfolioFilters({
             className={cn(
               "group inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 whitespace-nowrap cursor-pointer shrink-0 border select-none shadow-2xs",
               isActive
-                ? "bg-[#087A3D] text-white border-[#087A3D] shadow-sm"
-                : "bg-white text-[#101C19] border-[#E3EDE5] hover:border-[#159B50]/60 hover:bg-[#F4FAF3] hover:text-[#087A3D]"
+                ? "bg-[#008F53] text-white border-[#008F53] shadow-sm"
+                : "bg-white text-[#142A27] border-[#DFEDE5] hover:border-[#008F53]/60 hover:bg-[#E9FFF2] hover:text-[#008F53]"
             )}
             aria-pressed={isActive}
           >
