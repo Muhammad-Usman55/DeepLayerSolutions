@@ -8,9 +8,9 @@ import { Container } from "../common/Container";
 import { Central3DVisual } from "./services-preview/Central3DVisual";
 import { ServiceCard } from "./services-preview/ServiceCard";
 import { previewServices } from "./services-preview/types";
+import { Carousel } from "../carousel/Carousel";
 
 export function ServicesPreview() {
-
   return (
     <section
       className="relative overflow-hidden py-16 sm:py-20 lg:py-28 bg-gradient-to-b from-[#FAFCF9] via-[#F4FAF6] to-[#FAFCF9] border-t border-[#E3EDE5]"
@@ -97,16 +97,35 @@ export function ServicesPreview() {
           </div>
         </div>
 
-        {/* Lower Zone: Four Floating Glassmorphism Service Cards */}
+        {/* Lower Zone: Responsive Service Cards */}
         <div className="mt-14 sm:mt-18 lg:mt-20">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {/* Desktop Layout: Clean 4-column Grid */}
+          <div className="hidden lg:grid grid-cols-4 gap-6">
             {previewServices.map((service, index) => (
               <ServiceCard key={service.id} service={service} index={index} />
             ))}
+          </div>
+
+          {/* Mobile & Tablet Layout: Responsive Swipeable Carousel */}
+          <div className="lg:hidden">
+            <Carousel
+              desktopVisible={3}
+              tabletVisible={2}
+              mobileVisible={1}
+              gap={16}
+              showControls={true}
+              showDots={true}
+              ariaLabel="Services carousel"
+            >
+              {previewServices.map((service, index) => (
+                <div key={service.id} className="h-full">
+                  <ServiceCard service={service} index={index} />
+                </div>
+              ))}
+            </Carousel>
           </div>
         </div>
       </Container>
     </section>
   );
 }
-

@@ -28,8 +28,13 @@ export function CTASection({
           {/* Background Grid Pattern */}
           <div className="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none" />
 
-          {/* Decorative 3D Glass Rings SVG */}
-          <div className="absolute -right-12 sm:right-6 lg:right-16 top-1/2 -translate-y-1/2 w-64 h-64 lg:w-96 lg:h-96 opacity-30 lg:opacity-60 pointer-events-none">
+          {/* Decorative 3D Glass Rings SVG with subtle ambient floating motion */}
+          <div
+            className="absolute -right-12 sm:right-6 lg:right-16 top-1/2 -translate-y-1/2 w-64 h-64 lg:w-96 lg:h-96 opacity-30 lg:opacity-60 pointer-events-none"
+            style={{
+              animation: "floatSlow 8s ease-in-out infinite alternate",
+            }}
+          >
             <svg viewBox="0 0 400 400" fill="none" className="w-full h-full">
               <ellipse
                 cx="200"

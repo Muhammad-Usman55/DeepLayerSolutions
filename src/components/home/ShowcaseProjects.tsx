@@ -1,75 +1,111 @@
+"use client";
+
+import React from "react";
 import Link from "next/link";
-import { ArrowRight, Cpu } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Container } from "../common/Container";
-import { SectionHeading } from "../common/SectionHeading";
 import { Button } from "../common/Button";
 import { projectsData } from "@/data/projects";
+import { Carousel } from "../carousel/Carousel";
+import { ProjectVisualDispatcher } from "../portfolio/visuals/ProjectVisualDispatcher";
 
 export function ShowcaseProjects() {
-  const featuredProjects = projectsData.filter((p) => p.featured).slice(0, 6);
+  const featuredProjects = projectsData.filter((p) => p.featured);
 
   return (
-    <section className="py-20 md:py-28 relative">
+    <section className="py-20 md:py-28 relative bg-[#FAFCF9] border-t border-[#E3EDE5]">
+      {/* Background Soft Fluid Waves */}
+      <svg
+        className="absolute inset-0 w-full h-full pointer-events-none opacity-30"
+        viewBox="0 0 1440 600"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        preserveAspectRatio="none"
+      >
+        <path
+          d="M0 180 C400 180 750 350 1440 240"
+          stroke="#C4E7D0"
+          strokeWidth="1.5"
+          fill="none"
+        />
+        <path
+          d="M0 320 C500 320 850 490 1440 380"
+          stroke="#D8F3E2"
+          strokeWidth="2"
+          fill="none"
+        />
+      </svg>
+
       <Container size="wide">
-        <SectionHeading
-          badge="Featured Portfolio"
-          title="Turning Ideas Into Intelligent Solutions."
-          highlight="Intelligent Solutions"
-          subtitle="A selection of software platforms and AI implementations engineered with precision, reliability, and modern architecture."
-          action={
+        {/* Section Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 sm:mb-16">
+          <div className="max-w-2xl">
+            {/* Small Label Pill */}
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-[#E8F5E9] text-[#075C32] border border-[#C4D9C8] mb-4 shadow-2xs">
+              <span className="w-2 h-2 rounded-full bg-[#159B50] animate-pulse" />
+              <span>FEATURED PORTFOLIO</span>
+            </div>
+
+            {/* Main Headline */}
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#101C19] leading-[1.12]">
+              Ideas We&apos;ve Built. <br />
+              <span className="text-[#087A3D]">Solutions We&apos;ve Delivered.</span>
+            </h2>
+
+            {/* Subtitle */}
+            <p className="mt-4 text-base sm:text-lg text-[#65736D] leading-relaxed">
+              Explore selected software and AI engineering projects demonstrating our technical capabilities across computer vision, agentic reasoning, and high-concurrency applications.
+            </p>
+          </div>
+
+          <div className="shrink-0">
             <Button href="/portfolio" variant="secondary" size="md" withArrow>
               View Full Portfolio
             </Button>
-          }
-        />
+          </div>
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        {/* Featured Projects Carousel (3 Desktop, 2 Tablet, 1 Mobile) */}
+        <Carousel
+          desktopVisible={3}
+          tabletVisible={2}
+          mobileVisible={1}
+          gap={24}
+          showControls={true}
+          showDots={true}
+          ariaLabel="Featured project showcase"
+        >
           {featuredProjects.map((project) => (
-            <div
+            <Link
               key={project.id}
-              className="group flex flex-col justify-between rounded-2xl bg-white border border-[#E3EDE5] hover:border-[#159B50]/60 shadow-xs hover:shadow-xl transition-all duration-300 overflow-hidden hover:-translate-y-1"
+              href={`/portfolio/${project.slug}`}
+              className="group flex flex-col justify-between rounded-[24px] sm:rounded-[28px] bg-white border border-[#E3EDE5] hover:border-[#159B50]/60 shadow-xs hover:shadow-xl transition-all duration-300 overflow-hidden hover:-translate-y-1.5 h-full focus:outline-hidden focus:ring-2 focus:ring-[#087A3D]"
             >
-              {/* Card Visual Header */}
-              <div className="relative h-48 w-full bg-gradient-to-br from-[#E8F5E9] via-[#F4FAF3] to-[#FAFCF9] border-b border-[#E3EDE5] flex items-center justify-center p-6 overflow-hidden">
-                {/* Background Grid Pattern */}
-                <div className="absolute inset-0 bg-grid-pattern opacity-10" />
-
-                {/* Ambient Soft Glow */}
-                <div
-                  className="absolute w-32 h-32 rounded-full blur-2xl opacity-40 transition-transform duration-500 group-hover:scale-125"
-                  style={{ backgroundColor: project.accentColor || "#159B50" }}
+              {/* Bespoke 3D Glass Platform Illustration Header */}
+              <div className="relative w-full h-52 sm:h-56 overflow-hidden bg-gradient-to-b from-[#F4FAF6] via-[#EEF8F1] to-[#E3F2E8] border-b border-[#E3EDE5]">
+                <ProjectVisualDispatcher
+                  visualType={project.heroVisualType || project.slug}
+                  mode="card"
+                  className="transition-transform duration-500 group-hover:scale-[1.03]"
                 />
-
-                {/* Central Project Graphic Badge */}
-                <div className="relative z-10 flex flex-col items-center text-center">
-                  <div className="w-14 h-14 rounded-2xl bg-white shadow-md border border-[#E3EDE5] flex items-center justify-center text-[#047F5B] group-hover:scale-110 transition-transform duration-300">
-                    <Cpu className="w-7 h-7" />
-                  </div>
-                  <span className="mt-3 text-xs font-mono font-semibold tracking-wider uppercase text-[#173D2F] px-2.5 py-0.5 rounded-full bg-white/80 border border-[#C4D9C8]">
-                    {project.category}
-                  </span>
-                </div>
               </div>
 
               {/* Card Body */}
               <div className="p-6 sm:p-7 flex flex-col flex-1 justify-between">
                 <div>
-                  <h3 className="text-xl font-bold text-[#101C19] group-hover:text-[#047F5B] transition-colors">
+                  <h3 className="text-xl font-bold text-[#101C19] group-hover:text-[#087A3D] transition-colors leading-snug">
                     {project.title}
                   </h3>
-                  <p className="mt-1 text-xs font-medium text-[#047F5B]">
+                  <p className="mt-1 text-sm text-[#65736D] leading-relaxed line-clamp-2">
                     {project.tagline}
                   </p>
-                  <p className="mt-3 text-sm text-[#65736D] leading-relaxed line-clamp-3">
-                    {project.summary}
-                  </p>
 
-                  {/* Technology Tags */}
-                  <div className="mt-4 pt-4 border-t border-[#E3EDE5] flex flex-wrap gap-1.5">
-                    {project.technologies.slice(0, 4).map((tech) => (
+                  {/* Technology Pills */}
+                  <div className="mt-5 flex flex-wrap gap-2">
+                    {project.techStackFlat.map((tech) => (
                       <span
                         key={tech}
-                        className="text-[11px] font-mono px-2 py-0.5 rounded bg-[#F4FAF3] text-[#173D2F] border border-[#E3EDE5]"
+                        className="text-xs font-medium px-3 py-1 rounded-lg bg-[#E8F5E9] text-[#075C32] border border-[#D5EADB] transition-colors group-hover:border-[#C4D9C8]"
                       >
                         {tech}
                       </span>
@@ -77,22 +113,22 @@ export function ShowcaseProjects() {
                   </div>
                 </div>
 
-                {/* Footer Action */}
-                <div className="mt-6 pt-3 flex items-center justify-between">
-                  <Link
-                    href={`/portfolio/${project.slug}`}
-                    className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#047F5B] group-hover:text-[#173D2F] transition-colors"
-                  >
-                    <span>View Case Study</span>
-                    <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-1" />
-                  </Link>
+                {/* Card Footer */}
+                <div className="mt-7 pt-4 border-t border-[#E8F0EA] flex items-center justify-between">
+                  <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#087A3D] group-hover:text-[#065F34] transition-colors">
+                    <span>VIEW CASE STUDY</span>
+                    <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1.5 text-[#159B50]" />
+                  </div>
 
-                  <span className="text-[11px] text-[#A0AEA7] font-medium">Production Verified</span>
+                  <div className="flex items-center gap-1.5 text-xs text-[#8A9A92] font-medium">
+                    <span className="w-2 h-2 rounded-full bg-[#159B50]" />
+                    <span>Production Grade</span>
+                  </div>
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
-        </div>
+        </Carousel>
       </Container>
     </section>
   );

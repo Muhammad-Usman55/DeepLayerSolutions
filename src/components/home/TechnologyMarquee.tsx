@@ -72,7 +72,7 @@ export function TechnologyMarquee() {
         ) : (
           // Animated Mode: Seamless continuous infinite loop marquee
           <div
-            className="animate-marquee-ribbon flex items-center py-2"
+            className="animate-marquee-ribbon hover:[animation-play-state:paused] flex items-center py-2"
           >
             {marqueeItems.map((item, index) => {
               const isDuplicate = index >= technologyItems.length;

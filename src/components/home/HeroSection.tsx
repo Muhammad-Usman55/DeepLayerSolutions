@@ -1,8 +1,39 @@
+"use client";
+
+import React from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import { Button } from "../common/Button";
 import { Container } from "../common/Container";
 import { TechLayerVisual } from "../common/TechLayerVisual";
+import { FloatingElement } from "../animations/FloatingElement";
 
 export function HeroSection() {
+  const shouldReduceMotion = useReducedMotion();
+
+  // Staggered motion variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: shouldReduceMotion ? 0 : 0.12,
+        delayChildren: 0.05,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 22 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: shouldReduceMotion ? 0.2 : 0.65,
+        ease: "easeOut" as const,
+      },
+    },
+  };
+
   return (
     <section className="relative overflow-hidden pt-6 pb-16 lg:pt-12 lg:pb-24">
       {/* Background Ambience */}
@@ -12,15 +43,25 @@ export function HeroSection() {
       <Container size="wide">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
           {/* Left Hero Content (Cols 1-7) */}
-          <div className="lg:col-span-7 flex flex-col items-start text-left">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="lg:col-span-7 flex flex-col items-start text-left"
+          >
             {/* Small Label Pill */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider bg-[#E8F5E9] text-[#075C32] border border-[#C4D9C8] mb-6 shadow-xs animate-fade-in">
-              <span className="w-2 h-2 rounded-full bg-[#159B50] animate-pulse" />
-              <span>Engineering What&apos;s Next</span>
-            </div>
+            <motion.div variants={itemVariants}>
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider bg-[#E8F5E9] text-[#075C32] border border-[#C4D9C8] mb-6 shadow-xs">
+                <span className="w-2 h-2 rounded-full bg-[#159B50] animate-pulse" />
+                <span>Engineering What&apos;s Next</span>
+              </div>
+            </motion.div>
 
-            {/* Main Headline */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-[68px] font-extrabold tracking-tight text-[#101C19] leading-[1.08]">
+            {/* Main Headline with Highlight Reveal */}
+            <motion.h1
+              variants={itemVariants}
+              className="text-4xl sm:text-5xl lg:text-6xl xl:text-[68px] font-extrabold tracking-tight text-[#101C19] leading-[1.08]"
+            >
               We Build{" "}
               <span className="text-[#047F5B] relative inline-block">
                 Intelligent
@@ -33,21 +74,27 @@ export function HeroSection() {
                 </svg>
               </span>{" "}
               Digital Experiences.
-            </h1>
+            </motion.h1>
 
             {/* Supporting Copy */}
-            <p className="mt-6 text-lg sm:text-xl text-[#2D4A3E] leading-relaxed max-w-2xl font-normal">
+            <motion.p
+              variants={itemVariants}
+              className="mt-6 text-lg sm:text-xl text-[#2D4A3E] leading-relaxed max-w-2xl font-normal"
+            >
               Cutting-edge software engineering, AI, and digital products to help your business innovate, grow, and stay ahead in the age of intelligence.
-            </p>
+            </motion.p>
 
-            {/* CTAs */}
-            <div className="mt-8 sm:mt-10 flex flex-wrap items-center gap-4 w-full sm:w-auto">
+            {/* CTAs with hover lift */}
+            <motion.div
+              variants={itemVariants}
+              className="mt-8 sm:mt-10 flex flex-wrap items-center gap-4 w-full sm:w-auto"
+            >
               <Button
                 href="/services"
                 variant="primary"
                 size="lg"
                 withArrow
-                className="w-full sm:w-auto font-semibold shadow-md shadow-[#087A3D]/15"
+                className="w-full sm:w-auto font-semibold shadow-md shadow-[#087A3D]/15 hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5"
               >
                 Explore Our Services
               </Button>
@@ -55,14 +102,17 @@ export function HeroSection() {
                 href="/contact"
                 variant="outline"
                 size="lg"
-                className="w-full sm:w-auto font-medium"
+                className="w-full sm:w-auto font-medium hover:-translate-y-0.5 transition-all duration-300"
               >
                 Book a Consultation
               </Button>
-            </div>
+            </motion.div>
 
             {/* Engineering Pillars & Architecture Spec Strip */}
-            <div className="mt-10 pt-7 border-t border-[#E3EDE5] w-full">
+            <motion.div
+              variants={itemVariants}
+              className="mt-10 pt-7 border-t border-[#E3EDE5] w-full"
+            >
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-4 divide-y sm:divide-y-0 sm:divide-x divide-[#E3EDE5]">
                 <div className="sm:pr-4">
                   <div className="flex items-center gap-2">
@@ -72,29 +122,23 @@ export function HeroSection() {
                     </span>
                   </div>
                   <p className="mt-1.5 text-sm font-semibold text-[#101C19] tracking-tight">
-                    Custom AI & LLMs
-                  </p>
-                  <p className="text-xs text-[#4D6357] mt-0.5">
-                    Production-grade models & vision
+                    Custom AI &amp; LLMs
                   </p>
                 </div>
 
-                <div className="pt-4 sm:pt-0 sm:px-4">
+                <div className="sm:px-4 pt-3 sm:pt-0">
                   <div className="flex items-center gap-2">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#047F5B]" />
                     <span className="text-[11px] font-mono uppercase tracking-wider text-[#047F5B] font-semibold">
-                      02 · Architecture
+                      02 · Speed
                     </span>
                   </div>
                   <p className="mt-1.5 text-sm font-semibold text-[#101C19] tracking-tight">
-                    Cloud-Native Scale
-                  </p>
-                  <p className="text-xs text-[#4D6357] mt-0.5">
-                    Distributed, resilient backends
+                    Sub-450ms Latency
                   </p>
                 </div>
 
-                <div className="pt-4 sm:pt-0 sm:pl-4">
+                <div className="sm:pl-4 pt-3 sm:pt-0">
                   <div className="flex items-center gap-2">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#047F5B]" />
                     <span className="text-[11px] font-mono uppercase tracking-wider text-[#047F5B] font-semibold">
@@ -102,19 +146,18 @@ export function HeroSection() {
                     </span>
                   </div>
                   <p className="mt-1.5 text-sm font-semibold text-[#101C19] tracking-tight">
-                    Enterprise SLAs
-                  </p>
-                  <p className="text-xs text-[#4D6357] mt-0.5">
-                    Security-first engineering rigor
+                    Production Verified
                   </p>
                 </div>
               </div>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
-          {/* Right Hero Visual (Cols 8-12) */}
-          <div className="lg:col-span-5 flex items-center justify-center relative">
-            <TechLayerVisual />
+          {/* Right Hero Visual (Cols 8-12) with subtle floating motion */}
+          <div className="lg:col-span-5 flex items-center justify-center">
+            <FloatingElement duration={6.5} distance={10} rotation={1.2}>
+              <TechLayerVisual />
+            </FloatingElement>
           </div>
         </div>
       </Container>
