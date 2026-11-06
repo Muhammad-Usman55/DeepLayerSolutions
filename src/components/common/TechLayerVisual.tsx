@@ -50,18 +50,18 @@ export function TechLayerVisual({ className }: TechLayerVisualProps) {
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       className={cn(
-        "relative w-full aspect-square max-w-[460px] sm:max-w-[560px] md:max-w-[620px] lg:max-w-[680px] xl:max-w-[740px] mx-auto flex items-center justify-center select-none group perspective-[1200px]",
+        "relative w-full aspect-square max-w-[340px] sm:max-w-[400px] md:max-w-[450px] lg:max-w-[480px] xl:max-w-[520px] mx-auto flex items-center justify-center select-none group perspective-[1200px]",
         className
       )}
     >
       {/* 1. ATMOSPHERIC VOLUMETRIC RADIAL LIGHTING (Controlled Emerald & Mint Ambient Glow) */}
       <div className="absolute inset-0 bg-radial from-[#00B86B]/20 via-[#008F53]/10 to-transparent blur-3xl pointer-events-none" />
-      <div className="absolute top-1/4 -right-6 w-80 h-80 bg-[#008F53]/16 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-6 -left-6 w-80 h-80 bg-[#00B86B]/18 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/4 -right-4 w-64 h-64 bg-[#008F53]/15 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-6 -left-4 w-64 h-64 bg-[#00B86B]/16 rounded-full blur-3xl pointer-events-none" />
 
       {/* 2. ISOMETRIC CYBERNETIC GROUND GRID & SONAR PEDESTAL (Emerald & Mint) */}
-      <div className="absolute bottom-2 sm:bottom-4 inset-x-4 sm:inset-x-8 h-32 sm:h-40 flex items-center justify-center pointer-events-none">
-        <div className="absolute w-80 sm:w-96 h-24 sm:h-28 rounded-[100%] border border-[#008F53]/30 animate-ping opacity-25" />
+      <div className="absolute bottom-2 sm:bottom-4 inset-x-4 sm:inset-x-8 h-28 sm:h-32 flex items-center justify-center pointer-events-none">
+        <div className="absolute w-64 sm:w-80 h-20 sm:h-24 rounded-[100%] border border-[#008F53]/30 animate-ping opacity-25" />
         <svg viewBox="0 0 400 120" className="w-full h-full opacity-55">
           <ellipse cx="200" cy="60" rx="180" ry="48" fill="none" stroke="#008F53" strokeWidth="1" strokeDasharray="6 6" opacity="0.35" />
           <ellipse cx="200" cy="60" rx="130" ry="34" fill="none" stroke="#008F53" strokeWidth="1.2" strokeDasharray="4 4" opacity="0.45" />
@@ -118,7 +118,7 @@ export function TechLayerVisual({ className }: TechLayerVisualProps) {
       </div>
 
       {/* 4. DYNAMIC SYNCHRONIZED GROUND SHADOW (Green-Tinted Ambient, Compositor Thread) */}
-      <div className="absolute bottom-8 sm:bottom-10 w-56 sm:w-72 lg:w-88 xl:w-96 h-12 sm:h-16 rounded-[100%] bg-gradient-to-r from-[#075B3E]/25 via-[#008F53]/35 to-[#075B3E]/25 blur-xl pointer-events-none animate-pulse-shadow" />
+      <div className="absolute bottom-6 sm:bottom-8 w-44 sm:w-56 lg:w-64 xl:w-72 h-10 sm:h-12 rounded-[100%] bg-gradient-to-r from-[#075B3E]/25 via-[#008F53]/35 to-[#075B3E]/25 blur-xl pointer-events-none animate-pulse-shadow" />
 
       {/* 5. MAIN 3D ANIMATED WIREFRAME STRUCTURE (EMERALD, MINT & TRANSLUCENT PALE-MINT GLASS) */}
       <motion.div
@@ -129,18 +129,18 @@ export function TechLayerVisual({ className }: TechLayerVisualProps) {
           y: depthY,
           transformStyle: "preserve-3d",
         }}
-        className="relative z-10 w-full h-full max-w-[380px] sm:max-w-[480px] md:max-w-[540px] lg:max-w-[600px] xl:max-w-[660px] aspect-square flex items-center justify-center p-1 sm:p-2 transition-transform duration-300 group-hover:scale-105"
+        className="relative z-10 w-full h-full max-w-[300px] sm:max-w-[360px] md:max-w-[400px] lg:max-w-[430px] xl:max-w-[460px] aspect-square flex items-center justify-center p-1 sm:p-2 transition-transform duration-300 group-hover:scale-105"
       >
         {/* Floating Levitation wrapper (Hardware-accelerated CSS float) */}
         <div className="relative w-full h-full flex items-center justify-center animate-float-gentle">
           {/* Central Translucent Emerald Glass Nucleus with Controlled Inner Lighting */}
-          <div className="absolute w-48 h-48 sm:w-64 sm:h-64 lg:w-76 lg:h-76 xl:w-84 xl:h-84 rounded-full bg-gradient-to-tr from-[#008F53]/25 via-[#00B86B]/20 to-[#D5F9E6]/50 backdrop-blur-sm border border-[#00B86B]/40 shadow-[inset_0_0_40px_rgba(0,143,83,0.35),0_0_30px_rgba(0,143,83,0.2)] pointer-events-none" />
+          <div className="absolute w-36 h-36 sm:w-44 sm:h-44 lg:w-52 lg:h-52 xl:w-60 xl:h-60 rounded-full bg-gradient-to-tr from-[#008F53]/25 via-[#00B86B]/20 to-[#D5F9E6]/50 backdrop-blur-sm border border-[#00B86B]/40 shadow-[inset_0_0_30px_rgba(0,143,83,0.3),0_0_24px_rgba(0,143,83,0.18)] pointer-events-none" />
 
           {/* Controlled Inner Luminescent Core */}
-          <div className="absolute w-34 h-34 sm:w-44 sm:h-44 lg:w-52 lg:h-52 xl:w-58 xl:h-58 rounded-full bg-gradient-to-tr from-[#008F53]/35 via-[#00B86B]/30 to-transparent blur-md pointer-events-none" />
+          <div className="absolute w-24 h-24 sm:w-32 sm:h-32 lg:w-38 lg:h-38 xl:w-44 xl:h-44 rounded-full bg-gradient-to-tr from-[#008F53]/35 via-[#00B86B]/30 to-transparent blur-md pointer-events-none" />
 
           {/* Static Ambient Glow behind SVG (Zero runtime filter overhead) */}
-          <div className="absolute w-64 h-64 sm:w-84 sm:h-84 lg:w-[420px] lg:h-[420px] xl:w-[460px] xl:h-[460px] rounded-full bg-radial from-[#008F53]/30 via-[#00B86B]/15 to-transparent blur-2xl pointer-events-none -z-10" />
+          <div className="absolute w-48 h-48 sm:w-60 sm:h-60 lg:w-72 lg:h-72 xl:w-80 xl:h-80 rounded-full bg-radial from-[#008F53]/30 via-[#00B86B]/15 to-transparent blur-2xl pointer-events-none -z-10" />
 
           {/* Animated 3D Generative Sculpture */}
           <div className="relative w-full h-full flex items-center justify-center">
@@ -151,7 +151,7 @@ export function TechLayerVisual({ className }: TechLayerVisualProps) {
               height={640}
               priority
               unoptimized
-              className="w-full h-full object-contain transition-all duration-500 scale-110 sm:scale-120 md:scale-125"
+              className="w-full h-full object-contain transition-all duration-500 scale-100"
             />
 
             {/* Subtle Emerald / Mint Laser Scanner Sweep (Compositor Thread) */}
