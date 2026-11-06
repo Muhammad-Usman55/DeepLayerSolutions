@@ -68,8 +68,8 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm md:hidden"
+            transition={{ duration: 0.25, ease: "easeOut" }}
+            className="fixed inset-0 z-50 bg-black/40 backdrop-blur-xs md:hidden"
             onClick={onClose}
           />
 
@@ -81,17 +81,17 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             initial={{ x: "100%" }}
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
-            transition={{ type: "spring", damping: 26, stiffness: 220 }}
-            className="fixed top-0 right-0 bottom-0 z-50 w-full max-w-sm bg-[#F8FCF9] border-l border-[#E5F7ED] p-6 shadow-2xl flex flex-col justify-between overflow-y-auto md:hidden"
+            transition={{ type: "spring", damping: 30, stiffness: 300, mass: 0.8 }}
+            className="fixed top-0 right-0 bottom-0 z-50 w-full max-w-sm bg-[#FAFCF9] border-l border-[#E3EDE5] p-6 shadow-2xl flex flex-col justify-between overflow-y-auto transform-gpu will-change-transform md:hidden"
           >
             <div>
               {/* Header */}
-              <div className="flex items-center justify-between pb-5 border-b border-[#E5F7ED]">
+              <div className="flex items-center justify-between pb-5 border-b border-[#E3EDE5]">
                 <Logo size="sm" />
                 <button
                   type="button"
                   onClick={onClose}
-                  className="p-2 rounded-full text-[#61756B] hover:text-[#101C18] hover:bg-[#E5F7ED] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#078442]"
+                  className="p-2 rounded-full text-[#65736D] hover:text-[#101C19] hover:bg-[#E8F5E9] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#047F5B]"
                   aria-label="Close menu"
                 >
                   <X className="w-5 h-5" />
@@ -115,17 +115,17 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                           onClick={() => setServicesExpanded((prev) => !prev)}
                           aria-expanded={servicesExpanded}
                           className={cn(
-                            "flex items-center justify-between px-4 py-3 rounded-xl text-base font-medium transition-all text-left",
+                            "flex items-center justify-between px-4 py-3 rounded-xl text-base font-medium transition-colors text-left",
                             isActive || servicesExpanded
-                              ? "bg-[#E5F7ED] text-[#078442] font-semibold"
-                              : "text-[#101C18] hover:bg-[#E5F7ED]/60"
+                              ? "bg-[#E8F5E9] text-[#047F5B] font-semibold"
+                              : "text-[#101C19] hover:bg-[#E8F5E9]/60"
                           )}
                         >
                           <span>{item.label}</span>
                           <ChevronDown
                             className={cn(
-                              "w-4 h-4 transition-transform duration-200",
-                              servicesExpanded ? "rotate-180 text-[#078442]" : "text-[#61756B]"
+                              "w-4 h-4 transition-transform duration-250 ease-out",
+                              servicesExpanded ? "rotate-180 text-[#047F5B]" : "text-[#65736D]"
                             )}
                           />
                         </button>
@@ -137,8 +137,8 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                               initial={{ opacity: 0, height: 0 }}
                               animate={{ opacity: 1, height: "auto" }}
                               exit={{ opacity: 0, height: 0 }}
-                              transition={{ duration: 0.25 }}
-                              className="overflow-hidden pl-2 pr-1 pt-1 pb-2 flex flex-col gap-1 border-l-2 border-[#32C995] ml-4 mt-1"
+                              transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+                              className="overflow-hidden pl-2 pr-1 pt-1 pb-2 flex flex-col gap-1 border-l-2 border-[#159B50] ml-4 mt-1"
                             >
                               {servicesMegaMenuData.map((service) => {
                                 const IconComponent = serviceIcons[service.iconName];
@@ -147,16 +147,16 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                                     key={service.id}
                                     href={service.href}
                                     onClick={onClose}
-                                    className="flex items-start gap-2.5 px-3 py-2 rounded-lg hover:bg-[#E5F7ED]/60 transition-colors group"
+                                    className="flex items-start gap-2.5 px-3 py-2 rounded-lg hover:bg-[#E8F5E9]/60 transition-colors group"
                                   >
-                                    <div className="w-7 h-7 rounded-md bg-[#E5F7ED] text-[#078442] flex items-center justify-center shrink-0 mt-0.5 group-hover:bg-[#078442] group-hover:text-white transition-colors">
+                                    <div className="w-7 h-7 rounded-md bg-[#E8F5E9] text-[#047F5B] flex items-center justify-center shrink-0 mt-0.5 group-hover:bg-[#047F5B] group-hover:text-white transition-colors">
                                       <IconComponent className="w-3.5 h-3.5" />
                                     </div>
                                     <div className="flex-1 min-w-0">
-                                      <p className="text-sm font-medium text-[#101C18] group-hover:text-[#078442]">
+                                      <p className="text-sm font-medium text-[#101C19] group-hover:text-[#047F5B] transition-colors">
                                         {service.title}
                                       </p>
-                                      <p className="text-[11px] text-[#61756B] line-clamp-1">
+                                      <p className="text-[11px] text-[#65736D] line-clamp-1">
                                         {service.description}
                                       </p>
                                     </div>
@@ -176,14 +176,14 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                       href={item.href}
                       onClick={onClose}
                       className={cn(
-                        "flex items-center justify-between px-4 py-3 rounded-xl text-base font-medium transition-all",
+                        "flex items-center justify-between px-4 py-3 rounded-xl text-base font-medium transition-colors",
                         isActive
-                          ? "bg-[#E5F7ED] text-[#078442] font-semibold"
-                          : "text-[#101C18] hover:bg-[#E5F7ED]/60 hover:text-[#078442]"
+                          ? "bg-[#E8F5E9] text-[#047F5B] font-semibold"
+                          : "text-[#101C19] hover:bg-[#E8F5E9]/60 hover:text-[#047F5B]"
                       )}
                     >
                       <span>{item.label}</span>
-                      <ArrowRight className="w-4 h-4 opacity-40 group-hover:opacity-100 transition-opacity" />
+                      <ArrowRight className="w-4 h-4 opacity-40 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all text-[#047F5B]" />
                     </Link>
                   );
                 })}
@@ -191,18 +191,18 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             </div>
 
             {/* Bottom Actions & Contact Info */}
-            <div className="pt-6 border-t border-[#E5F7ED] mt-6 flex flex-col gap-4">
+            <div className="pt-6 border-t border-[#E3EDE5] mt-6 flex flex-col gap-4">
               <Link
                 href="/contact"
                 onClick={onClose}
-                className="w-full flex items-center justify-center gap-2 py-3.5 px-5 rounded-full bg-[#078442] hover:bg-[#066834] text-white font-semibold text-sm shadow-sm transition-all duration-200"
+                className="w-full flex items-center justify-center gap-2 py-3.5 px-5 rounded-full bg-[#047F5B] hover:bg-[#03684A] text-white font-semibold text-sm shadow-sm transition-all duration-200"
               >
                 <span>Let&apos;s Talk</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
 
-              <div className="text-xs text-[#61756B] space-y-1.5">
-                <p className="font-semibold text-[#101C18] flex items-center justify-between">
+              <div className="text-xs text-[#65736D] space-y-1.5">
+                <p className="font-semibold text-[#101C19] flex items-center justify-between">
                   <span>{siteConfig.name}</span>
                   <span className="text-[11px] text-[#047F5B] font-medium">{siteConfig.contact.address}</span>
                 </p>
