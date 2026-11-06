@@ -1,226 +1,170 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
-import {
-  Stethoscope,
-  TrendingUp,
-  GraduationCap,
-  ShoppingBag,
-  Factory,
-  Building2,
-  ArrowRight,
-  Activity,
-  ShieldCheck,
-  Cpu,
-  Layers,
-} from "lucide-react";
+import { motion, useReducedMotion } from "framer-motion";
+import { Activity, BarChart3, GraduationCap, ArrowRight } from "lucide-react";
 import { Container } from "../common/Container";
-import { SectionHeading } from "../common/SectionHeading";
-import { Button } from "../common/Button";
-import { Carousel } from "../carousel/Carousel";
+import {
+  Healthcare3DVisual,
+  Finance3DVisual,
+  Education3DVisual,
+} from "./industries/Industry3DVisuals";
 
-interface IndustryItem {
-  title: string;
-  description: string;
-  icon: React.ComponentType<{ className?: string }>;
+interface IndustryCardData {
+  id: string;
   slug: string;
-  tagline: string;
-  badge: string;
+  title: string;
+  subtitle: string;
+  badgeIcon: React.ComponentType<{ className?: string }>;
+  VisualComponent: React.ComponentType<{ className?: string }>;
 }
 
-const industries: IndustryItem[] = [
+const industryCards: IndustryCardData[] = [
   {
-    title: "Healthcare",
-    tagline: "AI Diagnostics & Clinical Workflow Intelligence",
-    description: "Smarter healthcare with AI diagnostics, medical vision analysis, and HIPAA-compliant patient intelligence.",
-    icon: Stethoscope,
+    id: "healthcare",
     slug: "healthcare",
-    badge: "HIPAA COMPLIANT",
+    title: "Healthcare",
+    subtitle: "Smarter Healthcare Solutions",
+    badgeIcon: Activity,
+    VisualComponent: Healthcare3DVisual,
   },
   {
-    title: "Finance & FinTech",
-    tagline: "Sub-Second Fraud Scoring & Trading Systems",
-    description: "Secure & intelligent financial platforms, sub-second fraud detection, algorithmic scoring, and ledger automation.",
-    icon: TrendingUp,
+    id: "finance",
     slug: "finance-fintech",
-    badge: "HIGH THROUGHPUT",
+    title: "Finance & FinTech",
+    subtitle: "Intelligent Financial Systems",
+    badgeIcon: BarChart3,
+    VisualComponent: Finance3DVisual,
   },
   {
-    title: "Education & EdTech",
-    tagline: "Multi-Modal RAG & Academic Q&A Systems",
-    description: "Personalized learning pathways, syllabus-aligned retrieval systems, and automated evaluation engines.",
-    icon: GraduationCap,
+    id: "education",
     slug: "education-edtech",
-    badge: "ADAPTIVE AI",
-  },
-  {
-    title: "E-Commerce & Retail",
-    tagline: "Visual Search & Real-Time Footfall Vision",
-    description: "Hyper-personalized shopping journeys, real-time edge store analytics, and predictive inventory optimization.",
-    icon: ShoppingBag,
-    slug: "ecommerce-retail",
-    badge: "EDGE VISION",
-  },
-  {
-    title: "Manufacturing",
-    tagline: "Predictive Maintenance & Defect Classification",
-    description: "Drive floor efficiency with real-time edge computer vision, automated defect labeling, and acoustic predictive maintenance.",
-    icon: Factory,
-    slug: "manufacturing",
-    badge: "IOT INTEGRATED",
-  },
-  {
-    title: "Real Estate",
-    tagline: "Valuation Algorithms & Digital Twins",
-    description: "Innovative valuation algorithms, geospatial property intelligence, digital twin 3D tours, and leasing automation.",
-    icon: Building2,
-    slug: "real-estate",
-    badge: "SPATIAL COMPUTING",
+    title: "Education & EdTech",
+    subtitle: "Adaptive Learning Technology",
+    badgeIcon: GraduationCap,
+    VisualComponent: Education3DVisual,
   },
 ];
 
-// Bespoke 3D Glass Graphic for each industry
-function IndustryGraphic({ slug }: { slug: string }) {
-  switch (slug) {
-    case "healthcare":
-      return (
-        <div className="relative w-full h-36 flex items-center justify-center bg-gradient-to-b from-[#F8FCF9] to-[#E9FFF2] overflow-hidden">
-          <div className="w-16 h-16 rounded-2xl bg-white shadow-md border border-[#DFEDE5] flex items-center justify-center text-[#008F53] group-hover:scale-110 transition-transform duration-300">
-            <Stethoscope className="w-8 h-8" />
-          </div>
-          {/* Subtle ECG pulse wave */}
-          <svg className="absolute bottom-3 left-4 right-4 h-6 text-[#008F53]/30" viewBox="0 0 100 20" fill="none">
-            <path d="M0 10 H35 L40 2 L45 18 L50 6 L55 12 L60 10 H100" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-          </svg>
-        </div>
-      );
-    case "finance-fintech":
-      return (
-        <div className="relative w-full h-36 flex items-center justify-center bg-gradient-to-b from-[#F8FCF9] to-[#E9FFF2] overflow-hidden">
-          <div className="w-16 h-16 rounded-2xl bg-white shadow-md border border-[#DFEDE5] flex items-center justify-center text-[#008F53] group-hover:scale-110 transition-transform duration-300">
-            <TrendingUp className="w-8 h-8" />
-          </div>
-          {/* Subtle Bar Chart Indicator */}
-          <div className="absolute bottom-3 right-6 flex items-end gap-1.5 opacity-40">
-            <div className="w-2 h-4 bg-[#00B86B] rounded-xs" />
-            <div className="w-2 h-7 bg-[#00B86B] rounded-xs" />
-            <div className="w-2 h-10 bg-[#008F53] rounded-xs" />
-          </div>
-        </div>
-      );
-    case "education-edtech":
-      return (
-        <div className="relative w-full h-36 flex items-center justify-center bg-gradient-to-b from-[#F8FCF9] to-[#E9FFF2] overflow-hidden">
-          <div className="w-16 h-16 rounded-2xl bg-white shadow-md border border-[#DFEDE5] flex items-center justify-center text-[#008F53] group-hover:scale-110 transition-transform duration-300">
-            <GraduationCap className="w-8 h-8" />
-          </div>
-          <div className="absolute bottom-3 left-6 text-[10px] font-mono text-[#008F53]/50 font-bold tracking-widest">
-            RAG // CITATION GUARANTEE
-          </div>
-        </div>
-      );
-    case "ecommerce-retail":
-      return (
-        <div className="relative w-full h-36 flex items-center justify-center bg-gradient-to-b from-[#F8FCF9] to-[#E9FFF2] overflow-hidden">
-          <div className="w-16 h-16 rounded-2xl bg-white shadow-md border border-[#DFEDE5] flex items-center justify-center text-[#008F53] group-hover:scale-110 transition-transform duration-300">
-            <ShoppingBag className="w-8 h-8" />
-          </div>
-          <div className="absolute bottom-3 right-6 text-[10px] font-mono text-[#008F53]/50 font-bold tracking-widest">
-            STORE DWELL // 48 FPS
-          </div>
-        </div>
-      );
-    case "manufacturing":
-      return (
-        <div className="relative w-full h-36 flex items-center justify-center bg-gradient-to-b from-[#F8FCF9] to-[#E9FFF2] overflow-hidden">
-          <div className="w-16 h-16 rounded-2xl bg-white shadow-md border border-[#DFEDE5] flex items-center justify-center text-[#008F53] group-hover:scale-110 transition-transform duration-300">
-            <Factory className="w-8 h-8" />
-          </div>
-          <div className="absolute bottom-3 left-6 text-[10px] font-mono text-[#008F53]/50 font-bold tracking-widest">
-            PREDICTIVE TELEMETRY
-          </div>
-        </div>
-      );
-    default:
-      return (
-        <div className="relative w-full h-36 flex items-center justify-center bg-gradient-to-b from-[#F8FCF9] to-[#E9FFF2] overflow-hidden">
-          <div className="w-16 h-16 rounded-2xl bg-white shadow-md border border-[#DFEDE5] flex items-center justify-center text-[#008F53] group-hover:scale-110 transition-transform duration-300">
-            <Building2 className="w-8 h-8" />
-          </div>
-          <div className="absolute bottom-3 right-6 text-[10px] font-mono text-[#008F53]/50 font-bold tracking-widest">
-            DIGITAL TWIN 3D
-          </div>
-        </div>
-      );
-  }
-}
-
 export function IndustriesPreview() {
+  const shouldReduceMotion = useReducedMotion();
+  const [activeDot, setActiveDot] = useState(0);
+
   return (
-    <section className="py-20 md:py-28 bg-[#F8FCF9] border-t border-[#DFEDE5]">
+    <section
+      id="industries"
+      className="relative overflow-hidden py-20 sm:py-24 lg:py-28 bg-[#FFFFFF] border-t border-[#DFEDE5] select-none"
+      aria-label="Industry-Specific Expertise"
+    >
+      {/* Soft Ambient Background Lighting & Gradients */}
+      <div className="absolute top-0 -left-20 w-96 h-96 bg-gradient-to-br from-[#E9FFF2] via-[#D5F9E6]/30 to-transparent rounded-full blur-3xl pointer-events-none -z-10" />
+      <div className="absolute bottom-0 -right-20 w-96 h-96 bg-gradient-to-tl from-[#E9FFF2] via-[#D5F9E6]/30 to-transparent rounded-full blur-3xl pointer-events-none -z-10" />
+
+      {/* Decorative Subtle Corner Aura Rings */}
+      <div className="hidden lg:block absolute -top-16 -left-16 w-72 h-72 rounded-full border border-[#00B86B]/15 pointer-events-none -z-10" />
+      <div className="hidden lg:block absolute -bottom-20 -right-20 w-88 h-88 rounded-full border border-[#00B86B]/15 pointer-events-none -z-10" />
+
       <Container size="wide">
-        <SectionHeading
-          badge="Sectors & Domains"
-          title="Industry-Specific Expertise."
-          highlight="Industry-Specific"
-          subtitle="From early-stage disruptors to enterprise leaders, we engineer digital solutions tailored to the operational realities of your domain."
-          action={
-            <Button href="/industries" variant="secondary" size="md" withArrow>
-              Explore All Industries
-            </Button>
-          }
-        />
+        {/* Section Header */}
+        <motion.div
+          initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          className="text-center max-w-2xl mx-auto"
+        >
+          {/* Centered Pill Badge */}
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#DFEDE5] shadow-xs text-xs font-semibold text-[#142A27] mb-4">
+            <span className="w-2 h-2 rounded-full bg-[#008F53]" />
+            <span>Sectors & Domains</span>
+          </div>
 
-        {/* Responsive Industries Carousel (3 Desktop, 2 Tablet, 1 Mobile) */}
-        <div className="mt-8">
-          <Carousel
-            desktopVisible={3}
-            tabletVisible={2}
-            mobileVisible={1}
-            gap={24}
-            showControls={true}
-            showDots={true}
-            ariaLabel="Industry expertise carousel"
-          >
-            {industries.map((ind) => (
-              <Link
-                key={ind.slug}
-                href={`/industries/${ind.slug}`}
-                className="group flex flex-col justify-between rounded-2xl bg-white border border-[#DFEDE5] hover:border-[#008F53]/60 shadow-xs hover:shadow-xl transition-all duration-300 overflow-hidden hover:-translate-y-1.5 h-full focus:outline-hidden focus:ring-2 focus:ring-[#008F53]"
+          {/* Main Heading with "Specific" highlighted in Emerald Green */}
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#142A27] leading-tight">
+            Industry-<span className="text-[#008F53]">Specific</span> Expertise.
+          </h2>
+
+          {/* Subtitle */}
+          <p className="mt-3.5 text-base sm:text-lg text-[#64736F] leading-relaxed">
+            Tailored solutions for your domain.
+          </p>
+
+          {/* Small Decorative Centered Emerald Dash Bar */}
+          <div className="w-12 h-1 bg-[#008F53] rounded-full mx-auto mt-4" />
+        </motion.div>
+
+        {/* 3 Industry Cards */}
+        <div className="mt-12 sm:mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto">
+          {industryCards.map((card, index) => {
+            const BadgeIcon = card.badgeIcon;
+            const Visual = card.VisualComponent;
+
+            return (
+              <motion.div
+                key={card.id}
+                initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{
+                  duration: 0.55,
+                  delay: index * 0.12,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
+                onMouseEnter={() => setActiveDot(index)}
               >
-                {/* Visual Header */}
-                <IndustryGraphic slug={ind.slug} />
-
-                {/* Body Content */}
-                <div className="p-6 sm:p-7 flex flex-col flex-1 justify-between">
-                  <div>
-                    <div className="flex items-center justify-between gap-2 mb-2">
-                      <span className="text-[10px] font-mono font-bold tracking-wider uppercase text-[#008F53] px-2.5 py-0.5 rounded-full bg-[#E9FFF2] border border-[#DFEDE5]">
-                        {ind.badge}
-                      </span>
+                <Link
+                  href={`/industries#${card.slug}`}
+                  className="group relative flex flex-col justify-between rounded-[28px] sm:rounded-[32px] bg-white border border-[#DFEDE5] p-7 sm:p-8 transition-all duration-300 hover:border-[#008F53]/40 hover:-translate-y-2 shadow-[0_8px_24px_rgba(0,143,83,0.04)] hover:shadow-[0_20px_40px_rgba(0,143,83,0.1)] focus:outline-hidden focus:ring-2 focus:ring-[#008F53]"
+                  aria-label={`Explore ${card.title} domain solutions`}
+                >
+                  {/* Top Row: Mini Pill/Circle Badge in Top Right */}
+                  <div className="flex items-center justify-end w-full">
+                    <div className="w-10 h-10 rounded-full bg-[#E9FFF2] border border-[#DFEDE5] flex items-center justify-center text-[#008F53] group-hover:scale-110 group-hover:bg-[#008F53] group-hover:text-white transition-all duration-300 shadow-xs">
+                      <BadgeIcon className="w-5 h-5 stroke-[2.2]" />
                     </div>
+                  </div>
 
-                    <h3 className="text-xl font-bold text-[#142A27] group-hover:text-[#008F53] transition-colors">
-                      {ind.title}
+                  {/* Center: Bespoke 3D Glass & Isometric Vector Illustration */}
+                  <div className="my-2 sm:my-3 flex items-center justify-center">
+                    <div className="w-full transition-transform duration-500 ease-out group-hover:scale-105">
+                      <Visual />
+                    </div>
+                  </div>
+
+                  {/* Bottom: Title & Minimal Circular Action Button */}
+                  <div className="mt-2 pt-2">
+                    <h3 className="text-xl sm:text-2xl font-bold text-[#142A27] tracking-tight group-hover:text-[#008F53] transition-colors duration-200">
+                      {card.title}
                     </h3>
-                    <p className="mt-1 text-xs font-semibold text-[#008F53]">
-                      {ind.tagline}
-                    </p>
-                    <p className="mt-3 text-sm text-[#64736F] leading-relaxed line-clamp-3">
-                      {ind.description}
-                    </p>
-                  </div>
 
-                  {/* Footer Arrow */}
-                  <div className="mt-6 pt-4 border-t border-[#DFEDE5] flex items-center justify-between text-xs font-bold uppercase tracking-wider text-[#008F53] group-hover:text-[#007343]">
-                    <span>Explore Domain</span>
-                    <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1.5 text-[#008F53]" />
+                    <div className="mt-4 sm:mt-5">
+                      <div className="inline-flex items-center justify-center w-11 h-11 rounded-full bg-[#E9FFF2] text-[#008F53] group-hover:bg-[#008F53] group-hover:text-white transition-all duration-300 shadow-xs group-hover:shadow-md group-hover:scale-105">
+                        <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-0.5" />
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </Link>
-            ))}
-          </Carousel>
+                </Link>
+              </motion.div>
+            );
+          })}
+        </div>
+
+        {/* 3 Pagination Indicator Dots */}
+        <div className="mt-10 sm:mt-12 flex items-center justify-center gap-2" aria-hidden="true">
+          {industryCards.map((_, dotIdx) => (
+            <button
+              key={dotIdx}
+              type="button"
+              onClick={() => setActiveDot(dotIdx)}
+              className={`transition-all duration-300 rounded-full ${
+                activeDot === dotIdx
+                  ? "w-6 h-2 bg-[#008F53]"
+                  : "w-2 h-2 bg-[#DFEDE5] hover:bg-[#008F53]/40"
+              }`}
+              aria-label={`Highlight industry card ${dotIdx + 1}`}
+            />
+          ))}
         </div>
       </Container>
     </section>
