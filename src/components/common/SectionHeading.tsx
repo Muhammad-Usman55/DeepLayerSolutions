@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import { cn } from "@/lib/utils";
+import { Eyebrow } from "./Eyebrow";
 
 interface SectionHeadingProps {
   badge?: string;
@@ -50,10 +51,13 @@ export function SectionHeading({
       )}
     >
       {badge && (
-        <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-semibold tracking-wider uppercase mb-3 bg-[#E8F5E9] text-[#075C32] border border-[#C4D9C8]">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#159B50] animate-pulse" />
+        <Eyebrow
+          variant="chip"
+          theme={theme}
+          className="mb-3.5"
+        >
           {badge}
-        </div>
+        </Eyebrow>
       )}
 
       <div className={cn("flex flex-col md:flex-row md:items-end justify-between w-full gap-4", isCenter && "md:justify-center")}>

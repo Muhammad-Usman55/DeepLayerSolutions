@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Container } from "@/components/common/Container";
 import { Breadcrumb } from "@/components/common/Breadcrumb";
+import { Eyebrow } from "@/components/common/Eyebrow";
 import { CTASection } from "@/components/common/CTASection";
 import { BlogView } from "@/components/blog/BlogView";
 import { PageWrapper } from "@/components/layout/PageWrapper";
@@ -23,10 +24,9 @@ export default function BlogPage() {
           />
 
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold tracking-wider uppercase bg-[#E8F5E9] text-[#075C32] border border-[#C4D9C8] mb-4">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#159B50] animate-pulse" />
+            <Eyebrow variant="chip" className="mb-4">
               Technical Editorial
-            </div>
+            </Eyebrow>
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#101C19] leading-tight">
               Insights, Ideas & <br />

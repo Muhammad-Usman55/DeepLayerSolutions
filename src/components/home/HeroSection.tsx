@@ -1,7 +1,9 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
+import { ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "../common/Button";
 import { Container } from "../common/Container";
 import { TechLayerVisual } from "../common/TechLayerVisual";
@@ -49,12 +51,24 @@ export function HeroSection() {
             animate="visible"
             className="lg:col-span-7 flex flex-col items-start text-left"
           >
-            {/* Small Label Pill */}
+            {/* Bespoke Studio Eyebrow Pill */}
             <motion.div variants={itemVariants}>
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider bg-[#E8F5E9] text-[#075C32] border border-[#C4D9C8] mb-6 shadow-xs">
-                <span className="w-2 h-2 rounded-full bg-[#159B50] animate-pulse" />
-                <span>Engineering What&apos;s Next</span>
-              </div>
+              <Link
+                href="/services"
+                className="group inline-flex items-center gap-2.5 pl-2.5 pr-3.5 py-1.5 rounded-full bg-white/95 backdrop-blur-sm border border-[#D8E6DC] hover:border-[#047F5B] shadow-[0_2px_10px_-2px_rgba(4,127,91,0.08)] hover:shadow-md transition-all duration-300 mb-6 cursor-pointer"
+              >
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#E8F5E9] text-[#047F5B] font-mono text-[10px] font-bold tracking-wide">
+                  <Sparkles className="w-3 h-3 text-[#047F5B]" />
+                  DEEPLAYER
+                </span>
+                <span className="text-xs font-semibold text-[#101C19] tracking-tight">
+                  Engineering What&apos;s Next
+                </span>
+                <span className="w-1 h-1 rounded-full bg-[#C4D9C8]" />
+                <span className="text-xs font-mono font-semibold text-[#047F5B] flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
+                  Explore <ArrowRight className="w-3 h-3" />
+                </span>
+              </Link>
             </motion.div>
 
             {/* Main Headline with Highlight Reveal */}

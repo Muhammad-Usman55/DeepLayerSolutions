@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { Container } from "../common/Container";
+import { Eyebrow } from "../common/Eyebrow";
 import { Central3DVisual } from "./services-preview/Central3DVisual";
 import { ServiceCard } from "./services-preview/ServiceCard";
 import { previewServices } from "./services-preview/types";
@@ -34,16 +35,16 @@ export function ServicesPreview() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
           {/* Left Content Area (Cols 1-5 on desktop) */}
           <div className="lg:col-span-5 flex flex-col items-start text-left">
-            {/* Small Label Pill */}
+            {/* Eyebrow Label */}
             <motion.div
               initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider bg-[#E8F5E9] text-[#075C32] border border-[#C4D9C8] mb-6 shadow-2xs"
             >
-              <span className="w-2 h-2 rounded-full bg-[#159B50] animate-pulse" />
-              <span>Our Services</span>
+              <Eyebrow variant="chip" className="mb-6">
+                Our Services
+              </Eyebrow>
             </motion.div>
 
             {/* Main Section Heading */}

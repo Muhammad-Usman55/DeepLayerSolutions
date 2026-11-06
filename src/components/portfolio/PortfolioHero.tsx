@@ -3,6 +3,7 @@
 import React from "react";
 import { Container } from "../common/Container";
 import { Breadcrumb } from "../common/Breadcrumb";
+import { Eyebrow } from "../common/Eyebrow";
 import { PortfolioHeroVisual } from "./PortfolioHeroVisual";
 
 export function PortfolioHero() {
@@ -55,11 +56,10 @@ export function PortfolioHero() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           {/* Left Hero Column */}
           <div className="lg:col-span-7 flex flex-col justify-center">
-            {/* Pill Label */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold tracking-wider uppercase bg-[#E8F5E9] text-[#075C32] border border-[#C4D9C8] w-fit mb-6 shadow-2xs">
-              <span className="w-2 h-2 rounded-full bg-[#159B50] animate-pulse" />
-              <span>OUR PRODUCTS</span>
-            </div>
+            {/* Eyebrow Label */}
+            <Eyebrow variant="chip" className="w-fit mb-6">
+              Our Products
+            </Eyebrow>
 
             {/* Main Heading */}
             <h1 className="text-4xl sm:text-5xl lg:text-[56px] font-extrabold tracking-tight text-[#101C19] leading-[1.12]">

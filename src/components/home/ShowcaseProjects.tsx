@@ -4,6 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Container } from "../common/Container";
+import { Eyebrow } from "../common/Eyebrow";
 import { Button } from "../common/Button";
 import { projectsData } from "@/data/projects";
 import { Carousel } from "../carousel/Carousel";
@@ -40,11 +41,10 @@ export function ShowcaseProjects() {
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 sm:mb-16">
           <div className="max-w-2xl">
-            {/* Small Label Pill */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-[#E8F5E9] text-[#075C32] border border-[#C4D9C8] mb-4 shadow-2xs">
-              <span className="w-2 h-2 rounded-full bg-[#159B50] animate-pulse" />
-              <span>FEATURED PORTFOLIO</span>
-            </div>
+            {/* Eyebrow Label */}
+            <Eyebrow variant="chip" className="mb-4">
+              Featured Portfolio
+            </Eyebrow>
 
             {/* Main Headline */}
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#101C19] leading-[1.12]">

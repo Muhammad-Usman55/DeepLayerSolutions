@@ -58,14 +58,14 @@ export function CaseStudyHero({ project }: CaseStudyHeroProps) {
 
         {/* Hero Top Badges */}
         <div className="flex flex-wrap items-center gap-2.5 mb-5">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-[#E8F5E9] text-[#075C32] border border-[#C4D9C8]">
-            <span className="w-2 h-2 rounded-full bg-[#159B50] animate-pulse" />
+          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-mono font-bold uppercase tracking-wider bg-white text-[#047F5B] border border-[#D8E6DC] shadow-2xs">
+            <span className="w-1.5 h-1.5 rounded-[2px] bg-[#047F5B]" />
             {project.category}
           </span>
-          <span className="px-3 py-1 rounded-full text-xs font-mono font-semibold bg-white text-[#101C19] border border-[#E3EDE5]">
+          <span className="px-2.5 py-1 rounded-md text-xs font-mono font-semibold bg-white text-[#101C19] border border-[#E3EDE5]">
             {project.projectType}
           </span>
-          <span className="px-3 py-1 rounded-full text-xs font-mono font-semibold bg-[#F4FAF3] text-[#159B50] border border-[#C4D9C8]">
+          <span className="px-2.5 py-1 rounded-md text-xs font-mono font-semibold bg-[#F4FAF3] text-[#047F5B] border border-[#D8E6DC]">
             {project.status}
           </span>
         </div>

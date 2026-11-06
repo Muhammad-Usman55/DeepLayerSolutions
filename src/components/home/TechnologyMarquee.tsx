@@ -4,6 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import { Container } from "../common/Container";
+import { Eyebrow } from "../common/Eyebrow";
 import { technologyItems, TechnologyItem } from "./technology-marquee/types";
 
 export function TechnologyMarquee() {
@@ -30,11 +31,10 @@ export function TechnologyMarquee() {
           transition={{ duration: 0.5 }}
           className="flex flex-col items-center text-center mb-8 sm:mb-10"
         >
-          {/* Small Label Pill */}
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E8F5E9] border border-[#C4D9C8] text-[11px] font-mono uppercase tracking-wider text-[#047F5B] font-semibold mb-3 shadow-2xs">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#159B50] animate-pulse" />
-            <span>WHAT WE DO</span>
-          </div>
+          {/* Eyebrow Label */}
+          <Eyebrow variant="chip" className="mb-3">
+            What We Do
+          </Eyebrow>
 
           {/* Main Compact Heading */}
           <h2 className="text-xl sm:text-2xl lg:text-3xl font-extrabold tracking-tight text-[#101C19]">

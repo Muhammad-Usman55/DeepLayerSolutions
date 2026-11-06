@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Mail, Phone, MapPin, Headphones, ShieldCheck, ArrowUpRight } from "lucide-react";
 import { Container } from "@/components/common/Container";
 import { Breadcrumb } from "@/components/common/Breadcrumb";
+import { Eyebrow } from "@/components/common/Eyebrow";
 import { ContactForm } from "@/components/contact/ContactForm";
 import { PageWrapper } from "@/components/layout/PageWrapper";
 import { siteConfig } from "@/config/site";
@@ -25,10 +26,9 @@ export default function ContactPage() {
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             <div className="lg:col-span-8">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold tracking-wider uppercase bg-[#E8F5E9] text-[#075C32] border border-[#C4D9C8] mb-4">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#159B50] animate-pulse" />
+              <Eyebrow variant="chip" className="mb-4">
                 Let&apos;s Connect
-              </div>
+              </Eyebrow>
 
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#101C19] leading-tight">
                 Let&apos;s Build Something <br />
@@ -117,8 +117,8 @@ export default function ContactPage() {
                     <span className="text-xs font-bold uppercase tracking-wider text-[#A0AEA7] block">
                       Call & WhatsApp
                     </span>
-                    <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#087A3D] bg-[#E8F5E9] px-2 py-0.5 rounded-full">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#159B50] animate-pulse" />
+                    <span className="inline-flex items-center gap-1.5 text-[11px] font-mono font-bold text-[#047F5B] bg-[#E8F5E9] border border-[#D8E6DC] px-2 py-0.5 rounded-md">
+                      <span className="w-1.5 h-1.5 rounded-[2px] bg-[#047F5B]" />
                       Active
                     </span>
                   </div>
