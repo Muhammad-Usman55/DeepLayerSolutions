@@ -125,9 +125,9 @@ export async function verifySupabaseConnection(): Promise<SupabaseConnectionResu
       };
     }
 
-    // 2. Perform a lightweight ping to the Supabase REST/Auth API
-    // Testing the API root endpoint responds with status 200/404/204 without needing pre-existing tables
-    const pingUrl = new URL("/rest/v1/", url).toString();
+    // 2. Perform a lightweight ping to the Supabase Auth/API settings endpoint
+    // Testing the settings endpoint responds with HTTP 200 confirming project reachability and key validity
+    const pingUrl = new URL("/auth/v1/settings", url).toString();
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 6000);
 
@@ -147,8 +147,8 @@ export async function verifySupabaseConnection(): Promise<SupabaseConnectionResu
 
     const latencyMs = Date.now() - startTime;
 
-    // HTTP 200, 400, or 404 from Supabase PostgREST confirms successful network handshake
-    if (response.ok || response.status === 404 || response.status === 200) {
+    // HTTP 200 confirms successful network handshake and valid API key
+    if (response.ok || response.status === 200) {
       return {
         config,
         initialized: true,
