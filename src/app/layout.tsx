@@ -18,11 +18,7 @@ const geistMono = Geist_Mono({
   display: "swap",
 });
 
-const isProduction =
-  process.env.VERCEL_ENV === "production" ||
-  (!process.env.VERCEL_ENV && process.env.NODE_ENV === "production");
-
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || siteConfig.url || "https://deeplayersolutions.com";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || siteConfig.url || "https://deeplayersolutions.vercel.app";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -51,11 +47,11 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   robots: {
-    index: isProduction,
-    follow: isProduction,
+    index: true,
+    follow: true,
     googleBot: {
-      index: isProduction,
-      follow: isProduction,
+      index: true,
+      follow: true,
       "max-video-preview": -1,
       "max-image-preview": "large",
       "max-snippet": -1,

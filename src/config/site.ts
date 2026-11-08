@@ -6,7 +6,7 @@ export const siteConfig = {
   subtitle: "Your Trusted Software & AI Partner",
   description:
     "Cutting-edge software engineering, Artificial Intelligence, and digital products to help your business innovate, grow, and stay ahead.",
-  url: "https://deeplayersolutions.com",
+  url: "https://deeplayersolutions.vercel.app",
   ogImage: "/logo/logo.png",
   contact: {
     // Official verified production contact endpoints
