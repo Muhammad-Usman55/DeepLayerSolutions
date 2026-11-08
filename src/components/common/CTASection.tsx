@@ -21,8 +21,8 @@ interface CTASectionProps {
 
 export function CTASection({
   badge = "START YOUR DIGITAL TRANSFORMATION",
-  title = "Ready to Build Something",
-  highlight = "Intelligent?",
+  title,
+  highlight,
   subtitle = "Let's turn your next big idea into a powerful digital solution. Our senior engineers and AI architects are ready to collaborate.",
   buttonText = "Let's Discuss Your Project",
   buttonHref = "/contact",
@@ -30,6 +30,11 @@ export function CTASection({
   secondaryHref = "/services",
   className,
 }: CTASectionProps) {
+  const displayTitle = title ?? "Ready to Build Something";
+  const displayHighlight = highlight !== undefined ? highlight : (title ? "" : "Intelligent?");
+  const cleanTitle = displayHighlight && displayTitle.endsWith(displayHighlight)
+    ? displayTitle.slice(0, -displayHighlight.length).trim()
+    : displayTitle;
   return (
     <section className={cn("py-16 sm:py-20 lg:py-24", className)} aria-label="Call to Action">
       <Container size="wide">
@@ -74,24 +79,29 @@ export function CTASection({
 
               {/* Main Headline */}
               <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-[54px] font-extrabold tracking-tight text-[#142A27] leading-[1.12]">
-                {title}{" "}
-                <span className="text-[#00B86B] relative inline-block mt-1">
-                  {highlight}
-                  {/* Curved Accent Underline */}
-                  <svg
-                    className="absolute -bottom-2 left-0 w-full h-3 text-[#34D399] -z-10"
-                    viewBox="0 0 160 16"
-                    fill="none"
-                    preserveAspectRatio="none"
-                  >
-                    <path
-                      d="M4 11 C 45 4, 115 4, 156 12"
-                      stroke="currentColor"
-                      strokeWidth="4"
-                      strokeLinecap="round"
-                    />
-                  </svg>
-                </span>
+                {cleanTitle}
+                {displayHighlight && (
+                  <>
+                    {" "}
+                    <span className="text-[#00B86B] relative inline-block mt-1">
+                      {displayHighlight}
+                      {/* Curved Accent Underline */}
+                      <svg
+                        className="absolute -bottom-2 left-0 w-full h-3 text-[#34D399] -z-10"
+                        viewBox="0 0 160 16"
+                        fill="none"
+                        preserveAspectRatio="none"
+                      >
+                        <path
+                          d="M4 11 C 45 4, 115 4, 156 12"
+                          stroke="currentColor"
+                          strokeWidth="4"
+                          strokeLinecap="round"
+                        />
+                      </svg>
+                    </span>
+                  </>
+                )}
               </h2>
 
               {/* Supporting Copy */}

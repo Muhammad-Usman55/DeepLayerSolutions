@@ -53,10 +53,6 @@ function TechBadge({ item }: { item: TechItem }) {
 }
 
 export function TechEcosystem() {
-  // 16 items per list group to ensure continuous flow across any display resolution
-  const track1Group = [...track1, ...track1];
-  const track2Group = [...track2, ...track2];
-
   return (
     <section className="py-20 md:py-24 bg-[#FAFCF9] overflow-hidden" aria-label="Technology Ecosystem">
       {/* Self-contained CSS for 100% guaranteed hardware-accelerated animation */}
@@ -98,10 +94,10 @@ export function TechEcosystem() {
           will-change: transform;
         }
         .dl-marquee-track.dl-left {
-          animation: dl-marquee-left 52s linear infinite !important;
+          animation: dl-marquee-left 28s linear infinite !important;
         }
         .dl-marquee-track.dl-right {
-          animation: dl-marquee-right 46s linear infinite !important;
+          animation: dl-marquee-right 25s linear infinite !important;
         }
         .dl-marquee-row:hover .dl-marquee-track {
           animation-play-state: paused !important;
@@ -115,10 +111,10 @@ export function TechEcosystem() {
         }
         @media (max-width: 768px) {
           .dl-marquee-track.dl-left {
-            animation-duration: 64s !important;
+            animation-duration: 34s !important;
           }
           .dl-marquee-track.dl-right {
-            animation-duration: 56s !important;
+            animation-duration: 30s !important;
           }
         }
       `}</style>
@@ -144,13 +140,13 @@ export function TechEcosystem() {
             <div className="dl-marquee-track dl-left">
               {/* Group 1 */}
               <div className="dl-marquee-list">
-                {track1Group.map((item, idx) => (
+                {track1.map((item, idx) => (
                   <TechBadge key={`t1-g1-${idx}`} item={item} />
                 ))}
               </div>
               {/* Group 2 (Exact duplicate for seamless infinite loop) */}
               <div className="dl-marquee-list" aria-hidden="true">
-                {track1Group.map((item, idx) => (
+                {track1.map((item, idx) => (
                   <TechBadge key={`t1-g2-${idx}`} item={item} />
                 ))}
               </div>
@@ -162,13 +158,13 @@ export function TechEcosystem() {
             <div className="dl-marquee-track dl-right">
               {/* Group 1 */}
               <div className="dl-marquee-list">
-                {track2Group.map((item, idx) => (
+                {track2.map((item, idx) => (
                   <TechBadge key={`t2-g1-${idx}`} item={item} />
                 ))}
               </div>
               {/* Group 2 (Exact duplicate for seamless infinite loop) */}
               <div className="dl-marquee-list" aria-hidden="true">
-                {track2Group.map((item, idx) => (
+                {track2.map((item, idx) => (
                   <TechBadge key={`t2-g2-${idx}`} item={item} />
                 ))}
               </div>

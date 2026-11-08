@@ -176,32 +176,14 @@ export function Navbar() {
                           />
                         )}
                         <span className="relative z-10">{item.label}</span>
-                        <span
-                          role="button"
-                          tabIndex={0}
-                          aria-label="Toggle Services menu"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            setServicesOpen((prev) => !prev);
-                          }}
-                          onKeyDown={(e) => {
-                            if (e.key === "Enter" || e.key === " ") {
-                              e.preventDefault();
-                              e.stopPropagation();
-                              setServicesOpen((prev) => !prev);
-                            }
-                          }}
-                          className="inline-flex items-center justify-center p-0.5 rounded-full hover:bg-[#008F53]/10 transition-colors cursor-pointer"
-                        >
-                          <ChevronDown
-                            className={cn(
-                              "w-3.5 h-3.5 relative z-10 transition-transform duration-250 ease-out text-[#64736F]",
-                              servicesOpen && "rotate-180 text-[#008F53]",
-                              isActive && "text-[#008F53]"
-                            )}
-                          />
-                        </span>
+                        <ChevronDown
+                          className={cn(
+                            "w-3.5 h-3.5 relative z-10 transition-transform duration-250 ease-out text-[#64736F]",
+                            servicesOpen && "rotate-180 text-[#008F53]",
+                            isActive && "text-[#008F53]"
+                          )}
+                          aria-hidden="true"
+                        />
                       </Link>
 
                       {/* Services Mega Menu Dropdown */}

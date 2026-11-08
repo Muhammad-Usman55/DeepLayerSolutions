@@ -150,6 +150,8 @@ export function TechLayerVisual({ className }: TechLayerVisualProps) {
               width={640}
               height={640}
               priority
+              loading="eager"
+              fetchPriority="high"
               unoptimized
               className="w-full h-full object-contain transition-all duration-500 scale-100"
             />

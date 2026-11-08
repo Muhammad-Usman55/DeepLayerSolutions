@@ -23,7 +23,8 @@ export default function HomePage() {
       <TechEcosystem />
       <FAQSection />
       <CTASection
-        title="Ready to Build Something Intelligent?"
+        title="Ready to Build Something"
+        highlight="Intelligent?"
         subtitle="Let's turn your next big idea into a powerful digital solution. Our senior engineers and AI architects are ready to collaborate."
         buttonText="Let's Discuss Your Project"
         buttonHref="/contact"

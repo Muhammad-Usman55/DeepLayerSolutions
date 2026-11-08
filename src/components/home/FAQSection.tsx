@@ -140,6 +140,7 @@ export function FAQSection() {
                     )}
                   >
                     <button
+                      id={`faq-question-${faq.id}`}
                       type="button"
                       onClick={() => toggleFaq(faq.id)}
                       aria-expanded={isOpen}
@@ -177,6 +178,8 @@ export function FAQSection() {
                         <motion.div
                           id={`faq-answer-${faq.id}`}
                           role="region"
+                          aria-labelledby={`faq-question-${faq.id}`}
+                          aria-label={`Frequently Asked Questions Answers — ${faq.question}`}
                           initial={{ height: 0, opacity: 0 }}
                           animate={{
                             height: "auto",

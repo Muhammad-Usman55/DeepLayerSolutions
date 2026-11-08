@@ -192,7 +192,7 @@ export function Footer() {
                   <Phone className="w-3 h-3" />
                 </div>
                 <a
-                  href={`tel:${siteConfig.contact.phone.replace(/\s+/g, "")}`}
+                  href="tel:+923166007316"
                   className="hover:text-[#00B86B] transition-colors"
                 >
                   {siteConfig.contact.phone}
