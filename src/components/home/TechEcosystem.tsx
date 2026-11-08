@@ -53,6 +53,10 @@ function TechBadge({ item }: { item: TechItem }) {
 }
 
 export function TechEcosystem() {
+  // 16 items per list group to ensure continuous flow across any display resolution
+  const track1Group = [...track1, ...track1];
+  const track2Group = [...track2, ...track2];
+
   return (
     <section className="py-20 md:py-24 bg-[#FAFCF9] overflow-hidden" aria-label="Technology Ecosystem">
       <Container size="wide">
@@ -64,64 +68,46 @@ export function TechEcosystem() {
         />
       </Container>
 
-      {/* Infinite Dual Marquee Rails with Edge Fades */}
+      {/* Opposite Direction Horizontal Scrolling Logo Marquee */}
       <div className="relative w-full mt-12 overflow-hidden select-none [touch-action:pan-y]">
-        {/* Left & Right Gradient Fade Masks */}
-        <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-36 lg:w-48 bg-gradient-to-r from-[#FAFCF9] via-[#FAFCF9]/90 to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-36 lg:w-48 bg-gradient-to-l from-[#FAFCF9] via-[#FAFCF9]/90 to-transparent z-10 pointer-events-none" />
+        {/* Supporting gradient fade overlays for cross-browser optical edge dissolving */}
+        <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-32 lg:w-44 bg-gradient-to-r from-[#FAFCF9] via-[#FAFCF9]/80 to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-32 lg:w-44 bg-gradient-to-l from-[#FAFCF9] via-[#FAFCF9]/80 to-transparent z-10 pointer-events-none" />
 
-        <div className="space-y-4 sm:space-y-5">
-          {/* Row 1 — RIGHT TO LEFT */}
-          <div
-            className="animate-marquee-rtl hover:[animation-play-state:paused]"
-            role="region"
-            aria-label="Technologies row 1 moving right to left"
-          >
-            {/* Primary Track Set (50% of infinite loop) */}
-            <div className="flex items-center shrink-0 gap-4 sm:gap-5 pr-4 sm:pr-5">
-              {track1.map((item, idx) => (
-                <TechBadge key={`t1-a1-${idx}`} item={item} />
-              ))}
-              {track1.map((item, idx) => (
-                <TechBadge key={`t1-a2-${idx}`} item={item} />
-              ))}
-            </div>
-
-            {/* Seamless Mirror Set (Identical 50% for 0px glitch-free loop) */}
-            <div className="flex items-center shrink-0 gap-4 sm:gap-5 pr-4 sm:pr-5" aria-hidden="true">
-              {track1.map((item, idx) => (
-                <TechBadge key={`t1-b1-${idx}`} item={item} />
-              ))}
-              {track1.map((item, idx) => (
-                <TechBadge key={`t1-b2-${idx}`} item={item} />
-              ))}
+        <div className="marquee-container space-y-4 sm:space-y-5">
+          {/* Row 1: Scrolling Left (Right to Left) */}
+          <div className="marquee-row" role="region" aria-label="Technologies Row 1">
+            <div className="marquee-track scroll-left" style={{ "--duration": "34s" } as React.CSSProperties}>
+              {/* Group 1 */}
+              <div className="marquee-list">
+                {track1Group.map((item, idx) => (
+                  <TechBadge key={`t1-g1-${idx}`} item={item} />
+                ))}
+              </div>
+              {/* Group 2 (Exact duplicate for seamless infinite loop) */}
+              <div className="marquee-list" aria-hidden="true">
+                {track1Group.map((item, idx) => (
+                  <TechBadge key={`t1-g2-${idx}`} item={item} />
+                ))}
+              </div>
             </div>
           </div>
 
-          {/* Row 2 — LEFT TO RIGHT (Opposite direction) */}
-          <div
-            className="animate-marquee-ltr hover:[animation-play-state:paused]"
-            role="region"
-            aria-label="Technologies row 2 moving left to right"
-          >
-            {/* Primary Track Set (50% of infinite loop) */}
-            <div className="flex items-center shrink-0 gap-4 sm:gap-5 pr-4 sm:pr-5">
-              {track2.map((item, idx) => (
-                <TechBadge key={`t2-a1-${idx}`} item={item} />
-              ))}
-              {track2.map((item, idx) => (
-                <TechBadge key={`t2-a2-${idx}`} item={item} />
-              ))}
-            </div>
-
-            {/* Seamless Mirror Set (Identical 50% for 0px glitch-free loop) */}
-            <div className="flex items-center shrink-0 gap-4 sm:gap-5 pr-4 sm:pr-5" aria-hidden="true">
-              {track2.map((item, idx) => (
-                <TechBadge key={`t2-b1-${idx}`} item={item} />
-              ))}
-              {track2.map((item, idx) => (
-                <TechBadge key={`t2-b2-${idx}`} item={item} />
-              ))}
+          {/* Row 2: Scrolling Right (Opposite Direction: Left to Right) */}
+          <div className="marquee-row" role="region" aria-label="Technologies Row 2">
+            <div className="marquee-track scroll-right" style={{ "--duration": "30s" } as React.CSSProperties}>
+              {/* Group 1 */}
+              <div className="marquee-list">
+                {track2Group.map((item, idx) => (
+                  <TechBadge key={`t2-g1-${idx}`} item={item} />
+                ))}
+              </div>
+              {/* Group 2 (Exact duplicate for seamless infinite loop) */}
+              <div className="marquee-list" aria-hidden="true">
+                {track2Group.map((item, idx) => (
+                  <TechBadge key={`t2-g2-${idx}`} item={item} />
+                ))}
+              </div>
             </div>
           </div>
         </div>
