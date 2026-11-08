@@ -145,7 +145,7 @@ export function FAQSection() {
                       onClick={() => toggleFaq(faq.id)}
                       aria-expanded={isOpen}
                       aria-controls={`faq-answer-${faq.id}`}
-                      className="w-full flex items-center justify-between gap-3 sm:gap-4 p-4 sm:p-6 text-left cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#008F53]"
+                      className="w-full flex items-center justify-between gap-3 sm:gap-4 p-4 sm:p-6 text-left cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#008F53] faq-accordion-trigger"
                     >
                       <div className="flex items-center gap-3 sm:gap-3.5 min-w-0">
                         <span className="shrink-0 w-6 h-6 rounded-md bg-[#E9FFF2] text-[#008F53] font-mono text-xs font-bold flex items-center justify-center">

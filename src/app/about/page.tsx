@@ -88,7 +88,7 @@ export default function AboutPage() {
               </div>
             </div>
 
-            <div className="lg:col-span-5 flex justify-center">
+            <div className="hidden lg:flex lg:col-span-5 justify-center hero-tech-visual-container">
               <TechLayerVisual />
             </div>
           </div>

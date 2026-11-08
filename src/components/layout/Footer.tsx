@@ -140,7 +140,7 @@ export function Footer() {
                 Our Capabilities
               </h4>
             </div>
-            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-3 gap-y-1.5">
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-3 gap-y-1.5 footer-capabilities-grid">
               {footerServiceLinks.map((service) => (
                 <li key={service.href}>
                   <Link

@@ -38,7 +38,7 @@ export function CTASection({
   return (
     <section className={cn("py-16 sm:py-20 lg:py-24", className)} aria-label="Call to Action">
       <Container size="wide">
-        <div className="relative overflow-hidden rounded-2xl sm:rounded-[36px] lg:rounded-[40px] bg-gradient-to-br from-[#FFFFFF] via-[#F0FAF4] to-[#D5F9E6]/80 p-6 sm:p-12 lg:p-16 border border-[#BCE8CF] shadow-[0_16px_48px_-12px_rgba(0,184,107,0.12)]">
+        <div className="relative overflow-hidden rounded-2xl sm:rounded-[36px] lg:rounded-[40px] bg-gradient-to-br from-[#FFFFFF] via-[#F0FAF4] to-[#D5F9E6]/80 p-6 sm:p-12 lg:p-16 border border-[#BCE8CF] shadow-[0_16px_48px_-12px_rgba(0,184,107,0.12)] cta-box-container">
           {/* Subtle Ambient Background Gradients & Soft Waves */}
           <div className="absolute top-0 right-0 w-[550px] h-[500px] bg-gradient-to-br from-[#34D399]/20 via-[#00B86B]/15 to-transparent rounded-full blur-3xl pointer-events-none -z-10" />
           <div className="absolute bottom-0 left-10 w-96 h-96 bg-[#86EFAC]/25 rounded-full blur-3xl pointer-events-none -z-10" />

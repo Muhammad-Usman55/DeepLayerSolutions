@@ -35,7 +35,7 @@ export function HeroSection() {
   };
 
   return (
-    <section className="relative overflow-hidden pt-6 pb-16 lg:pt-12 lg:pb-24">
+    <section className="relative overflow-hidden pt-6 pb-16 lg:pt-12 lg:pb-24 hero-section-wrapper">
       {/* Background Ambience */}
       <div className="absolute top-0 right-1/4 -z-10 w-[600px] h-[500px] bg-gradient-to-br from-[#E8F5E9] via-[#F4FAF3] to-transparent rounded-full blur-3xl opacity-70 pointer-events-none" />
       <div className="absolute -top-32 left-10 -z-10 w-[450px] h-[450px] bg-[#34D399]/10 rounded-full blur-3xl pointer-events-none" />
@@ -47,7 +47,7 @@ export function HeroSection() {
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="lg:col-span-7 xl:col-span-7 flex flex-col items-start text-left"
+            className="lg:col-span-7 xl:col-span-7 flex flex-col items-start text-left hero-content-col"
           >
             {/* Bespoke Studio Eyebrow Pill */}
             <motion.div variants={itemVariants} className="max-w-full">
@@ -72,7 +72,7 @@ export function HeroSection() {
             {/* Main Headline with Highlight Reveal */}
             <motion.h1
               variants={itemVariants}
-              className="text-3xl sm:text-5xl lg:text-6xl xl:text-[68px] font-extrabold tracking-tight text-[#142A27] leading-[1.12] sm:leading-[1.08]"
+              className="text-3xl sm:text-5xl lg:text-6xl xl:text-[68px] font-extrabold tracking-tight text-[#142A27] leading-[1.12] sm:leading-[1.08] hero-headline"
             >
               We Build{" "}
               <span className="text-[#008F53] relative inline-block">
@@ -91,7 +91,7 @@ export function HeroSection() {
             {/* Supporting Copy */}
             <motion.p
               variants={itemVariants}
-              className="mt-5 sm:mt-6 text-base sm:text-lg lg:text-xl text-[#64736F] leading-relaxed max-w-2xl font-normal"
+              className="mt-5 sm:mt-6 text-base sm:text-lg lg:text-xl text-[#64736F] leading-relaxed max-w-2xl font-normal hero-subtext"
             >
               Cutting-edge software engineering, AI, and digital products to help your business innovate, grow, and stay ahead in the age of intelligence.
             </motion.p>
@@ -99,7 +99,7 @@ export function HeroSection() {
             {/* CTAs with hover lift */}
             <motion.div
               variants={itemVariants}
-              className="mt-7 sm:mt-10 flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 sm:gap-4 w-full sm:w-auto"
+              className="mt-7 sm:mt-10 flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 sm:gap-4 w-full sm:w-auto hero-cta-group"
             >
               <Button
                 href="/services"
@@ -125,8 +125,8 @@ export function HeroSection() {
               variants={itemVariants}
               className="mt-8 sm:mt-10 pt-6 sm:pt-7 border-t border-[#DFEDE5] w-full"
             >
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 sm:gap-4 divide-y sm:divide-y-0 sm:divide-x divide-[#DFEDE5]">
-                <div className="flex items-center justify-between sm:block pb-3.5 sm:pb-0 sm:pr-4">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 sm:gap-4 divide-y sm:divide-y-0 sm:divide-x divide-[#DFEDE5] hero-spec-strip">
+                <div className="flex items-center justify-between sm:block pb-3.5 sm:pb-0 sm:pr-4 hero-spec-item">
                   <div className="flex items-center gap-2">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#008F53]" />
                     <span className="text-[11px] font-mono uppercase tracking-wider text-[#008F53] font-semibold">
@@ -138,7 +138,7 @@ export function HeroSection() {
                   </p>
                 </div>
 
-                <div className="flex items-center justify-between sm:block py-3.5 sm:py-0 sm:px-4">
+                <div className="flex items-center justify-between sm:block py-3.5 sm:py-0 sm:px-4 hero-spec-item">
                   <div className="flex items-center gap-2">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#008F53]" />
                     <span className="text-[11px] font-mono uppercase tracking-wider text-[#008F53] font-semibold">
@@ -150,7 +150,7 @@ export function HeroSection() {
                   </p>
                 </div>
 
-                <div className="flex items-center justify-between sm:block pt-3.5 sm:pt-0 sm:pl-4">
+                <div className="flex items-center justify-between sm:block pt-3.5 sm:pt-0 sm:pl-4 hero-spec-item">
                   <div className="flex items-center gap-2">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#008F53]" />
                     <span className="text-[11px] font-mono uppercase tracking-wider text-[#008F53] font-semibold">
@@ -166,7 +166,7 @@ export function HeroSection() {
           </motion.div>
 
           {/* Right Hero Visual (Cols 8-12 on lg/xl) with subtle floating motion */}
-          <div className="lg:col-span-5 xl:col-span-5 flex items-center justify-center lg:justify-end w-full">
+          <div className="hidden lg:flex lg:col-span-5 xl:col-span-5 items-center justify-center lg:justify-end w-full hero-tech-visual-container">
             <FloatingElement duration={6.5} distance={10} rotation={1.2} className="w-full flex items-center justify-center">
               <TechLayerVisual />
             </FloatingElement>

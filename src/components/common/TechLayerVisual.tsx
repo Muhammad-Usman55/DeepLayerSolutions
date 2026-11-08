@@ -50,7 +50,7 @@ export function TechLayerVisual({ className }: TechLayerVisualProps) {
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       className={cn(
-        "relative w-full aspect-square max-w-[260px] xs:max-w-[280px] sm:max-w-[340px] md:max-w-[380px] lg:max-w-[420px] xl:max-w-[460px] mx-auto flex items-center justify-center select-none group perspective-[1200px]",
+        "relative w-full aspect-square max-w-[260px] xs:max-w-[280px] sm:max-w-[340px] md:max-w-[380px] lg:max-w-[420px] xl:max-w-[460px] mx-auto flex items-center justify-center select-none group perspective-[1200px] tech-layer-visual",
         className
       )}
     >

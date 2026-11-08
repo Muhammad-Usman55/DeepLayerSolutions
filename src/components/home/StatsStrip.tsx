@@ -5,7 +5,7 @@ export function StatsStrip() {
   return (
     <section className="py-12 bg-white border-t border-[#E3EDE5]">
       <Container size="wide">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8 lg:divide-x divide-[#E3EDE5]">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8 lg:divide-x divide-[#E3EDE5] stats-grid">
           {siteConfig.stats.map((stat) => (
             <div
               key={stat.label}
