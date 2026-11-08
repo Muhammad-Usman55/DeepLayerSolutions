@@ -109,15 +109,15 @@ export const footerQuickLinks: NavItem[] = [
 ];
 
 export const footerServiceLinks: NavItem[] = [
-  { label: "Artificial Intelligence & ML", href: "/services/ai-machine-learning" },
-  { label: "Generative AI & LLM Solutions", href: "/services/generative-ai-llms" },
-  { label: "Custom Software Development", href: "/services/custom-software-development" },
+  { label: "AI & Machine Learning", href: "/services/ai-machine-learning" },
+  { label: "Generative AI & LLMs", href: "/services/generative-ai-llms" },
+  { label: "Custom Software", href: "/services/custom-software-development" },
   { label: "Web Development", href: "/services/web-development" },
-  { label: "Data Engineering & Analytics", href: "/services/data-engineering" },
-  { label: "Cloud Solutions & DevOps", href: "/services/cloud-solutions-devops" },
-  { label: "Mobile Application Development", href: "/services/mobile-app-development" },
-  { label: "IT Consulting & Transformation", href: "/services/it-consulting" },
-  { label: "Search Engine Optimization (SEO)", href: "/services/seo" },
+  { label: "Data Engineering", href: "/services/data-engineering" },
+  { label: "Cloud & DevOps", href: "/services/cloud-solutions-devops" },
+  { label: "Mobile Applications", href: "/services/mobile-app-development" },
+  { label: "IT Consulting", href: "/services/it-consulting" },
+  { label: "SEO & Optimization", href: "/services/seo" },
 ];
 
 export const footerLegalLinks: NavItem[] = [

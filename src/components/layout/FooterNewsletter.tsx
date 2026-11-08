@@ -47,18 +47,18 @@ export function FooterNewsletter() {
   };
 
   return (
-    <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl bg-gradient-to-r from-[#E9FFF2]/95 via-[#F3FFF7] to-[#E9FFF2]/95 border border-[#DFEDE5] shadow-[0_4px_28px_-6px_rgba(0,184,107,0.08)] p-5 sm:p-8 lg:p-9 mb-12 sm:mb-16">
+    <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#E9FFF2]/95 via-[#F3FFF7] to-[#E9FFF2]/95 border border-[#DFEDE5] shadow-[0_4px_24px_-6px_rgba(0,184,107,0.06)] p-4 sm:p-5 lg:p-6 mb-8 sm:mb-10">
       {/* Decorative Light Radial Ambience */}
-      <div className="absolute -top-12 -right-12 w-64 h-64 bg-[#34D399]/20 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute -top-12 -right-12 w-48 h-48 bg-[#34D399]/15 rounded-full blur-2xl pointer-events-none" />
 
-      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 lg:gap-10 relative z-10">
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 lg:gap-8 relative z-10">
         {/* Left Side: 3D Paper Plane & Heading */}
-        <div className="flex items-center gap-4 sm:gap-6">
+        <div className="flex items-center gap-3 sm:gap-4">
           {/* 3D Paper Plane Illustration */}
-          <div className="shrink-0 relative w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center">
+          <div className="shrink-0 relative w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center">
             <svg
               viewBox="0 0 80 80"
-              className="w-full h-full drop-shadow-[0_8px_16px_rgba(0,184,107,0.25)]"
+              className="w-full h-full drop-shadow-[0_6px_12px_rgba(0,184,107,0.2)]"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
@@ -105,10 +105,10 @@ export function FooterNewsletter() {
           </div>
 
           <div>
-            <h3 className="text-lg sm:text-2xl font-extrabold text-[#142A27] tracking-tight">
+            <h3 className="text-base sm:text-lg font-bold text-[#142A27] tracking-tight">
               Stay Updated with <span className="text-[#00B86B]">DeepLayer Solutions</span>
             </h3>
-            <p className="text-sm text-[#64736F] mt-1 font-normal">
+            <p className="text-xs sm:text-sm text-[#64736F] mt-0.5 font-normal">
               Get the latest updates, tech insights and exclusive offers.
             </p>
           </div>
@@ -116,10 +116,10 @@ export function FooterNewsletter() {
 
         {/* Right Side: Subscription Input Field */}
         <div className="w-full lg:max-w-md">
-          <form onSubmit={handleSubmit} className="relative flex flex-col gap-2">
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center bg-white border border-[#DFEDE5] rounded-2xl sm:rounded-full p-2 sm:p-1.5 sm:pl-4 shadow-2xs focus-within:border-[#00B86B] focus-within:ring-2 focus-within:ring-[#00B86B]/20 transition-all gap-2 sm:gap-0">
-              <div className="flex items-center w-full px-2 py-1 sm:px-0 sm:py-0">
-                <Mail className="w-4 h-4 text-[#64736F] mr-2.5 shrink-0" />
+          <form onSubmit={handleSubmit} className="relative flex flex-col gap-1.5">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center bg-white border border-[#DFEDE5] rounded-xl sm:rounded-full p-1.5 sm:p-1 sm:pl-3.5 shadow-2xs focus-within:border-[#00B86B] focus-within:ring-2 focus-within:ring-[#00B86B]/20 transition-all gap-2 sm:gap-0">
+              <div className="flex items-center w-full px-2 py-0.5 sm:px-0 sm:py-0">
+                <Mail className="w-4 h-4 text-[#64736F] mr-2 shrink-0" />
                 <input
                   type="email"
                   value={email}
@@ -129,14 +129,14 @@ export function FooterNewsletter() {
                   }}
                   placeholder="Enter your email address"
                   disabled={status === "loading"}
-                  className="w-full bg-transparent text-sm text-[#142A27] placeholder:text-[#64736F]/70 focus:outline-none disabled:opacity-50"
+                  className="w-full bg-transparent text-xs sm:text-sm text-[#142A27] placeholder:text-[#64736F]/70 focus:outline-none disabled:opacity-50"
                   aria-label="Email address for newsletter"
                 />
               </div>
               <button
                 type="submit"
                 disabled={status === "loading"}
-                className="inline-flex items-center justify-center gap-1.5 w-full sm:w-auto px-5 sm:px-6 py-2.5 rounded-xl sm:rounded-full bg-[#00B86B] hover:bg-[#008F53] text-white font-semibold text-xs sm:text-sm shadow-sm hover:shadow-md transition-all shrink-0 active:scale-95 disabled:opacity-70 cursor-pointer"
+                className="inline-flex items-center justify-center gap-1.5 w-full sm:w-auto px-4 sm:px-5 py-2 rounded-lg sm:rounded-full bg-[#00B86B] hover:bg-[#008F53] text-white font-semibold text-xs shadow-xs hover:shadow transition-all shrink-0 active:scale-95 disabled:opacity-70 cursor-pointer"
               >
                 {status === "loading" ? (
                   <>
@@ -145,7 +145,7 @@ export function FooterNewsletter() {
                   </>
                 ) : (
                   <>
-                    <ArrowRight className="w-4 h-4" />
+                    <ArrowRight className="w-3.5 h-3.5" />
                     <span>Subscribe</span>
                   </>
                 )}
