@@ -31,6 +31,7 @@ export function ContactForm() {
   const [serverError, setServerError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [referenceNumber, setReferenceNumber] = useState<string | null>(null);
 
   const validate = (): boolean => {
     const newErrors: Partial<Record<keyof FormState, string>> = {};
@@ -98,6 +99,7 @@ export function ContactForm() {
       }
 
       setIsSuccess(true);
+      setReferenceNumber(data?.referenceNumber || null);
       setForm(initialForm);
       setErrors({});
       setServerError(null);
@@ -122,13 +124,23 @@ export function ContactForm() {
             Inquiry Received!
           </h3>
 
+          {referenceNumber && (
+            <div className="mt-3 px-3.5 py-1.5 rounded-full bg-[#E9FFF2] border border-[#BCE8CF] inline-flex items-center gap-2 text-xs font-mono font-bold text-[#008F53] shadow-2xs">
+              <span className="text-[#142A27]/70 font-normal">Reference ID:</span>
+              <span>{referenceNumber}</span>
+            </div>
+          )}
+
           <p className="mt-3 text-sm sm:text-base text-[#64736F] max-w-md leading-relaxed">
             Thank you for reaching out to DeepLayer Solutions. One of our technical architects will review your project requirements and respond within 24 business hours.
           </p>
 
           <button
             type="button"
-            onClick={() => setIsSuccess(false)}
+            onClick={() => {
+              setIsSuccess(false);
+              setReferenceNumber(null);
+            }}
             className="mt-8 px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#008F53] text-white hover:bg-[#007343] transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#008F53]"
           >
             Send Another Message

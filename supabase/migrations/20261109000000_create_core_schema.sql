@@ -333,3 +333,4 @@ CREATE POLICY "email_logs_admin_all"
   TO authenticated
   USING (public.is_admin())
   WITH CHECK (public.is_admin());
+

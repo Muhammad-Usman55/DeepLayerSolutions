@@ -1,18 +1,22 @@
 import { NextRequest, NextResponse } from "next/server";
+import { createAdminClient } from "@/lib/supabase/admin";
 
-// Simple in-memory rate limiter for serverless environment
+// In-memory IP rate limiter for serverless environment
 // Maps IP to { count: number, resetAt: number }
 const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
 const RATE_LIMIT_WINDOW_MS = 15 * 60 * 1000; // 15 minutes
 const MAX_REQUESTS_PER_WINDOW = 5;
 
-// Basic HTML sanitization to prevent injection / stored XSS
+// Basic HTML and script tag stripping to prevent XSS / malicious payloads
 function sanitize(str: string): string {
   return str
     .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, "")
     .replace(/<[^>]+>/g, "")
+    .replace(/[\u0000-\u0008\u000B-\u000C\u000E-\u001F]/g, "") // Strip invisible control characters
     .trim();
 }
+
+const EMAIL_REGEX = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
 
 export async function POST(req: NextRequest) {
   try {
@@ -31,7 +35,7 @@ export async function POST(req: NextRequest) {
           {
             success: false,
             message:
-              "Too many inquiries sent from your connection. Please wait 15 minutes before trying again.",
+              "Too many inquiries sent from your connection. Please wait 15 minutes before submitting again.",
           },
           { status: 429 }
         );
@@ -55,13 +59,13 @@ export async function POST(req: NextRequest) {
 
     const { fullName, email, company, service, subject, message, botField } = body;
 
-    // 3. Honeypot Spam Check (bots often fill hidden inputs)
+    // 3. Honeypot Spam Check (silent response to defeat automated spam bots)
     if (botField) {
-      // Return 200 silently to defeat bot scanners without leaking rejection
       return NextResponse.json(
         {
           success: true,
           message: "Thank you for reaching out to DeepLayer Solutions.",
+          referenceNumber: "DLS-CONFIRMED",
         },
         { status: 200 }
       );
@@ -72,28 +76,32 @@ export async function POST(req: NextRequest) {
 
     if (!fullName || typeof fullName !== "string" || fullName.trim().length < 2) {
       errors.fullName = "Please provide your full name (at least 2 characters).";
-    } else if (fullName.length > 100) {
+    } else if (fullName.trim().length > 100) {
       errors.fullName = "Full name must be under 100 characters.";
     }
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!email || typeof email !== "string" || !emailRegex.test(email.trim())) {
+    const trimmedEmail = typeof email === "string" ? email.trim() : "";
+    if (!trimmedEmail || !EMAIL_REGEX.test(trimmedEmail)) {
       errors.email = "Please provide a valid business email address.";
-    } else if (email.length > 150) {
+    } else if (trimmedEmail.length > 150) {
       errors.email = "Email address must be under 150 characters.";
     }
 
     if (!subject || typeof subject !== "string" || subject.trim().length < 3) {
-      errors.subject = "Please provide a subject (at least 3 characters).";
-    } else if (subject.length > 200) {
+      errors.subject = "Please provide an inquiry subject (at least 3 characters).";
+    } else if (subject.trim().length > 200) {
       errors.subject = "Subject must be under 200 characters.";
     }
 
     if (!message || typeof message !== "string" || message.trim().length < 15) {
       errors.message =
         "Please provide at least 15 characters describing your project or architecture needs.";
-    } else if (message.length > 3000) {
+    } else if (message.trim().length > 3000) {
       errors.message = "Message must be under 3000 characters.";
+    }
+
+    if (company && typeof company === "string" && company.trim().length > 150) {
+      errors.company = "Company name must be under 150 characters.";
     }
 
     if (Object.keys(errors).length > 0) {
@@ -107,43 +115,96 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // 5. Sanitize Sanitized Values
-    const sanitizedSubmission = {
-      fullName: sanitize(fullName),
-      email: sanitize(email).toLowerCase(),
-      company: company ? sanitize(String(company)) : "N/A",
-      service: service ? sanitize(String(service)) : "General Inquiry",
-      subject: sanitize(subject),
-      message: sanitize(message),
-      submittedAt: new Date().toISOString(),
-      ip,
-    };
+    // 5. Clean & Sanitize Inputs
+    const sanitizedFullName = sanitize(fullName);
+    const sanitizedEmail = trimmedEmail.toLowerCase();
+    const sanitizedCompany = company ? sanitize(String(company)) : null;
+    const sanitizedService = service ? sanitize(String(service)) : "General Inquiry";
+    const sanitizedSubject = sanitize(subject);
+    const sanitizedMessage = sanitize(message);
 
-    // 6. Production Logging
-    // In production with RESEND_API_KEY, emails can be dispatched here.
+    // 6. Connect to Supabase via Protected Admin Client
+    const supabase = createAdminClient();
+
+    // 7. Prevent Duplicate or Accidental Double Submissions
+    // Check if an identical submission from this email & subject was recorded in the last 2 minutes
+    const twoMinutesAgo = new Date(Date.now() - 2 * 60 * 1000).toISOString();
+    const { data: duplicate } = await supabase
+      .from("contact_submissions")
+      .select("id, reference_number, created_at")
+      .eq("email", sanitizedEmail)
+      .eq("subject", sanitizedSubject)
+      .gte("created_at", twoMinutesAgo)
+      .order("created_at", { ascending: false })
+      .limit(1)
+      .maybeSingle();
+
+    if (duplicate?.reference_number) {
+      return NextResponse.json(
+        {
+          success: true,
+          isDuplicate: true,
+          referenceNumber: duplicate.reference_number,
+          message: `We have already received your inquiry (Ref: ${duplicate.reference_number}). Our architects are currently reviewing your project.`,
+          timestamp: duplicate.created_at,
+        },
+        { status: 200 }
+      );
+    }
+
+    // 8. Persist to PostgreSQL Database
+    const { data: record, error: dbError } = await supabase
+      .from("contact_submissions")
+      .insert({
+        full_name: sanitizedFullName,
+        email: sanitizedEmail,
+        company: sanitizedCompany,
+        service: sanitizedService,
+        subject: sanitizedSubject,
+        message: sanitizedMessage,
+        status: "new",
+        admin_notes: null,
+      })
+      .select("id, reference_number, created_at")
+      .single();
+
+    if (dbError || !record) {
+      console.error("[SUPABASE CONTACT INSERT ERROR]", dbError?.message || "Unknown database error");
+      return NextResponse.json(
+        {
+          success: false,
+          message:
+            "A database error occurred while saving your inquiry. Please try again or email us directly at info@deeplayersolutions.com.",
+        },
+        { status: 500 }
+      );
+    }
+
+    // 9. Structured Audit Log
     console.info(
-      `[CONTACT INQUIRY] Received from ${sanitizedSubmission.fullName} (${sanitizedSubmission.email}) - Subject: "${sanitizedSubmission.subject}" (Service: "${sanitizedSubmission.service}")`
+      `[CONTACT SUBMISSION SAVED] Ref: ${record.reference_number} | ID: ${record.id} | From: ${sanitizedFullName} (${sanitizedEmail}) | Service: "${sanitizedService}"`
     );
 
+    // 10. Return Successful Response with Generated Reference Number
     return NextResponse.json(
       {
         success: true,
+        referenceNumber: record.reference_number,
         message:
-          "Thank you for reaching out to DeepLayer Solutions. One of our technical architects will review your project requirements and respond within 24 business hours.",
-        timestamp: sanitizedSubmission.submittedAt,
+          "Thank you for reaching out to DeepLayer Solutions. Your inquiry has been received and our engineering architects will respond within 24 business hours.",
+        timestamp: record.created_at,
       },
-      { status: 200 }
+      { status: 201 }
     );
-  } catch (error) {
-    console.error("[CONTACT API ERROR]", error);
+  } catch (error: any) {
+    console.error("[CONTACT API UNHANDLED ERROR]", error?.message || error);
     return NextResponse.json(
       {
         success: false,
         message:
-          "An unexpected server error occurred while processing your message. Please try again or email us directly at deeplayersolutions@gmail.com.",
+          "An unexpected server error occurred while processing your message. Please try again or reach out at info@deeplayersolutions.com.",
       },
       { status: 500 }
     );
   }
 }
-
