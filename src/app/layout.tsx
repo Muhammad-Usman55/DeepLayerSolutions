@@ -3,7 +3,6 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { Preloader } from "@/components/common/Preloader";
 import { MotionProvider } from "@/components/common/MotionProvider";
 import { siteConfig } from "@/config/site";
 
@@ -19,49 +18,71 @@ const geistMono = Geist_Mono({
   display: "swap",
 });
 
+const isProduction =
+  process.env.VERCEL_ENV === "production" ||
+  (!process.env.VERCEL_ENV && process.env.NODE_ENV === "production");
+
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || siteConfig.url || "https://deeplayersolutions.com";
+
 export const metadata: Metadata = {
-  metadataBase: new URL(siteConfig.url),
+  metadataBase: new URL(siteUrl),
   title: {
-    default: `${siteConfig.name} — ${siteConfig.subtitle}`,
+    default: `${siteConfig.name} — Custom AI, Enterprise Software & Cloud Engineering`,
     template: `%s | ${siteConfig.name}`,
   },
-  description: siteConfig.description,
+  description:
+    "DeepLayer Solutions is a premier software engineering and artificial intelligence agency. We engineer Custom AI Development, LLM Integration, Enterprise Software Engineering, Computer Vision, and Cloud & DevOps Solutions built for velocity and scale.",
   keywords: [
-    "DeepLayer Solutions",
-    "Software Development Agency",
-    "Artificial Intelligence",
-    "Machine Learning",
-    "Next.js Development",
+    "Custom AI Development",
+    "LLM Integration",
+    "Enterprise Software Engineering",
     "Computer Vision",
-    "Generative AI",
-    "Cloud Architecture",
-    "Enterprise Software",
+    "Cloud & DevOps Solutions",
+    "DeepLayer Solutions",
+    "Machine Learning Agency",
+    "Next.js Enterprise Development",
+    "AI Agent Systems",
+    "FastAPI & Microservices Architecture",
   ],
-  authors: [{ name: siteConfig.name, url: siteConfig.url }],
+  authors: [{ name: siteConfig.name, url: siteUrl }],
   creator: siteConfig.name,
+  publisher: siteConfig.name,
   alternates: {
-    canonical: siteConfig.url,
+    canonical: "/",
+  },
+  robots: {
+    index: isProduction,
+    follow: isProduction,
+    googleBot: {
+      index: isProduction,
+      follow: isProduction,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: siteConfig.url,
-    title: `${siteConfig.name} — ${siteConfig.subtitle}`,
-    description: siteConfig.description,
+    url: siteUrl,
+    title: `${siteConfig.name} — Custom AI, Enterprise Software & Cloud Engineering`,
+    description:
+      "Enterprise agency specializing in Custom AI Development, LLM Integration, Enterprise Software Engineering, Computer Vision, and Cloud & DevOps Solutions.",
     siteName: siteConfig.name,
     images: [
       {
         url: siteConfig.ogImage,
         width: 800,
         height: 800,
-        alt: siteConfig.name,
+        alt: `${siteConfig.name} — Enterprise Software & AI Agency`,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${siteConfig.name} — ${siteConfig.subtitle}`,
-    description: siteConfig.description,
+    title: `${siteConfig.name} — Custom AI, Enterprise Software & Cloud Engineering`,
+    description:
+      "Enterprise agency specializing in Custom AI Development, LLM Integration, Enterprise Software Engineering, Computer Vision, and Cloud & DevOps Solutions.",
     images: [siteConfig.ogImage],
   },
   icons: {
@@ -87,12 +108,14 @@ const jsonLdSchema = {
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "Organization",
-      "@id": `${siteConfig.url}/#organization`,
+      "@type": ["Organization", "ProfessionalService"],
+      "@id": `${siteUrl}/#organization`,
       name: siteConfig.name,
-      url: siteConfig.url,
-      logo: `${siteConfig.url}/logo/logo.png`,
+      url: siteUrl,
+      logo: `${siteUrl}/logo/logo.png`,
+      image: `${siteUrl}/logo/logo.png`,
       description: siteConfig.description,
+      priceRange: "$$$$",
       address: {
         "@type": "PostalAddress",
         addressLocality: "Lahore",
@@ -106,6 +129,52 @@ const jsonLdSchema = {
         email: siteConfig.contact.email,
         availableLanguage: ["English", "Urdu"],
       },
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: "Enterprise Technology Services",
+        itemListElement: [
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "Custom AI & Machine Learning Development",
+              description: "Custom deep learning models, neural networks, and computer vision systems.",
+            },
+          },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "Generative AI & LLM Integration",
+              description: "RAG vector pipelines, multi-agent AI workflows, and enterprise model fine-tuning.",
+            },
+          },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "Enterprise Software Engineering",
+              description: "High-concurrency full-stack architectures, Next.js web applications, and resilient APIs.",
+            },
+          },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "Cloud Solutions & DevOps",
+              description: "Kubernetes orchestration, automated CI/CD pipelines, and cloud infrastructure.",
+            },
+          },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "Technical SEO & Web Optimization",
+              description: "Core Web Vitals acceleration, semantic search schema, and organic ranking scaling.",
+            },
+          },
+        ],
+      },
       sameAs: [
         siteConfig.social.linkedin,
         siteConfig.social.facebook,
@@ -114,11 +183,12 @@ const jsonLdSchema = {
     },
     {
       "@type": "WebSite",
-      "@id": `${siteConfig.url}/#website`,
-      url: siteConfig.url,
+      "@id": `${siteUrl}/#website`,
+      url: siteUrl,
       name: siteConfig.name,
+      description: siteConfig.description,
       publisher: {
-        "@id": `${siteConfig.url}/#organization`,
+        "@id": `${siteUrl}/#organization`,
       },
     },
   ],
@@ -135,10 +205,6 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full scroll-smooth antialiased`}
     >
       <head>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="icon" href="/icon-32.png" sizes="32x32" type="image/png" />
-        <link rel="icon" href="/icon-192.png" sizes="192x192" type="image/png" />
-        <link rel="apple-touch-icon" href="/apple-icon.png" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdSchema) }}
@@ -153,7 +219,6 @@ export default function RootLayout({
           Skip to main content
         </a>
         <MotionProvider>
-          <Preloader />
           <Navbar />
           {children}
           <Footer />

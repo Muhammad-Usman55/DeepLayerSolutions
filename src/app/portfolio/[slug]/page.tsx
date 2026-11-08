@@ -38,6 +38,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title: `${project.title} — ${project.tagline} | DeepLayer Solutions`,
     description: project.summary,
+    alternates: {
+      canonical: `/portfolio/${project.slug}`,
+    },
     openGraph: {
       title: `${project.title} — Case Study | DeepLayer Solutions`,
       description: project.summary,

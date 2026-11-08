@@ -20,6 +20,9 @@ export const metadata: Metadata = {
   title: "About DeepLayer Solutions",
   description:
     "Learn about DeepLayer Solutions' mission, engineering philosophy, and values in software development and artificial intelligence.",
+  alternates: {
+    canonical: "/about",
+  },
 };
 
 const values = [

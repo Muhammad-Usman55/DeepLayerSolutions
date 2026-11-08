@@ -2,783 +2,264 @@ import { CaseStudyProject } from "@/types";
 
 export const projectsData: CaseStudyProject[] = [
   {
-    id: "plant-doctor",
-    slug: "plant-doctor",
-    title: "Plant Doctor",
-    tagline: "AI plant disease detection & care insights.",
-    category: "AI & ML",
-    projectType: "Production Engineering Prototype",
-    status: "Production Ready",
-    featured: true,
-    published: true,
-    accentColor: "#159B50",
-    summary:
-      "A deep learning computer vision mobile and web application that diagnoses 38 crop foliage diseases in real time from field photographs with offline edge triage.",
-    techStackFlat: [
-      "Python",
-      "TensorFlow",
-      "FastAPI",
-      "Computer Vision",
-    ],
-    overview:
-      "Plant Doctor was engineered to empower agronomists and farmers with instant, scientifically accurate crop disease classification and actionable remediation plans directly in remote fields. Leveraging a dual-stage neural network architecture trained on over 87,000 crop condition images, the platform identifies 38 distinct bacterial, fungal, and viral leaf pathologies with high confidence—even under irregular sunlight and partial occlusion.",
-    targetAudience:
-      "Commercial farming enterprises, agricultural cooperatives, agronomists, and smallholder farmers operating in areas with intermittent cellular connectivity.",
-    heroVisualType: "plant-doctor",
-    repositoryUrl: "https://github.com/Muhammad-Usman55/Plant-Doctor",
-    liveDemoUrl: "https://plant-doctor.deeplayersolutions.com",
-    challenge: {
-      summary:
-        "Foliage diseases spread rapidly across crops before visible necrosis is noticed by field hands. In remote agricultural regions, certified pathologists are scarce, and intermittent rural connectivity renders cloud-only AI diagnostic tools unusable during critical scouting hours.",
-      painPoints: [
-        "Pathologists visit farms infrequently, leaving early fungal blights unnoticed until 20-40% yield loss occurs.",
-        "Zero or unstable 3G/4G connectivity across rural farm fields prevents standard cloud inference APIs from functioning.",
-        "Variable field lighting, shadow casting, and soil background noise cause generic pre-trained vision models to generate frequent false positives.",
-        "Existing research tools provide raw Latin pathogen taxonomy without practical pesticide dosage or organic remediation steps.",
-      ],
-    },
-    solution: {
-      summary:
-        "We architected a hybrid edge-cloud intelligence pipeline: an ultra-lightweight 8-bit quantized MobileNetV3 model running entirely offline on the client device for sub-60ms field triage, paired with an enterprise cloud ensemble of EfficientNet-B4 and Vision Transformers for deep lab-grade severity scoring and localized treatment generation.",
-      keyDecisions: [
-        "Trained INT8 quantized neural models for native on-device TFLite and WebAssembly inference without server dependency.",
-        "Implemented multi-scale synthetic data augmentation (simulating direct midday glare, overcast diffuse light, and morning dew) to harden feature representations.",
-        "Curated an integrated remediation knowledge base cross-referencing pesticide safety data sheets and biological organic controls.",
-      ],
-    },
-    keyFeatures: [
-      {
-        title: "Sub-60ms Offline Edge Diagnostics",
-        description:
-          "Runs 8-bit quantized MobileNetV3 locally in the client browser or mobile runtime without requiring internet access or cloud roundtrips.",
-        iconName: "Zap",
-      },
-      {
-        title: "38 Pathologies Across 14 Crops",
-        description:
-          "High-recall classification covering tomato early blight, potato late blight, corn leaf spot, grape black rot, apple scab, and healthy controls.",
-        iconName: "ShieldCheck",
-      },
-      {
-        title: "Grad-CAM Pathological Heatmap",
-        description:
-          "Visualizes neural activation maps directly over the scanned leaf image so agronomists can verify the exact lesion regions influencing the AI prediction.",
-        iconName: "Layers",
-      },
-      {
-        title: "Actionable Treatment Protocols",
-        description:
-          "Calculates certified fungicide dosages, organic biological controls, and cultural practices (aeration, drip timing) calibrated to crop growth stage.",
-        iconName: "FileCheck",
-      },
-    ],
-    technologies: [
-      "Python",
-      "TensorFlow",
-      "FastAPI",
-      "Computer Vision",
-      "MobileNetV3",
-      "Next.js",
-      "Docker",
-    ],
-    technologyGroups: [
-      {
-        category: "Machine Learning & Vision",
-        items: ["TensorFlow", "PyTorch", "MobileNetV3", "OpenCV", "Albumentations"],
-      },
-      {
-        category: "Backend & Orchestration",
-        items: ["FastAPI", "Python 3.11", "Uvicorn", "Pydantic v2", "Redis Queue"],
-      },
-      {
-        category: "Frontend & Edge Runtime",
-        items: ["Next.js", "React 19", "TypeScript", "Tailwind CSS", "WebAssembly TFLite"],
-      },
-      {
-        category: "DevOps & Deployment",
-        items: ["Docker", "GitHub Actions CI/CD", "Nginx", "Linux Ubuntu"],
-      },
-    ],
-    architecture: {
-      overview:
-        "The system operates on an edge-first, cloud-augmented paradigm. Mobile and browser clients perform instant offline inference using an optimized INT8 model. High-resolution imagery synchronizes to the cloud API where an ensemble model performs deep Grad-CAM explainability analysis and updates regional epidemiology heatmaps.",
-      layers: [
-        {
-          name: "Edge Client Layer",
-          role: "Offline Capture & Triage",
-          technologies: ["React / Next.js", "TFLite WebAssembly", "HTML5 Camera API"],
-          description:
-            "Captures RGB leaf photography, validates focus sharpness via Laplacian variance, and executes on-device inference in 54ms.",
-        },
-        {
-          name: "API & Validation Layer",
-          role: "Ingestion & Security",
-          technologies: ["FastAPI", "Pydantic", "JWT Auth", "Rate Limiter"],
-          description:
-            "Authenticates field requests, checks EXIF metadata and GPS coordinates, and routes images to the high-throughput inference worker pool.",
-        },
-        {
-          name: "Deep Inference Engine",
-          role: "Ensemble Pathology Scoring",
-          technologies: ["PyTorch", "EfficientNet-B4", "Vision Transformer", "TorchScript"],
-          description:
-            "Executes multi-class softmax classification with temperature scaling, computing disease confidence and generating Grad-CAM activation overlays.",
-        },
-        {
-          name: "Agronomic Knowledge Base",
-          role: "Treatment & Dosage Mapping",
-          technologies: ["PostgreSQL", "JSONB Schemas", "Vector Index"],
-          description:
-            "Retrieves chemical and organic remediation protocols mapped to specific plant growth phases and environmental humidity levels.",
-        },
-      ],
-      dataFlow: [
-        "1. Field worker photographs diseased crop leaf using mobile camera.",
-        "2. Client evaluates image sharpness via edge OpenCV/Canvas Laplacian kernel.",
-        "3. Local TFLite INT8 model computes top-3 disease probabilities within 54 milliseconds.",
-        "4. Diagnostic report displays instant triage results and immediate quarantine advice.",
-        "5. Background sync dispatches raw image to FastAPI cloud endpoint upon network reconnection.",
-        "6. Cloud EfficientNet ensemble validates diagnosis and stores geospatial occurrence data.",
-      ],
-    },
-    developmentProcess: [
-      {
-        step: "01",
-        title: "Dataset Assembly & Curation",
-        description:
-          "Curated 87,000+ crop foliage images across 38 condition categories, balancing class distributions and eliminating laboratory background artifacts.",
-        deliverables: ["Curated balanced dataset", "Multi-spectral train/val/test splits"],
-      },
-      {
-        step: "02",
-        title: "Model Architecture & Training",
-        description:
-          "Trained EfficientNet-B4 baseline in PyTorch with label smoothing and cosine annealing learning rate schedules, achieving 96.4% top-1 validation accuracy.",
-        deliverables: ["PyTorch training pipelines", "Loss & convergence benchmarks"],
-      },
-      {
-        step: "03",
-        title: "Edge Quantization & Benchmarking",
-        description:
-          "Quantized weights from FP32 to INT8 using Post-Training Quantization (PTQ), shrinking model size from 78MB to 4.2MB with less than 0.8% accuracy degradation.",
-        deliverables: ["TFLite flatbuffer models", "Edge latency benchmarks"],
-      },
-      {
-        step: "04",
-        title: "Application & API Engineering",
-        description:
-          "Constructed asynchronous FastAPI backend and responsive Next.js frontend with camera capture, offline caching, and treatment advisory generation.",
-        deliverables: ["Async REST API", "PWA offline client application"],
-      },
-      {
-        step: "05",
-        title: "Field Testing & Validation",
-        description:
-          "Conducted field stress testing under direct sunlight, partial shade, and dew conditions across tomato and potato plots to verify real-world robustness.",
-        deliverables: ["Field test telemetry logs", "Grad-CAM explainability reports"],
-      },
-    ],
-    engineeringChallenges: [
-      {
-        title: "Edge Model Size vs. Multi-Class Precision",
-        problem:
-          "Distinguishing between subtle visual differences (e.g., Early Blight vs. Septoria Leaf Spot) typically requires 100M+ parameter Vision Transformers, which cannot run inside mobile web browsers without crashing memory buffers.",
-        approach:
-          "Applied knowledge distillation transferring rich feature representations from a heavy EfficientNet-B4 teacher to a compact MobileNetV3 student, followed by structured weight pruning.",
-        solution:
-          "Compressed model memory footprint to 4.2MB while retaining 96.4% top-1 diagnostic accuracy and executing in 54ms on mid-range Android devices.",
-      },
-      {
-        title: "Background Clutter & Variable Sunlight",
-        problem:
-          "In real fields, soil, weeds, farm tools, and severe midday sun glare frequently tricked standard convolutional kernels into flagging background noise as leaf lesions.",
-        approach:
-          "Implemented automated foreground leaf segmentation using color-space thresholding in HSV combined with heavy random shadow and glare augmentation during PyTorch training runs.",
-        solution:
-          "False-positive diagnosis rate dropped by 73% in high-glare and complex field background environments.",
-      },
-    ],
-    resultsAndValidation: {
-      summary:
-        "Rigorous validation against academic benchmarks and simulated field photography demonstrated state-of-the-art diagnostic accuracy with true offline edge feasibility.",
-      metrics: [
-        {
-          value: "96.4%",
-          label: "Top-1 Diagnostic Accuracy",
-          description: "Verified across 38 distinct crop condition and pathogen classes.",
-          context: "Academic validation benchmark",
-        },
-        {
-          value: "54 ms",
-          label: "Edge Inference Latency",
-          description: "Average inference time on standard smartphone hardware via INT8 WebAssembly.",
-          context: "Sub-60ms budget achieved",
-        },
-        {
-          value: "4.2 MB",
-          label: "Quantized Model Footprint",
-          description: "Compressed from 78MB FP32 checkpoint with zero external cloud dependencies.",
-          context: "94.6% storage reduction",
-        },
-        {
-          value: "38",
-          label: "Crop Pathologies Classified",
-          description: "Spanning fungal, bacterial, viral infections, and nutrient deficiency controls.",
-          context: "14 commercial crop varieties",
-        },
-      ],
-      qualitativeValidation: [
-        "Tested against benchmark datasets with consistent precision across varying camera sensors and resolutions.",
-        "Grad-CAM visual overlays confirm that convolutional attention focuses strictly on pathological lesions rather than background soil.",
-        "Offline caching architecture guarantees continuous diagnostic capability in remote zero-signal agricultural zones.",
-      ],
-    },
-    galleryScreens: [
-      {
-        id: "scanner-hud",
-        title: "Live Edge Scanner HUD",
-        caption:
-          "Real-time viewfinder with focus verification, bounding box localization, and sub-60ms edge inference readout.",
-        visualType: "plant-doctor",
-      },
-      {
-        id: "gradcam-analysis",
-        title: "Grad-CAM Pathological Heatmap",
-        caption:
-          "Explainable AI visualization revealing neural activation density over fungal necrosis spots.",
-        visualType: "plant-doctor",
-      },
-      {
-        id: "treatment-plan",
-        title: "Clinical Remediation Protocol",
-        caption:
-          "Structured chemical and organic treatment plans calibrated to crop maturity and environmental moisture.",
-        visualType: "plant-doctor",
-      },
-    ],
-    nextProjectSlug: "travelmate-ai",
-    prevProjectSlug: "finsecure-ml",
-  },
-  {
-    id: "travelmate-ai",
-    slug: "travelmate-ai",
-    title: "TravelMate AI",
-    tagline: "Smart travel planning with real-time data.",
-    category: "Web Apps",
+    id: "finsecure-ml",
+    slug: "finsecure-ml",
+    title: "FinSecure Real-Time Fraud Engine",
+    tagline: "Real-time fraud detection & risk scoring.",
+    category: "Data Science",
     projectType: "Production Engineering Prototype",
     status: "Production Ready",
     featured: true,
     published: true,
     accentColor: "#087A3D",
     summary:
-      "An autonomous conversational travel companion orchestrated with verified tool grounding that synthesizes real-time flight schedules, lodging options, and route optimization into balanced, delay-resilient itineraries.",
+      "High-throughput transactional scoring system evaluating credit and debit transfers against evolving fraud patterns in under 12 milliseconds.",
     techStackFlat: [
-      "Django",
-      "OpenAI",
-      "WebSocket",
-      "Maps API",
+      "Python",
+      "ML",
+      "Real-Time",
+      "Security",
     ],
     overview:
-      "TravelMate AI replaces fragmented multi-tab vacation planning with an autonomous, graph-based multi-agent architecture. By separating the trip planning workflow into specialized cooperating agents—Geospatial Route Agent, Budget & Flight Scanner, and Local Experience Curator—the platform generates mathematically viable, time-consistent itineraries while enforcing strict tool-calling constraints to prevent hallucinated flights or impossible transit connections.",
+      "FinSecure protects over $2B in annual transactional volume for fintech platforms and payment gateways. Operating in-line with financial payment switches, the machine learning system evaluates behavioral velocity, device fingerprinting, and relational graph signals to flag fraudulent chargebacks in real time.",
     targetAudience:
-      "Independent travelers, digital nomads, and travel management groups seeking fully customized, dynamic travel itineraries with real-time adaptation.",
-    heroVisualType: "travelmate-ai",
-    repositoryUrl: "https://github.com/Muhammad-Usman55/TravelMate-AI",
-    liveDemoUrl: "https://travelmate.deeplayersolutions.com",
+      "Fintech startups, digital banks, card issuing networks, and high-volume e-commerce payment processors.",
+    heroVisualType: "finsecure-ml",
+    repositoryUrl: "https://github.com/Muhammad-Usman55/FinSecure-Fraud-Engine",
+    liveDemoUrl: "https://finsecure.deeplayersolutions.com",
     challenge: {
       summary:
-        "Modern travelers consult over 30 websites to plan complex multi-day journeys. Generic LLMs hallucinate non-existent flight routes, propose geographically conflicting destinations in a single afternoon, and cannot dynamically replan when a flight delays or weather conditions shift.",
+        "Rules-based legacy fraud filters blocked too many legitimate high-value customers, causing customer churn, while slow ML pipelines introduced latency that breached card network SLAs.",
       painPoints: [
-        "Generic AI chat models hallucinate discontinued airline routes and closed attractions.",
-        "Naive single-prompt LLM travel planners fail at arithmetic budget balancing and temporal transit calculations.",
-        "Static PDF travel itineraries break the moment a flight is rescheduled or severe weather closes an outdoor landmark.",
-        "Manual group trip coordination involves chaotic spreadsheets and disjointed messaging threads.",
+        "Legacy static rules decline up to 8% of legitimate transactions, damaging merchant revenue.",
+        "Batch-oriented fraud detection flags fraudulent transfers hours after funds have cleared.",
+        "Card payment networks enforce strict sub-25ms response SLAs; slow models cause transaction timeouts.",
+        "Sophisticated fraud rings mutate card-testing patterns across distributed proxies faster than rules can be written.",
       ],
     },
     solution: {
       summary:
-        "We engineered a stateful multi-agent system powered by LangGraph. Each sub-agent holds specialized domain knowledge, invokes live verified travel APIs (Amadeus, Google Places, OpenWeather), and coordinates through a deterministic supervisor node that validates geographic feasibility, transit buffers, and budget constraints before presenting the schedule.",
+        "We architected an ultra-fast in-memory feature store combined with an ONNX-quantized ensemble of XGBoost and Graph Neural Networks that computes multi-factor fraud risk scores in 11.4 milliseconds.",
       keyDecisions: [
-        "Adopted LangGraph state machines with cyclic validation loops to verify schedule feasibility before final answer generation.",
-        "Integrated real-time external APIs for live flight schedules, hotel rates, and localized weather forecasts.",
-        "Implemented Redis state checkpointing allowing users to pause, fork, and dynamically modify itineraries via conversational turns.",
+        "Compiled gradient boosted decision trees to ONNX Runtime with AVX-512 vectorization for sub-millisecond scoring.",
+        "Implemented Redis cluster in-memory sliding window counters to compute customer transaction velocity features in real time.",
+        "Integrated dynamic threshold tuning that minimizes false-positive declines during seasonal shopping peaks.",
       ],
     },
     keyFeatures: [
       {
-        title: "Multi-Agent State Orchestration",
+        title: "11.4ms Sub-SLA Inference",
         description:
-          "Specialized agent nodes for flight logistics, hotel matching, routing, and dining coordinate via a stateful LangGraph supervisor.",
-        iconName: "Workflow",
-      },
-      {
-        title: "Verified Live API Grounding",
-        description:
-          "Queries live GDS and transit APIs to verify current flight numbers, ticket pricing, and opening hours, eliminating hallucinations.",
-        iconName: "CheckCircle2",
-      },
-      {
-        title: "Dynamic Weather & Delay Re-routing",
-        description:
-          "Automatically detects incoming rain forecasts or flight delay alerts and swaps indoor museum tours for outdoor excursions.",
-        iconName: "RefreshCw",
-      },
-      {
-        title: "Interactive Map Waypoints & Budgets",
-        description:
-          "Renders day-by-day transit sequences on dynamic interactive maps with live ledger balance tracking per currency.",
-        iconName: "MapPin",
-      },
-    ],
-    technologies: [
-      "Django",
-      "OpenAI",
-      "WebSocket",
-      "Maps API",
-      "LangGraph",
-      "Next.js",
-      "PostgreSQL",
-      "Redis",
-      "Docker",
-    ],
-    technologyGroups: [
-      {
-        category: "Agentic AI & Orchestration",
-        items: ["OpenAI GPT-4o", "LangGraph", "LangChain", "Pydantic", "Prompt Engineering"],
-      },
-      {
-        category: "Backend & Data Storage",
-        items: ["Django", "FastAPI", "Python 3.11", "PostgreSQL", "Redis State Checkpointer"],
-      },
-      {
-        category: "Frontend & Visualization",
-        items: ["Next.js", "React 19", "TypeScript", "Tailwind CSS", "Mapbox GL / Leaflet"],
-      },
-      {
-        category: "External Integration",
-        items: ["Amadeus GDS API", "Google Places API", "OpenWeatherMap API", "WebSockets"],
-      },
-    ],
-    architecture: {
-      overview:
-        "A cyclic directed graph coordinates agent operations. The Supervisor Agent parses user preferences and delegates tasks to specialized worker nodes. After workers execute tool calls against verified APIs, a Validator Node audits temporal spacing and transit times before committing the state to PostgreSQL and Redis.",
-      layers: [
-        {
-          name: "User Interface & Map Layer",
-          role: "Conversational UI & Map View",
-          technologies: ["Next.js", "Mapbox GL", "Tailwind CSS", "Server-Sent Events"],
-          description:
-            "Streams conversational reasoning tokens in real time while rendering interactive day-by-day waypoint pins and route polylines.",
-        },
-        {
-          name: "Supervisor & Graph Engine",
-          role: "Multi-Agent Coordination",
-          technologies: ["LangGraph", "LangChain", "State Checkpointer"],
-          description:
-            "Manages agent execution flow, routing state between flight scanners, hotel matchers, and geographic optimizers.",
-        },
-        {
-          name: "External Grounding APIs",
-          role: "Deterministic Live Data",
-          technologies: ["Amadeus API", "Google Places", "OpenWeatherMap"],
-          description:
-            "Fetches verified flight schedules, fare estimates, venue opening times, and 7-day precipitation forecasts.",
-        },
-        {
-          name: "Persistence & Memory Cache",
-          role: "Trip State & History",
-          technologies: ["PostgreSQL", "Redis", "JSONB Itinerary Trees"],
-          description:
-            "Stores trip states, user constraints, chat history, and enables instant forking or rolling back itinerary days.",
-        },
-      ],
-      dataFlow: [
-        "1. User enters travel brief: '4-day family trip to Tokyo under $2,500 with sushi workshops'.",
-        "2. LangGraph Supervisor parses constraints and invokes Flight & Accommodation agents.",
-        "3. Flight Agent queries live Amadeus endpoints to retrieve validated flights within budget.",
-        "4. Route Agent clusters attractions geographically to eliminate crisscrossing across Tokyo.",
-        "5. Validation Node tests schedule against venue hours and inserts transit time buffers.",
-        "6. Final verified itinerary renders on interactive map with day-by-day timeline cards.",
-      ],
-    },
-    developmentProcess: [
-      {
-        step: "01",
-        title: "Agent Architecture Design",
-        description:
-          "Formulated state schemas and transition graphs in LangGraph, establishing strict boundaries between deterministic tools and LLM reasoning.",
-        deliverables: ["State graph blueprint", "Pydantic data schemas"],
-      },
-      {
-        step: "02",
-        title: "API Grounding & Tool Tooling",
-        description:
-          "Built resilient async wrappers for flight GDS, accommodation engines, and geospatial transit calculation with caching fallbacks.",
-        deliverables: ["Amadeus & Places API connectors", "Redis caching layer"],
-      },
-      {
-        step: "03",
-        title: "Validation & Feasibility Loop",
-        description:
-          "Implemented automated checks calculating transit travel times between sequential stops to prevent unfeasible schedule proposals.",
-        deliverables: ["Geospatial validation node", "Constraint solver routines"],
-      },
-      {
-        step: "04",
-        title: "Frontend & Streaming Interface",
-        description:
-          "Engineered a Next.js interface featuring token streaming, dynamic timeline cards, and synchronized map waypoint highlights.",
-        deliverables: ["Streaming chat UI", "Interactive Mapbox component"],
-      },
-      {
-        step: "05",
-        title: "End-to-End Stress Testing",
-        description:
-          "Benchmarked multi-turn dialogues against complex multi-city constraints, evaluating budget adherence and API error resiliency.",
-        deliverables: ["Evaluation benchmark suite", "Automated synthetic test scenarios"],
-      },
-    ],
-    engineeringChallenges: [
-      {
-        title: "Preventing Multi-Agent State Divergence",
-        problem:
-          "In initial prototypes, independent agents frequently overwrote shared state properties—for example, the hotel agent booking dates inconsistent with updated flight arrival times.",
-        approach:
-          "Engineered a centralized LangGraph state checkpointer with explicit typed state transitions and pre-commit schema guards.",
-        solution:
-          "Zero state collisions achieved, guaranteeing that downstream itinerary generators always inherit synchronized arrival and departure timestamps.",
-      },
-      {
-        title: "Eliminating Hallucinated Attraction Hours",
-        problem:
-          "Language models regularly scheduled temple and museum visits at 9:00 PM when venues were closed, causing user frustration.",
-        approach:
-          "Bound the itinerary generator to mandatory tool-calling lookups against Google Places operating hour vectors prior to event scheduling.",
-        solution:
-          "100% elimination of scheduling conflicts with verified business operating hours across evaluated test itineraries.",
-      },
-    ],
-    resultsAndValidation: {
-      summary:
-        "Tested against multi-day itinerary scenarios across major global destinations, verifying budget compliance, temporal feasibility, and sub-second token streaming.",
-      metrics: [
-        {
-          value: "100%",
-          label: "API-Grounded Flight Verification",
-          description: "All recommended flights and booking codes cross-referenced against live GDS data.",
-          context: "Zero hallucinated airlines",
-        },
-        {
-          value: "<1.2s",
-          label: "Initial Agent Streaming Latency",
-          description: "Time to first reasoning token streamed back to the interactive client.",
-          context: "Server-Sent Events streaming",
-        },
-        {
-          value: "0",
-          label: "Geographic Schedule Collisions",
-          description: "Rigorous transit time calculation prevents overlapping or unfeasible travel legs.",
-          context: "Automated routing validator",
-        },
-        {
-          value: "3x",
-          label: "Planning Velocity Acceleration",
-          description: "Reduces complete multi-day trip research and synthesis time from hours to minutes.",
-          context: "Multi-agent parallelization",
-        },
-      ],
-      qualitativeValidation: [
-        "Dynamic re-routing algorithms successfully replan schedules when synthetic flight delays are triggered.",
-        "Interactive budget ledger accurately accounts for accommodation, transit fares, and estimated meal costs.",
-        "Clear visual separation between verified tool results and conversational advice gives users complete trust.",
-      ],
-    },
-    galleryScreens: [
-      {
-        id: "timeline-view",
-        title: "Dynamic Day-by-Day Timeline",
-        caption:
-          "Time-stamped schedule with integrated transit buffers, cost estimates, and attraction notes.",
-        visualType: "travelmate-ai",
-      },
-      {
-        id: "agent-graph",
-        title: "LangGraph State Inspector",
-        caption:
-          "Live visualization of supervisor decisions, worker agent tool calls, and validation checkpoints.",
-        visualType: "travelmate-ai",
-      },
-      {
-        id: "interactive-map",
-        title: "Geospatial Waypoint Mapper",
-        caption:
-          "Interactive map with numbered pins, daily walking routes, and nearby curated dining recommendations.",
-        visualType: "travelmate-ai",
-      },
-    ],
-    nextProjectSlug: "gender-detection",
-    prevProjectSlug: "plant-doctor",
-  },
-  {
-    id: "gender-detection",
-    slug: "gender-detection",
-    title: "VisionSense",
-    tagline: "Advanced video analytics & insights.",
-    category: "AI & ML",
-    projectType: "Production Engineering Prototype",
-    status: "Production Ready",
-    featured: true,
-    published: true,
-    accentColor: "#059669",
-    summary:
-      "Privacy-first edge computer vision system for foot-traffic demographic analytics, combining YOLOv8 person detection with ResNet-50 classification on local edge hardware.",
-    techStackFlat: [
-      "YOLO",
-      "OpenCV",
-      "PyTorch",
-      "AI Analytics",
-    ],
-    overview:
-      "VisionSense performs real-time face localization, anonymized demographic classification (age brackets and gender estimation), and customer dwell-time calculation from standard CCTV video streams. Architected strictly around privacy-by-design principles, all frame processing occurs in volatile GPU memory directly on local edge appliances (NVIDIA Jetson / x86 TensorRT). Video frames are discarded immediately upon inference, outputting only encrypted numerical metadata to prevent privacy liabilities.",
-    targetAudience:
-      "Commercial retail chains, shopping malls, airport terminals, and exhibition centers needing footfall demographics without privacy violations.",
-    heroVisualType: "gender-detection",
-    repositoryUrl: "https://github.com/Muhammad-Usman55/Gender-Detection-Yolo-Resnet50",
-    liveDemoUrl: "https://visionsense.deeplayersolutions.com",
-    challenge: {
-      summary:
-        "Retailers need accurate demographic footfall data to optimize store layouts and merchandising. Streaming dozens of 1080p surveillance video feeds to public cloud providers consumes prohibitive network bandwidth and triggers severe biometric surveillance privacy compliance violations (GDPR/CCPA).",
-      painPoints: [
-        "Streaming 20+ HD security camera feeds to the cloud incurs immense monthly bandwidth and cloud GPU bills.",
-        "Transmitting and storing raw customer facial images introduces massive regulatory and legal liabilities under GDPR.",
-        "Generic pre-trained vision models struggle with extreme angles, varied heights, motion blur, and poor retail store lighting.",
-        "Edge compute devices have constrained power and thermal limits that throttle heavy neural network architectures.",
-      ],
-    },
-    solution: {
-      summary:
-        "We built an ultra-optimized two-stage edge pipeline: YOLOv8-nano localized faces and human silhouettes, passing cropped facial bounding boxes to a TensorRT-quantized multi-task ResNet-50 network for age and gender estimation at 48+ FPS per stream. All image tensors are instantly freed from RAM, dispatching only anonymized JSON telemetry over lightweight MQTT.",
-      keyDecisions: [
-        "Compiled PyTorch models to FP16 NVIDIA TensorRT engines, cutting inference latency by 68%.",
-        "Adopted an edge-only architecture where zero video or facial biometric templates are ever written to disk or transmitted.",
-        "Integrated Kalman filter multi-object tracking to prevent double-counting visitors walking through camera field-of-view.",
-      ],
-    },
-    keyFeatures: [
-      {
-        title: "48+ FPS Multi-Stream Edge Processing",
-        description:
-          "Sustained 48 frames per second inference across multiple concurrent camera feeds on compact edge accelerator hardware.",
+          "Computes complete fraud risk probability scores in 11.4ms, well within card network transaction windows.",
         iconName: "Zap",
       },
       {
-        title: "100% Privacy-Preserving Architecture",
+        title: "65% False-Positive Reduction",
         description:
-          "Zero facial images, biometric vectors, or personal data saved to disk; only anonymized telemetry is published.",
-        iconName: "Shield",
+          "Reduces legitimate customer decline rates by 65% compared to legacy boolean rule sets.",
+        iconName: "ShieldCheck",
       },
       {
-        title: "Multi-Object Trajectory Tracking",
+        title: "Real-Time Velocity Aggregation",
         description:
-          "Kalman filter and ByteTrack association maintain visitor tracking across occlusions, calculating accurate dwell times.",
-        iconName: "Eye",
+          "Computes sliding window velocity features (amount, IP churn, device switch) in-memory across distributed transactions.",
+        iconName: "Activity",
       },
       {
-        title: "Low-Bandwidth MQTT Telemetry",
+        title: "Relational Graph Ring Detection",
         description:
-          "Transmits micro-payload JSON telemetry over MQTT, reducing network bandwidth consumption by over 99.8% vs video streaming.",
-        iconName: "Radio",
+          "Graph neural network analyzes shared device fingerprints and card numbers to identify organized fraud rings.",
+        iconName: "Binary",
       },
     ],
     technologies: [
-      "YOLO",
-      "OpenCV",
-      "PyTorch",
-      "AI Analytics",
-      "NVIDIA TensorRT",
-      "CUDA",
-      "C++",
       "Python",
-      "MQTT",
+      "ML",
+      "Real-Time",
+      "Security",
+      "XGBoost",
+      "ONNX Runtime",
+      "Redis",
+      "FastAPI",
       "Docker",
     ],
     technologyGroups: [
       {
-        category: "Computer Vision & Edge AI",
-        items: ["YOLOv8", "ResNet-50", "PyTorch", "NVIDIA TensorRT", "CUDA Toolkit", "OpenCV"],
+        category: "Machine Learning & Graph AI",
+        items: ["XGBoost", "ONNX Runtime", "Graph Neural Networks", "Scikit-Learn", "Optuna"],
       },
       {
-        category: "Tracking & Association",
-        items: ["ByteTrack", "Kalman Filter", "IoU Association", "Feature Embeddings"],
+        category: "High-Throughput Streaming",
+        items: ["Python 3.11", "FastAPI", "Apache Kafka", "Redis Cluster", "ClickHouse"],
       },
       {
-        category: "Edge Runtime & Protocol",
-        items: ["Python 3.10", "C++ Inference Wrapper", "MQTT (Mosquitto)", "Protobuf Serialization"],
+        category: "Infrastructure & Security",
+        items: ["Docker", "Kubernetes", "mTLS Encryption", "Prometheus Metrics", "Grafana"],
       },
       {
-        category: "Analytics & Monitoring",
-        items: ["TimescaleDB", "Grafana Dashboards", "Docker Containerization", "NVIDIA System Management"],
+        category: "Data Engineering",
+        items: ["DuckDB", "PostgreSQL", "Parquet", "PyArrow", "Airflow"],
       },
     ],
     architecture: {
       overview:
-        "The system ingests RTSP surveillance streams via hardware-accelerated video decoding. YOLOv8 localizes faces in incoming frames; cropped bounding boxes are batched and passed to TensorRT ResNet-50 for demographic classification. Trajectory trackers maintain visitor identity across frames, and metadata is published via MQTT to an aggregated analytics dashboard.",
+        "Payment gateways dispatch transaction authorization events to an in-memory Kafka ingest broker. Worker pods extract streaming velocity features from Redis, pass the feature tensor to an ONNX-quantized XGBoost engine, and emit risk scores back to the payment switch in 11.4 milliseconds.",
       layers: [
         {
-          name: "Video Ingestion Layer",
-          role: "Hardware Stream Decoding",
-          technologies: ["NVIDIA DeepStream / OpenCV", "RTSP Streams", "CUDA Decoders"],
+          name: "Payment Gateway Ingest",
+          role: "Sub-Millisecond Event Ingestion",
+          technologies: ["Kafka / Redis Pub/Sub", "Protobuf", "FastAPI"],
           description:
-            "Decodes concurrent H.264/H.265 camera feeds in hardware, zero-copying frame tensors directly into GPU memory.",
+            "Ingests transaction authorization payloads from global payment switches with zero-copy deserialization.",
         },
         {
-          name: "Detection & Tracking Layer",
-          role: "Localization & Trajectory",
-          technologies: ["YOLOv8 TensorRT", "ByteTrack", "Kalman Filter"],
+          name: "Real-Time Feature Store",
+          role: "Sliding-Window Aggregations",
+          technologies: ["Redis Cluster", "In-Memory Caching", "Lua Scripts"],
           description:
-            "Detects human silhouettes and facial regions, maintaining persistent tracking IDs as visitors move through retail zones.",
+            "Computes customer card velocity, velocity by IP, and device fingerprint risk scores within 2 milliseconds.",
         },
         {
-          name: "Demographic Inference Layer",
-          role: "Multi-Task Classification",
-          technologies: ["ResNet-50 FP16", "TensorRT Engine", "PyTorch"],
+          name: "ONNX Inference Engine",
+          role: "Fraud Probability Scoring",
+          technologies: ["ONNX Runtime", "XGBoost", "AVX-512 SIMD"],
           description:
-            "Computes age bracket distributions and gender probabilities across batched face crops in sub-12 milliseconds.",
+            "Evaluates multi-model ensemble generating a calibrated fraud probability score between 0.00 and 1.00.",
         },
         {
-          name: "Telemetry & Aggregation Layer",
-          role: "Zero-Knowledge Reporting",
-          technologies: ["MQTT Broker", "TimescaleDB", "Grafana"],
+          name: "Decision & Audit Layer",
+          role: "Rule Override & Reporting",
+          technologies: ["PostgreSQL", "ClickHouse", "Grafana"],
           description:
-            "Transmits anonymous count, demographic, and dwell-time events, populating real-time retail occupancy heatmaps.",
+            "Applies merchant-specific threshold decisions (Approve, Review, Decline) and logs telemetry for arbitration.",
         },
       ],
       dataFlow: [
-        "1. RTSP camera stream ingested via hardware-accelerated NVDEC video decoders.",
-        "2. YOLOv8-nano identifies candidate bounding boxes for faces and heads.",
-        "3. ByteTrack tracker associates detections across consecutive frames to prevent duplicate counts.",
-        "4. Aligned face crops fed into TensorRT FP16 ResNet-50 classification engine.",
-        "5. Frame memory immediately purged from GPU VRAM without any disk writes.",
-        "6. Anonymized JSON demographic payload published to central MQTT broker.",
+        "1. Cardholder attempts $420 online transaction; payment gateway dispatches authorization event.",
+        "2. Ingestion layer decodes JSON/Protobuf payload and queries Redis for card velocity counters.",
+        "3. Real-time feature vector assembled (velocity in last 1 hour, geographical distance from previous charge).",
+        "4. ONNX Runtime executes quantized model scoring in 8.2 milliseconds.",
+        "5. Risk score evaluated against merchant risk thresholds; 'APPROVE' signal returned in 11.4ms.",
+        "6. Telemetry logged asynchronously to ClickHouse for continuous retraining.",
       ],
     },
     developmentProcess: [
       {
         step: "01",
-        title: "Model Selection & Multi-Task Design",
+        title: "Historical Dataset Mining",
         description:
-          "Architected a unified ResNet-50 backbone with dual classification heads for simultaneous age bracket and gender prediction.",
-        deliverables: ["PyTorch multi-task model", "Custom loss weighting logic"],
+          "Analyzed 12M anonymized transactions to identify emerging chargeback patterns, card-testing signatures, and device spoofing.",
+        deliverables: ["Curated transaction dataset", "Feature correlation matrix"],
       },
       {
         step: "02",
-        title: "Fine-Tuning on Diverse Datasets",
+        title: "Feature Engineering & Store",
         description:
-          "Trained on curated public demographic datasets augmented with synthetic lighting variations, head tilts, and surveillance noise.",
-        deliverables: ["Trained FP32 PyTorch weights", "Confusion matrix validation metrics"],
+          "Engineered 140+ behavioral features including sliding window velocity, geolocation jump velocity, and device mismatch.",
+        deliverables: ["Redis velocity feature store", "Real-time aggregation Lua scripts"],
       },
       {
         step: "03",
-        title: "TensorRT Compilation & Quantization",
+        title: "Ensemble Training & ONNX Quantization",
         description:
-          "Exported ONNX graphs and built optimized TensorRT FP16 execution engines calibrated for NVIDIA architecture.",
-        deliverables: ["Engine binary artifacts", "GPU latency & memory profiling"],
+          "Trained XGBoost baseline and compiled to ONNX FP16 runtime with AVX-512 optimizations for sub-millisecond execution.",
+        deliverables: ["ONNX model binaries", "Latency & memory benchmark report"],
       },
       {
         step: "04",
-        title: "Tracker & Pipeline Integration",
+        title: "Inline Switch Integration",
         description:
-          "Combined YOLOv8 detector and ByteTrack Kalman tracker into an asynchronous multi-threaded C++ and Python pipeline.",
-        deliverables: ["Production edge pipeline code", "Multi-camera test harness"],
+          "Constructed high-throughput async FastAPI worker pipeline integrated with Kafka streaming brokers.",
+        deliverables: ["Async scoring service", "Fail-open safety circuit breakers"],
       },
       {
         step: "05",
-        title: "Telemetry & Performance Profiling",
+        title: "Production Load & Stress Testing",
         description:
-          "Built secure MQTT transmission client and real-time Grafana dashboard tracking footfall volume, dwell times, and demographics.",
-        deliverables: ["MQTT telemetry bridge", "Grafana executive dashboard"],
+          "Simulated peak transaction bursts of 4,000 transactions per second to verify latency SLAs under extreme load.",
+        deliverables: ["Stress test telemetry logs", "SLA latency compliance audit"],
       },
     ],
     engineeringChallenges: [
       {
-        title: "Preventing Frame Rate Drops Under High Visitor Density",
+        title: "Sub-15ms Round-Trip Card Network SLAs",
         problem:
-          "When retail aisles experienced sudden crowd surges, per-face classification calls overwhelmed GPU compute buffers, dropping video frame rates below 15 FPS.",
+          "Standard Python machine learning inference taking 45-60ms breached payment processor timeout windows, causing transactions to fail.",
         approach:
-          "Implemented dynamic face crop batching combined with temporal inference skipping (classifying each tracked person every 8 frames rather than every frame).",
+          "Compiled model trees to ONNX Runtime C++ execution binaries and pre-computed customer velocity counters into high-performance Redis memory.",
         solution:
-          "Maintained steady 48+ FPS processing throughput even during dense crowd scenarios with zero loss in demographic accuracy.",
+          "Cut total end-to-end evaluation latency to 11.4 milliseconds at peak load of 4,000 TPS.",
       },
       {
-        title: "Handling Oblique Surveillance Angles",
+        title: "Minimizing False-Positive Declines on High-Value Users",
         problem:
-          "Ceiling-mounted security cameras capture extreme downward angles where standard facial alignment models fail to locate keypoints.",
+          "Overly sensitive fraud models blocked legitimate high-net-worth customers traveling internationally, generating severe merchant backlash.",
         approach:
-          "Trained an affine transform pre-processor on oblique surveillance crops to normalize facial geometry before feeding tensors to ResNet.",
+          "Trained dynamic risk thresholds calibrated against historical customer tenure, verified device tokens, and multi-factor trust scores.",
         solution:
-          "Improved demographic classification accuracy at 45-degree downward angles by 31.4%.",
+          "Reduced false-positive declines by 65% while capturing 94.2% of actual fraudulent attempts.",
       },
     ],
     resultsAndValidation: {
       summary:
-        "Rigorous stress-testing across diverse surveillance video feeds proved high inference velocity and strict privacy compliance.",
+        "Stress-tested against millions of synthetic and historic transactions, validating sub-12ms latency and high detection recall.",
       metrics: [
         {
-          value: "48.2 FPS",
-          label: "Inference Throughput",
-          description: "Sustained dual-pipeline processing speed on NVIDIA Jetson edge platform.",
-          context: "Real-time edge performance",
+          value: "11.4 ms",
+          label: "End-to-End Scoring Latency",
+          description: "Total elapsed time from transaction event arrival to decision response.",
+          context: "Sub-15ms card SLA fulfilled",
         },
         {
-          value: "91.8%",
-          label: "Demographic Accuracy",
-          description: "Combined accuracy across gender and age brackets under standard retail lighting.",
-          context: "Benchmarked on surveillance test sets",
+          value: "65%",
+          label: "False-Positive Reduction",
+          description: "Fewer legitimate customer card declines compared to rules-based engines.",
+          context: "Significantly lowers merchant friction",
         },
         {
-          value: "0 bytes",
-          label: "Biometric Data Stored",
-          description: "Zero image frames or biometric vectors written to disk or transmitted to cloud.",
-          context: "100% GDPR/CCPA compliant",
+          value: "4,000 TPS",
+          label: "Peak Transaction Throughput",
+          description: "Concurrent transactions scored per second on a single Kubernetes cluster node.",
+          context: "High-density scaling",
         },
         {
-          value: "99.8%",
-          label: "Bandwidth Savings",
-          description: "Comparing lightweight MQTT JSON events against continuous HD video cloud streaming.",
-          context: "Massive cost efficiency",
+          value: "94.2%",
+          label: "Fraud Detection Recall",
+          description: "Percentage of confirmed chargebacks and fraudulent attempts successfully flagged.",
+          context: "Production verified benchmark",
         },
       ],
       qualitativeValidation: [
-        "Eliminated cloud streaming bandwidth costs entirely while satisfying strict EU privacy regulations.",
-        "Persistent tracking reliably differentiates between newly entering shoppers and stationary employees.",
-        "Automated telemetry successfully populates real-time retail occupancy and dwell-time heatmaps.",
+        "Card payment processors praise the sub-12ms response time that eliminates transaction authorization lag.",
+        "Sliding window velocity tracking successfully identifies card-testing bots within seconds.",
+        "Merchant admin dashboards provide instant transparency into risk score contribution factors.",
       ],
     },
     galleryScreens: [
       {
-        id: "camera-hud",
-        title: "Surveillance Stream HUD",
+        id: "scoring-hud",
+        title: "Real-Time Transaction Risk Monitor",
         caption:
-          "Real-time video feed overlay with bounding boxes, tracking IDs, demographic estimates, and FPS counter.",
-        visualType: "gender-detection",
+          "Live stream of transaction authorization requests with millisecond score latency and risk breakdown.",
+        visualType: "finsecure-ml",
       },
       {
-        id: "edge-pipeline",
-        title: "TensorRT Pipeline Profiler",
+        id: "velocity-graph",
+        title: "Card Velocity & Anomaly Inspector",
         caption:
-          "Telemetry showing GPU memory utilization, frame decoding latency, and MQTT event dispatch rates.",
-        visualType: "gender-detection",
+          "Sliding-window transaction velocity graphs identifying distributed card-testing spikes.",
+        visualType: "finsecure-ml",
       },
       {
-        id: "dwell-analytics",
-        title: "Store Dwell & Footfall Dashboard",
+        id: "merchant-dashboard",
+        title: "Merchant Risk Threshold Console",
         caption:
-          "Aggregated hourly foot-traffic charts, gender balance indicators, and average dwell times by department.",
-        visualType: "gender-detection",
+          "Configuring dynamic approval thresholds and inspecting chargeback prevention metrics.",
+        visualType: "finsecure-ml",
       },
     ],
     nextProjectSlug: "voice-agent",
-    prevProjectSlug: "travelmate-ai",
+    prevProjectSlug: "plant-doctor",
   },
   {
     id: "voice-agent",
@@ -1038,12 +519,12 @@ export const projectsData: CaseStudyProject[] = [
         visualType: "voice-agent",
       },
     ],
-    nextProjectSlug: "smart-course-qa",
-    prevProjectSlug: "gender-detection",
+    nextProjectSlug: "enterprise-rag-assistant",
+    prevProjectSlug: "finsecure-ml",
   },
   {
-    id: "smart-course-qa",
-    slug: "smart-course-qa",
+    id: "enterprise-rag-assistant",
+    slug: "enterprise-rag-assistant",
     title: "Smart Enterprise Q&A",
     tagline: "RAG-powered knowledge assistant.",
     category: "AI & ML",
@@ -1056,7 +537,7 @@ export const projectsData: CaseStudyProject[] = [
       "Enterprise document intelligence engine that indexes millions of pages of technical documentation, contracts, and internal knowledge bases with exact page citations.",
     techStackFlat: [
       "LangChain",
-      "Streamlit",
+      "FastAPI",
       "Gemini",
       "RAG",
     ],
@@ -1064,7 +545,7 @@ export const projectsData: CaseStudyProject[] = [
       "Smart Enterprise Q&A solves knowledge fragmentation by allowing teams to query massive corpora of proprietary knowledge in plain natural language. The system cites exact page numbers, highlights source excerpts, and cross-references verified internal repositories with zero hallucinations.",
     targetAudience:
       "Enterprise engineering teams, academic researchers, legal departments, and corporate knowledge hubs.",
-    heroVisualType: "smart-course-qa",
+    heroVisualType: "enterprise-rag-assistant",
     repositoryUrl: "https://github.com/Muhammad-Usman55/Course-Material-QA-Assistant",
     liveDemoUrl: "https://courseqa.deeplayersolutions.com",
     challenge: {
@@ -1114,7 +595,7 @@ export const projectsData: CaseStudyProject[] = [
     ],
     technologies: [
       "LangChain",
-      "Streamlit",
+      "FastAPI",
       "Gemini",
       "RAG",
       "Qdrant",
@@ -1139,7 +620,7 @@ export const projectsData: CaseStudyProject[] = [
       },
       {
         category: "Frontend & Interfaces",
-        items: ["Next.js", "Streamlit", "React 19", "Tailwind CSS", "PDF.js Visualizer"],
+        items: ["Next.js", "FastAPI", "React 19", "Tailwind CSS", "PDF.js Visualizer"],
       },
     ],
     architecture: {
@@ -1170,7 +651,7 @@ export const projectsData: CaseStudyProject[] = [
         {
           name: "Interactive Knowledge Portal",
           role: "Citation & Document Viewer",
-          technologies: ["Next.js", "Streamlit", "PDF.js Viewer"],
+          technologies: ["Next.js", "FastAPI", "PDF.js Viewer"],
           description:
             "Renders verified answers and displays side-by-side document previews when citations are clicked.",
         },
@@ -1211,7 +692,7 @@ export const projectsData: CaseStudyProject[] = [
         title: "User Interface Development",
         description:
           "Engineered a responsive interface featuring side-by-side document inspection and instant search history.",
-        deliverables: ["Interactive split-screen viewer", "Streamlit prototype"],
+        deliverables: ["Interactive split-screen viewer", "FastAPI microservice"],
       },
       {
         step: "05",
@@ -1282,25 +763,286 @@ export const projectsData: CaseStudyProject[] = [
         title: "Split-Screen Q&A & Document Viewer",
         caption:
           "Side-by-side interface showing the AI answer on the left and the source document on the right.",
-        visualType: "smart-course-qa",
+        visualType: "enterprise-rag-assistant",
       },
       {
         id: "citation-inspector",
         title: "Exact Page Coordinate Highlighting",
         caption:
           "Bounding box overlay highlighting the exact text paragraph extracted from the manual.",
-        visualType: "smart-course-qa",
+        visualType: "enterprise-rag-assistant",
       },
       {
         id: "knowledge-graph",
         title: "Enterprise Knowledge Index",
         caption:
           "Visualizing interconnected document categories and index health telemetry.",
-        visualType: "smart-course-qa",
+        visualType: "enterprise-rag-assistant",
+      },
+    ],
+    nextProjectSlug: "visionsense-video-analytics",
+    prevProjectSlug: "voice-agent",
+  },
+  {
+    id: "visionsense-video-analytics",
+    slug: "visionsense-video-analytics",
+    title: "VisionSense",
+    tagline: "Advanced video analytics & insights.",
+    category: "AI & ML",
+    projectType: "Production Engineering Prototype",
+    status: "Production Ready",
+    featured: true,
+    published: true,
+    accentColor: "#059669",
+    summary:
+      "Privacy-first edge computer vision system for foot-traffic demographic analytics, combining YOLOv8 person detection with ResNet-50 classification on local edge hardware.",
+    techStackFlat: [
+      "YOLO",
+      "OpenCV",
+      "PyTorch",
+      "AI Analytics",
+    ],
+    overview:
+      "VisionSense performs real-time face localization, anonymized demographic classification (age brackets and gender estimation), and customer dwell-time calculation from standard CCTV video streams. Architected strictly around privacy-by-design principles, all frame processing occurs in volatile GPU memory directly on local edge appliances (NVIDIA Jetson / x86 TensorRT). Video frames are discarded immediately upon inference, outputting only encrypted numerical metadata to prevent privacy liabilities.",
+    targetAudience:
+      "Commercial retail chains, shopping malls, airport terminals, and exhibition centers needing footfall demographics without privacy violations.",
+    heroVisualType: "visionsense-video-analytics",
+    repositoryUrl: "https://github.com/Muhammad-Usman55/Gender-Detection-Yolo-Resnet50",
+    liveDemoUrl: "https://visionsense.deeplayersolutions.com",
+    challenge: {
+      summary:
+        "Retailers need accurate demographic footfall data to optimize store layouts and merchandising. Streaming dozens of 1080p surveillance video feeds to public cloud providers consumes prohibitive network bandwidth and triggers severe biometric surveillance privacy compliance violations (GDPR/CCPA).",
+      painPoints: [
+        "Streaming 20+ HD security camera feeds to the cloud incurs immense monthly bandwidth and cloud GPU bills.",
+        "Transmitting and storing raw customer facial images introduces massive regulatory and legal liabilities under GDPR.",
+        "Generic pre-trained vision models struggle with extreme angles, varied heights, motion blur, and poor retail store lighting.",
+        "Edge compute devices have constrained power and thermal limits that throttle heavy neural network architectures.",
+      ],
+    },
+    solution: {
+      summary:
+        "We built an ultra-optimized two-stage edge pipeline: YOLOv8-nano localized faces and human silhouettes, passing cropped facial bounding boxes to a TensorRT-quantized multi-task ResNet-50 network for age and gender estimation at 48+ FPS per stream. All image tensors are instantly freed from RAM, dispatching only anonymized JSON telemetry over lightweight MQTT.",
+      keyDecisions: [
+        "Compiled PyTorch models to FP16 NVIDIA TensorRT engines, cutting inference latency by 68%.",
+        "Adopted an edge-only architecture where zero video or facial biometric templates are ever written to disk or transmitted.",
+        "Integrated Kalman filter multi-object tracking to prevent double-counting visitors walking through camera field-of-view.",
+      ],
+    },
+    keyFeatures: [
+      {
+        title: "48+ FPS Multi-Stream Edge Processing",
+        description:
+          "Sustained 48 frames per second inference across multiple concurrent camera feeds on compact edge accelerator hardware.",
+        iconName: "Zap",
+      },
+      {
+        title: "100% Privacy-Preserving Architecture",
+        description:
+          "Zero facial images, biometric vectors, or personal data saved to disk; only anonymized telemetry is published.",
+        iconName: "Shield",
+      },
+      {
+        title: "Multi-Object Trajectory Tracking",
+        description:
+          "Kalman filter and ByteTrack association maintain visitor tracking across occlusions, calculating accurate dwell times.",
+        iconName: "Eye",
+      },
+      {
+        title: "Low-Bandwidth MQTT Telemetry",
+        description:
+          "Transmits micro-payload JSON telemetry over MQTT, reducing network bandwidth consumption by over 99.8% vs video streaming.",
+        iconName: "Radio",
+      },
+    ],
+    technologies: [
+      "YOLO",
+      "OpenCV",
+      "PyTorch",
+      "AI Analytics",
+      "NVIDIA TensorRT",
+      "CUDA",
+      "C++",
+      "Python",
+      "MQTT",
+      "Docker",
+    ],
+    technologyGroups: [
+      {
+        category: "Computer Vision & Edge AI",
+        items: ["YOLOv8", "ResNet-50", "PyTorch", "NVIDIA TensorRT", "CUDA Toolkit", "OpenCV"],
+      },
+      {
+        category: "Tracking & Association",
+        items: ["ByteTrack", "Kalman Filter", "IoU Association", "Feature Embeddings"],
+      },
+      {
+        category: "Edge Runtime & Protocol",
+        items: ["Python 3.10", "C++ Inference Wrapper", "MQTT (Mosquitto)", "Protobuf Serialization"],
+      },
+      {
+        category: "Analytics & Monitoring",
+        items: ["TimescaleDB", "Grafana Dashboards", "Docker Containerization", "NVIDIA System Management"],
+      },
+    ],
+    architecture: {
+      overview:
+        "The system ingests RTSP surveillance streams via hardware-accelerated video decoding. YOLOv8 localizes faces in incoming frames; cropped bounding boxes are batched and passed to TensorRT ResNet-50 for demographic classification. Trajectory trackers maintain visitor identity across frames, and metadata is published via MQTT to an aggregated analytics dashboard.",
+      layers: [
+        {
+          name: "Video Ingestion Layer",
+          role: "Hardware Stream Decoding",
+          technologies: ["NVIDIA DeepStream / OpenCV", "RTSP Streams", "CUDA Decoders"],
+          description:
+            "Decodes concurrent H.264/H.265 camera feeds in hardware, zero-copying frame tensors directly into GPU memory.",
+        },
+        {
+          name: "Detection & Tracking Layer",
+          role: "Localization & Trajectory",
+          technologies: ["YOLOv8 TensorRT", "ByteTrack", "Kalman Filter"],
+          description:
+            "Detects human silhouettes and facial regions, maintaining persistent tracking IDs as visitors move through retail zones.",
+        },
+        {
+          name: "Demographic Inference Layer",
+          role: "Multi-Task Classification",
+          technologies: ["ResNet-50 FP16", "TensorRT Engine", "PyTorch"],
+          description:
+            "Computes age bracket distributions and gender probabilities across batched face crops in sub-12 milliseconds.",
+        },
+        {
+          name: "Telemetry & Aggregation Layer",
+          role: "Zero-Knowledge Reporting",
+          technologies: ["MQTT Broker", "TimescaleDB", "Grafana"],
+          description:
+            "Transmits anonymous count, demographic, and dwell-time events, populating real-time retail occupancy heatmaps.",
+        },
+      ],
+      dataFlow: [
+        "1. RTSP camera stream ingested via hardware-accelerated NVDEC video decoders.",
+        "2. YOLOv8-nano identifies candidate bounding boxes for faces and heads.",
+        "3. ByteTrack tracker associates detections across consecutive frames to prevent duplicate counts.",
+        "4. Aligned face crops fed into TensorRT FP16 ResNet-50 classification engine.",
+        "5. Frame memory immediately purged from GPU VRAM without any disk writes.",
+        "6. Anonymized JSON demographic payload published to central MQTT broker.",
+      ],
+    },
+    developmentProcess: [
+      {
+        step: "01",
+        title: "Model Selection & Multi-Task Design",
+        description:
+          "Architected a unified ResNet-50 backbone with dual classification heads for simultaneous age bracket and gender prediction.",
+        deliverables: ["PyTorch multi-task model", "Custom loss weighting logic"],
+      },
+      {
+        step: "02",
+        title: "Fine-Tuning on Diverse Datasets",
+        description:
+          "Trained on curated public demographic datasets augmented with synthetic lighting variations, head tilts, and surveillance noise.",
+        deliverables: ["Trained FP32 PyTorch weights", "Confusion matrix validation metrics"],
+      },
+      {
+        step: "03",
+        title: "TensorRT Compilation & Quantization",
+        description:
+          "Exported ONNX graphs and built optimized TensorRT FP16 execution engines calibrated for NVIDIA architecture.",
+        deliverables: ["Engine binary artifacts", "GPU latency & memory profiling"],
+      },
+      {
+        step: "04",
+        title: "Tracker & Pipeline Integration",
+        description:
+          "Combined YOLOv8 detector and ByteTrack Kalman tracker into an asynchronous multi-threaded C++ and Python pipeline.",
+        deliverables: ["Production edge pipeline code", "Multi-camera test harness"],
+      },
+      {
+        step: "05",
+        title: "Telemetry & Performance Profiling",
+        description:
+          "Built secure MQTT transmission client and real-time Grafana dashboard tracking footfall volume, dwell times, and demographics.",
+        deliverables: ["MQTT telemetry bridge", "Grafana executive dashboard"],
+      },
+    ],
+    engineeringChallenges: [
+      {
+        title: "Preventing Frame Rate Drops Under High Visitor Density",
+        problem:
+          "When retail aisles experienced sudden crowd surges, per-face classification calls overwhelmed GPU compute buffers, dropping video frame rates below 15 FPS.",
+        approach:
+          "Implemented dynamic face crop batching combined with temporal inference skipping (classifying each tracked person every 8 frames rather than every frame).",
+        solution:
+          "Maintained steady 48+ FPS processing throughput even during dense crowd scenarios with zero loss in demographic accuracy.",
+      },
+      {
+        title: "Handling Oblique Surveillance Angles",
+        problem:
+          "Ceiling-mounted security cameras capture extreme downward angles where standard facial alignment models fail to locate keypoints.",
+        approach:
+          "Trained an affine transform pre-processor on oblique surveillance crops to normalize facial geometry before feeding tensors to ResNet.",
+        solution:
+          "Improved demographic classification accuracy at 45-degree downward angles by 31.4%.",
+      },
+    ],
+    resultsAndValidation: {
+      summary:
+        "Rigorous stress-testing across diverse surveillance video feeds proved high inference velocity and strict privacy compliance.",
+      metrics: [
+        {
+          value: "48.2 FPS",
+          label: "Inference Throughput",
+          description: "Sustained dual-pipeline processing speed on NVIDIA Jetson edge platform.",
+          context: "Real-time edge performance",
+        },
+        {
+          value: "91.8%",
+          label: "Demographic Accuracy",
+          description: "Combined accuracy across gender and age brackets under standard retail lighting.",
+          context: "Benchmarked on surveillance test sets",
+        },
+        {
+          value: "0 bytes",
+          label: "Biometric Data Stored",
+          description: "Zero image frames or biometric vectors written to disk or transmitted to cloud.",
+          context: "100% GDPR/CCPA compliant",
+        },
+        {
+          value: "99.8%",
+          label: "Bandwidth Savings",
+          description: "Comparing lightweight MQTT JSON events against continuous HD video cloud streaming.",
+          context: "Massive cost efficiency",
+        },
+      ],
+      qualitativeValidation: [
+        "Eliminated cloud streaming bandwidth costs entirely while satisfying strict EU privacy regulations.",
+        "Persistent tracking reliably differentiates between newly entering shoppers and stationary employees.",
+        "Automated telemetry successfully populates real-time retail occupancy and dwell-time heatmaps.",
+      ],
+    },
+    galleryScreens: [
+      {
+        id: "camera-hud",
+        title: "Surveillance Stream HUD",
+        caption:
+          "Real-time video feed overlay with bounding boxes, tracking IDs, demographic estimates, and FPS counter.",
+        visualType: "visionsense-video-analytics",
+      },
+      {
+        id: "edge-pipeline",
+        title: "TensorRT Pipeline Profiler",
+        caption:
+          "Telemetry showing GPU memory utilization, frame decoding latency, and MQTT event dispatch rates.",
+        visualType: "visionsense-video-analytics",
+      },
+      {
+        id: "dwell-analytics",
+        title: "Store Dwell & Footfall Dashboard",
+        caption:
+          "Aggregated hourly foot-traffic charts, gender balance indicators, and average dwell times by department.",
+        visualType: "visionsense-video-analytics",
       },
     ],
     nextProjectSlug: "auto-labeling",
-    prevProjectSlug: "voice-agent",
+    prevProjectSlug: "enterprise-rag-assistant",
   },
   {
     id: "auto-labeling",
@@ -1559,267 +1301,525 @@ export const projectsData: CaseStudyProject[] = [
         visualType: "auto-labeling",
       },
     ],
-    nextProjectSlug: "finsecure-ml",
-    prevProjectSlug: "smart-course-qa",
+    nextProjectSlug: "travelmate-ai",
+    prevProjectSlug: "visionsense-video-analytics",
   },
   {
-    id: "finsecure-ml",
-    slug: "finsecure-ml",
-    title: "FinSecure Real-Time Fraud Engine",
-    tagline: "Real-time fraud detection & risk scoring.",
-    category: "Data Science",
+    id: "travelmate-ai",
+    slug: "travelmate-ai",
+    title: "TravelMate AI",
+    tagline: "Smart travel planning with real-time data.",
+    category: "Web Apps",
     projectType: "Production Engineering Prototype",
     status: "Production Ready",
     featured: true,
     published: true,
     accentColor: "#087A3D",
     summary:
-      "High-throughput transactional scoring system evaluating credit and debit transfers against evolving fraud patterns in under 12 milliseconds.",
+      "An autonomous conversational travel companion orchestrated with verified tool grounding that synthesizes real-time flight schedules, lodging options, and route optimization into balanced, delay-resilient itineraries.",
     techStackFlat: [
-      "Python",
-      "ML",
-      "Real-Time",
-      "Security",
+      "Django",
+      "OpenAI",
+      "WebSocket",
+      "Maps API",
     ],
     overview:
-      "FinSecure protects over $2B in annual transactional volume for fintech platforms and payment gateways. Operating in-line with financial payment switches, the machine learning system evaluates behavioral velocity, device fingerprinting, and relational graph signals to flag fraudulent chargebacks in real time.",
+      "TravelMate AI replaces fragmented multi-tab vacation planning with an autonomous, graph-based multi-agent architecture. By separating the trip planning workflow into specialized cooperating agents—Geospatial Route Agent, Budget & Flight Scanner, and Local Experience Curator—the platform generates mathematically viable, time-consistent itineraries while enforcing strict tool-calling constraints to prevent hallucinated flights or impossible transit connections.",
     targetAudience:
-      "Fintech startups, digital banks, card issuing networks, and high-volume e-commerce payment processors.",
-    heroVisualType: "finsecure-ml",
-    repositoryUrl: "https://github.com/Muhammad-Usman55/FinSecure-Fraud-Engine",
-    liveDemoUrl: "https://finsecure.deeplayersolutions.com",
+      "Independent travelers, digital nomads, and travel management groups seeking fully customized, dynamic travel itineraries with real-time adaptation.",
+    heroVisualType: "travelmate-ai",
+    repositoryUrl: "https://github.com/Muhammad-Usman55/TravelMate-AI",
+    liveDemoUrl: "https://travelmate.deeplayersolutions.com",
     challenge: {
       summary:
-        "Rules-based legacy fraud filters blocked too many legitimate high-value customers, causing customer churn, while slow ML pipelines introduced latency that breached card network SLAs.",
+        "Modern travelers consult over 30 websites to plan complex multi-day journeys. Generic LLMs hallucinate non-existent flight routes, propose geographically conflicting destinations in a single afternoon, and cannot dynamically replan when a flight delays or weather conditions shift.",
       painPoints: [
-        "Legacy static rules decline up to 8% of legitimate transactions, damaging merchant revenue.",
-        "Batch-oriented fraud detection flags fraudulent transfers hours after funds have cleared.",
-        "Card payment networks enforce strict sub-25ms response SLAs; slow models cause transaction timeouts.",
-        "Sophisticated fraud rings mutate card-testing patterns across distributed proxies faster than rules can be written.",
+        "Generic AI chat models hallucinate discontinued airline routes and closed attractions.",
+        "Naive single-prompt LLM travel planners fail at arithmetic budget balancing and temporal transit calculations.",
+        "Static PDF travel itineraries break the moment a flight is rescheduled or severe weather closes an outdoor landmark.",
+        "Manual group trip coordination involves chaotic spreadsheets and disjointed messaging threads.",
       ],
     },
     solution: {
       summary:
-        "We architected an ultra-fast in-memory feature store combined with an ONNX-quantized ensemble of XGBoost and Graph Neural Networks that computes multi-factor fraud risk scores in 11.4 milliseconds.",
+        "We engineered a stateful multi-agent system powered by LangGraph. Each sub-agent holds specialized domain knowledge, invokes live verified travel APIs (Amadeus, Google Places, OpenWeather), and coordinates through a deterministic supervisor node that validates geographic feasibility, transit buffers, and budget constraints before presenting the schedule.",
       keyDecisions: [
-        "Compiled gradient boosted decision trees to ONNX Runtime with AVX-512 vectorization for sub-millisecond scoring.",
-        "Implemented Redis cluster in-memory sliding window counters to compute customer transaction velocity features in real time.",
-        "Integrated dynamic threshold tuning that minimizes false-positive declines during seasonal shopping peaks.",
+        "Adopted LangGraph state machines with cyclic validation loops to verify schedule feasibility before final answer generation.",
+        "Integrated real-time external APIs for live flight schedules, hotel rates, and localized weather forecasts.",
+        "Implemented Redis state checkpointing allowing users to pause, fork, and dynamically modify itineraries via conversational turns.",
       ],
     },
     keyFeatures: [
       {
-        title: "11.4ms Sub-SLA Inference",
+        title: "Multi-Agent State Orchestration",
         description:
-          "Computes complete fraud risk probability scores in 11.4ms, well within card network transaction windows.",
-        iconName: "Zap",
+          "Specialized agent nodes for flight logistics, hotel matching, routing, and dining coordinate via a stateful LangGraph supervisor.",
+        iconName: "Workflow",
       },
       {
-        title: "65% False-Positive Reduction",
+        title: "Verified Live API Grounding",
         description:
-          "Reduces legitimate customer decline rates by 65% compared to legacy boolean rule sets.",
-        iconName: "ShieldCheck",
+          "Queries live GDS and transit APIs to verify current flight numbers, ticket pricing, and opening hours, eliminating hallucinations.",
+        iconName: "CheckCircle2",
       },
       {
-        title: "Real-Time Velocity Aggregation",
+        title: "Dynamic Weather & Delay Re-routing",
         description:
-          "Computes sliding window velocity features (amount, IP churn, device switch) in-memory across distributed transactions.",
-        iconName: "Activity",
+          "Automatically detects incoming rain forecasts or flight delay alerts and swaps indoor museum tours for outdoor excursions.",
+        iconName: "RefreshCw",
       },
       {
-        title: "Relational Graph Ring Detection",
+        title: "Interactive Map Waypoints & Budgets",
         description:
-          "Graph neural network analyzes shared device fingerprints and card numbers to identify organized fraud rings.",
-        iconName: "Binary",
+          "Renders day-by-day transit sequences on dynamic interactive maps with live ledger balance tracking per currency.",
+        iconName: "MapPin",
       },
     ],
     technologies: [
-      "Python",
-      "ML",
-      "Real-Time",
-      "Security",
-      "XGBoost",
-      "ONNX Runtime",
+      "Django",
+      "OpenAI",
+      "WebSocket",
+      "Maps API",
+      "LangGraph",
+      "Next.js",
+      "PostgreSQL",
       "Redis",
-      "FastAPI",
       "Docker",
     ],
     technologyGroups: [
       {
-        category: "Machine Learning & Graph AI",
-        items: ["XGBoost", "ONNX Runtime", "Graph Neural Networks", "Scikit-Learn", "Optuna"],
+        category: "Agentic AI & Orchestration",
+        items: ["OpenAI GPT-4o", "LangGraph", "LangChain", "Pydantic", "Prompt Engineering"],
       },
       {
-        category: "High-Throughput Streaming",
-        items: ["Python 3.11", "FastAPI", "Apache Kafka", "Redis Cluster", "ClickHouse"],
+        category: "Backend & Data Storage",
+        items: ["Django", "FastAPI", "Python 3.11", "PostgreSQL", "Redis State Checkpointer"],
       },
       {
-        category: "Infrastructure & Security",
-        items: ["Docker", "Kubernetes", "mTLS Encryption", "Prometheus Metrics", "Grafana"],
+        category: "Frontend & Visualization",
+        items: ["Next.js", "React 19", "TypeScript", "Tailwind CSS", "Mapbox GL / Leaflet"],
       },
       {
-        category: "Data Engineering",
-        items: ["DuckDB", "PostgreSQL", "Parquet", "PyArrow", "Airflow"],
+        category: "External Integration",
+        items: ["Amadeus GDS API", "Google Places API", "OpenWeatherMap API", "WebSockets"],
       },
     ],
     architecture: {
       overview:
-        "Payment gateways dispatch transaction authorization events to an in-memory Kafka ingest broker. Worker pods extract streaming velocity features from Redis, pass the feature tensor to an ONNX-quantized XGBoost engine, and emit risk scores back to the payment switch in 11.4 milliseconds.",
+        "A cyclic directed graph coordinates agent operations. The Supervisor Agent parses user preferences and delegates tasks to specialized worker nodes. After workers execute tool calls against verified APIs, a Validator Node audits temporal spacing and transit times before committing the state to PostgreSQL and Redis.",
       layers: [
         {
-          name: "Payment Gateway Ingest",
-          role: "Sub-Millisecond Event Ingestion",
-          technologies: ["Kafka / Redis Pub/Sub", "Protobuf", "FastAPI"],
+          name: "User Interface & Map Layer",
+          role: "Conversational UI & Map View",
+          technologies: ["Next.js", "Mapbox GL", "Tailwind CSS", "Server-Sent Events"],
           description:
-            "Ingests transaction authorization payloads from global payment switches with zero-copy deserialization.",
+            "Streams conversational reasoning tokens in real time while rendering interactive day-by-day waypoint pins and route polylines.",
         },
         {
-          name: "Real-Time Feature Store",
-          role: "Sliding-Window Aggregations",
-          technologies: ["Redis Cluster", "In-Memory Caching", "Lua Scripts"],
+          name: "Supervisor & Graph Engine",
+          role: "Multi-Agent Coordination",
+          technologies: ["LangGraph", "LangChain", "State Checkpointer"],
           description:
-            "Computes customer card velocity, velocity by IP, and device fingerprint risk scores within 2 milliseconds.",
+            "Manages agent execution flow, routing state between flight scanners, hotel matchers, and geographic optimizers.",
         },
         {
-          name: "ONNX Inference Engine",
-          role: "Fraud Probability Scoring",
-          technologies: ["ONNX Runtime", "XGBoost", "AVX-512 SIMD"],
+          name: "External Grounding APIs",
+          role: "Deterministic Live Data",
+          technologies: ["Amadeus API", "Google Places", "OpenWeatherMap"],
           description:
-            "Evaluates multi-model ensemble generating a calibrated fraud probability score between 0.00 and 1.00.",
+            "Fetches verified flight schedules, fare estimates, venue opening times, and 7-day precipitation forecasts.",
         },
         {
-          name: "Decision & Audit Layer",
-          role: "Rule Override & Reporting",
-          technologies: ["PostgreSQL", "ClickHouse", "Grafana"],
+          name: "Persistence & Memory Cache",
+          role: "Trip State & History",
+          technologies: ["PostgreSQL", "Redis", "JSONB Itinerary Trees"],
           description:
-            "Applies merchant-specific threshold decisions (Approve, Review, Decline) and logs telemetry for arbitration.",
+            "Stores trip states, user constraints, chat history, and enables instant forking or rolling back itinerary days.",
         },
       ],
       dataFlow: [
-        "1. Cardholder attempts $420 online transaction; payment gateway dispatches authorization event.",
-        "2. Ingestion layer decodes JSON/Protobuf payload and queries Redis for card velocity counters.",
-        "3. Real-time feature vector assembled (velocity in last 1 hour, geographical distance from previous charge).",
-        "4. ONNX Runtime executes quantized model scoring in 8.2 milliseconds.",
-        "5. Risk score evaluated against merchant risk thresholds; 'APPROVE' signal returned in 11.4ms.",
-        "6. Telemetry logged asynchronously to ClickHouse for continuous retraining.",
+        "1. User enters travel brief: '4-day family trip to Tokyo under $2,500 with sushi workshops'.",
+        "2. LangGraph Supervisor parses constraints and invokes Flight & Accommodation agents.",
+        "3. Flight Agent queries live Amadeus endpoints to retrieve validated flights within budget.",
+        "4. Route Agent clusters attractions geographically to eliminate crisscrossing across Tokyo.",
+        "5. Validation Node tests schedule against venue hours and inserts transit time buffers.",
+        "6. Final verified itinerary renders on interactive map with day-by-day timeline cards.",
       ],
     },
     developmentProcess: [
       {
         step: "01",
-        title: "Historical Dataset Mining",
+        title: "Agent Architecture Design",
         description:
-          "Analyzed 12M anonymized transactions to identify emerging chargeback patterns, card-testing signatures, and device spoofing.",
-        deliverables: ["Curated transaction dataset", "Feature correlation matrix"],
+          "Formulated state schemas and transition graphs in LangGraph, establishing strict boundaries between deterministic tools and LLM reasoning.",
+        deliverables: ["State graph blueprint", "Pydantic data schemas"],
       },
       {
         step: "02",
-        title: "Feature Engineering & Store",
+        title: "API Grounding & Tool Tooling",
         description:
-          "Engineered 140+ behavioral features including sliding window velocity, geolocation jump velocity, and device mismatch.",
-        deliverables: ["Redis velocity feature store", "Real-time aggregation Lua scripts"],
+          "Built resilient async wrappers for flight GDS, accommodation engines, and geospatial transit calculation with caching fallbacks.",
+        deliverables: ["Amadeus & Places API connectors", "Redis caching layer"],
       },
       {
         step: "03",
-        title: "Ensemble Training & ONNX Quantization",
+        title: "Validation & Feasibility Loop",
         description:
-          "Trained XGBoost baseline and compiled to ONNX FP16 runtime with AVX-512 optimizations for sub-millisecond execution.",
-        deliverables: ["ONNX model binaries", "Latency & memory benchmark report"],
+          "Implemented automated checks calculating transit travel times between sequential stops to prevent unfeasible schedule proposals.",
+        deliverables: ["Geospatial validation node", "Constraint solver routines"],
       },
       {
         step: "04",
-        title: "Inline Switch Integration",
+        title: "Frontend & Streaming Interface",
         description:
-          "Constructed high-throughput async FastAPI worker pipeline integrated with Kafka streaming brokers.",
-        deliverables: ["Async scoring service", "Fail-open safety circuit breakers"],
+          "Engineered a Next.js interface featuring token streaming, dynamic timeline cards, and synchronized map waypoint highlights.",
+        deliverables: ["Streaming chat UI", "Interactive Mapbox component"],
       },
       {
         step: "05",
-        title: "Production Load & Stress Testing",
+        title: "End-to-End Stress Testing",
         description:
-          "Simulated peak transaction bursts of 4,000 transactions per second to verify latency SLAs under extreme load.",
-        deliverables: ["Stress test telemetry logs", "SLA latency compliance audit"],
+          "Benchmarked multi-turn dialogues against complex multi-city constraints, evaluating budget adherence and API error resiliency.",
+        deliverables: ["Evaluation benchmark suite", "Automated synthetic test scenarios"],
       },
     ],
     engineeringChallenges: [
       {
-        title: "Sub-15ms Round-Trip Card Network SLAs",
+        title: "Preventing Multi-Agent State Divergence",
         problem:
-          "Standard Python machine learning inference taking 45-60ms breached payment processor timeout windows, causing transactions to fail.",
+          "In initial prototypes, independent agents frequently overwrote shared state properties—for example, the hotel agent booking dates inconsistent with updated flight arrival times.",
         approach:
-          "Compiled model trees to ONNX Runtime C++ execution binaries and pre-computed customer velocity counters into high-performance Redis memory.",
+          "Engineered a centralized LangGraph state checkpointer with explicit typed state transitions and pre-commit schema guards.",
         solution:
-          "Cut total end-to-end evaluation latency to 11.4 milliseconds at peak load of 4,000 TPS.",
+          "Zero state collisions achieved, guaranteeing that downstream itinerary generators always inherit synchronized arrival and departure timestamps.",
       },
       {
-        title: "Minimizing False-Positive Declines on High-Value Users",
+        title: "Eliminating Hallucinated Attraction Hours",
         problem:
-          "Overly sensitive fraud models blocked legitimate high-net-worth customers traveling internationally, generating severe merchant backlash.",
+          "Language models regularly scheduled temple and museum visits at 9:00 PM when venues were closed, causing user frustration.",
         approach:
-          "Trained dynamic risk thresholds calibrated against historical customer tenure, verified device tokens, and multi-factor trust scores.",
+          "Bound the itinerary generator to mandatory tool-calling lookups against Google Places operating hour vectors prior to event scheduling.",
         solution:
-          "Reduced false-positive declines by 65% while capturing 94.2% of actual fraudulent attempts.",
+          "100% elimination of scheduling conflicts with verified business operating hours across evaluated test itineraries.",
       },
     ],
     resultsAndValidation: {
       summary:
-        "Stress-tested against millions of synthetic and historic transactions, validating sub-12ms latency and high detection recall.",
+        "Tested against multi-day itinerary scenarios across major global destinations, verifying budget compliance, temporal feasibility, and sub-second token streaming.",
       metrics: [
         {
-          value: "11.4 ms",
-          label: "End-to-End Scoring Latency",
-          description: "Total elapsed time from transaction event arrival to decision response.",
-          context: "Sub-15ms card SLA fulfilled",
+          value: "100%",
+          label: "API-Grounded Flight Verification",
+          description: "All recommended flights and booking codes cross-referenced against live GDS data.",
+          context: "Zero hallucinated airlines",
         },
         {
-          value: "65%",
-          label: "False-Positive Reduction",
-          description: "Fewer legitimate customer card declines compared to rules-based engines.",
-          context: "Significantly lowers merchant friction",
+          value: "<1.2s",
+          label: "Initial Agent Streaming Latency",
+          description: "Time to first reasoning token streamed back to the interactive client.",
+          context: "Server-Sent Events streaming",
         },
         {
-          value: "4,000 TPS",
-          label: "Peak Transaction Throughput",
-          description: "Concurrent transactions scored per second on a single Kubernetes cluster node.",
-          context: "High-density scaling",
+          value: "0",
+          label: "Geographic Schedule Collisions",
+          description: "Rigorous transit time calculation prevents overlapping or unfeasible travel legs.",
+          context: "Automated routing validator",
         },
         {
-          value: "94.2%",
-          label: "Fraud Detection Recall",
-          description: "Percentage of confirmed chargebacks and fraudulent attempts successfully flagged.",
-          context: "Production verified benchmark",
+          value: "3x",
+          label: "Planning Velocity Acceleration",
+          description: "Reduces complete multi-day trip research and synthesis time from hours to minutes.",
+          context: "Multi-agent parallelization",
         },
       ],
       qualitativeValidation: [
-        "Card payment processors praise the sub-12ms response time that eliminates transaction authorization lag.",
-        "Sliding window velocity tracking successfully identifies card-testing bots within seconds.",
-        "Merchant admin dashboards provide instant transparency into risk score contribution factors.",
+        "Dynamic re-routing algorithms successfully replan schedules when synthetic flight delays are triggered.",
+        "Interactive budget ledger accurately accounts for accommodation, transit fares, and estimated meal costs.",
+        "Clear visual separation between verified tool results and conversational advice gives users complete trust.",
       ],
     },
     galleryScreens: [
       {
-        id: "scoring-hud",
-        title: "Real-Time Transaction Risk Monitor",
+        id: "timeline-view",
+        title: "Dynamic Day-by-Day Timeline",
         caption:
-          "Live stream of transaction authorization requests with millisecond score latency and risk breakdown.",
-        visualType: "finsecure-ml",
+          "Time-stamped schedule with integrated transit buffers, cost estimates, and attraction notes.",
+        visualType: "travelmate-ai",
       },
       {
-        id: "velocity-graph",
-        title: "Card Velocity & Anomaly Inspector",
+        id: "agent-graph",
+        title: "LangGraph State Inspector",
         caption:
-          "Sliding-window transaction velocity graphs identifying distributed card-testing spikes.",
-        visualType: "finsecure-ml",
+          "Live visualization of supervisor decisions, worker agent tool calls, and validation checkpoints.",
+        visualType: "travelmate-ai",
       },
       {
-        id: "merchant-dashboard",
-        title: "Merchant Risk Threshold Console",
+        id: "interactive-map",
+        title: "Geospatial Waypoint Mapper",
         caption:
-          "Configuring dynamic approval thresholds and inspecting chargeback prevention metrics.",
-        visualType: "finsecure-ml",
+          "Interactive map with numbered pins, daily walking routes, and nearby curated dining recommendations.",
+        visualType: "travelmate-ai",
       },
     ],
     nextProjectSlug: "plant-doctor",
     prevProjectSlug: "auto-labeling",
   },
+  {
+    id: "plant-doctor",
+    slug: "plant-doctor",
+    title: "Plant Doctor",
+    tagline: "AI plant disease detection & care insights.",
+    category: "AI & ML",
+    projectType: "Production Engineering Prototype",
+    status: "Production Ready",
+    featured: true,
+    published: true,
+    accentColor: "#159B50",
+    summary:
+      "A deep learning computer vision mobile and web application that diagnoses 38 crop foliage diseases in real time from field photographs with offline edge triage.",
+    techStackFlat: [
+      "Python",
+      "TensorFlow",
+      "FastAPI",
+      "Computer Vision",
+    ],
+    overview:
+      "Plant Doctor was engineered to empower agronomists and farmers with instant, scientifically accurate crop disease classification and actionable remediation plans directly in remote fields. Leveraging a dual-stage neural network architecture trained on over 87,000 crop condition images, the platform identifies 38 distinct bacterial, fungal, and viral leaf pathologies with high confidence—even under irregular sunlight and partial occlusion.",
+    targetAudience:
+      "Commercial farming enterprises, agricultural cooperatives, agronomists, and smallholder farmers operating in areas with intermittent cellular connectivity.",
+    heroVisualType: "plant-doctor",
+    repositoryUrl: "https://github.com/Muhammad-Usman55/Plant-Doctor",
+    liveDemoUrl: "https://plant-doctor.deeplayersolutions.com",
+    challenge: {
+      summary:
+        "Foliage diseases spread rapidly across crops before visible necrosis is noticed by field hands. In remote agricultural regions, certified pathologists are scarce, and intermittent rural connectivity renders cloud-only AI diagnostic tools unusable during critical scouting hours.",
+      painPoints: [
+        "Pathologists visit farms infrequently, leaving early fungal blights unnoticed until 20-40% yield loss occurs.",
+        "Zero or unstable 3G/4G connectivity across rural farm fields prevents standard cloud inference APIs from functioning.",
+        "Variable field lighting, shadow casting, and soil background noise cause generic pre-trained vision models to generate frequent false positives.",
+        "Existing research tools provide raw Latin pathogen taxonomy without practical pesticide dosage or organic remediation steps.",
+      ],
+    },
+    solution: {
+      summary:
+        "We architected a hybrid edge-cloud intelligence pipeline: an ultra-lightweight 8-bit quantized MobileNetV3 model running entirely offline on the client device for sub-60ms field triage, paired with an enterprise cloud ensemble of EfficientNet-B4 and Vision Transformers for deep lab-grade severity scoring and localized treatment generation.",
+      keyDecisions: [
+        "Trained INT8 quantized neural models for native on-device TFLite and WebAssembly inference without server dependency.",
+        "Implemented multi-scale synthetic data augmentation (simulating direct midday glare, overcast diffuse light, and morning dew) to harden feature representations.",
+        "Curated an integrated remediation knowledge base cross-referencing pesticide safety data sheets and biological organic controls.",
+      ],
+    },
+    keyFeatures: [
+      {
+        title: "Sub-60ms Offline Edge Diagnostics",
+        description:
+          "Runs 8-bit quantized MobileNetV3 locally in the client browser or mobile runtime without requiring internet access or cloud roundtrips.",
+        iconName: "Zap",
+      },
+      {
+        title: "38 Pathologies Across 14 Crops",
+        description:
+          "High-recall classification covering tomato early blight, potato late blight, corn leaf spot, grape black rot, apple scab, and healthy controls.",
+        iconName: "ShieldCheck",
+      },
+      {
+        title: "Grad-CAM Pathological Heatmap",
+        description:
+          "Visualizes neural activation maps directly over the scanned leaf image so agronomists can verify the exact lesion regions influencing the AI prediction.",
+        iconName: "Layers",
+      },
+      {
+        title: "Actionable Treatment Protocols",
+        description:
+          "Calculates certified fungicide dosages, organic biological controls, and cultural practices (aeration, drip timing) calibrated to crop growth stage.",
+        iconName: "FileCheck",
+      },
+    ],
+    technologies: [
+      "Python",
+      "TensorFlow",
+      "FastAPI",
+      "Computer Vision",
+      "MobileNetV3",
+      "Next.js",
+      "Docker",
+    ],
+    technologyGroups: [
+      {
+        category: "Machine Learning & Vision",
+        items: ["TensorFlow", "PyTorch", "MobileNetV3", "OpenCV", "Albumentations"],
+      },
+      {
+        category: "Backend & Orchestration",
+        items: ["FastAPI", "Python 3.11", "Uvicorn", "Pydantic v2", "Redis Queue"],
+      },
+      {
+        category: "Frontend & Edge Runtime",
+        items: ["Next.js", "React 19", "TypeScript", "Tailwind CSS", "WebAssembly TFLite"],
+      },
+      {
+        category: "DevOps & Deployment",
+        items: ["Docker", "GitHub Actions CI/CD", "Nginx", "Linux Ubuntu"],
+      },
+    ],
+    architecture: {
+      overview:
+        "The system operates on an edge-first, cloud-augmented paradigm. Mobile and browser clients perform instant offline inference using an optimized INT8 model. High-resolution imagery synchronizes to the cloud API where an ensemble model performs deep Grad-CAM explainability analysis and updates regional epidemiology heatmaps.",
+      layers: [
+        {
+          name: "Edge Client Layer",
+          role: "Offline Capture & Triage",
+          technologies: ["React / Next.js", "TFLite WebAssembly", "HTML5 Camera API"],
+          description:
+            "Captures RGB leaf photography, validates focus sharpness via Laplacian variance, and executes on-device inference in 54ms.",
+        },
+        {
+          name: "API & Validation Layer",
+          role: "Ingestion & Security",
+          technologies: ["FastAPI", "Pydantic", "JWT Auth", "Rate Limiter"],
+          description:
+            "Authenticates field requests, checks EXIF metadata and GPS coordinates, and routes images to the high-throughput inference worker pool.",
+        },
+        {
+          name: "Deep Inference Engine",
+          role: "Ensemble Pathology Scoring",
+          technologies: ["PyTorch", "EfficientNet-B4", "Vision Transformer", "TorchScript"],
+          description:
+            "Executes multi-class softmax classification with temperature scaling, computing disease confidence and generating Grad-CAM activation overlays.",
+        },
+        {
+          name: "Agronomic Knowledge Base",
+          role: "Treatment & Dosage Mapping",
+          technologies: ["PostgreSQL", "JSONB Schemas", "Vector Index"],
+          description:
+            "Retrieves chemical and organic remediation protocols mapped to specific plant growth phases and environmental humidity levels.",
+        },
+      ],
+      dataFlow: [
+        "1. Field worker photographs diseased crop leaf using mobile camera.",
+        "2. Client evaluates image sharpness via edge OpenCV/Canvas Laplacian kernel.",
+        "3. Local TFLite INT8 model computes top-3 disease probabilities within 54 milliseconds.",
+        "4. Diagnostic report displays instant triage results and immediate quarantine advice.",
+        "5. Background sync dispatches raw image to FastAPI cloud endpoint upon network reconnection.",
+        "6. Cloud EfficientNet ensemble validates diagnosis and stores geospatial occurrence data.",
+      ],
+    },
+    developmentProcess: [
+      {
+        step: "01",
+        title: "Dataset Assembly & Curation",
+        description:
+          "Curated 87,000+ crop foliage images across 38 condition categories, balancing class distributions and eliminating laboratory background artifacts.",
+        deliverables: ["Curated balanced dataset", "Multi-spectral train/val/test splits"],
+      },
+      {
+        step: "02",
+        title: "Model Architecture & Training",
+        description:
+          "Trained EfficientNet-B4 baseline in PyTorch with label smoothing and cosine annealing learning rate schedules, achieving 96.4% top-1 validation accuracy.",
+        deliverables: ["PyTorch training pipelines", "Loss & convergence benchmarks"],
+      },
+      {
+        step: "03",
+        title: "Edge Quantization & Benchmarking",
+        description:
+          "Quantized weights from FP32 to INT8 using Post-Training Quantization (PTQ), shrinking model size from 78MB to 4.2MB with less than 0.8% accuracy degradation.",
+        deliverables: ["TFLite flatbuffer models", "Edge latency benchmarks"],
+      },
+      {
+        step: "04",
+        title: "Application & API Engineering",
+        description:
+          "Constructed asynchronous FastAPI backend and responsive Next.js frontend with camera capture, offline caching, and treatment advisory generation.",
+        deliverables: ["Async REST API", "PWA offline client application"],
+      },
+      {
+        step: "05",
+        title: "Field Testing & Validation",
+        description:
+          "Conducted field stress testing under direct sunlight, partial shade, and dew conditions across tomato and potato plots to verify real-world robustness.",
+        deliverables: ["Field test telemetry logs", "Grad-CAM explainability reports"],
+      },
+    ],
+    engineeringChallenges: [
+      {
+        title: "Edge Model Size vs. Multi-Class Precision",
+        problem:
+          "Distinguishing between subtle visual differences (e.g., Early Blight vs. Septoria Leaf Spot) typically requires 100M+ parameter Vision Transformers, which cannot run inside mobile web browsers without crashing memory buffers.",
+        approach:
+          "Applied knowledge distillation transferring rich feature representations from a heavy EfficientNet-B4 teacher to a compact MobileNetV3 student, followed by structured weight pruning.",
+        solution:
+          "Compressed model memory footprint to 4.2MB while retaining 96.4% top-1 diagnostic accuracy and executing in 54ms on mid-range Android devices.",
+      },
+      {
+        title: "Background Clutter & Variable Sunlight",
+        problem:
+          "In real fields, soil, weeds, farm tools, and severe midday sun glare frequently tricked standard convolutional kernels into flagging background noise as leaf lesions.",
+        approach:
+          "Implemented automated foreground leaf segmentation using color-space thresholding in HSV combined with heavy random shadow and glare augmentation during PyTorch training runs.",
+        solution:
+          "False-positive diagnosis rate dropped by 73% in high-glare and complex field background environments.",
+      },
+    ],
+    resultsAndValidation: {
+      summary:
+        "Rigorous validation against academic benchmarks and simulated field photography demonstrated state-of-the-art diagnostic accuracy with true offline edge feasibility.",
+      metrics: [
+        {
+          value: "96.4%",
+          label: "Top-1 Diagnostic Accuracy",
+          description: "Verified across 38 distinct crop condition and pathogen classes.",
+          context: "Academic validation benchmark",
+        },
+        {
+          value: "54 ms",
+          label: "Edge Inference Latency",
+          description: "Average inference time on standard smartphone hardware via INT8 WebAssembly.",
+          context: "Sub-60ms budget achieved",
+        },
+        {
+          value: "4.2 MB",
+          label: "Quantized Model Footprint",
+          description: "Compressed from 78MB FP32 checkpoint with zero external cloud dependencies.",
+          context: "94.6% storage reduction",
+        },
+        {
+          value: "38",
+          label: "Crop Pathologies Classified",
+          description: "Spanning fungal, bacterial, viral infections, and nutrient deficiency controls.",
+          context: "14 commercial crop varieties",
+        },
+      ],
+      qualitativeValidation: [
+        "Tested against benchmark datasets with consistent precision across varying camera sensors and resolutions.",
+        "Grad-CAM visual overlays confirm that convolutional attention focuses strictly on pathological lesions rather than background soil.",
+        "Offline caching architecture guarantees continuous diagnostic capability in remote zero-signal agricultural zones.",
+      ],
+    },
+    galleryScreens: [
+      {
+        id: "scanner-hud",
+        title: "Live Edge Scanner HUD",
+        caption:
+          "Real-time viewfinder with focus verification, bounding box localization, and sub-60ms edge inference readout.",
+        visualType: "plant-doctor",
+      },
+      {
+        id: "gradcam-analysis",
+        title: "Grad-CAM Pathological Heatmap",
+        caption:
+          "Explainable AI visualization revealing neural activation density over fungal necrosis spots.",
+        visualType: "plant-doctor",
+      },
+      {
+        id: "treatment-plan",
+        title: "Clinical Remediation Protocol",
+        caption:
+          "Structured chemical and organic treatment plans calibrated to crop maturity and environmental moisture.",
+        visualType: "plant-doctor",
+      },
+    ],
+    nextProjectSlug: "finsecure-ml",
+    prevProjectSlug: "travelmate-ai",
+  }
 ];

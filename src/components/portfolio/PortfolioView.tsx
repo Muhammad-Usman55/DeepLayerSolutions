@@ -17,9 +17,9 @@ export function PortfolioView() {
       if (p.category === activeCategory) return true;
       // Allow secondary category matching (e.g. Plant Doctor is also Mobile, TravelMate is also Web Apps)
       if (activeCategory === "Mobile" && p.slug === "plant-doctor") return true;
-      if (activeCategory === "Web Apps" && (p.slug === "travelmate-ai" || p.slug === "smart-course-qa")) return true;
+      if (activeCategory === "Web Apps" && (p.slug === "travelmate-ai" || p.slug === "enterprise-rag-assistant" || p.slug === "smart-course-qa")) return true;
       if (activeCategory === "Automation" && (p.slug === "auto-labeling" || p.slug === "voice-agent")) return true;
-      if (activeCategory === "AI & ML" && (p.slug === "plant-doctor" || p.slug === "gender-detection" || p.slug === "smart-course-qa" || p.slug === "travelmate-ai")) return true;
+      if (activeCategory === "AI & ML" && (p.slug === "plant-doctor" || p.slug === "visionsense-video-analytics" || p.slug === "gender-detection" || p.slug === "enterprise-rag-assistant" || p.slug === "smart-course-qa" || p.slug === "travelmate-ai")) return true;
       if (activeCategory === "Data Science" && p.slug === "finsecure-ml") return true;
       return false;
     });

@@ -143,21 +143,20 @@ export function Navbar() {
                     <div
                       key={item.href}
                       ref={servicesDropdownRef}
-                      className="relative"
+                      className="relative inline-flex items-center"
                       onMouseEnter={handleMouseEnter}
                       onMouseLeave={handleMouseLeave}
                     >
-                      <button
-                        type="button"
-                        onClick={() => setServicesOpen((prev) => !prev)}
-                        aria-expanded={servicesOpen}
-                        aria-haspopup="true"
+                      <Link
+                        href="/services"
                         className={cn(
-                          "relative px-4 py-1.5 text-sm font-medium rounded-full transition-colors duration-200 inline-flex items-center gap-1 select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#008F53]",
+                          "relative px-3.5 py-1.5 text-sm font-medium rounded-full transition-colors duration-200 inline-flex items-center gap-1 select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#008F53]",
                           isActive
                             ? "text-[#008F53] font-semibold"
                             : "text-[#142A27] hover:text-[#008F53] hover:bg-[#E9FFF2]/60"
                         )}
+                        aria-haspopup="true"
+                        aria-expanded={servicesOpen}
                       >
                         {isActive && (
                           <motion.span
@@ -167,14 +166,33 @@ export function Navbar() {
                           />
                         )}
                         <span className="relative z-10">{item.label}</span>
-                        <ChevronDown
-                          className={cn(
-                            "w-3.5 h-3.5 relative z-10 transition-transform duration-250 ease-out text-[#64736F]",
-                            servicesOpen && "rotate-180 text-[#008F53]",
-                            isActive && "text-[#008F53]"
-                          )}
-                        />
-                      </button>
+                        <span
+                          role="button"
+                          tabIndex={0}
+                          aria-label="Toggle Services menu"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            setServicesOpen((prev) => !prev);
+                          }}
+                          onKeyDown={(e) => {
+                            if (e.key === "Enter" || e.key === " ") {
+                              e.preventDefault();
+                              e.stopPropagation();
+                              setServicesOpen((prev) => !prev);
+                            }
+                          }}
+                          className="inline-flex items-center justify-center p-0.5 rounded-full hover:bg-[#008F53]/10 transition-colors cursor-pointer"
+                        >
+                          <ChevronDown
+                            className={cn(
+                              "w-3.5 h-3.5 relative z-10 transition-transform duration-250 ease-out text-[#64736F]",
+                              servicesOpen && "rotate-180 text-[#008F53]",
+                              isActive && "text-[#008F53]"
+                            )}
+                          />
+                        </span>
+                      </Link>
 
                       {/* Services Mega Menu Dropdown */}
                       <AnimatePresence>

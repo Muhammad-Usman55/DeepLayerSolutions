@@ -36,6 +36,7 @@ export function ProjectVisualDispatcher({
 
     case "gender-detection":
     case "visionsense":
+    case "visionsense-video-analytics":
       return (
         <div className={`w-full h-full ${className}`}>
           <VisionSense3DVisual />
@@ -53,6 +54,7 @@ export function ProjectVisualDispatcher({
     case "smart-course-qa":
     case "smart-qa":
     case "smart-enterprise-qa":
+    case "enterprise-rag-assistant":
       return (
         <div className={`w-full h-full ${className}`}>
           <SmartQA3DVisual />

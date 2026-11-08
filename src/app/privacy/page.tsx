@@ -7,6 +7,9 @@ import { siteConfig } from "@/config/site";
 export const metadata: Metadata = {
   title: "Privacy Policy",
   description: "Privacy Policy and data governance principles for DeepLayer Solutions.",
+  alternates: {
+    canonical: "/privacy",
+  },
 };
 
 export default function PrivacyPage() {

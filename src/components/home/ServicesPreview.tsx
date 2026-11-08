@@ -9,7 +9,6 @@ import { Eyebrow } from "../common/Eyebrow";
 import { Central3DVisual } from "./services-preview/Central3DVisual";
 import { ServiceCard } from "./services-preview/ServiceCard";
 import { previewServices } from "./services-preview/types";
-import { Carousel } from "../carousel/Carousel";
 
 export function ServicesPreview() {
   return (
@@ -98,32 +97,14 @@ export function ServicesPreview() {
           </div>
         </div>
 
-        {/* Lower Zone: Responsive Service Cards */}
+        {/* Lower Zone: Responsive Service Cards (Single Unified DOM Tree) */}
         <div className="mt-14 sm:mt-18 lg:mt-20">
-          {/* Desktop Layout: Clean 4-column Grid */}
-          <div className="hidden lg:grid grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
             {previewServices.map((service, index) => (
-              <ServiceCard key={service.id} service={service} index={index} />
+              <div key={service.id} className="h-full">
+                <ServiceCard service={service} index={index} />
+              </div>
             ))}
-          </div>
-
-          {/* Mobile & Tablet Layout: Responsive Swipeable Carousel */}
-          <div className="lg:hidden">
-            <Carousel
-              desktopVisible={3}
-              tabletVisible={2}
-              mobileVisible={1}
-              gap={16}
-              showControls={true}
-              showDots={true}
-              ariaLabel="Services carousel"
-            >
-              {previewServices.map((service, index) => (
-                <div key={service.id} className="h-full">
-                  <ServiceCard service={service} index={index} />
-                </div>
-              ))}
-            </Carousel>
           </div>
         </div>
       </Container>

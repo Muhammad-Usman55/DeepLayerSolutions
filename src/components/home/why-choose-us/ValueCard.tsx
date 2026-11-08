@@ -20,36 +20,39 @@ export function ValueCard({ card, index }: ValueCardProps) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-20px" }}
       transition={{ duration: 0.5, delay: index * 0.08, ease: "easeOut" }}
-      className="w-full"
+      className="w-full h-full"
     >
       <Link
         href={card.href || "/services"}
-        className="group relative flex items-center justify-between gap-3 px-4 py-3.5 sm:px-6 sm:py-4.5 rounded-2xl sm:rounded-3xl bg-white/85 hover:bg-white/95 backdrop-blur-md border border-[#DFEDE5] hover:border-[#008F53]/60 shadow-[0_4px_20px_-4px_rgba(0,143,83,0.06)] hover:shadow-[0_12px_28px_-6px_rgba(0,143,83,0.14)] transition-all duration-300 hover:-translate-y-1 select-none overflow-hidden"
+        className="group relative flex items-start justify-between gap-3 px-4 py-4 sm:px-5 sm:py-5 rounded-2xl sm:rounded-3xl bg-white/85 hover:bg-white/95 backdrop-blur-md border border-[#DFEDE5] hover:border-[#008F53]/60 shadow-[0_4px_20px_-4px_rgba(0,143,83,0.06)] hover:shadow-[0_12px_28px_-6px_rgba(0,143,83,0.14)] transition-all duration-300 hover:-translate-y-1 select-none overflow-hidden h-full"
         aria-label={`${card.title} - Learn more`}
       >
         {/* Subtle Top Specular Glass Reflection */}
         <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#00B86B]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
         {/* Left: Glass Bubble with Icon */}
-        <div className="relative shrink-0 flex items-center justify-center">
+        <div className="relative shrink-0 flex items-center justify-center mt-0.5">
           {/* Glass Bubble Outer Ring */}
-          <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-[#E9FFF2] via-white to-[#D5F9E6] border border-[#00B86B]/40 shadow-xs flex items-center justify-center text-[#008F53] group-hover:text-[#007343] group-hover:scale-105 transition-all duration-300 relative overflow-hidden">
+          <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-gradient-to-br from-[#E9FFF2] via-white to-[#D5F9E6] border border-[#00B86B]/40 shadow-xs flex items-center justify-center text-[#008F53] group-hover:text-[#007343] group-hover:scale-105 transition-all duration-300 relative overflow-hidden">
             {/* Bubble Specular Shine */}
             <div className="absolute top-1 left-2 w-3.5 h-2 rounded-full bg-white/80 blur-[0.5px] rotate-[-25deg] pointer-events-none" />
             <Icon className="w-5 h-5 sm:w-5.5 sm:h-5.5 transition-transform duration-300 group-hover:rotate-3 relative z-10" />
           </div>
         </div>
 
-        {/* Center: Title */}
+        {/* Center: Title & Crawlable B2B Description */}
         <div className="flex-1 min-w-0 pr-1">
-          <h3 className="text-sm sm:text-[15px] font-bold text-[#142A27] group-hover:text-[#008F53] transition-colors leading-snug truncate">
+          <h3 className="text-sm sm:text-[15px] font-bold text-[#142A27] group-hover:text-[#008F53] transition-colors leading-snug">
             {card.title}
           </h3>
+          <p className="mt-1 text-xs text-[#64736F] leading-relaxed">
+            {card.description}
+          </p>
         </div>
 
         {/* Right: Circular Arrow Action Pill */}
         <div
-          className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#E9FFF2] border border-[#DFEDE5] text-[#008F53] flex items-center justify-center transition-all duration-300 group-hover:bg-[#008F53] group-hover:text-white group-hover:border-[#008F53] group-hover:scale-105 shrink-0 shadow-2xs"
+          className="w-7 h-7 rounded-full bg-[#E9FFF2] border border-[#DFEDE5] text-[#008F53] flex items-center justify-center transition-all duration-300 group-hover:bg-[#008F53] group-hover:text-white group-hover:border-[#008F53] group-hover:scale-105 shrink-0 shadow-2xs mt-0.5"
           aria-hidden="true"
         >
           <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-0.5" />
@@ -58,4 +61,3 @@ export function ValueCard({ card, index }: ValueCardProps) {
     </motion.div>
   );
 }
-

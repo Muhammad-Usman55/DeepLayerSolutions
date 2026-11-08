@@ -170,8 +170,8 @@ DeepLayer Solutions/
 3. **Why Choose Us:** Metric-backed agency differentiators with tactile glassmorphism.
 4. **Stats Strip:** Live company milestones:
    - **26+** Projects Delivered
-   - **9+** Happy Clients Worldwide
-   - **18+** Client Satisfaction Score
+   - **99.4%** Production Uptime SLA
+   - **98%** Client Retention Rate
    - **2+** Years of Specialized AI & Engineering Experience
 5. **Showcase Projects:** Featured case studies highlighting real production ROI and technological architecture.
 6. **Industries Grid:** Domain-specific technological capabilities across 8 high-growth sectors.

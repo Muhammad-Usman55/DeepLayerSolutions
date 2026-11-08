@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   title: "Industries & Sectors | DeepLayer Solutions",
   description:
     "Tailored digital solutions, AI workflows, and software engineering addressing the operational realities of Healthcare, Finance, Manufacturing, Logistics, and more.",
+  alternates: {
+    canonical: "/industries",
+  },
 };
 
 export default function IndustriesPage() {

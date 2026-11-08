@@ -6,6 +6,9 @@ import { PageWrapper } from "@/components/layout/PageWrapper";
 export const metadata: Metadata = {
   title: "Terms of Service",
   description: "Terms and conditions governing the use of DeepLayer Solutions services and digital platforms.",
+  alternates: {
+    canonical: "/terms",
+  },
 };
 
 export default function TermsPage() {

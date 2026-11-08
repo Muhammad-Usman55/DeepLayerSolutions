@@ -10,6 +10,9 @@ export const metadata: Metadata = {
   title: "Blog & Technical Insights",
   description:
     "Exploring the latest developments in AI, LLMs, computer vision, software engineering, and cloud scalability from the DeepLayer Solutions engineering team.",
+  alternates: {
+    canonical: "/blog",
+  },
 };
 
 export default function BlogPage() {

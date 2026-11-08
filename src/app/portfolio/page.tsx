@@ -10,6 +10,9 @@ export const metadata: Metadata = {
   title: "Our Products & Engineering Case Studies",
   description:
     "Explore selected software and AI engineering projects demonstrating our technical capabilities across intelligent applications, automation, and digital solutions.",
+  alternates: {
+    canonical: "/portfolio",
+  },
 };
 
 export default function PortfolioPage() {

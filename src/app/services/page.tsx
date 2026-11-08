@@ -11,6 +11,9 @@ export const metadata: Metadata = {
   title: "Services & Capabilities",
   description:
     "Explore DeepLayer Solutions' engineering services across Artificial Intelligence, Machine Learning, Custom Software, Cloud Infrastructure, and Digital Transformation.",
+  alternates: {
+    canonical: "/services",
+  },
 };
 
 export default function ServicesPage() {

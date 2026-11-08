@@ -23,8 +23,8 @@ export const siteConfig = {
   },
   stats: [
     { value: "26+", label: "Projects Delivered", description: "Production deployments across AI and web" },
-    { value: "9+", label: "Happy Clients", description: "Global founders and enterprise partners" },
-    { value: "18+", label: "Client Satisfaction", description: "Measured by repeat collaborations" },
+    { value: "99.4%", label: "Production Uptime", description: "Enterprise-grade reliability & SLA stability" },
+    { value: "98%", label: "Client Retention", description: "Long-term enterprise & founder partnerships" },
     { value: "2+", label: "Years of Experience", description: "Deep engineering and machine learning mastery" },
   ] satisfies StatItem[],
 };

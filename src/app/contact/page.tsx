@@ -11,6 +11,9 @@ export const metadata: Metadata = {
   title: "Contact DeepLayer Solutions",
   description:
     "Get in touch with DeepLayer Solutions for custom software development, AI model architecture, and digital engineering partnerships.",
+  alternates: {
+    canonical: "/contact",
+  },
 };
 
 export default function ContactPage() {
