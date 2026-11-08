@@ -59,6 +59,70 @@ export function TechEcosystem() {
 
   return (
     <section className="py-20 md:py-24 bg-[#FAFCF9] overflow-hidden" aria-label="Technology Ecosystem">
+      {/* Self-contained CSS for 100% guaranteed hardware-accelerated animation */}
+      <style>{`
+        @keyframes dl-marquee-left {
+          0% {
+            transform: translate3d(0, 0, 0);
+          }
+          100% {
+            transform: translate3d(-50%, 0, 0);
+          }
+        }
+        @keyframes dl-marquee-right {
+          0% {
+            transform: translate3d(-50%, 0, 0);
+          }
+          100% {
+            transform: translate3d(0, 0, 0);
+          }
+        }
+        .dl-marquee-container {
+          display: flex;
+          flex-direction: column;
+          gap: 1.25rem;
+          width: 100%;
+          overflow: hidden;
+        }
+        .dl-marquee-row {
+          display: flex;
+          width: 100%;
+          overflow: hidden;
+          user-select: none;
+          mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+          -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+        }
+        .dl-marquee-track {
+          display: flex;
+          width: max-content;
+          will-change: transform;
+        }
+        .dl-marquee-track.dl-left {
+          animation: dl-marquee-left 26s linear infinite !important;
+        }
+        .dl-marquee-track.dl-right {
+          animation: dl-marquee-right 22s linear infinite !important;
+        }
+        .dl-marquee-row:hover .dl-marquee-track {
+          animation-play-state: paused !important;
+        }
+        .dl-marquee-list {
+          display: flex;
+          align-items: center;
+          gap: 1.25rem;
+          padding-right: 1.25rem;
+          flex-shrink: 0;
+        }
+        @media (max-width: 768px) {
+          .dl-marquee-track.dl-left {
+            animation-duration: 34s !important;
+          }
+          .dl-marquee-track.dl-right {
+            animation-duration: 28s !important;
+          }
+        }
+      `}</style>
+
       <Container size="wide">
         <SectionHeading
           badge="Engineering Stack"
@@ -70,22 +134,22 @@ export function TechEcosystem() {
 
       {/* Opposite Direction Horizontal Scrolling Logo Marquee */}
       <div className="relative w-full mt-12 overflow-hidden select-none [touch-action:pan-y]">
-        {/* Supporting gradient fade overlays for cross-browser optical edge dissolving */}
+        {/* Supporting gradient fade overlays */}
         <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-32 lg:w-44 bg-gradient-to-r from-[#FAFCF9] via-[#FAFCF9]/80 to-transparent z-10 pointer-events-none" />
         <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-32 lg:w-44 bg-gradient-to-l from-[#FAFCF9] via-[#FAFCF9]/80 to-transparent z-10 pointer-events-none" />
 
-        <div className="marquee-container space-y-4 sm:space-y-5">
+        <div className="dl-marquee-container">
           {/* Row 1: Scrolling Left (Right to Left) */}
-          <div className="marquee-row" role="region" aria-label="Technologies Row 1">
-            <div className="marquee-track scroll-left" style={{ "--duration": "34s" } as React.CSSProperties}>
+          <div className="dl-marquee-row" role="region" aria-label="Technologies Row 1">
+            <div className="dl-marquee-track dl-left">
               {/* Group 1 */}
-              <div className="marquee-list">
+              <div className="dl-marquee-list">
                 {track1Group.map((item, idx) => (
                   <TechBadge key={`t1-g1-${idx}`} item={item} />
                 ))}
               </div>
               {/* Group 2 (Exact duplicate for seamless infinite loop) */}
-              <div className="marquee-list" aria-hidden="true">
+              <div className="dl-marquee-list" aria-hidden="true">
                 {track1Group.map((item, idx) => (
                   <TechBadge key={`t1-g2-${idx}`} item={item} />
                 ))}
@@ -94,16 +158,16 @@ export function TechEcosystem() {
           </div>
 
           {/* Row 2: Scrolling Right (Opposite Direction: Left to Right) */}
-          <div className="marquee-row" role="region" aria-label="Technologies Row 2">
-            <div className="marquee-track scroll-right" style={{ "--duration": "30s" } as React.CSSProperties}>
+          <div className="dl-marquee-row" role="region" aria-label="Technologies Row 2">
+            <div className="dl-marquee-track dl-right">
               {/* Group 1 */}
-              <div className="marquee-list">
+              <div className="dl-marquee-list">
                 {track2Group.map((item, idx) => (
                   <TechBadge key={`t2-g1-${idx}`} item={item} />
                 ))}
               </div>
               {/* Group 2 (Exact duplicate for seamless infinite loop) */}
-              <div className="marquee-list" aria-hidden="true">
+              <div className="dl-marquee-list" aria-hidden="true">
                 {track2Group.map((item, idx) => (
                   <TechBadge key={`t2-g2-${idx}`} item={item} />
                 ))}

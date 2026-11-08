@@ -353,13 +353,6 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .marquee-track,
-  .marquee-track.scroll-left,
-  .marquee-track.scroll-right,
-  .animate-marquee-ribbon,
-  .animate-marquee-reverse,
-  .animate-marquee-ltr,
-  .animate-marquee-rtl,
   .animate-float-gentle,
   .animate-float-reverse,
   .animate-float-subtle,
