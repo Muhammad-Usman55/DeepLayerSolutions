@@ -7,10 +7,12 @@
 
 @media (max-width: 1023px) {
   /* ------------------------------------------------------------------------
-     1. EXCLUDE UPLOADED 3D NEURAL SPHERE / ORBITAL GRAPHIC ON MOBILE
+     1. EXCLUDE UPLOADED 3D NEURAL SPHERE & DESKTOP-ONLY SPEC STRIP ON MOBILE
      ------------------------------------------------------------------------ */
   .hero-tech-visual-container,
   .tech-layer-visual,
+  .hero-spec-strip-container,
+  .hero-spec-strip,
   [data-mobile-exclude="sphere"] {
     display: none !important;
     visibility: hidden !important;
@@ -32,7 +34,7 @@
     -webkit-overflow-scrolling: touch;
   }
 
-  /* Disable annoying mobile tap flash */
+  /* Disable mobile tap flash */
   *,
   *::before,
   *::after {
@@ -60,11 +62,19 @@
   }
 
   /* ------------------------------------------------------------------------
-     4. HERO SECTION MOBILE REFINEMENT
+     4. HERO SECTION MOBILE FULL-VIEWPORT FRAMING
+     Ensures first screen shows ONLY the Hero Section comfortably above
+     the fold without below content or awkward blank space peeking in.
      ------------------------------------------------------------------------ */
   .hero-section-wrapper {
-    padding-top: 1.25rem !important;
-    padding-bottom: 2.75rem !important;
+    min-height: calc(100svh - 60px) !important;
+    min-height: calc(100dvh - 60px) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    padding-top: 1rem !important;
+    padding-bottom: 1.5rem !important;
+    box-sizing: border-box !important;
   }
 
   /* Left column takes full width cleanly on mobile */
@@ -74,16 +84,16 @@
   }
 
   .hero-headline {
-    font-size: clamp(2.1rem, 8vw, 2.75rem) !important;
-    line-height: 1.14 !important;
+    font-size: clamp(2rem, 7.8vw, 2.65rem) !important;
+    line-height: 1.15 !important;
     letter-spacing: -0.03em !important;
     word-break: break-word;
   }
 
   .hero-subtext {
-    font-size: 1rem !important;
-    line-height: 1.6 !important;
-    margin-top: 1rem !important;
+    font-size: 0.95rem !important;
+    line-height: 1.55 !important;
+    margin-top: 0.85rem !important;
     max-width: 100% !important;
     color: #4B5E59 !important;
   }
@@ -94,7 +104,7 @@
     display: flex !important;
     flex-direction: column !important;
     gap: 0.75rem !important;
-    margin-top: 1.75rem !important;
+    margin-top: 1.5rem !important;
   }
 
   .hero-cta-group > a,
@@ -104,38 +114,22 @@
     justify-content: center !important;
     font-size: 0.95rem !important;
   }
-
-  /* Hero Architecture Spec Strip on Mobile */
-  .hero-spec-strip {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 0.65rem !important;
-    border-top: 1px solid #DFEDE5 !important;
-    padding-top: 1.25rem !important;
-    margin-top: 1.75rem !important;
-    width: 100% !important;
-  }
-
-  .hero-spec-item {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: space-between !important;
-    background: rgba(233, 255, 242, 0.55) !important;
-    border: 1px solid rgba(223, 237, 229, 0.95) !important;
-    border-radius: 14px !important;
-    padding: 0.75rem 1rem !important;
-    box-shadow: 0 1px 3px rgba(0, 143, 83, 0.04) !important;
-  }
 }
 
 /* --------------------------------------------------------------------------
    5. TIGHT MOBILE VIEWPORT OPTIMIZATIONS (< 768px)
    -------------------------------------------------------------------------- */
 @media (max-width: 767px) {
-  /* Section Spacing - eliminate excessive empty vertical gaps */
-  section {
-    padding-top: 3.25rem !important;
-    padding-bottom: 3.25rem !important;
+  /* Section Spacing - eliminate excessive empty vertical gaps while preserving breathing room */
+  section:not(.hero-section-wrapper) {
+    padding-top: 2.75rem !important;
+    padding-bottom: 2.75rem !important;
+  }
+
+  /* Services Preview immediately below Hero - clean tight top border with zero dead space */
+  section[aria-label="Our Services Preview"] {
+    padding-top: 2.5rem !important;
+    border-top: 1px solid #DFEDE5 !important;
   }
 
   /* Section Headings - prevent awkward orphan words and oversize on small screens */
@@ -201,7 +195,12 @@
    -------------------------------------------------------------------------- */
 @media (max-width: 419px) {
   .hero-headline {
-    font-size: 1.9rem !important;
+    font-size: 1.85rem !important;
+  }
+
+  .hero-section-wrapper {
+    padding-top: 0.75rem !important;
+    padding-bottom: 1.25rem !important;
   }
 
   .footer-capabilities-grid {

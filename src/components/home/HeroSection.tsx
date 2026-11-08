@@ -40,8 +40,8 @@ export function HeroSection() {
       <div className="absolute top-0 right-1/4 -z-10 w-[600px] h-[500px] bg-gradient-to-br from-[#E8F5E9] via-[#F4FAF3] to-transparent rounded-full blur-3xl opacity-70 pointer-events-none" />
       <div className="absolute -top-32 left-10 -z-10 w-[450px] h-[450px] bg-[#34D399]/10 rounded-full blur-3xl pointer-events-none" />
 
-      <Container size="wide">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+      <Container size="wide" className="h-full flex flex-col justify-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-0 lg:gap-8 items-center w-full">
           {/* Left Hero Content (Cols 1-7 on lg/xl) */}
           <motion.div
             variants={containerVariants}
@@ -120,10 +120,10 @@ export function HeroSection() {
               </Button>
             </motion.div>
 
-            {/* Engineering Pillars & Architecture Spec Strip */}
+            {/* Engineering Pillars & Architecture Spec Strip (Desktop Only) */}
             <motion.div
               variants={itemVariants}
-              className="mt-8 sm:mt-10 pt-6 sm:pt-7 border-t border-[#DFEDE5] w-full"
+              className="hidden lg:block mt-8 sm:mt-10 pt-6 sm:pt-7 border-t border-[#DFEDE5] w-full hero-spec-strip-container"
             >
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 sm:gap-4 divide-y sm:divide-y-0 sm:divide-x divide-[#DFEDE5] hero-spec-strip">
                 <div className="flex items-center justify-between sm:block pb-3.5 sm:pb-0 sm:pr-4 hero-spec-item">
