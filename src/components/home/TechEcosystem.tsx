@@ -1,10 +1,9 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
 import { Container } from "../common/Container";
 import { SectionHeading } from "../common/SectionHeading";
-import { Terminal, Cpu, Database, Cloud, Layers, ShieldCheck, Box, Code2 } from "lucide-react";
+import { Terminal, Cpu, Database, Cloud, Layers, Box, Code2 } from "lucide-react";
 
 interface TechItem {
   name: string;
@@ -38,7 +37,7 @@ function TechBadge({ item }: { item: TechItem }) {
   const Icon = item.icon;
   return (
     <div className="flex items-center gap-3 px-5 py-3 rounded-2xl bg-white border border-[#DFEDE5] hover:border-[#008F53] shadow-xs hover:shadow-md transition-all duration-300 group select-none shrink-0">
-      <div className="w-9 h-9 rounded-xl bg-[#E9FFF2] border border-[#DFEDE5] flex items-center justify-center text-[#008F53] group-hover:bg-[#008F53] group-hover:text-white transition-all duration-200">
+      <div className="w-9 h-9 rounded-xl bg-[#E9FFF2] border border-[#DFEDE5] flex items-center justify-center text-[#008F53] group-hover:bg-[#008F53] group-hover:text-white transition-all duration-200 shrink-0">
         <Icon className="w-4 h-4" />
       </div>
       <div className="text-left">
@@ -54,11 +53,8 @@ function TechBadge({ item }: { item: TechItem }) {
 }
 
 export function TechEcosystem() {
-  const track1Loop = [...track1, ...track1, ...track1];
-  const track2Loop = [...track2, ...track2, ...track2];
-
   return (
-    <section className="py-20 md:py-24 bg-[#FAFCF9] overflow-hidden">
+    <section className="py-20 md:py-24 bg-[#FAFCF9] overflow-hidden" aria-label="Technology Ecosystem">
       <Container size="wide">
         <SectionHeading
           badge="Engineering Stack"
@@ -69,46 +65,67 @@ export function TechEcosystem() {
       </Container>
 
       {/* Infinite Dual Marquee Rails with Edge Fades */}
-      <div className="relative w-full mt-12 overflow-hidden select-none">
+      <div className="relative w-full mt-12 overflow-hidden select-none [touch-action:pan-y]">
         {/* Left & Right Gradient Fade Masks */}
         <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-36 lg:w-48 bg-gradient-to-r from-[#FAFCF9] via-[#FAFCF9]/90 to-transparent z-10 pointer-events-none" />
         <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-36 lg:w-48 bg-gradient-to-l from-[#FAFCF9] via-[#FAFCF9]/90 to-transparent z-10 pointer-events-none" />
 
-        <div className="space-y-4">
-          {/* Track 1 (Left to Right / standard loop) */}
-          <div className="flex items-center gap-4 animate-marquee-ribbon hover:[animation-play-state:paused]">
-              {track1Loop.map((item, idx) => {
-                const isDuplicate = idx >= track1.length;
-                return (
-                  <div
-                    key={`t1-${idx}`}
-                    aria-hidden={isDuplicate ? "true" : undefined}
-                  >
-                    <TechBadge item={item} />
-                  </div>
-                );
-              })}
+        <div className="space-y-4 sm:space-y-5">
+          {/* Row 1 — LEFT TO RIGHT */}
+          <div
+            className="animate-marquee-ltr hover:[animation-play-state:paused]"
+            role="region"
+            aria-label="Technologies row 1 moving left to right"
+          >
+            {/* Primary Track Set (50% of infinite loop) */}
+            <div className="flex items-center shrink-0 gap-4 sm:gap-5 pr-4 sm:pr-5">
+              {track1.map((item, idx) => (
+                <TechBadge key={`t1-a1-${idx}`} item={item} />
+              ))}
+              {track1.map((item, idx) => (
+                <TechBadge key={`t1-a2-${idx}`} item={item} />
+              ))}
             </div>
 
-            {/* Track 2 (Opposite direction / staggered reverse feel) */}
-            <div
-              className="flex items-center gap-4 animate-marquee-reverse hover:[animation-play-state:paused]"
-              style={{ animationDirection: "reverse" }}
-            >
-              {track2Loop.map((item, idx) => {
-                const isDuplicate = idx >= track2.length;
-                return (
-                  <div
-                    key={`t2-${idx}`}
-                    aria-hidden={isDuplicate ? "true" : undefined}
-                  >
-                    <TechBadge item={item} />
-                  </div>
-                );
-              })}
+            {/* Seamless Mirror Set (Identical 50% for 0px glitch-free loop) */}
+            <div className="flex items-center shrink-0 gap-4 sm:gap-5 pr-4 sm:pr-5" aria-hidden="true">
+              {track1.map((item, idx) => (
+                <TechBadge key={`t1-b1-${idx}`} item={item} />
+              ))}
+              {track1.map((item, idx) => (
+                <TechBadge key={`t1-b2-${idx}`} item={item} />
+              ))}
+            </div>
+          </div>
+
+          {/* Row 2 — RIGHT TO LEFT */}
+          <div
+            className="animate-marquee-rtl hover:[animation-play-state:paused]"
+            role="region"
+            aria-label="Technologies row 2 moving right to left"
+          >
+            {/* Primary Track Set (50% of infinite loop) */}
+            <div className="flex items-center shrink-0 gap-4 sm:gap-5 pr-4 sm:pr-5">
+              {track2.map((item, idx) => (
+                <TechBadge key={`t2-a1-${idx}`} item={item} />
+              ))}
+              {track2.map((item, idx) => (
+                <TechBadge key={`t2-a2-${idx}`} item={item} />
+              ))}
+            </div>
+
+            {/* Seamless Mirror Set (Identical 50% for 0px glitch-free loop) */}
+            <div className="flex items-center shrink-0 gap-4 sm:gap-5 pr-4 sm:pr-5" aria-hidden="true">
+              {track2.map((item, idx) => (
+                <TechBadge key={`t2-b1-${idx}`} item={item} />
+              ))}
+              {track2.map((item, idx) => (
+                <TechBadge key={`t2-b2-${idx}`} item={item} />
+              ))}
             </div>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
   );
 }
