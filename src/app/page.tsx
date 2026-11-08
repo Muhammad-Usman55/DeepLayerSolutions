@@ -1,5 +1,4 @@
 import { HeroSection } from "@/components/home/HeroSection";
-import { TechnologyMarquee } from "@/components/home/TechnologyMarquee";
 import { ServicesPreview } from "@/components/home/ServicesPreview";
 import { WhyChooseUs } from "@/components/home/WhyChooseUs";
 import { StatsStrip } from "@/components/home/StatsStrip";
@@ -15,7 +14,6 @@ export default function HomePage() {
   return (
     <PageWrapper>
       <HeroSection />
-      <TechnologyMarquee />
       <ServicesPreview />
       <WhyChooseUs />
       <StatsStrip />
