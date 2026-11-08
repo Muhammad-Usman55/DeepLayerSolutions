@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight, Sparkles, Cpu, Zap, ShieldCheck } from "lucide-react";
 import { Button } from "../common/Button";
 import { Container } from "../common/Container";
 import { TechLayerVisual } from "../common/TechLayerVisual";
@@ -120,44 +120,50 @@ export function HeroSection() {
               </Button>
             </motion.div>
 
-            {/* Engineering Pillars & Architecture Spec Strip (Desktop Only) */}
+            {/* Engineering Pillars & Architecture Spec Strip (Responsive 3-Column on mobile & desktop) */}
             <motion.div
               variants={itemVariants}
-              className="hidden lg:block mt-8 sm:mt-10 pt-6 sm:pt-7 border-t border-[#DFEDE5] w-full hero-spec-strip-container"
+              className="mt-6 sm:mt-10 pt-4 sm:pt-7 border-t border-[#DFEDE5] w-full"
             >
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 sm:gap-4 divide-y sm:divide-y-0 sm:divide-x divide-[#DFEDE5] hero-spec-strip">
-                <div className="flex items-center justify-between sm:block pb-3.5 sm:pb-0 sm:pr-4 hero-spec-item">
-                  <div className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#008F53]" />
-                    <span className="text-[11px] font-mono uppercase tracking-wider text-[#008F53] font-semibold">
+              <div className="grid grid-cols-3 gap-2 sm:gap-4 divide-x divide-[#DFEDE5] text-center sm:text-left">
+                {/* 01: Capability */}
+                <div className="flex flex-col items-center sm:block px-1 sm:px-4">
+                  <div className="flex items-center justify-center sm:justify-start gap-1 sm:gap-2">
+                    <Cpu className="w-4 h-4 text-[#008F53] shrink-0" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#008F53] hidden sm:inline-block" />
+                    <span className="text-[10px] sm:text-[11px] font-mono uppercase tracking-wider text-[#008F53] font-semibold hidden sm:inline-block">
                       01 · Capability
                     </span>
                   </div>
-                  <p className="sm:mt-1.5 text-sm font-semibold text-[#142A27] tracking-tight">
+                  <p className="mt-1 sm:mt-1.5 text-[11px] sm:text-sm font-semibold text-[#142A27] tracking-tight leading-tight">
                     Custom AI &amp; LLMs
                   </p>
                 </div>
 
-                <div className="flex items-center justify-between sm:block py-3.5 sm:py-0 sm:px-4 hero-spec-item">
-                  <div className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#008F53]" />
-                    <span className="text-[11px] font-mono uppercase tracking-wider text-[#008F53] font-semibold">
+                {/* 02: Speed */}
+                <div className="flex flex-col items-center sm:block px-1 sm:px-4">
+                  <div className="flex items-center justify-center sm:justify-start gap-1 sm:gap-2">
+                    <Zap className="w-4 h-4 text-[#008F53] shrink-0" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#008F53] hidden sm:inline-block" />
+                    <span className="text-[10px] sm:text-[11px] font-mono uppercase tracking-wider text-[#008F53] font-semibold hidden sm:inline-block">
                       02 · Speed
                     </span>
                   </div>
-                  <p className="sm:mt-1.5 text-sm font-semibold text-[#142A27] tracking-tight">
+                  <p className="mt-1 sm:mt-1.5 text-[11px] sm:text-sm font-semibold text-[#142A27] tracking-tight leading-tight">
                     Sub-450ms Latency
                   </p>
                 </div>
 
-                <div className="flex items-center justify-between sm:block pt-3.5 sm:pt-0 sm:pl-4 hero-spec-item">
-                  <div className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#008F53]" />
-                    <span className="text-[11px] font-mono uppercase tracking-wider text-[#008F53] font-semibold">
+                {/* 03: Standard */}
+                <div className="flex flex-col items-center sm:block px-1 sm:px-4">
+                  <div className="flex items-center justify-center sm:justify-start gap-1 sm:gap-2">
+                    <ShieldCheck className="w-4 h-4 text-[#008F53] shrink-0" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#008F53] hidden sm:inline-block" />
+                    <span className="text-[10px] sm:text-[11px] font-mono uppercase tracking-wider text-[#008F53] font-semibold hidden sm:inline-block">
                       03 · Standard
                     </span>
                   </div>
-                  <p className="sm:mt-1.5 text-sm font-semibold text-[#142A27] tracking-tight">
+                  <p className="mt-1 sm:mt-1.5 text-[11px] sm:text-sm font-semibold text-[#142A27] tracking-tight leading-tight">
                     Production Verified
                   </p>
                 </div>

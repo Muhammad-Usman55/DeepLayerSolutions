@@ -11,7 +11,7 @@ import { valueCardsData } from "./why-choose-us/types";
 export function WhyChooseUs() {
   return (
     <section
-      className="relative overflow-hidden py-16 sm:py-20 lg:py-28 bg-gradient-to-b from-[#FAFCF9] via-[#F4FAF6] to-[#FAFCF9] border-t border-[#E3EDE5] select-none"
+      className="hidden lg:block relative overflow-hidden lg:py-28 bg-gradient-to-b from-[#FAFCF9] via-[#F4FAF6] to-[#FAFCF9] border-t border-[#E3EDE5] select-none"
       aria-label="Why Choose Us"
     >
       {/* Background Volumetric Ambient Lighting & Subtle Grid Lines */}

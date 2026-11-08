@@ -36,15 +36,15 @@ const track2: TechItem[] = [
 function TechBadge({ item }: { item: TechItem }) {
   const Icon = item.icon;
   return (
-    <div className="flex items-center gap-3 px-5 py-3 rounded-2xl bg-white border border-[#DFEDE5] hover:border-[#008F53] shadow-xs hover:shadow-md transition-all duration-300 group select-none shrink-0">
-      <div className="w-9 h-9 rounded-xl bg-[#E9FFF2] border border-[#DFEDE5] flex items-center justify-center text-[#008F53] group-hover:bg-[#008F53] group-hover:text-white transition-all duration-200 shrink-0">
-        <Icon className="w-4 h-4" />
+    <div className="flex items-center gap-2 sm:gap-3 px-3 py-1.5 sm:px-5 sm:py-3 rounded-full sm:rounded-2xl bg-white border border-[#DFEDE5] hover:border-[#008F53] shadow-2xs hover:shadow-md transition-all duration-300 group select-none shrink-0">
+      <div className="w-6 h-6 sm:w-9 sm:h-9 rounded-full sm:rounded-xl bg-[#E9FFF2] border border-[#DFEDE5] flex items-center justify-center text-[#008F53] group-hover:bg-[#008F53] group-hover:text-white transition-all duration-200 shrink-0">
+        <Icon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
       </div>
       <div className="text-left">
-        <span className="text-[10px] font-mono uppercase tracking-wider text-[#008F53] font-semibold block leading-tight">
+        <span className="text-[10px] font-mono uppercase tracking-wider text-[#008F53] font-semibold hidden sm:block leading-tight">
           {item.category}
         </span>
-        <span className="text-sm font-bold text-[#142A27] group-hover:text-[#008F53] transition-colors block leading-tight">
+        <span className="text-xs sm:text-sm font-bold text-[#142A27] group-hover:text-[#008F53] transition-colors block leading-tight">
           {item.name}
         </span>
       </div>
@@ -120,12 +120,25 @@ export function TechEcosystem() {
       `}</style>
 
       <Container size="wide">
-        <SectionHeading
-          badge="Engineering Stack"
-          title="Battle-Tested Technology Ecosystem."
-          highlight="Battle-Tested"
-          subtitle="We select technologies based on performance, type safety, ecosystem maturity, and enterprise maintainability."
-        />
+        {/* Mobile Header Matching Mockup (< sm) */}
+        <div className="text-center mb-6 sm:hidden">
+          <h2 className="text-xl sm:text-2xl font-extrabold text-[#142A27] tracking-tight">
+            Engineering <span className="text-[#008F53]">Stack</span>
+          </h2>
+          <p className="text-xs sm:text-sm text-[#64736F] mt-1 font-normal">
+            Modern technologies for powerful solutions.
+          </p>
+        </div>
+
+        {/* Desktop Header Unchanged (hidden sm:block) */}
+        <div className="hidden sm:block">
+          <SectionHeading
+            badge="Engineering Stack"
+            title="Battle-Tested Technology Ecosystem."
+            highlight="Battle-Tested"
+            subtitle="We select technologies based on performance, type safety, ecosystem maturity, and enterprise maintainability."
+          />
+        </div>
       </Container>
 
       {/* Opposite Direction Horizontal Scrolling Logo Marquee */}

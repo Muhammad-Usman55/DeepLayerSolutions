@@ -45,223 +45,231 @@ export function Footer() {
 
   return (
     <footer
-      className="relative overflow-hidden bg-white text-[#142A27] pt-10 sm:pt-12 pb-6 sm:pb-8 border-t border-[#DFEDE5] select-none"
+      className="relative overflow-hidden select-none"
       aria-label="Site Footer"
     >
       {/* Background Volumetric Ambient Lighting */}
-      <div className="absolute top-1/4 left-1/4 -z-10 w-[500px] h-[400px] bg-gradient-to-tr from-[#E9FFF2]/70 via-[#F3FFF7] to-transparent rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-10 right-10 -z-10 w-[400px] h-[400px] bg-[#34D399]/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/4 left-1/4 -z-10 w-[500px] h-[400px] bg-gradient-to-tr from-[#E9FFF2]/70 via-[#F3FFF7] to-transparent rounded-full blur-3xl pointer-events-none hidden lg:block" />
+      <div className="absolute bottom-10 right-10 -z-10 w-[400px] h-[400px] bg-[#34D399]/10 rounded-full blur-3xl pointer-events-none hidden lg:block" />
 
-      <Container size="wide" className="relative z-10">
-        {/* Top Newsletter Banner */}
-        <FooterNewsletter />
+      {/* Top Newsletter Section - Mint on Mobile, Integrated on Desktop */}
+      <div className="bg-[#FAFCF9] lg:bg-white pt-8 pb-4 lg:pt-10 lg:pb-0">
+        <Container size="wide">
+          <FooterNewsletter />
+        </Container>
+      </div>
 
-        {/* Main 4-Column Balanced Footer Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-6 xl:gap-8 pb-8 items-start">
-          {/* Column 1: Company Branding & Socials (Cols 1-3) */}
-          <div className="lg:col-span-3 flex flex-col justify-between">
-            <div>
-              <Logo variant="default" size="md" />
-              <p className="mt-3 text-xs sm:text-[13px] text-[#64736F] leading-relaxed max-w-sm font-normal">
-                {siteConfig.description}
-              </p>
-              <p className="mt-2 text-[11px] text-[#008F53] font-semibold tracking-wide">
-                Build • Innovate • Scale
-              </p>
-            </div>
-
-            {/* Social Icons Row */}
-            <div className="mt-4 flex items-center gap-2">
-              <a
-                href={siteConfig.social.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-8 h-8 rounded-lg bg-[#F0FAF4] hover:bg-[#00B86B] text-[#142A27] hover:text-white border border-[#DFEDE5] hover:border-[#00B86B] transition-all duration-200 flex items-center justify-center shadow-2xs"
-                aria-label="LinkedIn Profile"
-              >
-                <LinkedInIcon className="w-3.5 h-3.5" />
-              </a>
-              <a
-                href={siteConfig.social.facebook}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-8 h-8 rounded-lg bg-[#F0FAF4] hover:bg-[#1877F2] text-[#142A27] hover:text-white border border-[#DFEDE5] hover:border-[#1877F2] transition-all duration-200 flex items-center justify-center shadow-2xs"
-                aria-label="Facebook Page"
-              >
-                <FacebookIcon className="w-3.5 h-3.5" />
-              </a>
-              <a
-                href={siteConfig.contact.whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-8 h-8 rounded-lg bg-[#F0FAF4] hover:bg-[#25D366] text-[#142A27] hover:text-white border border-[#DFEDE5] hover:border-[#25D366] transition-all duration-200 flex items-center justify-center shadow-2xs"
-                aria-label="WhatsApp Contact"
-              >
-                <WhatsAppIcon className="w-3.5 h-3.5" />
-              </a>
-            </div>
-          </div>
-
-          {/* Column 2: Quick Links (Cols 4-5) */}
-          <div className="lg:col-span-2">
-            <div className="flex items-center gap-2 mb-3">
-              <span className="w-1 h-3.5 rounded-full bg-[#00B86B]" />
-              <h4 className="text-xs sm:text-sm font-bold text-[#142A27] tracking-tight">
-                Quick Links
-              </h4>
-            </div>
-            <ul className="space-y-1.5">
-              {footerQuickLinks.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="group flex items-center justify-between text-xs sm:text-[13px] text-[#64736F] hover:text-[#00B86B] transition-colors py-0.5"
-                  >
-                    <span className="flex items-center gap-1.5">
-                      <span>{link.label}</span>
-                      {link.badge && (
-                        <span className="px-1.5 py-0.2 text-[8px] font-mono font-bold uppercase rounded bg-[#E9FFF2] text-[#008F53] border border-[#BCE8CF]">
-                          {link.badge}
-                        </span>
-                      )}
-                    </span>
-                    <ChevronRight className="w-3 h-3 opacity-25 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all text-[#00B86B]" />
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Column 3: Our Capabilities (Cols 6-9) - 2-Column Responsive Subgrid */}
-          <div className="lg:col-span-4">
-            <div className="flex items-center gap-2 mb-3">
-              <span className="w-1 h-3.5 rounded-full bg-[#00B86B]" />
-              <h4 className="text-xs sm:text-sm font-bold text-[#142A27] tracking-tight">
-                Our Capabilities
-              </h4>
-            </div>
-            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-3 gap-y-1.5 footer-capabilities-grid">
-              {footerServiceLinks.map((service) => (
-                <li key={service.href}>
-                  <Link
-                    href={service.href}
-                    className="group flex items-center justify-between text-xs sm:text-[13px] text-[#64736F] hover:text-[#00B86B] transition-colors py-0.5"
-                  >
-                    <span className="truncate">{service.label}</span>
-                    <ChevronRight className="w-3 h-3 opacity-25 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all text-[#00B86B] shrink-0" />
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Column 4: Get In Touch (Cols 10-12) */}
-          <div className="lg:col-span-3">
-            <div className="flex items-center gap-2 mb-3">
-              <span className="w-1 h-3.5 rounded-full bg-[#00B86B]" />
-              <h4 className="text-xs sm:text-sm font-bold text-[#142A27] tracking-tight">
-                Get In Touch
-              </h4>
-            </div>
-
-            <ul className="space-y-2 text-xs sm:text-[13px] text-[#64736F]">
-              {/* Location */}
-              <li className="flex items-center gap-2">
-                <div className="w-6 h-6 rounded-md bg-[#F0FAF4] text-[#00B86B] flex items-center justify-center shrink-0 border border-[#DFEDE5]">
-                  <MapPin className="w-3 h-3" />
-                </div>
-                <span className="truncate">{siteConfig.contact.address}</span>
-              </li>
-
-              {/* Email */}
-              <li className="flex items-center gap-2">
-                <div className="w-6 h-6 rounded-md bg-[#F0FAF4] text-[#00B86B] flex items-center justify-center shrink-0 border border-[#DFEDE5]">
-                  <Mail className="w-3 h-3" />
-                </div>
-                <a
-                  href={`mailto:${siteConfig.contact.email}`}
-                  className="hover:text-[#00B86B] transition-colors truncate"
-                >
-                  {siteConfig.contact.email}
-                </a>
-              </li>
-
-              {/* Phone */}
-              <li className="flex items-center gap-2">
-                <div className="w-6 h-6 rounded-md bg-[#F0FAF4] text-[#00B86B] flex items-center justify-center shrink-0 border border-[#DFEDE5]">
-                  <Phone className="w-3 h-3" />
-                </div>
-                <a
-                  href="tel:+923166007316"
-                  className="hover:text-[#00B86B] transition-colors"
-                >
-                  {siteConfig.contact.phone}
-                </a>
-              </li>
-
-              {/* WhatsApp */}
-              <li className="flex items-center gap-2">
-                <div className="w-6 h-6 rounded-md bg-[#F0FAF4] text-[#25D366] flex items-center justify-center shrink-0 border border-[#DFEDE5]">
-                  <WhatsAppIcon className="w-3 h-3" />
-                </div>
-                <div className="flex items-center gap-2">
-                  <a
-                    href={siteConfig.contact.whatsappUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-[#00B86B] transition-colors font-medium text-[#142A27]"
-                  >
-                    Chat on WhatsApp
-                  </a>
-                  <span className="px-1.5 py-0.2 rounded text-[8px] font-mono font-bold bg-[#00B86B] text-white tracking-wider">
-                    DIRECT
-                  </span>
-                </div>
-              </li>
-            </ul>
-
-            {/* Office Hours Minimal Card */}
-            <div className="mt-3 p-2 rounded-lg bg-[#F0FAF4] border border-[#DFEDE5] text-[11px]">
-              <div className="flex items-center gap-1.5 font-bold text-[#00B86B] mb-0.5">
-                <Clock className="w-3 h-3" />
-                <span>Office Hours</span>
+      {/* Main Footer Container: Dark Emerald on Mobile, Clean White on Desktop */}
+      <div className="bg-[#0A251D] text-white lg:bg-white lg:text-[#142A27] pt-10 sm:pt-12 pb-6 sm:pb-8 border-t border-white/10 lg:border-[#DFEDE5]">
+        <Container size="wide" className="relative z-10">
+          {/* Main 4-Column Balanced Footer Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-6 xl:gap-8 pb-8 items-start">
+            {/* Column 1: Company Branding & Socials (Cols 1-3) */}
+            <div className="lg:col-span-3 flex flex-col justify-between">
+              <div>
+                <Logo variant="default" size="md" className="hidden lg:inline-flex" />
+                <Logo variant="light" size="md" className="inline-flex lg:hidden" />
+                <p className="mt-3 text-xs sm:text-[13px] text-white/80 lg:text-[#64736F] leading-relaxed max-w-sm font-normal">
+                  {siteConfig.description}
+                </p>
+                <p className="mt-2 text-[11px] text-[#34D399] lg:text-[#008F53] font-semibold tracking-wide">
+                  Build • Innovate • Scale
+                </p>
               </div>
-              <p className="text-[#64736F] font-medium leading-tight">
-                Monday – Friday: 9:00 AM – 6:00 PM (PKT)
-              </p>
+
+              {/* Social Icons Row */}
+              <div className="mt-4 flex items-center gap-2">
+                <a
+                  href={siteConfig.social.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-8 h-8 rounded-lg bg-[#12382C] hover:bg-[#00B86B] text-white lg:bg-[#F0FAF4] lg:text-[#142A27] lg:hover:text-white border border-white/10 lg:border-[#DFEDE5] hover:border-[#00B86B] transition-all duration-200 flex items-center justify-center shadow-2xs"
+                  aria-label="LinkedIn Profile"
+                >
+                  <LinkedInIcon className="w-3.5 h-3.5" />
+                </a>
+                <a
+                  href={siteConfig.social.facebook}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-8 h-8 rounded-lg bg-[#12382C] hover:bg-[#1877F2] text-white lg:bg-[#F0FAF4] lg:text-[#142A27] lg:hover:text-white border border-white/10 lg:border-[#DFEDE5] hover:border-[#1877F2] transition-all duration-200 flex items-center justify-center shadow-2xs"
+                  aria-label="Facebook Page"
+                >
+                  <FacebookIcon className="w-3.5 h-3.5" />
+                </a>
+                <a
+                  href={siteConfig.contact.whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-8 h-8 rounded-lg bg-[#12382C] hover:bg-[#25D366] text-white lg:bg-[#F0FAF4] lg:text-[#142A27] lg:hover:text-white border border-white/10 lg:border-[#DFEDE5] hover:border-[#25D366] transition-all duration-200 flex items-center justify-center shadow-2xs"
+                  aria-label="WhatsApp Contact"
+                >
+                  <WhatsAppIcon className="w-3.5 h-3.5" />
+                </a>
+              </div>
+            </div>
+
+            {/* Column 2: Quick Links (Cols 4-5) */}
+            <div className="lg:col-span-2">
+              <div className="flex items-center gap-2 mb-3">
+                <span className="w-1 h-3.5 rounded-full bg-[#00B86B]" />
+                <h4 className="text-xs sm:text-sm font-bold text-white lg:text-[#142A27] tracking-tight">
+                  Quick Links
+                </h4>
+              </div>
+              <ul className="space-y-1.5">
+                {footerQuickLinks.map((link) => (
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      className="group flex items-center justify-between text-xs sm:text-[13px] text-white/80 hover:text-[#34D399] lg:text-[#64736F] lg:hover:text-[#00B86B] transition-colors py-0.5"
+                    >
+                      <span className="flex items-center gap-1.5">
+                        <span>{link.label}</span>
+                        {link.badge && (
+                          <span className="px-1.5 py-0.2 text-[8px] font-mono font-bold uppercase rounded bg-[#12382C] text-[#34D399] border border-white/10 lg:bg-[#E9FFF2] lg:text-[#008F53] lg:border-[#BCE8CF]">
+                            {link.badge}
+                          </span>
+                        )}
+                      </span>
+                      <ChevronRight className="w-3 h-3 opacity-25 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all text-[#34D399] lg:text-[#00B86B]" />
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Column 3: Our Capabilities (Cols 6-9) - 2-Column Responsive Subgrid */}
+            <div className="lg:col-span-4">
+              <div className="flex items-center gap-2 mb-3">
+                <span className="w-1 h-3.5 rounded-full bg-[#00B86B]" />
+                <h4 className="text-xs sm:text-sm font-bold text-white lg:text-[#142A27] tracking-tight">
+                  Our Capabilities
+                </h4>
+              </div>
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-3 gap-y-1.5 footer-capabilities-grid">
+                {footerServiceLinks.map((service) => (
+                  <li key={service.href}>
+                    <Link
+                      href={service.href}
+                      className="group flex items-center justify-between text-xs sm:text-[13px] text-white/80 hover:text-[#34D399] lg:text-[#64736F] lg:hover:text-[#00B86B] transition-colors py-0.5"
+                    >
+                      <span className="truncate">{service.label}</span>
+                      <ChevronRight className="w-3 h-3 opacity-25 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all text-[#34D399] lg:text-[#00B86B] shrink-0" />
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Column 4: Get In Touch (Cols 10-12) */}
+            <div className="lg:col-span-3">
+              <div className="flex items-center gap-2 mb-3">
+                <span className="w-1 h-3.5 rounded-full bg-[#00B86B]" />
+                <h4 className="text-xs sm:text-sm font-bold text-white lg:text-[#142A27] tracking-tight">
+                  Get In Touch
+                </h4>
+              </div>
+
+              <ul className="space-y-2 text-xs sm:text-[13px] text-white/80 lg:text-[#64736F]">
+                {/* Location */}
+                <li className="flex items-center gap-2">
+                  <div className="w-6 h-6 rounded-md bg-[#12382C] text-[#34D399] border-white/10 lg:bg-[#F0FAF4] lg:text-[#00B86B] lg:border-[#DFEDE5] flex items-center justify-center shrink-0 border">
+                    <MapPin className="w-3 h-3" />
+                  </div>
+                  <span className="truncate">{siteConfig.contact.address}</span>
+                </li>
+
+                {/* Email */}
+                <li className="flex items-center gap-2">
+                  <div className="w-6 h-6 rounded-md bg-[#12382C] text-[#34D399] border-white/10 lg:bg-[#F0FAF4] lg:text-[#00B86B] lg:border-[#DFEDE5] flex items-center justify-center shrink-0 border">
+                    <Mail className="w-3 h-3" />
+                  </div>
+                  <a
+                    href={`mailto:${siteConfig.contact.email}`}
+                    className="hover:text-[#34D399] lg:hover:text-[#00B86B] transition-colors truncate"
+                  >
+                    {siteConfig.contact.email}
+                  </a>
+                </li>
+
+                {/* Phone */}
+                <li className="flex items-center gap-2">
+                  <div className="w-6 h-6 rounded-md bg-[#12382C] text-[#34D399] border-white/10 lg:bg-[#F0FAF4] lg:text-[#00B86B] lg:border-[#DFEDE5] flex items-center justify-center shrink-0 border">
+                    <Phone className="w-3 h-3" />
+                  </div>
+                  <a
+                    href="tel:+923166007316"
+                    className="hover:text-[#34D399] lg:hover:text-[#00B86B] transition-colors"
+                  >
+                    {siteConfig.contact.phone}
+                  </a>
+                </li>
+
+                {/* WhatsApp */}
+                <li className="flex items-center gap-2">
+                  <div className="w-6 h-6 rounded-md bg-[#12382C] text-[#25D366] border-white/10 lg:bg-[#F0FAF4] lg:text-[#25D366] lg:border-[#DFEDE5] flex items-center justify-center shrink-0 border">
+                    <WhatsAppIcon className="w-3 h-3" />
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <a
+                      href={siteConfig.contact.whatsappUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-[#34D399] lg:hover:text-[#00B86B] transition-colors font-medium text-white lg:text-[#142A27]"
+                    >
+                      Chat on WhatsApp
+                    </a>
+                    <span className="px-1.5 py-0.2 rounded text-[8px] font-mono font-bold bg-[#00B86B] text-white tracking-wider">
+                      DIRECT
+                    </span>
+                  </div>
+                </li>
+              </ul>
+
+              {/* Office Hours Minimal Card */}
+              <div className="mt-3 p-2 rounded-lg bg-[#12382C] border border-white/10 text-white/80 lg:bg-[#F0FAF4] lg:border-[#DFEDE5] lg:text-[#64736F] text-[11px]">
+                <div className="flex items-center gap-1.5 font-bold text-[#34D399] lg:text-[#00B86B] mb-0.5">
+                  <Clock className="w-3 h-3" />
+                  <span>Office Hours</span>
+                </div>
+                <p className="font-medium leading-tight">
+                  Monday – Friday: 9:00 AM – 6:00 PM (PKT)
+                </p>
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* Subtle Horizontal Divider */}
-        <div className="border-t border-[#DFEDE5] pt-5 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#64736F]">
-          {/* Left: Copyright */}
-          <p className="font-normal text-center sm:text-left">
-            © {currentYear} <span className="font-semibold text-[#008F53]">DeepLayer Solutions</span>. All rights reserved.
-          </p>
+          {/* Subtle Horizontal Divider */}
+          <div className="border-t border-white/15 lg:border-[#DFEDE5] pt-5 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/70 lg:text-[#64736F]">
+            {/* Left: Copyright */}
+            <p className="font-normal text-center sm:text-left">
+              © {currentYear} <span className="font-semibold text-[#34D399] lg:text-[#008F53]">DeepLayer Solutions</span>. All rights reserved.
+            </p>
 
-          {/* Right: Legal Links */}
-          <div className="flex flex-wrap items-center justify-center sm:justify-end gap-3 sm:gap-4">
-            {footerLegalLinks.map((legal, index) => (
-              <React.Fragment key={legal.href}>
-                <Link
-                  href={legal.href}
-                  className="hover:text-[#00B86B] transition-colors"
-                >
-                  {legal.label}
-                </Link>
-                {index < footerLegalLinks.length - 1 && (
-                  <span className="text-[#DFEDE5]">|</span>
-                )}
-              </React.Fragment>
-            ))}
+            {/* Right: Legal Links */}
+            <div className="flex flex-wrap items-center justify-center sm:justify-end gap-3 sm:gap-4">
+              {footerLegalLinks.map((legal, index) => (
+                <React.Fragment key={legal.href}>
+                  <Link
+                    href={legal.href}
+                    className="hover:text-[#34D399] lg:hover:text-[#00B86B] transition-colors"
+                  >
+                    {legal.label}
+                  </Link>
+                  {index < footerLegalLinks.length - 1 && (
+                    <span className="text-white/20 lg:text-[#DFEDE5]">|</span>
+                  )}
+                </React.Fragment>
+              ))}
+            </div>
           </div>
-        </div>
-      </Container>
+        </Container>
+      </div>
 
       {/* Decorative Bottom Ambient Soft Wave SVG */}
       <svg
-        className="absolute bottom-0 left-0 w-full h-10 pointer-events-none opacity-40 -z-10"
+        className="absolute bottom-0 left-0 w-full h-10 pointer-events-none opacity-40 -z-10 hidden lg:block"
         viewBox="0 0 1440 40"
         fill="none"
         preserveAspectRatio="none"

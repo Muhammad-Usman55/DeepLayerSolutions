@@ -30,8 +30,18 @@ export function ServicesPreview() {
       />
 
       <Container size="wide">
-        {/* Upper Zone: Left 3D Central Visual & Right Content Block */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+        {/* Mobile Section Heading Matching Mockup */}
+        <div className="text-center mb-6 lg:hidden">
+          <h2 className="text-xl sm:text-2xl font-extrabold text-[#142A27] tracking-tight">
+            Our <span className="text-[#008F53]">Services</span>
+          </h2>
+          <p className="text-xs sm:text-sm text-[#64736F] mt-1 font-normal">
+            Innovative solutions for a smarter tomorrow.
+          </p>
+        </div>
+
+        {/* Upper Zone: Left 3D Central Visual & Right Content Block (Desktop Only) */}
+        <div className="hidden lg:grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
           {/* Left 3D Visualization Area (Cols 1-7 on desktop, 2nd on mobile) */}
           <div className="order-2 lg:order-1 lg:col-span-7 flex items-center justify-center relative">
             <Central3DVisual />
@@ -98,8 +108,8 @@ export function ServicesPreview() {
         </div>
 
         {/* Lower Zone: Responsive Service Cards (Single Unified DOM Tree) */}
-        <div className="mt-14 sm:mt-18 lg:mt-20">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
+        <div className="lg:mt-20">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
             {previewServices.map((service, index) => (
               <div key={service.id} className="h-full">
                 <ServiceCard service={service} index={index} />

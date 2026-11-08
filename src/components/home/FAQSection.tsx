@@ -37,9 +37,16 @@ export function FAQSection() {
       <div className="absolute inset-0 bg-dot-pattern opacity-25 pointer-events-none -z-10" />
 
       <Container size="wide">
+        {/* Mobile Header Matching Mockup (< lg) */}
+        <div className="text-center mb-6 lg:hidden">
+          <h2 className="text-xl sm:text-2xl font-extrabold text-[#142A27] tracking-tight">
+            Frequently Asked <span className="text-[#008F53]">Questions</span>
+          </h2>
+        </div>
+
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-start">
-          {/* Left Sticky Column (Cols 1-5 on desktop) */}
-          <div className="lg:col-span-5 lg:sticky lg:top-28 flex flex-col items-start text-left">
+          {/* Left Sticky Column (Cols 1-5 on desktop, hidden on mobile) */}
+          <div className="hidden lg:flex lg:col-span-5 lg:sticky lg:top-28 flex-col items-start text-left">
             <Eyebrow variant="chip" className="mb-4">
               Frequently Asked Questions
             </Eyebrow>
@@ -103,8 +110,8 @@ export function FAQSection() {
 
           {/* Right Accordion Column (Cols 6-12 on desktop) */}
           <div className="lg:col-span-7 flex flex-col w-full">
-            {/* Category Filter Pills */}
-            <div className="flex flex-wrap items-center gap-2 mb-6 select-none">
+            {/* Category Filter Pills (Desktop Only) */}
+            <div className="hidden sm:flex flex-wrap items-center gap-2 mb-6 select-none">
               {categories.map((category) => {
                 const isActive = activeCategory === category;
                 return (

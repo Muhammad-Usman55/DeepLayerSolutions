@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Brain, Code2, Globe, Cloud } from "lucide-react";
 import { motion } from "framer-motion";
 import { PreviewService } from "./types";
 import { Card3DVisual } from "./Card3DVisual";
@@ -23,34 +23,50 @@ export function ServiceCard({ service, index }: ServiceCardProps) {
     >
       <Link
         href={`/services/${service.slug}`}
-        className="group relative flex flex-col justify-between h-full p-6 sm:p-7 rounded-2xl bg-white/90 hover:bg-white backdrop-blur-xs border border-[#DFEDE5] hover:border-[#008F53]/45 shadow-xs hover:shadow-xl hover:shadow-[#008F53]/12 transition-all duration-300 hover:-translate-y-1.5 overflow-hidden"
+        className="group relative flex flex-col justify-between h-full rounded-2xl bg-white/90 hover:bg-white backdrop-blur-xs border border-[#DFEDE5] hover:border-[#008F53]/45 shadow-xs hover:shadow-xl hover:shadow-[#008F53]/12 transition-all duration-300 hover:-translate-y-1.5 overflow-hidden"
         aria-label={`Explore ${service.title}`}
       >
         {/* Subtle Top Gradient Glass Accent on Hover */}
         <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#008F53] via-[#00B86B] to-[#075B3E] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-        {/* Card Top: 3D Illustration */}
-        <div className="w-full flex flex-col items-center justify-center pt-2 pb-4">
-          <Card3DVisual type={service.visualType} />
+        {/* Mobile View: Clean Centered Card Matching Mockup (lg:hidden) */}
+        <div className="flex flex-col items-center text-center p-3.5 sm:p-4 lg:hidden">
+          <div className="w-10 h-10 rounded-full bg-[#E9FFF2] border border-[#BCE8CF] text-[#008F53] flex items-center justify-center mb-2.5 shadow-2xs group-hover:scale-105 transition-transform">
+            {service.visualType === "ai" && <Brain className="w-5 h-5" />}
+            {service.visualType === "software" && <Code2 className="w-5 h-5" />}
+            {service.visualType === "web" && <Globe className="w-5 h-5" />}
+            {service.visualType === "cloud" && <Cloud className="w-5 h-5" />}
+          </div>
+          <h3 className="text-xs sm:text-sm font-bold text-[#142A27] group-hover:text-[#008F53] transition-colors leading-snug">
+            {service.title}
+          </h3>
         </div>
 
-        {/* Card Bottom: Service Name & Circular Arrow Button */}
-        <div className="pt-4 border-t border-[#DFEDE5]/60 flex items-center justify-between gap-3 mt-auto">
-          <div className="flex flex-col">
-            <span className="text-[10px] font-mono uppercase tracking-wider text-[#008F53] font-semibold">
-              {service.category}
-            </span>
-            <h3 className="text-base sm:text-lg font-bold text-[#142A27] group-hover:text-[#008F53] transition-colors leading-snug line-clamp-2">
-              {service.title}
-            </h3>
+        {/* Desktop View: Full 3D Illustration & Arrow (hidden lg:flex) */}
+        <div className="hidden lg:flex flex-col justify-between h-full p-7">
+          {/* Card Top: 3D Illustration */}
+          <div className="w-full flex flex-col items-center justify-center pt-2 pb-4">
+            <Card3DVisual type={service.visualType} />
           </div>
 
-          {/* Circular Arrow Button */}
-          <div
-            className="w-9 h-9 rounded-full bg-[#E9FFF2] border border-[#DFEDE5] text-[#008F53] group-hover:bg-[#008F53] group-hover:text-white group-hover:border-[#008F53] flex items-center justify-center transition-all duration-300 shrink-0 shadow-2xs group-hover:scale-105"
-            aria-hidden="true"
-          >
-            <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5" />
+          {/* Card Bottom: Service Name & Circular Arrow Button */}
+          <div className="pt-4 border-t border-[#DFEDE5]/60 flex items-center justify-between gap-3 mt-auto">
+            <div className="flex flex-col">
+              <span className="text-[10px] font-mono uppercase tracking-wider text-[#008F53] font-semibold">
+                {service.category}
+              </span>
+              <h3 className="text-lg font-bold text-[#142A27] group-hover:text-[#008F53] transition-colors leading-snug line-clamp-2">
+                {service.title}
+              </h3>
+            </div>
+
+            {/* Circular Arrow Button */}
+            <div
+              className="w-9 h-9 rounded-full bg-[#E9FFF2] border border-[#DFEDE5] text-[#008F53] group-hover:bg-[#008F53] group-hover:text-white group-hover:border-[#008F53] flex items-center justify-center transition-all duration-300 shrink-0 shadow-2xs group-hover:scale-105"
+              aria-hidden="true"
+            >
+              <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5" />
+            </div>
           </div>
         </div>
       </Link>

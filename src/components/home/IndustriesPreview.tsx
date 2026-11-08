@@ -65,13 +65,23 @@ export function IndustriesPreview() {
       <div className="hidden lg:block absolute -bottom-20 -right-20 w-88 h-88 rounded-full border border-[#00B86B]/15 pointer-events-none -z-10" />
 
       <Container size="wide">
-        {/* Section Header */}
+        {/* Mobile Header Matching Mockup (sm:hidden) */}
+        <div className="text-center mb-6 sm:hidden">
+          <h2 className="text-xl sm:text-2xl font-extrabold text-[#142A27] tracking-tight">
+            Industry-<span className="text-[#008F53]">Specific</span> Expertise
+          </h2>
+          <p className="text-xs sm:text-sm text-[#64736F] mt-1 font-normal">
+            Tailored solutions for your industry.
+          </p>
+        </div>
+
+        {/* Section Header (Desktop) */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          className="text-center max-w-2xl mx-auto"
+          className="text-center max-w-2xl mx-auto hidden sm:block"
         >
           {/* Centered Pill Badge */}
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#DFEDE5] shadow-xs text-xs font-semibold text-[#142A27] mb-4">
@@ -93,8 +103,8 @@ export function IndustriesPreview() {
           <div className="w-12 h-1 bg-[#008F53] rounded-full mx-auto mt-4" />
         </motion.div>
 
-        {/* 3 Industry Cards */}
-        <div className="mt-12 sm:mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto">
+        {/* 3 Industry Cards (3-col compact row on mobile, 3-col rich cards on desktop) */}
+        <div className="mt-8 sm:mt-16 grid grid-cols-3 gap-2.5 sm:gap-8 max-w-6xl mx-auto">
           {industryCards.map((card, index) => {
             const BadgeIcon = card.badgeIcon;
             const Visual = card.VisualComponent;
@@ -114,30 +124,30 @@ export function IndustriesPreview() {
               >
                 <Link
                   href={`/industries#${card.slug}`}
-                  className="group relative flex flex-col justify-between rounded-2xl sm:rounded-[32px] bg-white border border-[#DFEDE5] p-5 sm:p-8 transition-all duration-300 hover:border-[#008F53]/40 hover:-translate-y-2 shadow-[0_8px_24px_rgba(0,143,83,0.04)] hover:shadow-[0_20px_40px_rgba(0,143,83,0.1)] focus:outline-hidden focus:ring-2 focus:ring-[#008F53]"
+                  className="group relative flex flex-col justify-between items-center sm:items-stretch rounded-xl sm:rounded-[32px] bg-white border border-[#DFEDE5] p-3 sm:p-8 transition-all duration-300 hover:border-[#008F53]/40 hover:-translate-y-2 shadow-[0_8px_24px_rgba(0,143,83,0.04)] hover:shadow-[0_20px_40px_rgba(0,143,83,0.1)] focus:outline-hidden focus:ring-2 focus:ring-[#008F53] text-center sm:text-left h-full"
                   aria-label={`Explore ${card.title} domain solutions`}
                 >
-                  {/* Top Row: Mini Pill/Circle Badge in Top Right */}
-                  <div className="flex items-center justify-end w-full">
-                    <div className="w-10 h-10 rounded-full bg-[#E9FFF2] border border-[#DFEDE5] flex items-center justify-center text-[#008F53] group-hover:scale-110 group-hover:bg-[#008F53] group-hover:text-white transition-all duration-300 shadow-xs">
-                      <BadgeIcon className="w-5 h-5 stroke-[2.2]" />
+                  {/* Top Row: Mini Pill/Circle Badge (Centered on mobile, right on desktop) */}
+                  <div className="flex items-center justify-center sm:justify-end w-full">
+                    <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#E9FFF2] border border-[#DFEDE5] flex items-center justify-center text-[#008F53] group-hover:scale-110 group-hover:bg-[#008F53] group-hover:text-white transition-all duration-300 shadow-xs">
+                      <BadgeIcon className="w-4 h-4 sm:w-5 sm:h-5 stroke-[2.2]" />
                     </div>
                   </div>
 
-                  {/* Center: Bespoke 3D Glass & Isometric Vector Illustration */}
-                  <div className="my-2 sm:my-3 flex items-center justify-center">
+                  {/* Center: Bespoke 3D Glass & Isometric Vector Illustration (Desktop Only) */}
+                  <div className="my-2 sm:my-3 hidden sm:flex items-center justify-center">
                     <div className="w-full transition-transform duration-500 ease-out group-hover:scale-105">
                       <Visual />
                     </div>
                   </div>
 
                   {/* Bottom: Title & Minimal Circular Action Button */}
-                  <div className="mt-2 pt-2">
-                    <h3 className="text-xl sm:text-2xl font-bold text-[#142A27] tracking-tight group-hover:text-[#008F53] transition-colors duration-200">
+                  <div className="mt-1 sm:mt-2 sm:pt-2 w-full">
+                    <h3 className="text-xs sm:text-2xl font-bold text-[#142A27] tracking-tight group-hover:text-[#008F53] transition-colors duration-200 leading-snug">
                       {card.title}
                     </h3>
 
-                    <div className="mt-4 sm:mt-5">
+                    <div className="mt-4 sm:mt-5 hidden sm:block">
                       <div className="inline-flex items-center justify-center w-11 h-11 rounded-full bg-[#E9FFF2] text-[#008F53] group-hover:bg-[#008F53] group-hover:text-white transition-all duration-300 shadow-xs group-hover:shadow-md group-hover:scale-105">
                         <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-0.5" />
                       </div>
@@ -149,8 +159,8 @@ export function IndustriesPreview() {
           })}
         </div>
 
-        {/* 3 Pagination Indicator Dots */}
-        <div className="mt-10 sm:mt-12 flex items-center justify-center gap-2" aria-hidden="true">
+        {/* 3 Pagination Indicator Dots (Desktop Only) */}
+        <div className="mt-10 sm:mt-12 hidden sm:flex items-center justify-center gap-2" aria-hidden="true">
           {industryCards.map((_, dotIdx) => (
             <button
               key={dotIdx}

@@ -77,8 +77,18 @@ export function ProcessTimeline() {
       </svg>
 
       <Container size="wide">
-        {/* Section Heading: Centered */}
-        <div className="flex flex-col items-center text-center max-w-3xl mx-auto mb-14 sm:mb-18 lg:mb-20">
+        {/* Mobile Heading Matching Mockup (< sm) */}
+        <div className="text-center mb-6 sm:hidden">
+          <h2 className="text-xl sm:text-2xl font-extrabold text-[#142A27] tracking-tight">
+            Our <span className="text-[#008F53]">Development</span> Approach
+          </h2>
+          <p className="text-xs sm:text-sm text-[#64736F] mt-1 font-normal">
+            A simple and effective process.
+          </p>
+        </div>
+
+        {/* Section Heading: Desktop (>= sm) */}
+        <div className="hidden sm:flex flex-col items-center text-center max-w-3xl mx-auto mb-14 sm:mb-18 lg:mb-20">
           <Eyebrow variant="chip" className="mb-4">
             How We Work
           </Eyebrow>
@@ -92,12 +102,44 @@ export function ProcessTimeline() {
           </p>
         </div>
 
-        {/* 4 Connected Development Steps */}
-        <div className="relative">
+        {/* Mobile Vertical Process List matching Mockup (< sm) */}
+        <div className="sm:hidden max-w-md mx-auto bg-white rounded-2xl border border-[#DFEDE5] p-4 shadow-xs space-y-3.5">
+          <div className="flex items-center gap-3 text-left">
+            <span className="w-5 h-5 rounded-full bg-[#008F53] text-white text-[11px] font-bold flex items-center justify-center shrink-0">1</span>
+            <div className="flex-1 min-w-0 text-xs">
+              <span className="font-bold text-[#142A27]">Discover</span>
+              <span className="text-[#64736F]"> — Understand your needs</span>
+            </div>
+          </div>
+          <div className="flex items-center gap-3 text-left">
+            <span className="w-5 h-5 rounded-full bg-[#008F53] text-white text-[11px] font-bold flex items-center justify-center shrink-0">2</span>
+            <div className="flex-1 min-w-0 text-xs">
+              <span className="font-bold text-[#142A27]">Strategize</span>
+              <span className="text-[#64736F]"> — Plan the right solution</span>
+            </div>
+          </div>
+          <div className="flex items-center gap-3 text-left">
+            <span className="w-5 h-5 rounded-full bg-[#008F53] text-white text-[11px] font-bold flex items-center justify-center shrink-0">3</span>
+            <div className="flex-1 min-w-0 text-xs">
+              <span className="font-bold text-[#142A27]">Develop</span>
+              <span className="text-[#64736F]"> — Build with excellence</span>
+            </div>
+          </div>
+          <div className="flex items-center gap-3 text-left">
+            <span className="w-5 h-5 rounded-full bg-[#008F53] text-white text-[11px] font-bold flex items-center justify-center shrink-0">4</span>
+            <div className="flex-1 min-w-0 text-xs">
+              <span className="font-bold text-[#142A27]">Deliver</span>
+              <span className="text-[#64736F]"> — Launch and support</span>
+            </div>
+          </div>
+        </div>
+
+        {/* 4 Connected Development Steps (Tablet & Desktop >= sm) */}
+        <div className="hidden sm:block relative">
           {/* Desktop Horizontal Connecting Line */}
           <div className="hidden lg:block absolute top-[44%] left-[10%] right-[10%] h-[2px] border-t-2 border-dashed border-[#BCE8CF] -z-0 pointer-events-none" />
 
-          {/* Steps Grid: 4 in row on Desktop, 2x2 on Tablet, 1 on Mobile */}
+          {/* Steps Grid: 4 in row on Desktop, 2x2 on Tablet */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-7 lg:gap-6 relative z-10">
             {processSteps.map((step, idx) => {
               const IconComponent = step.Icon;
