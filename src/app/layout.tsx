@@ -96,6 +96,9 @@ export const metadata: Metadata = {
       { url: "/apple-icon.png", sizes: "180x180", type: "image/png" },
     ],
   },
+  verification: {
+    google: "1_eR-BQXU2XK2n7seIS1-BRwE6GLcvwSDC5us33FzOc",
+  },
 };
 
 export const viewport: Viewport = {
