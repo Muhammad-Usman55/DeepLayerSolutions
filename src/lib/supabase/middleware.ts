@@ -19,7 +19,7 @@ export async function updateSession(request: NextRequest) {
 
   // If Supabase environment variables are not yet configured, gracefully passthrough
   if (!supabaseUrl || !supabaseAnonKey) {
-    return supabaseResponse;
+    return { supabaseResponse, user: null, supabase: null };
   }
 
   const supabase = createServerClient<Database>(supabaseUrl, supabaseAnonKey, {
@@ -41,8 +41,10 @@ export async function updateSession(request: NextRequest) {
 
   // IMPORTANT: Do not run code between createServerClient and supabase.auth.getUser().
   // A simple mistake could cause the user to be logged out randomly.
-  await supabase.auth.getUser();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
-  return supabaseResponse;
+  return { supabaseResponse, user, supabase };
 }
 

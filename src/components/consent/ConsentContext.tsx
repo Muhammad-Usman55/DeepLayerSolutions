@@ -149,3 +149,4 @@ export function ConsentProvider({ children }: { children: React.ReactNode }) {
 
   return <ConsentContext.Provider value={value}>{children}</ConsentContext.Provider>;
 }
+

@@ -83,3 +83,4 @@ export function CookieConsentBanner() {
     </AnimatePresence>
   );
 }
+

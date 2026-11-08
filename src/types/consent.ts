@@ -25,3 +25,4 @@ export interface ConsentContextValue {
   closeBanner: () => void;
   closePreferences: () => void;
 }
+
