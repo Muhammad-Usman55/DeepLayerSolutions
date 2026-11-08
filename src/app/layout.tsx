@@ -4,6 +4,7 @@ import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Preloader } from "@/components/common/Preloader";
+import { PageTransition } from "@/components/layout/PageTransition";
 import { MotionProvider } from "@/components/common/MotionProvider";
 import { siteConfig } from "@/config/site";
 
@@ -155,7 +156,7 @@ export default function RootLayout({
         <MotionProvider>
           <Preloader />
           <Navbar />
-          {children}
+          <PageTransition>{children}</PageTransition>
           <Footer />
         </MotionProvider>
       </body>
