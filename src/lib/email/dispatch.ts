@@ -10,6 +10,15 @@ import {
   generateContactConfirmationEmail,
   ContactConfirmationParams,
 } from "./templates/contactConfirmationEmail";
+import {
+  generateNewsletterConfirmationEmail,
+  NewsletterConfirmationParams,
+} from "./templates/newsletterConfirmationEmail";
+import {
+  generateNewsletterWelcomeEmail,
+  NewsletterWelcomeParams,
+} from "./templates/newsletterWelcomeEmail";
+import { generateUnsubscribeToken } from "./tokens";
 
 export interface EmailDispatchResult {
   recipient: string;
@@ -262,5 +271,212 @@ export async function sendContactInquiryEmails(inquiry: {
     notification: notificationResult,
     confirmation: confirmationResult,
   };
+}
+
+/**
+ * Dispatches a double opt-in confirmation email to a new or pending subscriber.
+ * Contains a secure 48-hour confirmation link.
+ */
+export async function sendNewsletterConfirmationEmail(params: {
+  email: string;
+  rawToken: string;
+  subscriberId?: string | null;
+}): Promise<EmailDispatchResult> {
+  const { email, rawToken, subscriberId } = params;
+  const resend = getResendClient();
+  const fromEmail = getFromEmail();
+  const siteUrl = getSiteUrl();
+
+  if (!resend) {
+    console.warn(
+      `[RESEND UNCONFIGURED] Newsletter confirmation for ${email} skipped: RESEND_API_KEY is not set.`
+    );
+    const unconfiguredResult: EmailDispatchResult = {
+      recipient: email,
+      type: "newsletter_confirmation",
+      status: "failed",
+      error: "RESEND_API_KEY environment variable is not configured.",
+    };
+    await logEmailAttempt({
+      recipient: email,
+      emailType: "newsletter_confirmation",
+      relatedRecordId: subscriberId || null,
+      status: "failed",
+      errorMessage: "RESEND_API_KEY is not configured in environment.",
+    });
+    return unconfiguredResult;
+  }
+
+  try {
+    const template = generateNewsletterConfirmationEmail({
+      email,
+      rawToken,
+      siteUrl,
+    });
+
+    const { data, error } = await resend.emails.send({
+      from: fromEmail,
+      to: [email],
+      subject: template.subject,
+      html: template.html,
+      text: template.text,
+    });
+
+    if (error || !data?.id) {
+      const errStr = error?.message || "Resend rejected newsletter confirmation";
+      console.error(`[NEWSLETTER CONFIRMATION ERROR] ${email}:`, errStr);
+      const failedResult: EmailDispatchResult = {
+        recipient: email,
+        type: "newsletter_confirmation",
+        status: "failed",
+        error: errStr,
+      };
+      await logEmailAttempt({
+        recipient: email,
+        emailType: "newsletter_confirmation",
+        relatedRecordId: subscriberId || null,
+        status: "failed",
+        errorMessage: errStr,
+      });
+      return failedResult;
+    }
+
+    console.info(`[NEWSLETTER CONFIRMATION SENT] ${email} | ID: ${data.id}`);
+    const successResult: EmailDispatchResult = {
+      recipient: email,
+      type: "newsletter_confirmation",
+      status: "sent",
+      providerMessageId: data.id,
+    };
+    await logEmailAttempt({
+      recipient: email,
+      emailType: "newsletter_confirmation",
+      relatedRecordId: subscriberId || null,
+      providerMessageId: data.id,
+      status: "sent",
+    });
+    return successResult;
+  } catch (err: any) {
+    const errStr = err?.message || "Unexpected error during confirmation dispatch";
+    console.error(`[NEWSLETTER CONFIRMATION EXCEPTION] ${email}:`, errStr);
+    const exceptionResult: EmailDispatchResult = {
+      recipient: email,
+      type: "newsletter_confirmation",
+      status: "failed",
+      error: errStr,
+    };
+    await logEmailAttempt({
+      recipient: email,
+      emailType: "newsletter_confirmation",
+      relatedRecordId: subscriberId || null,
+      status: "failed",
+      errorMessage: errStr,
+    });
+    return exceptionResult;
+  }
+}
+
+/**
+ * Dispatches a welcome email to a newly confirmed newsletter subscriber.
+ * Includes a cryptographic one-click unsubscribe link.
+ */
+export async function sendNewsletterWelcomeEmail(params: {
+  email: string;
+  subscriberId?: string | null;
+}): Promise<EmailDispatchResult> {
+  const { email, subscriberId } = params;
+  const resend = getResendClient();
+  const fromEmail = getFromEmail();
+  const siteUrl = getSiteUrl();
+
+  const unsubscribeKey = generateUnsubscribeToken(email);
+
+  if (!resend) {
+    console.warn(
+      `[RESEND UNCONFIGURED] Newsletter welcome for ${email} skipped: RESEND_API_KEY is not set.`
+    );
+    const unconfiguredResult: EmailDispatchResult = {
+      recipient: email,
+      type: "newsletter_welcome",
+      status: "failed",
+      error: "RESEND_API_KEY environment variable is not configured.",
+    };
+    await logEmailAttempt({
+      recipient: email,
+      emailType: "newsletter_welcome",
+      relatedRecordId: subscriberId || null,
+      status: "failed",
+      errorMessage: "RESEND_API_KEY is not configured in environment.",
+    });
+    return unconfiguredResult;
+  }
+
+  try {
+    const template = generateNewsletterWelcomeEmail({
+      email,
+      unsubscribeKey,
+      siteUrl,
+    });
+
+    const { data, error } = await resend.emails.send({
+      from: fromEmail,
+      to: [email],
+      subject: template.subject,
+      html: template.html,
+      text: template.text,
+    });
+
+    if (error || !data?.id) {
+      const errStr = error?.message || "Resend rejected newsletter welcome";
+      console.error(`[NEWSLETTER WELCOME ERROR] ${email}:`, errStr);
+      const failedResult: EmailDispatchResult = {
+        recipient: email,
+        type: "newsletter_welcome",
+        status: "failed",
+        error: errStr,
+      };
+      await logEmailAttempt({
+        recipient: email,
+        emailType: "newsletter_welcome",
+        relatedRecordId: subscriberId || null,
+        status: "failed",
+        errorMessage: errStr,
+      });
+      return failedResult;
+    }
+
+    console.info(`[NEWSLETTER WELCOME SENT] ${email} | ID: ${data.id}`);
+    const successResult: EmailDispatchResult = {
+      recipient: email,
+      type: "newsletter_welcome",
+      status: "sent",
+      providerMessageId: data.id,
+    };
+    await logEmailAttempt({
+      recipient: email,
+      emailType: "newsletter_welcome",
+      relatedRecordId: subscriberId || null,
+      providerMessageId: data.id,
+      status: "sent",
+    });
+    return successResult;
+  } catch (err: any) {
+    const errStr = err?.message || "Unexpected error during welcome dispatch";
+    console.error(`[NEWSLETTER WELCOME EXCEPTION] ${email}:`, errStr);
+    const exceptionResult: EmailDispatchResult = {
+      recipient: email,
+      type: "newsletter_welcome",
+      status: "failed",
+      error: errStr,
+    };
+    await logEmailAttempt({
+      recipient: email,
+      emailType: "newsletter_welcome",
+      relatedRecordId: subscriberId || null,
+      status: "failed",
+      errorMessage: errStr,
+    });
+    return exceptionResult;
+  }
 }
 
