@@ -16,6 +16,11 @@ import {
   Brain,
   Sparkles,
   SearchCheck,
+  Code2,
+  Database,
+  Cloud,
+  Smartphone,
+  Compass,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Logo } from "./Logo";
@@ -25,14 +30,19 @@ import { Container } from "../common/Container";
 import { cn } from "@/lib/utils";
 
 const serviceIcons: Record<ServiceNavItem["iconName"], React.ComponentType<{ className?: string }>> = {
+  Brain,
+  Bot,
+  Code2,
   Globe,
+  Database,
+  Cloud,
+  Smartphone,
+  Compass,
+  SearchCheck,
   Gauge,
   Layout,
   Zap,
-  Bot,
   Eye,
-  Brain,
-  SearchCheck,
 };
 
 export function Navbar() {
@@ -202,7 +212,7 @@ export function Navbar() {
                             animate={{ opacity: 1, y: 0, scale: 1 }}
                             exit={{ opacity: 0, y: 6, scale: 0.98 }}
                             transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
-                            className="absolute top-full left-1/2 -translate-x-1/2 pt-2.5 w-[640px] z-50"
+                            className="absolute top-full left-1/2 -translate-x-1/2 pt-2.5 w-[760px] xl:w-[820px] z-50"
                           >
                             {/* Invisible bridge prevents mouse dropout */}
                             <div className="absolute -top-3 left-0 right-0 h-4 pointer-events-auto" />
@@ -224,8 +234,8 @@ export function Navbar() {
                                 </Link>
                               </div>
 
-                              {/* 8 Services Grid */}
-                              <div className="grid grid-cols-2 gap-2">
+                              {/* 9 Services 3-Column Grid */}
+                              <div className="grid grid-cols-3 gap-2">
                                 {servicesMegaMenuData.map((service) => {
                                   const IconComponent = serviceIcons[service.iconName];
                                   return (

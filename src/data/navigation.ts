@@ -5,63 +5,83 @@ export interface ServiceNavItem {
   title: string;
   description: string;
   href: string;
-  iconName: "Globe" | "Gauge" | "Layout" | "Zap" | "Bot" | "Eye" | "Brain" | "SearchCheck";
+  iconName:
+    | "Brain"
+    | "Bot"
+    | "Code2"
+    | "Globe"
+    | "Database"
+    | "Cloud"
+    | "Smartphone"
+    | "Compass"
+    | "SearchCheck"
+    | "Gauge"
+    | "Layout"
+    | "Zap"
+    | "Eye";
 }
 
 export const servicesMegaMenuData: ServiceNavItem[] = [
   {
-    id: "web-dev",
-    title: "Web Development",
-    description: "High-performance enterprise web apps & digital platforms.",
-    href: "/services/web-development",
-    iconName: "Globe",
-  },
-  {
-    id: "site-opt",
-    title: "Website Optimization",
-    description: "Core Web Vitals, speed, and modern SEO enhancement.",
-    href: "/services/web-development#optimization",
-    iconName: "Gauge",
-  },
-  {
-    id: "landing-pages",
-    title: "Landing Pages",
-    description: "High-converting, bespoke UX/UI sales & lead generation pages.",
-    href: "/services/web-development#landing-pages",
-    iconName: "Layout",
-  },
-  {
-    id: "ai-automation",
-    title: "AI Automation",
-    description: "Custom agentic pipelines and automated workflow intelligence.",
-    href: "/services/generative-ai-llms",
-    iconName: "Zap",
-  },
-  {
-    id: "intelligent-agents",
-    title: "Bots & Intelligent Agents",
-    description: "Conversational AI, autonomous agents & LLM integrations.",
-    href: "/services/generative-ai-llms#agents",
-    iconName: "Bot",
-  },
-  {
-    id: "computer-vision",
-    title: "Computer Vision",
-    description: "Object detection, visual recognition & OCR neural networks.",
-    href: "/services/ai-machine-learning#vision",
-    iconName: "Eye",
-  },
-  {
-    id: "machine-learning",
-    title: "Machine Learning",
-    description: "Predictive modeling, custom ML models & data analytics.",
+    id: "ai-ml",
+    title: "AI & Machine Learning",
+    description: "Custom deep learning models, computer vision & neural networks.",
     href: "/services/ai-machine-learning",
     iconName: "Brain",
   },
   {
+    id: "gen-ai",
+    title: "Generative AI & LLM Solutions",
+    description: "RAG vector pipelines, multi-agent AI systems & LLM fine-tuning.",
+    href: "/services/generative-ai-llms",
+    iconName: "Bot",
+  },
+  {
+    id: "custom-software",
+    title: "Custom Software Development",
+    description: "High-concurrency backend systems & enterprise microservices.",
+    href: "/services/custom-software-development",
+    iconName: "Code2",
+  },
+  {
+    id: "web-dev",
+    title: "Web Development",
+    description: "Enterprise Next.js web applications, headless platforms & rapid UI.",
+    href: "/services/web-development",
+    iconName: "Globe",
+  },
+  {
+    id: "data-eng",
+    title: "Data Engineering & Analytics",
+    description: "High-throughput ETL pipelines, streaming architectures & BI lakes.",
+    href: "/services/data-engineering",
+    iconName: "Database",
+  },
+  {
+    id: "cloud-devops",
+    title: "Cloud Solutions & DevOps",
+    description: "Kubernetes orchestration, CI/CD automation & zero-trust cloud.",
+    href: "/services/cloud-solutions-devops",
+    iconName: "Cloud",
+  },
+  {
+    id: "mobile-dev",
+    title: "Mobile App Development",
+    description: "Cross-platform iOS & Android native apps with offline sync.",
+    href: "/services/mobile-app-development",
+    iconName: "Smartphone",
+  },
+  {
+    id: "it-consulting",
+    title: "IT Consulting & Transformation",
+    description: "Architecture modernization, technical audits & CTO advisory.",
+    href: "/services/it-consulting",
+    iconName: "Compass",
+  },
+  {
     id: "seo",
     title: "Search Engine Optimization (SEO)",
-    description: "Technical SEO audits, Core Web Vitals & organic ranking.",
+    description: "Technical crawl audits, Core Web Vitals & organic ranking.",
     href: "/services/seo",
     iconName: "SearchCheck",
   },
@@ -89,13 +109,15 @@ export const footerQuickLinks: NavItem[] = [
 ];
 
 export const footerServiceLinks: NavItem[] = [
-  { label: "AI & Machine Learning", href: "/services/ai-machine-learning" },
-  { label: "Custom Software", href: "/services/custom-software-development" },
-  { label: "Web Platforms", href: "/services/web-development" },
+  { label: "Artificial Intelligence & ML", href: "/services/ai-machine-learning" },
+  { label: "Generative AI & LLM Solutions", href: "/services/generative-ai-llms" },
+  { label: "Custom Software Development", href: "/services/custom-software-development" },
+  { label: "Web Development", href: "/services/web-development" },
+  { label: "Data Engineering & Analytics", href: "/services/data-engineering" },
+  { label: "Cloud Solutions & DevOps", href: "/services/cloud-solutions-devops" },
+  { label: "Mobile Application Development", href: "/services/mobile-app-development" },
+  { label: "IT Consulting & Transformation", href: "/services/it-consulting" },
   { label: "Search Engine Optimization (SEO)", href: "/services/seo" },
-  { label: "Cloud & DevOps", href: "/services/cloud-solutions-devops" },
-  { label: "Data Engineering", href: "/services/data-engineering" },
-  { label: "IT Consulting", href: "/services/it-consulting" },
 ];
 
 export const footerLegalLinks: NavItem[] = [

@@ -24,10 +24,11 @@ const categories = [
   "Next-Gen AI",
   "Core Engineering",
   "Digital Platforms",
-  "Search & Visibility",
+  "Data Platforms",
   "Infrastructure",
   "Mobile Platforms",
   "Strategic Advisory",
+  "Search & Visibility",
 ];
 
 export function ServiceFilter() {

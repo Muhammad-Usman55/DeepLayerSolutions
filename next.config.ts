@@ -30,6 +30,62 @@ const nextConfig: NextConfig = {
         destination: "/portfolio/enterprise-rag-assistant",
         permanent: true,
       },
+      // Service legacy & alternative slug aliases
+      {
+        source: "/services/website-optimization",
+        destination: "/services/seo",
+        permanent: true,
+      },
+      {
+        source: "/services/landing-pages",
+        destination: "/services/web-development",
+        permanent: true,
+      },
+      {
+        source: "/services/ai-automation",
+        destination: "/services/generative-ai-llms",
+        permanent: true,
+      },
+      {
+        source: "/services/bots-intelligent-agents",
+        destination: "/services/generative-ai-llms",
+        permanent: true,
+      },
+      {
+        source: "/services/computer-vision",
+        destination: "/services/ai-machine-learning",
+        permanent: true,
+      },
+      {
+        source: "/services/machine-learning",
+        destination: "/services/ai-machine-learning",
+        permanent: true,
+      },
+      {
+        source: "/services/custom-software",
+        destination: "/services/custom-software-development",
+        permanent: true,
+      },
+      {
+        source: "/services/cloud-devops",
+        destination: "/services/cloud-solutions-devops",
+        permanent: true,
+      },
+      {
+        source: "/services/mobile-apps",
+        destination: "/services/mobile-app-development",
+        permanent: true,
+      },
+      {
+        source: "/services/mobile-application-development",
+        destination: "/services/mobile-app-development",
+        permanent: true,
+      },
+      {
+        source: "/services/it-consulting-digital-transformation",
+        destination: "/services/it-consulting",
+        permanent: true,
+      },
     ];
   },
   async headers() {

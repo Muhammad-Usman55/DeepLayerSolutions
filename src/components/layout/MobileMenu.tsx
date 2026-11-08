@@ -15,6 +15,11 @@ import {
   Eye,
   Brain,
   SearchCheck,
+  Code2,
+  Database,
+  Cloud,
+  Smartphone,
+  Compass,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Logo } from "./Logo";
@@ -28,14 +33,19 @@ interface MobileMenuProps {
 }
 
 const serviceIcons: Record<ServiceNavItem["iconName"], React.ComponentType<{ className?: string }>> = {
+  Brain,
+  Bot,
+  Code2,
   Globe,
+  Database,
+  Cloud,
+  Smartphone,
+  Compass,
+  SearchCheck,
   Gauge,
   Layout,
   Zap,
-  Bot,
   Eye,
-  Brain,
-  SearchCheck,
 };
 
 export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
