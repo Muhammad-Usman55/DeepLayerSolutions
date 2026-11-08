@@ -71,11 +71,11 @@ export function TechEcosystem() {
         <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-36 lg:w-48 bg-gradient-to-l from-[#FAFCF9] via-[#FAFCF9]/90 to-transparent z-10 pointer-events-none" />
 
         <div className="space-y-4 sm:space-y-5">
-          {/* Row 1 — LEFT TO RIGHT */}
+          {/* Row 1 — RIGHT TO LEFT */}
           <div
-            className="animate-marquee-ltr hover:[animation-play-state:paused]"
+            className="animate-marquee-rtl hover:[animation-play-state:paused]"
             role="region"
-            aria-label="Technologies row 1 moving left to right"
+            aria-label="Technologies row 1 moving right to left"
           >
             {/* Primary Track Set (50% of infinite loop) */}
             <div className="flex items-center shrink-0 gap-4 sm:gap-5 pr-4 sm:pr-5">
@@ -98,11 +98,11 @@ export function TechEcosystem() {
             </div>
           </div>
 
-          {/* Row 2 — RIGHT TO LEFT */}
+          {/* Row 2 — LEFT TO RIGHT (Opposite direction) */}
           <div
-            className="animate-marquee-rtl hover:[animation-play-state:paused]"
+            className="animate-marquee-ltr hover:[animation-play-state:paused]"
             role="region"
-            aria-label="Technologies row 2 moving right to left"
+            aria-label="Technologies row 2 moving left to right"
           >
             {/* Primary Track Set (50% of infinite loop) */}
             <div className="flex items-center shrink-0 gap-4 sm:gap-5 pr-4 sm:pr-5">
