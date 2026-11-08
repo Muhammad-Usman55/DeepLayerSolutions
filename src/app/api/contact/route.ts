@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { sendContactInquiryEmails } from "@/lib/email/dispatch";
 
 // In-memory IP rate limiter for serverless environment
 // Maps IP to { count: number, resetAt: number }
@@ -185,7 +186,25 @@ export async function POST(req: NextRequest) {
       `[CONTACT SUBMISSION SAVED] Ref: ${record.reference_number} | ID: ${record.id} | From: ${sanitizedFullName} (${sanitizedEmail}) | Service: "${sanitizedService}"`
     );
 
-    // 10. Return Successful Response with Generated Reference Number
+    // 10. Dispatch Transactional Emails (Failsafe & Audited)
+    // CRITICAL: Record is already committed in PostgreSQL. Email failures are logged and do not block the inquiry.
+    try {
+      await sendContactInquiryEmails({
+        id: record.id,
+        referenceNumber: record.reference_number,
+        fullName: sanitizedFullName,
+        email: sanitizedEmail,
+        company: sanitizedCompany,
+        service: sanitizedService,
+        subject: sanitizedSubject,
+        message: sanitizedMessage,
+        submittedAt: record.created_at,
+      });
+    } catch (emailError: any) {
+      console.error("[EMAIL DISPATCH UNHANDLED EXCEPTION]", emailError?.message || emailError);
+    }
+
+    // 11. Return Successful Response with Generated Reference Number
     return NextResponse.json(
       {
         success: true,
