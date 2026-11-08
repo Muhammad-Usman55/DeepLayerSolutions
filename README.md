@@ -177,8 +177,8 @@ DeepLayer Solutions/
 6. **Industries Grid:** Domain-specific technological capabilities across 8 high-growth sectors.
 7. **Development Approach (Process Timeline):** 5-step delivery methodology from Discovery & Architecture to Deployment & Telemetry.
 8. **Battle-Tested Technology Ecosystem (Dual Marquee):**
-   - **Row 1:** Python, PyTorch, TensorFlow, OpenCV, Next.js, TypeScript, LangGraph, Google Gemini $\to$ scrolls **Right to Left** (`26s`).
-   - **Row 2:** FastAPI, Django, Docker, Kubernetes, PostgreSQL, Redis, Qdrant, AWS Cloud $\to$ scrolls **Left to Right** (`22s`).
+   - **Row 1:** Python, PyTorch, TensorFlow, OpenCV, Next.js, TypeScript, LangGraph, Google Gemini $\to$ scrolls **Right to Left** (`52s`).
+   - **Row 2:** FastAPI, Django, Docker, Kubernetes, PostgreSQL, Redis, Qdrant, AWS Cloud $\to$ scrolls **Left to Right** (`46s`).
    - Features **instant hover pause**, seamless 0px loop reset, and bilateral optical edge dissolves.
 9. **Interactive FAQ Section:** Expandable accordion addressing client concerns regarding security, timeline, pricing, and IP ownership.
 10. **High-Conversion CTA Banner:** Visual emerald ribbon with direct links to booking discovery calls.

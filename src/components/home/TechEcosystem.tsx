@@ -98,10 +98,10 @@ export function TechEcosystem() {
           will-change: transform;
         }
         .dl-marquee-track.dl-left {
-          animation: dl-marquee-left 26s linear infinite !important;
+          animation: dl-marquee-left 52s linear infinite !important;
         }
         .dl-marquee-track.dl-right {
-          animation: dl-marquee-right 22s linear infinite !important;
+          animation: dl-marquee-right 46s linear infinite !important;
         }
         .dl-marquee-row:hover .dl-marquee-track {
           animation-play-state: paused !important;
@@ -115,10 +115,10 @@ export function TechEcosystem() {
         }
         @media (max-width: 768px) {
           .dl-marquee-track.dl-left {
-            animation-duration: 34s !important;
+            animation-duration: 64s !important;
           }
           .dl-marquee-track.dl-right {
-            animation-duration: 28s !important;
+            animation-duration: 56s !important;
           }
         }
       `}</style>
