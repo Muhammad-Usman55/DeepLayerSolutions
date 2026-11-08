@@ -3,6 +3,7 @@ import { Container } from "@/components/common/Container";
 import { Breadcrumb } from "@/components/common/Breadcrumb";
 import { PageWrapper } from "@/components/layout/PageWrapper";
 import { siteConfig } from "@/config/site";
+import { OpenCookieSettingsButton } from "@/components/consent/OpenCookieSettingsButton";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
@@ -50,7 +51,26 @@ export default function PrivacyPage() {
               Any proprietary code, architectural documents, or business strategies shared during discovery sessions are treated as strictly confidential and protected under standard mutual non-disclosure obligations.
             </p>
 
-            <h2 className="text-xl font-bold text-[#142A27]">5. Contact Us</h2>
+            <h2 className="text-xl font-bold text-[#142A27]">5. Cookies &amp; Tracking Technologies</h2>
+            <p>
+              We employ a privacy-conscious, tiered cookie architecture adhering strictly to GDPR, CCPA, and global privacy standards.
+            </p>
+            <ul className="list-disc list-inside space-y-2 pl-2">
+              <li>
+                <strong className="text-[#142A27]">Strictly Necessary Cookies:</strong> Essential for platform security, form validation, and technical routing. These cookies cannot be deactivated.
+              </li>
+              <li>
+                <strong className="text-[#142A27]">Analytics Cookies (Google Analytics 4):</strong> Optional. Used only when explicitly approved. We enforce full IP anonymization, disable Google Signals (cross-device profiling), and forbid transmitting any personally identifiable information (PII).
+              </li>
+              <li>
+                <strong className="text-[#142A27]">Marketing Cookies:</strong> Optional. Used strictly to measure engineering briefing outreach. We do not participate in third-party behavioral ad exchange profiling.
+              </li>
+            </ul>
+            <div className="pt-2">
+              <OpenCookieSettingsButton />
+            </div>
+
+            <h2 className="text-xl font-bold text-[#142A27]">6. Contact Us</h2>
             <p>
               For inquiries regarding data privacy or to request the deletion of your consultation records, please contact us at{" "}
               <a href={`mailto:${siteConfig.contact.email}`} className="text-[#008F53] font-medium underline">

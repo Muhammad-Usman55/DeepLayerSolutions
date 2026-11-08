@@ -14,6 +14,7 @@ import { Container } from "../common/Container";
 import { FooterNewsletter } from "./FooterNewsletter";
 import { footerQuickLinks, footerServiceLinks, footerLegalLinks } from "@/data/navigation";
 import { siteConfig } from "@/config/site";
+import { openCookiePreferences } from "@/components/consent/ConsentContext";
 
 // Clean vector social icons
 function LinkedInIcon({ className }: { className?: string }) {
@@ -249,7 +250,7 @@ export function Footer() {
 
             {/* Right: Legal Links */}
             <div className="flex flex-wrap items-center justify-center sm:justify-end gap-3 sm:gap-4">
-              {footerLegalLinks.map((legal, index) => (
+              {footerLegalLinks.map((legal) => (
                 <React.Fragment key={legal.href}>
                   <Link
                     href={legal.href}
@@ -257,11 +258,16 @@ export function Footer() {
                   >
                     {legal.label}
                   </Link>
-                  {index < footerLegalLinks.length - 1 && (
-                    <span className="text-white/20 lg:text-[#DFEDE5]">|</span>
-                  )}
+                  <span className="text-white/20 lg:text-[#DFEDE5]">|</span>
                 </React.Fragment>
               ))}
+              <button
+                type="button"
+                onClick={openCookiePreferences}
+                className="hover:text-[#34D399] lg:hover:text-[#00B86B] transition-colors cursor-pointer"
+              >
+                Cookie Settings
+              </button>
             </div>
           </div>
         </Container>

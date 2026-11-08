@@ -71,3 +71,4 @@ export function verifyUnsubscribeToken(email: string, token: string): boolean {
     return false;
   }
 }
+

@@ -5,6 +5,9 @@ import "./mobile.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { MotionProvider } from "@/components/common/MotionProvider";
+import { ConsentProvider } from "@/components/consent/ConsentContext";
+import { CookieConsent } from "@/components/consent/CookieConsent";
+import { GoogleAnalytics } from "@/components/consent/GoogleAnalytics";
 import { siteConfig } from "@/config/site";
 
 const geistSans = Geist({
@@ -219,9 +222,13 @@ export default function RootLayout({
           Skip to main content
         </a>
         <MotionProvider>
-          <Navbar />
-          {children}
-          <Footer />
+          <ConsentProvider>
+            <GoogleAnalytics />
+            <Navbar />
+            {children}
+            <Footer />
+            <CookieConsent />
+          </ConsentProvider>
         </MotionProvider>
       </body>
     </html>
