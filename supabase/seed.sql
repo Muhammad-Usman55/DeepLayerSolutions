@@ -1,0 +1,16 @@
+-- ==============================================================================
+-- DeepLayer Solutions — Initial Seed & Admin Bootstrap
+-- supabase/seed.sql
+-- ==============================================================================
+--
+-- Instructions to bootstrap the primary Superadmin account:
+--
+-- 1. Create your user account in Supabase Dashboard -> Authentication -> Users.
+-- 2. Copy the generated User UID (e.g., 'a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11').
+-- 3. Run the statement below in Supabase Dashboard -> SQL Editor:
+--
+-- INSERT INTO public.admin_profiles (id, role)
+-- VALUES ('<PASTE_YOUR_AUTH_USER_UUID_HERE>', 'superadmin')
+-- ON CONFLICT (id) DO UPDATE SET role = 'superadmin';
+--
+-- ==============================================================================

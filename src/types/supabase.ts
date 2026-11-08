@@ -1,9 +1,8 @@
 /**
- * Supabase Database Type Definitions
+ * DeepLayer Solutions — Supabase Database Types
  *
- * This file provides the schema definition for your Supabase PostgreSQL database.
- * Once tables are created in Phase 2, this can be automatically updated using:
- * `npx supabase gen types typescript --project-id <your-project-id> > src/types/supabase.ts`
+ * Generated TypeScript representations of the production PostgreSQL schema.
+ * Matches `supabase/migrations/20261109000000_create_core_schema.sql`.
  */
 
 export type Json =
@@ -14,33 +13,224 @@ export type Json =
   | { [key: string]: Json | undefined }
   | Json[];
 
+export type ContactSubmissionStatus =
+  | "new"
+  | "in_review"
+  | "contacted"
+  | "closed"
+  | "spam";
+
+export type SubscriberStatus = "pending" | "active" | "unsubscribed";
+
+export type AdminRole = "superadmin" | "admin" | "editor";
+
+export type EmailType =
+  | "contact_notification"
+  | "contact_autoresponder"
+  | "newsletter_confirmation"
+  | "newsletter_welcome"
+  | "system_alert";
+
+export type EmailLogStatus =
+  | "queued"
+  | "sent"
+  | "delivered"
+  | "failed"
+  | "bounced";
+
 export interface Database {
   public: {
     Tables: {
-      [key: string]: {
-        Row: Record<string, unknown>;
-        Insert: Record<string, unknown>;
-        Update: Record<string, unknown>;
-        Relationships: unknown[];
+      contact_submissions: {
+        Row: {
+          id: string;
+          reference_number: string;
+          full_name: string;
+          email: string;
+          company: string | null;
+          service: string | null;
+          subject: string;
+          message: string;
+          status: ContactSubmissionStatus;
+          admin_notes: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          reference_number?: string;
+          full_name: string;
+          email: string;
+          company?: string | null;
+          service?: string | null;
+          subject: string;
+          message: string;
+          status?: ContactSubmissionStatus;
+          admin_notes?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          reference_number?: string;
+          full_name?: string;
+          email?: string;
+          company?: string | null;
+          service?: string | null;
+          subject?: string;
+          message?: string;
+          status?: ContactSubmissionStatus;
+          admin_notes?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
+
+      subscribers: {
+        Row: {
+          id: string;
+          email: string;
+          status: SubscriberStatus;
+          confirmation_token_hash: string | null;
+          token_expires_at: string | null;
+          subscribed_at: string | null;
+          unsubscribed_at: string | null;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          email: string;
+          status?: SubscriberStatus;
+          confirmation_token_hash?: string | null;
+          token_expires_at?: string | null;
+          subscribed_at?: string | null;
+          unsubscribed_at?: string | null;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          email?: string;
+          status?: SubscriberStatus;
+          confirmation_token_hash?: string | null;
+          token_expires_at?: string | null;
+          subscribed_at?: string | null;
+          unsubscribed_at?: string | null;
+          created_at?: string;
+        };
+        Relationships: [];
+      };
+
+      cookie_consents: {
+        Row: {
+          id: string;
+          consent_id: string;
+          necessary: boolean;
+          analytics: boolean;
+          marketing: boolean;
+          policy_version: string;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          consent_id: string;
+          necessary?: boolean;
+          analytics?: boolean;
+          marketing?: boolean;
+          policy_version?: string;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          consent_id?: string;
+          necessary?: boolean;
+          analytics?: boolean;
+          marketing?: boolean;
+          policy_version?: string;
+          created_at?: string;
+        };
+        Relationships: [];
+      };
+
+      email_logs: {
+        Row: {
+          id: string;
+          recipient: string;
+          email_type: EmailType;
+          related_record_id: string | null;
+          provider_message_id: string | null;
+          status: EmailLogStatus;
+          error_message: string | null;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          recipient: string;
+          email_type: EmailType;
+          related_record_id?: string | null;
+          provider_message_id?: string | null;
+          status?: EmailLogStatus;
+          error_message?: string | null;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          recipient?: string;
+          email_type?: EmailType;
+          related_record_id?: string | null;
+          provider_message_id?: string | null;
+          status?: EmailLogStatus;
+          error_message?: string | null;
+          created_at?: string;
+        };
+        Relationships: [];
+      };
+
+      admin_profiles: {
+        Row: {
+          id: string;
+          role: AdminRole;
+          created_at: string;
+        };
+        Insert: {
+          id: string;
+          role?: AdminRole;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          role?: AdminRole;
+          created_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "admin_profiles_id_fkey";
+            columns: ["id"];
+            isOneToOne: true;
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          }
+        ];
       };
     };
-    Views: {
-      [key: string]: {
-        Row: Record<string, unknown>;
-        Relationships: unknown[];
-      };
-    };
+    Views: Record<string, never>;
     Functions: {
-      [key: string]: {
-        Args: Record<string, unknown>;
-        Returns: unknown;
+      is_admin: {
+        Args: Record<string, never>;
+        Returns: boolean;
+      };
+      generate_contact_reference: {
+        Args: Record<string, never>;
+        Returns: string;
       };
     };
     Enums: {
-      [key: string]: string;
+      contact_submission_status: ContactSubmissionStatus;
+      subscriber_status: SubscriberStatus;
+      admin_role: AdminRole;
+      email_type: EmailType;
+      email_log_status: EmailLogStatus;
     };
-    CompositeTypes: {
-      [key: string]: unknown;
-    };
+    CompositeTypes: Record<string, never>;
   };
 }
