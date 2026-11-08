@@ -31,6 +31,7 @@ export function CarouselDots({
             key={idx}
             type="button"
             role="tab"
+            tabIndex={isActive ? 0 : -1}
             aria-selected={isActive}
             aria-label={`Go to slide ${idx + 1} of ${total}`}
             onClick={() => onSelect(idx)}

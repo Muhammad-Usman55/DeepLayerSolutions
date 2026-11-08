@@ -20,6 +20,47 @@ export interface CarouselProps {
   ariaLabel?: string;
 }
 
+/**
+ * Recursively ensures all interactive elements (links, buttons, inputs)
+ * inside a slide receive tabIndex={-1} when the slide is hidden, and tabIndex={0}
+ * when the slide is visible, resolving Lighthouse accessibility errors.
+ */
+function injectTabIndex(node: React.ReactNode, isHidden: boolean): React.ReactNode {
+  if (!React.isValidElement(node)) return node;
+
+  const tabIndex = isHidden ? -1 : 0;
+  const isInteractiveTag =
+    typeof node.type === "string" &&
+    ["a", "button", "input", "select", "textarea"].includes(node.type);
+
+  const nodeProps = node.props as Record<string, unknown> | undefined;
+  const isInteractive =
+    isInteractiveTag ||
+    Boolean(nodeProps?.href) ||
+    Boolean(nodeProps?.onClick) ||
+    nodeProps?.tabIndex !== undefined;
+
+  const extraProps: Record<string, unknown> = {};
+  if (isInteractive) {
+    extraProps.tabIndex = tabIndex;
+  }
+
+  const children = (nodeProps as { children?: React.ReactNode } | undefined)?.children;
+  if (children) {
+    if (Array.isArray(children)) {
+      extraProps.children = React.Children.map(children, (c) =>
+        injectTabIndex(c, isHidden)
+      );
+    } else if (React.isValidElement(children)) {
+      extraProps.children = injectTabIndex(children, isHidden);
+    }
+  }
+
+  return Object.keys(extraProps).length > 0
+    ? React.cloneElement(node, extraProps)
+    : node;
+}
+
 export function Carousel({
   children,
   desktopVisible = 3,
@@ -168,6 +209,8 @@ export function Carousel({
         >
           {React.Children.map(children, (child, idx) => {
             const isSlideActive = idx >= currentIndex && idx < currentIndex + visibleItems;
+            const isHidden = !isSlideActive;
+            const slideContent = injectTabIndex(child, isHidden);
 
             return (
               <div
@@ -175,13 +218,14 @@ export function Carousel({
                 role="group"
                 aria-roledescription="slide"
                 aria-label={`Slide ${idx + 1} of ${totalItems}`}
-                aria-hidden={!isSlideActive}
+                aria-hidden={isHidden}
+                inert={isHidden ? true : undefined}
                 className="shrink-0 transition-opacity duration-300"
                 style={{
                   width: `calc(${itemWidthPercentage}% - ${(gap * (visibleItems - 1)) / visibleItems}px)`,
                 }}
               >
-                {child}
+                {slideContent}
               </div>
             );
           })}
