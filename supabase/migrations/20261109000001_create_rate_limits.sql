@@ -29,3 +29,4 @@ CREATE POLICY "rate_limits_service_role_all"
 
 -- Automated index for fast lookup and cleanup of expired windows
 CREATE INDEX IF NOT EXISTS idx_rate_limits_reset_at ON public.rate_limits (reset_at);
+

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, Suspense } from "react";
+import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ShieldCheck, Lock, Mail, ArrowRight, AlertCircle, Loader2 } from "lucide-react";
 import { Logo } from "@/components/layout/Logo";
@@ -156,12 +157,12 @@ export default function AdminLoginPage() {
 
         {/* Back Link */}
         <div className="text-center mt-6">
-          <a
+          <Link
             href="/"
             className="text-xs text-white/60 hover:text-white transition-colors"
           >
             &larr; Return to DeepLayer Solutions Website
-          </a>
+          </Link>
         </div>
       </div>
     </div>

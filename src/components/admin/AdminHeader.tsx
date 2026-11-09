@@ -93,3 +93,4 @@ export function AdminHeader({ email, role }: AdminHeaderProps) {
     </header>
   );
 }
+
