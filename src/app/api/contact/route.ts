@@ -1,12 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { sendContactInquiryEmails } from "@/lib/email/dispatch";
-
-// In-memory IP rate limiter for serverless environment
-// Maps IP to { count: number, resetAt: number }
-const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
-const RATE_LIMIT_WINDOW_MS = 15 * 60 * 1000; // 15 minutes
-const MAX_REQUESTS_PER_WINDOW = 5;
+import { checkRateLimit, getClientIp } from "@/lib/security/rateLimit";
+import { verifyTurnstileToken } from "@/lib/security/turnstile";
+import { validateRequestOrigin } from "@/lib/security/csrf";
 
 // Basic HTML and script tag stripping to prevent XSS / malicious payloads
 function sanitize(str: string): string {
@@ -21,35 +18,49 @@ const EMAIL_REGEX = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
 
 export async function POST(req: NextRequest) {
   try {
-    // 1. Rate Limiting Check
-    const ip =
-      req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
-      req.headers.get("x-real-ip") ||
-      "unknown-ip";
-
-    const now = Date.now();
-    const rateData = rateLimitMap.get(ip);
-
-    if (rateData && now < rateData.resetAt) {
-      if (rateData.count >= MAX_REQUESTS_PER_WINDOW) {
-        return NextResponse.json(
-          {
-            success: false,
-            message:
-              "Too many inquiries sent from your connection. Please wait 15 minutes before submitting again.",
-          },
-          { status: 429 }
-        );
-      }
-      rateData.count += 1;
-    } else {
-      rateLimitMap.set(ip, {
-        count: 1,
-        resetAt: now + RATE_LIMIT_WINDOW_MS,
-      });
+    // 1. CSRF / Origin Verification
+    if (!validateRequestOrigin(req)) {
+      return NextResponse.json(
+        { success: false, message: "Cross-site request blocked." },
+        { status: 403 }
+      );
     }
 
-    // 2. Parse JSON Payload
+    // 2. Client IP Extraction
+    const ip = getClientIp(req);
+
+    // 3. Distributed Production Rate Limiting (5 requests per 15 minutes)
+    const rateLimit = await checkRateLimit({
+      endpoint: "contact",
+      maxRequests: 5,
+      windowSeconds: 900,
+      ip,
+    });
+
+    if (!rateLimit.allowed) {
+      const waitMinutes = Math.max(
+        1,
+        Math.ceil((rateLimit.resetAt.getTime() - Date.now()) / (60 * 1000))
+      );
+      return NextResponse.json(
+        {
+          success: false,
+          message: `Too many inquiries sent from your connection. Please wait ${waitMinutes} minutes before submitting again.`,
+        },
+        {
+          status: 429,
+          headers: {
+            "Retry-After": String(
+              Math.ceil((rateLimit.resetAt.getTime() - Date.now()) / 1000)
+            ),
+            "X-RateLimit-Remaining": "0",
+            "X-RateLimit-Reset": rateLimit.resetAt.toISOString(),
+          },
+        }
+      );
+    }
+
+    // 4. Parse JSON Payload
     const body = await req.json().catch(() => null);
     if (!body || typeof body !== "object") {
       return NextResponse.json(
@@ -58,9 +69,9 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const { fullName, email, company, service, subject, message, botField } = body;
+    const { fullName, email, company, service, subject, message, botField, turnstileToken } = body;
 
-    // 3. Honeypot Spam Check (silent response to defeat automated spam bots)
+    // 5. Honeypot Spam Check (silent response to defeat automated spam bots)
     if (botField) {
       return NextResponse.json(
         {
@@ -72,7 +83,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // 4. Server-Side Field Validations
+    // 6. Server-Side Field Validations
     const errors: Record<string, string> = {};
 
     if (!fullName || typeof fullName !== "string" || fullName.trim().length < 2) {
@@ -116,7 +127,19 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // 5. Clean & Sanitize Inputs
+    // 7. Cloudflare Turnstile Bot Verification
+    const turnstileResult = await verifyTurnstileToken(turnstileToken, ip);
+    if (!turnstileResult.success) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Security verification failed. Please refresh the page and try again.",
+        },
+        { status: 403 }
+      );
+    }
+
+    // 8. Clean & Sanitize Inputs
     const sanitizedFullName = sanitize(fullName);
     const sanitizedEmail = trimmedEmail.toLowerCase();
     const sanitizedCompany = company ? sanitize(String(company)) : null;
@@ -124,10 +147,10 @@ export async function POST(req: NextRequest) {
     const sanitizedSubject = sanitize(subject);
     const sanitizedMessage = sanitize(message);
 
-    // 6. Connect to Supabase via Protected Admin Client
+    // 9. Connect to Supabase via Protected Admin Client
     const supabase = createAdminClient();
 
-    // 7. Prevent Duplicate or Accidental Double Submissions
+    // 10. Prevent Duplicate or Accidental Double Submissions
     // Check if an identical submission from this email & subject was recorded in the last 2 minutes
     const twoMinutesAgo = new Date(Date.now() - 2 * 60 * 1000).toISOString();
     const { data: duplicate } = await supabase
@@ -153,7 +176,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // 8. Persist to PostgreSQL Database
+    // 11. Persist to PostgreSQL Database
     const { data: record, error: dbError } = await supabase
       .from("contact_submissions")
       .insert({
@@ -181,13 +204,12 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // 9. Structured Audit Log
+    // 12. Structured Audit Log (Safe — without leaking unhashed PII)
     console.info(
-      `[CONTACT SUBMISSION SAVED] Ref: ${record.reference_number} | ID: ${record.id} | From: ${sanitizedFullName} (${sanitizedEmail}) | Service: "${sanitizedService}"`
+      `[CONTACT SUBMISSION SAVED] Ref: ${record.reference_number} | ID: ${record.id} | Service: "${sanitizedService}"`
     );
 
-    // 10. Dispatch Transactional Emails (Failsafe & Audited)
-    // CRITICAL: Record is already committed in PostgreSQL. Email failures are logged and do not block the inquiry.
+    // 13. Dispatch Transactional Emails (Failsafe & Audited)
     try {
       await sendContactInquiryEmails({
         id: record.id,
@@ -204,7 +226,7 @@ export async function POST(req: NextRequest) {
       console.error("[EMAIL DISPATCH UNHANDLED EXCEPTION]", emailError?.message || emailError);
     }
 
-    // 11. Return Successful Response with Generated Reference Number
+    // 14. Return Successful Response
     return NextResponse.json(
       {
         success: true,
@@ -213,7 +235,12 @@ export async function POST(req: NextRequest) {
           "Thank you for reaching out to DeepLayer Solutions. Your inquiry has been received and our engineering architects will respond within 24 business hours.",
         timestamp: record.created_at,
       },
-      { status: 201 }
+      {
+        status: 201,
+        headers: {
+          "X-RateLimit-Remaining": String(rateLimit.remaining),
+        },
+      }
     );
   } catch (error: any) {
     console.error("[CONTACT API UNHANDLED ERROR]", error?.message || error);

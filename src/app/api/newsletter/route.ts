@@ -2,41 +2,57 @@ import { NextRequest, NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { generateConfirmationToken } from "@/lib/email/tokens";
 import { sendNewsletterConfirmationEmail } from "@/lib/email/dispatch";
-
-const newsletterRateMap = new Map<string, { count: number; resetAt: number }>();
-const RATE_LIMIT_WINDOW_MS = 15 * 60 * 1000;
-const MAX_REQUESTS = 5;
+import { checkRateLimit, getClientIp } from "@/lib/security/rateLimit";
+import { verifyTurnstileToken } from "@/lib/security/turnstile";
+import { validateRequestOrigin } from "@/lib/security/csrf";
 
 const EMAIL_REGEX = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
 
 export async function POST(req: NextRequest) {
   try {
-    const ip =
-      req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
-      req.headers.get("x-real-ip") ||
-      "unknown-ip";
-
-    const now = Date.now();
-    const rateData = newsletterRateMap.get(ip);
-
-    if (rateData && now < rateData.resetAt) {
-      if (rateData.count >= MAX_REQUESTS) {
-        return NextResponse.json(
-          {
-            success: false,
-            message: "Too many subscription attempts. Please wait 15 minutes before trying again.",
-          },
-          { status: 429 }
-        );
-      }
-      rateData.count += 1;
-    } else {
-      newsletterRateMap.set(ip, {
-        count: 1,
-        resetAt: now + RATE_LIMIT_WINDOW_MS,
-      });
+    // 1. CSRF / Origin Verification
+    if (!validateRequestOrigin(req)) {
+      return NextResponse.json(
+        { success: false, message: "Cross-site request blocked." },
+        { status: 403 }
+      );
     }
 
+    // 2. Client IP Extraction
+    const ip = getClientIp(req);
+
+    // 3. Distributed Production Rate Limiting (5 requests per 15 minutes)
+    const rateLimit = await checkRateLimit({
+      endpoint: "newsletter",
+      maxRequests: 5,
+      windowSeconds: 900,
+      ip,
+    });
+
+    if (!rateLimit.allowed) {
+      const waitMinutes = Math.max(
+        1,
+        Math.ceil((rateLimit.resetAt.getTime() - Date.now()) / (60 * 1000))
+      );
+      return NextResponse.json(
+        {
+          success: false,
+          message: `Too many subscription attempts from your connection. Please wait ${waitMinutes} minutes before trying again.`,
+        },
+        {
+          status: 429,
+          headers: {
+            "Retry-After": String(
+              Math.ceil((rateLimit.resetAt.getTime() - Date.now()) / 1000)
+            ),
+            "X-RateLimit-Remaining": "0",
+            "X-RateLimit-Reset": rateLimit.resetAt.toISOString(),
+          },
+        }
+      );
+    }
+
+    // 4. Parse Payload
     const body = await req.json().catch(() => null);
     if (!body || typeof body !== "object") {
       return NextResponse.json(
@@ -45,7 +61,24 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const email = typeof body.email === "string" ? body.email.trim().toLowerCase() : "";
+    // 5. Turnstile Bot Check (if provided in body or if Turnstile is configured)
+    if (body.turnstileToken) {
+      const turnstileResult = await verifyTurnstileToken(body.turnstileToken, ip);
+      if (!turnstileResult.success) {
+        return NextResponse.json(
+          {
+            success: false,
+            message: "Security verification failed. Please try again.",
+          },
+          { status: 403 }
+        );
+      }
+    }
+
+    // 6. Server-Side Email Validation & Sanitization
+    const rawEmail = typeof body.email === "string" ? body.email.trim().toLowerCase() : "";
+    // Strip control characters and HTML tags
+    const email = rawEmail.replace(/<[^>]+>/g, "").replace(/[\u0000-\u001F]/g, "");
 
     if (!email || !EMAIL_REGEX.test(email) || email.length > 100) {
       return NextResponse.json(
@@ -56,7 +89,7 @@ export async function POST(req: NextRequest) {
 
     const supabase = createAdminClient();
 
-    // Check if subscriber record already exists
+    // 7. Check if subscriber record already exists
     const { data: existing, error: queryError } = await supabase
       .from("subscribers")
       .select("id, email, status, confirmation_token_hash, token_expires_at")
@@ -150,22 +183,31 @@ export async function POST(req: NextRequest) {
       subscriberId = newRecord.id;
     }
 
-    // Step: Dispatch confirmation email via Resend
+    // 8. Dispatch confirmation email via Resend
     // Important: an email delivery issue does not delete or roll back the pending subscriber
-    await sendNewsletterConfirmationEmail({
-      email,
-      rawToken,
-      subscriberId,
-    });
+    try {
+      await sendNewsletterConfirmationEmail({
+        email,
+        rawToken,
+        subscriberId,
+      });
+    } catch (dispatchError: any) {
+      console.error("[NEWSLETTER EMAIL DISPATCH ERROR]:", dispatchError?.message || dispatchError);
+    }
 
-    console.info(`[NEWSLETTER PENDING SAVED]: ${email} | Sub ID: ${subscriberId}`);
+    console.info(`[NEWSLETTER PENDING SAVED]: Sub ID: ${subscriberId}`);
 
     return NextResponse.json(
       {
         success: true,
         message: "Please check your inbox! A confirmation link has been sent to complete your subscription.",
       },
-      { status: 200 }
+      {
+        status: 200,
+        headers: {
+          "X-RateLimit-Remaining": String(rateLimit.remaining),
+        },
+      }
     );
   } catch (error: any) {
     console.error("[NEWSLETTER API CRITICAL ERROR]:", error?.message || error);

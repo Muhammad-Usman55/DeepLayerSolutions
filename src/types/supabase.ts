@@ -212,6 +212,28 @@ export interface Database {
           }
         ];
       };
+
+      rate_limits: {
+        Row: {
+          key: string;
+          count: number;
+          reset_at: string;
+          created_at: string;
+        };
+        Insert: {
+          key: string;
+          count?: number;
+          reset_at: string;
+          created_at?: string;
+        };
+        Update: {
+          key?: string;
+          count?: number;
+          reset_at?: string;
+          created_at?: string;
+        };
+        Relationships: [];
+      };
     };
     Views: Record<string, never>;
     Functions: {

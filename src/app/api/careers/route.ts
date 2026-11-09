@@ -1,46 +1,45 @@
 import { NextRequest, NextResponse } from "next/server";
-
-const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
-const RATE_LIMIT_WINDOW_MS = 15 * 60 * 1000;
-const MAX_REQUESTS_PER_WINDOW = 5;
+import { checkRateLimit, getClientIp, hashClientIdentifier } from "@/lib/security/rateLimit";
+import { validateRequestOrigin } from "@/lib/security/csrf";
 
 function sanitize(str: string): string {
   return str
     .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, "")
     .replace(/<[^>]+>/g, "")
+    .replace(/[\u0000-\u0008\u000B-\u000C\u000E-\u001F]/g, "")
     .trim();
 }
 
 export async function POST(req: NextRequest) {
   try {
-    // 1. Rate Limiting Check
-    const ip =
-      req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
-      req.headers.get("x-real-ip") ||
-      "unknown-ip";
-
-    const now = Date.now();
-    const rateData = rateLimitMap.get(ip);
-
-    if (rateData && now < rateData.resetAt) {
-      if (rateData.count >= MAX_REQUESTS_PER_WINDOW) {
-        return NextResponse.json(
-          {
-            success: false,
-            message: "Too many applications submitted from this connection. Please wait 15 minutes before submitting again.",
-          },
-          { status: 429 }
-        );
-      }
-      rateData.count += 1;
-    } else {
-      rateLimitMap.set(ip, {
-        count: 1,
-        resetAt: now + RATE_LIMIT_WINDOW_MS,
-      });
+    // 1. CSRF / Origin Verification
+    if (!validateRequestOrigin(req)) {
+      return NextResponse.json(
+        { success: false, message: "Cross-site request blocked." },
+        { status: 403 }
+      );
     }
 
-    // 2. Parse JSON Payload
+    // 2. Client IP Extraction & Distributed Rate Limiting
+    const ip = getClientIp(req);
+    const rateLimit = await checkRateLimit({
+      endpoint: "careers",
+      maxRequests: 5,
+      windowSeconds: 900,
+      ip,
+    });
+
+    if (!rateLimit.allowed) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Too many applications submitted from this connection. Please wait 15 minutes before submitting again.",
+        },
+        { status: 429 }
+      );
+    }
+
+    // 3. Parse JSON Payload
     const body = await req.json().catch(() => null);
     if (!body || typeof body !== "object") {
       return NextResponse.json(
@@ -61,7 +60,7 @@ export async function POST(req: NextRequest) {
       botField,
     } = body;
 
-    // 3. Honeypot check
+    // 4. Honeypot check
     if (botField) {
       return NextResponse.json(
         { success: true, message: "Application received." },
@@ -69,32 +68,48 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // 4. Server-Side Field Validations
+    // 5. Server-Side Field Validations
     const errors: Record<string, string> = {};
 
     if (!fullName || typeof fullName !== "string" || fullName.trim().length < 2) {
       errors.fullName = "Please enter your full name (at least 2 characters).";
+    } else if (fullName.trim().length > 100) {
+      errors.fullName = "Full name must be under 100 characters.";
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!email || typeof email !== "string" || !emailRegex.test(email.trim())) {
       errors.email = "Please enter a valid email address.";
+    } else if (email.trim().length > 150) {
+      errors.email = "Email must be under 150 characters.";
     }
 
     if (!phone || typeof phone !== "string" || phone.trim().length < 7) {
       errors.phone = "Please enter a valid phone/WhatsApp number.";
+    } else if (phone.trim().length > 30) {
+      errors.phone = "Phone number must be under 30 characters.";
     }
 
     if (!position || typeof position !== "string" || position.trim().length < 2) {
       errors.position = "Please select a target position.";
+    } else if (position.trim().length > 100) {
+      errors.position = "Position must be under 100 characters.";
     }
 
     if (!linkedin || typeof linkedin !== "string" || !linkedin.includes("linkedin.com")) {
       errors.linkedin = "Please provide your valid LinkedIn profile link.";
+    } else if (linkedin.trim().length > 300) {
+      errors.linkedin = "LinkedIn URL must be under 300 characters.";
     }
 
     if (!resumeUrl || typeof resumeUrl !== "string" || resumeUrl.trim().length < 5) {
       errors.resumeUrl = "Please provide a valid viewable link to your resume/CV.";
+    } else if (resumeUrl.trim().length > 500) {
+      errors.resumeUrl = "Resume link must be under 500 characters.";
+    }
+
+    if (coverNote && typeof coverNote === "string" && coverNote.trim().length > 2000) {
+      errors.coverNote = "Cover note must be under 2000 characters.";
     }
 
     if (Object.keys(errors).length > 0) {
@@ -108,7 +123,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // 5. Sanitize
+    // 6. Sanitize
     const sanitizedApplication = {
       fullName: sanitize(fullName),
       email: sanitize(email).toLowerCase(),
@@ -119,12 +134,12 @@ export async function POST(req: NextRequest) {
       resumeUrl: sanitize(resumeUrl),
       coverNote: coverNote ? sanitize(String(coverNote)) : "N/A",
       submittedAt: new Date().toISOString(),
-      ip,
+      clientHash: hashClientIdentifier(ip, "careers"),
     };
 
-    // 6. Production Logging
+    // 7. Production Logging (privacy-safe)
     console.info(
-      `[CAREER APPLICATION] ${sanitizedApplication.fullName} applied for "${sanitizedApplication.position}" (${sanitizedApplication.email}, Phone: ${sanitizedApplication.phone})`
+      `[CAREER APPLICATION] ${sanitizedApplication.fullName} applied for "${sanitizedApplication.position}" (Ref Hash: ${sanitizedApplication.clientHash})`
     );
 
     return NextResponse.json(
@@ -136,8 +151,8 @@ export async function POST(req: NextRequest) {
       },
       { status: 200 }
     );
-  } catch (error) {
-    console.error("[CAREER API ERROR]", error);
+  } catch (error: any) {
+    console.error("[CAREER API ERROR]", error?.message || error);
     return NextResponse.json(
       {
         success: false,
@@ -147,4 +162,3 @@ export async function POST(req: NextRequest) {
     );
   }
 }
-

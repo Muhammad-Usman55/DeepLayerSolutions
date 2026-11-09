@@ -1,8 +1,32 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { checkRateLimit, getClientIp } from "@/lib/security/rateLimit";
+import { validateRequestOrigin } from "@/lib/security/csrf";
 
 export async function POST(req: NextRequest) {
   try {
+    if (!validateRequestOrigin(req)) {
+      return NextResponse.json(
+        { success: false, message: "Cross-site request blocked." },
+        { status: 403 }
+      );
+    }
+
+    const ip = getClientIp(req);
+    const rateLimit = await checkRateLimit({
+      endpoint: "cookie_consent",
+      maxRequests: 20,
+      windowSeconds: 900,
+      ip,
+    });
+
+    if (!rateLimit.allowed) {
+      return NextResponse.json(
+        { success: false, message: "Too many consent updates. Please try again later." },
+        { status: 429 }
+      );
+    }
+
     const body = await req.json().catch(() => null);
     if (!body || typeof body !== "object") {
       return NextResponse.json(
@@ -47,7 +71,7 @@ export async function POST(req: NextRequest) {
       .single();
 
     if (error) {
-      console.error("[COOKIE CONSENT DB ERROR]:", error);
+      console.error("[COOKIE CONSENT DB ERROR]:", error?.message || error);
       return NextResponse.json(
         { success: false, message: "Failed to persist consent receipt." },
         { status: 500 }
@@ -70,4 +94,3 @@ export async function POST(req: NextRequest) {
     );
   }
 }
-
