@@ -8,7 +8,6 @@ import {
   Inbox,
   Users,
   MailCheck,
-  ShieldAlert,
 } from "lucide-react";
 
 const NAV_ITEMS = [

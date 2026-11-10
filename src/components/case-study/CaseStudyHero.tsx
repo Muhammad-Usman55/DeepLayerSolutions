@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Container } from "../common/Container";
 import { Breadcrumb } from "../common/Breadcrumb";
 import { CaseStudyProject } from "@/types";
-import { ExternalLink, Sparkles, CheckCircle2, ArrowLeft } from "lucide-react";
+import { ExternalLink, ArrowLeft } from "lucide-react";
 import { ProjectVisualDispatcher } from "../portfolio/visuals/ProjectVisualDispatcher";
 
 function GithubIcon({ className }: { className?: string }) {

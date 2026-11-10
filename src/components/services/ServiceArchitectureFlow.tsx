@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { ArrowRight, Sparkles, CheckCircle2, ShieldCheck, Zap } from "lucide-react";
+import { ArrowRight, Sparkles, CheckCircle2 } from "lucide-react";
 
 interface ArchitectureStep {
   tier: string;

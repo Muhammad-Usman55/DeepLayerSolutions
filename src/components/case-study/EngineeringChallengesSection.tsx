@@ -3,7 +3,7 @@
 import React from "react";
 import { Container } from "../common/Container";
 import { CaseStudyProject } from "@/types";
-import { Wrench, ArrowRight, CheckCircle2, AlertTriangle } from "lucide-react";
+import { Wrench, CheckCircle2, AlertTriangle } from "lucide-react";
 
 interface Props {
   project: CaseStudyProject;

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Suspense } from "react";
-import { CheckCircle2, AlertCircle, Home, MailX, Loader2 } from "lucide-react";
+import { AlertCircle, Home, MailX, Loader2 } from "lucide-react";
 import { PageWrapper } from "@/components/layout/PageWrapper";
 import { Container } from "@/components/common/Container";
 import { Eyebrow } from "@/components/common/Eyebrow";

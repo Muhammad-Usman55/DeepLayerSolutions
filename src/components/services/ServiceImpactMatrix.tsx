@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { AlertTriangle, CheckCircle2, Zap, TrendingUp, ShieldAlert, Sparkles } from "lucide-react";
+import { CheckCircle2, Zap, TrendingUp, ShieldAlert, Sparkles } from "lucide-react";
 
 interface ServiceImpactMatrixProps {
   serviceTitle: string;
@@ -25,7 +25,7 @@ export function ServiceImpactMatrix({
           Overcoming The Bottlenecks
         </h2>
         <p className="mt-2 text-sm sm:text-base text-[#64736F]">
-          How our engineered approach replaces conventional trade-offs with production certainty.
+          How our engineered {serviceTitle} approach replaces conventional trade-offs with production certainty.
         </p>
       </div>
 

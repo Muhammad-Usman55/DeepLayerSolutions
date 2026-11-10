@@ -2,22 +2,10 @@ import "server-only";
 
 import { createAdminClient } from "@/lib/supabase/admin";
 import { getResendClient, getFromEmail, getCompanyEmail, getSiteUrl } from "./resend";
-import {
-  generateContactNotificationEmail,
-  ContactNotificationParams,
-} from "./templates/contactNotificationEmail";
-import {
-  generateContactConfirmationEmail,
-  ContactConfirmationParams,
-} from "./templates/contactConfirmationEmail";
-import {
-  generateNewsletterConfirmationEmail,
-  NewsletterConfirmationParams,
-} from "./templates/newsletterConfirmationEmail";
-import {
-  generateNewsletterWelcomeEmail,
-  NewsletterWelcomeParams,
-} from "./templates/newsletterWelcomeEmail";
+import { generateContactNotificationEmail } from "./templates/contactNotificationEmail";
+import { generateContactConfirmationEmail } from "./templates/contactConfirmationEmail";
+import { generateNewsletterConfirmationEmail } from "./templates/newsletterConfirmationEmail";
+import { generateNewsletterWelcomeEmail } from "./templates/newsletterWelcomeEmail";
 import { generateUnsubscribeToken } from "./tokens";
 
 export interface EmailDispatchResult {

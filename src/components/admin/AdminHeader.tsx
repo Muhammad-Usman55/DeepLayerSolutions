@@ -7,11 +7,6 @@ import {
   Shield,
   LogOut,
   ExternalLink,
-  Menu,
-  X,
-  UserCheck,
-  Bell,
-  RefreshCw,
 } from "lucide-react";
 import { Logo } from "@/components/layout/Logo";
 
@@ -23,7 +18,6 @@ interface AdminHeaderProps {
 export function AdminHeader({ email, role }: AdminHeaderProps) {
   const router = useRouter();
   const [loggingOut, setLoggingOut] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const handleLogout = async () => {
     try {

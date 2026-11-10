@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, FormEvent } from "react";
-import { CheckCircle2, AlertCircle, Send, Sparkles, FileText, Link2, User, Mail, Phone } from "lucide-react";
+import { CheckCircle2, AlertCircle, Sparkles, FileText, Link2, User, Mail, Phone } from "lucide-react";
 import { Button } from "../common/Button";
 
 interface CareerFormState {

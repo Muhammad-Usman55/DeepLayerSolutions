@@ -1,4 +1,4 @@
-import { ConsentRecord, CookiePreferences } from "@/types/consent";
+import { ConsentRecord } from "@/types/consent";
 
 export const CONSENT_STORAGE_KEY = "deeplayer_cookie_consent_v1";
 export const CONSENT_COOKIE_KEY = "deeplayer_consent";

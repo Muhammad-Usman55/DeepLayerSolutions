@@ -139,15 +139,6 @@ const nextConfig: NextConfig = {
         headers: defaultHeaders,
       },
       {
-        source: "/deeplayer-animated-loader.svg",
-        headers: [
-          {
-            key: "Cache-Control",
-            value: "public, max-age=31536000, immutable",
-          },
-        ],
-      },
-      {
         source: "/koeRHQn0tk.svg",
         headers: [
           {

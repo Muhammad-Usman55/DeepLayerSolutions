@@ -9,10 +9,8 @@ import {
   CheckCircle2,
   Users,
   Send,
-  AlertTriangle,
   ArrowRight,
   RefreshCw,
-  Mail,
   Loader2,
 } from "lucide-react";
 

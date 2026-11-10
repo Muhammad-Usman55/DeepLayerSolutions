@@ -2,8 +2,8 @@
 
 import React, { useState } from "react";
 import { Container } from "../common/Container";
-import { CaseStudyProject, GalleryScreenItem } from "@/types";
-import { Sparkles, Eye, Monitor } from "lucide-react";
+import { CaseStudyProject } from "@/types";
+import { Monitor } from "lucide-react";
 import { ProjectVisualDispatcher } from "../portfolio/visuals/ProjectVisualDispatcher";
 import { cn } from "@/lib/utils";
 

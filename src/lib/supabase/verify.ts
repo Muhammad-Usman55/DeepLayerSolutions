@@ -22,16 +22,6 @@ export interface SupabaseConnectionResult {
 }
 
 /**
- * Safely masks a sensitive key for diagnostic reporting.
- * e.g. "eyJhbGciOiJIUzI1NiIs..." -> "eyJhb...4f8a"
- */
-function maskKey(key: string | undefined): string | undefined {
-  if (!key) return undefined;
-  if (key.length <= 8) return "********";
-  return `${key.slice(0, 5)}...${key.slice(-4)}`;
-}
-
-/**
  * Inspects environment variables without exposing secrets.
  */
 export function getSupabaseConfigStatus(): SupabaseConfigStatus {

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Search, Briefcase, Filter, Sparkles } from "lucide-react";
+import { Search, Briefcase } from "lucide-react";
 import { jobOpeningsData } from "@/data/careers";
 import { JobCard } from "./JobCard";
 import { CareerApplyForm } from "./CareerApplyForm";

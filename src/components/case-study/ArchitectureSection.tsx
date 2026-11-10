@@ -3,7 +3,7 @@
 import React from "react";
 import { Container } from "../common/Container";
 import { CaseStudyProject } from "@/types";
-import { Cpu, ArrowDown, Database, Server, Laptop, Activity } from "lucide-react";
+import { Cpu, Activity } from "lucide-react";
 
 interface Props {
   project: CaseStudyProject;

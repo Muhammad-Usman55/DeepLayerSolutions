@@ -16,7 +16,6 @@ import {
   Cpu,
   Layers,
   ShieldCheck,
-  Zap,
 } from "lucide-react";
 import { servicesData } from "@/data/services";
 import { Container } from "@/components/common/Container";

@@ -3,7 +3,7 @@
 import React from "react";
 import { Container } from "../common/Container";
 import { CaseStudyProject } from "@/types";
-import { CheckCircle2, Award, Gauge } from "lucide-react";
+import { CheckCircle2, Gauge } from "lucide-react";
 
 interface Props {
   project: CaseStudyProject;

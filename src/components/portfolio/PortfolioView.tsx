@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
-import { ProjectCategory, CaseStudyProject } from "@/types";
+import { ProjectCategory } from "@/types";
 import { projectsData } from "@/data/projects";
 import { PortfolioFilters } from "./PortfolioFilters";
 import { ProjectCard } from "./ProjectCard";

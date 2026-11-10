@@ -7,7 +7,7 @@ import { CTASection } from "@/components/common/CTASection";
 import { CareersHeroVisual } from "@/components/careers/CareersHeroVisual";
 import { CareersContent } from "@/components/careers/CareersContent";
 import { careerPerks } from "@/data/careers";
-import { Globe, Brain, Rocket, Zap, Users, Sparkles, CheckCircle2 } from "lucide-react";
+import { Globe, Brain, Rocket, Zap, Users, Sparkles } from "lucide-react";
 import { siteConfig } from "@/config/site";
 
 export const metadata: Metadata = {

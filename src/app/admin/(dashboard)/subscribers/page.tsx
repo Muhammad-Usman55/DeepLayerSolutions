@@ -5,7 +5,6 @@ import {
   Search,
   Filter,
   Download,
-  Users,
   ChevronLeft,
   ChevronRight,
   Loader2,

@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { getAuthenticatedAdmin } from "@/lib/auth/admin";
 import { createAdminClient } from "@/lib/supabase/admin";
 
@@ -8,7 +8,7 @@ function escapeCsvField(val: any): string {
   return `"${str}"`;
 }
 
-export async function GET(req: NextRequest) {
+export async function GET() {
   const admin = await getAuthenticatedAdmin();
   if (!admin) {
     return NextResponse.json(

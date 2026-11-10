@@ -3,10 +3,10 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { Plus, Minus, ArrowRight, MessageSquare, Mail, Phone } from "lucide-react";
+import { Plus, Minus, MessageSquare, Mail, Phone } from "lucide-react";
 import { Container } from "../common/Container";
 import { Eyebrow } from "../common/Eyebrow";
-import { faqsData, FAQItem } from "@/data/faqs";
+import { faqsData } from "@/data/faqs";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 
