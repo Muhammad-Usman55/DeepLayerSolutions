@@ -18,7 +18,10 @@ export interface ServiceNavItem {
     | "Gauge"
     | "Layout"
     | "Zap"
-    | "Eye";
+    | "Eye"
+    | "ShoppingCart"
+    | "Store"
+    | "Workflow";
 }
 
 export const servicesMegaMenuData: ServiceNavItem[] = [
@@ -85,6 +88,27 @@ export const servicesMegaMenuData: ServiceNavItem[] = [
     href: "/services/seo",
     iconName: "SearchCheck",
   },
+  {
+    id: "ecommerce",
+    title: "E-Commerce Solutions",
+    description: "High-conversion headless storefronts, multi-currency & cart scaling.",
+    href: "/services/ecommerce-solutions",
+    iconName: "ShoppingCart",
+  },
+  {
+    id: "erp-pos",
+    title: "ERP & POS Solutions",
+    description: "Unified cloud POS terminals, multi-warehouse stock & accounting.",
+    href: "/services/erp-pos-solutions",
+    iconName: "Store",
+  },
+  {
+    id: "business-automation",
+    title: "Business Automation",
+    description: "Robotic process automation (RPA), webhook pipelines & automated ops.",
+    href: "/services/business-automation",
+    iconName: "Workflow",
+  },
 ];
 
 export const headerNavLinks: NavItem[] = [
@@ -118,6 +142,9 @@ export const footerServiceLinks: NavItem[] = [
   { label: "Mobile Applications", href: "/services/mobile-app-development" },
   { label: "IT Consulting", href: "/services/it-consulting" },
   { label: "SEO & Optimization", href: "/services/seo" },
+  { label: "E-Commerce Solutions", href: "/services/ecommerce-solutions" },
+  { label: "ERP & POS Systems", href: "/services/erp-pos-solutions" },
+  { label: "Business Automation", href: "/services/business-automation" },
 ];
 
 export const footerLegalLinks: NavItem[] = [

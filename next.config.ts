@@ -86,6 +86,36 @@ const nextConfig: NextConfig = {
         destination: "/services/it-consulting",
         permanent: true,
       },
+      {
+        source: "/services/ecommerce",
+        destination: "/services/ecommerce-solutions",
+        permanent: true,
+      },
+      {
+        source: "/services/e-commerce",
+        destination: "/services/ecommerce-solutions",
+        permanent: true,
+      },
+      {
+        source: "/services/erp",
+        destination: "/services/erp-pos-solutions",
+        permanent: true,
+      },
+      {
+        source: "/services/pos",
+        destination: "/services/erp-pos-solutions",
+        permanent: true,
+      },
+      {
+        source: "/services/erp-pos",
+        destination: "/services/erp-pos-solutions",
+        permanent: true,
+      },
+      {
+        source: "/services/automation",
+        destination: "/services/business-automation",
+        permanent: true,
+      },
     ];
   },
   async headers() {

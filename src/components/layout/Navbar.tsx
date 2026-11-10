@@ -21,6 +21,9 @@ import {
   Cloud,
   Smartphone,
   Compass,
+  ShoppingCart,
+  Store,
+  Workflow,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Logo } from "./Logo";
@@ -43,6 +46,9 @@ const serviceIcons: Record<ServiceNavItem["iconName"], React.ComponentType<{ cla
   Layout,
   Zap,
   Eye,
+  ShoppingCart,
+  Store,
+  Workflow,
 };
 
 export function Navbar() {

@@ -13,6 +13,9 @@ import {
   Smartphone,
   Compass,
   SearchCheck,
+  ShoppingCart,
+  Store,
+  Workflow,
   Cpu,
   Layers,
   ShieldCheck,
@@ -39,10 +42,28 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Smartphone,
   Compass,
   SearchCheck,
+  ShoppingCart,
+  Store,
+  Workflow,
 };
 
 // Key quantitative telemetry metrics for each service
 const serviceMetricsMap: Record<string, { label: string; value: string }[]> = {
+  "ecommerce-solutions": [
+    { label: "Checkout Conversion", value: "+45% Lift" },
+    { label: "Payment Latency", value: "<250ms Gateway" },
+    { label: "Catalog Concurrency", value: "1M+ SKUs" },
+  ],
+  "erp-pos-solutions": [
+    { label: "Sync Latency", value: "<50ms Real-Time" },
+    { label: "Inventory Accuracy", value: "99.98%" },
+    { label: "Multi-Store Scale", value: "500+ Branches" },
+  ],
+  "business-automation": [
+    { label: "Manual Effort Cut", value: "-80% Hours" },
+    { label: "Process Error Defect", value: "0.01%" },
+    { label: "Execution Velocity", value: "10x Speed" },
+  ],
   "seo": [
     { label: "SERP Rankings", value: "Top 3 Target" },
     { label: "Core Web Vitals", value: "100/100" },

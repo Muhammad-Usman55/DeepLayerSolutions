@@ -262,6 +262,87 @@ const serviceArchitectureMap: Record<
       },
     ],
   },
+  "ecommerce-solutions": {
+    heading: "Headless E-Commerce & Checkout Mesh",
+    subheading: "Sub-second edge storefront, omni-channel inventory sync, and multi-currency payment settlement.",
+    tiers: [
+      {
+        tier: "Tier 01",
+        name: "Edge Storefront & Catalog",
+        highlight: "Next.js SSR & Faceted Search",
+        specs: ["Sub-200ms catalog queries", "Dynamic ISR product pages", "Predictive search caching"],
+        latency: "<120ms",
+      },
+      {
+        tier: "Tier 02",
+        name: "Cart & Payment Orchestration",
+        highlight: "PCI-DSS Compliant Checkout",
+        specs: ["Stripe / Apple Pay / Google Pay", "Zero-friction 1-click buy", "Real-time fraud scoring"],
+        latency: "<250ms",
+      },
+      {
+        tier: "Tier 03",
+        name: "Fulfillment & Inventory Mesh",
+        highlight: "Omni-Channel Sync Engine",
+        specs: ["Multi-warehouse sync", "Automated webhook dispatch", "ERP bi-directional pipe"],
+        latency: "Real-time",
+      },
+    ],
+  },
+  "erp-pos-solutions": {
+    heading: "Unified Enterprise ERP & POS Pipeline",
+    subheading: "Offline-first point of sale, real-time multi-branch stock reconciliation, and automated ledger accounting.",
+    tiers: [
+      {
+        tier: "Tier 01",
+        name: "Offline-First Terminal Ingress",
+        highlight: "Local SQLite & Hardware Bridge",
+        specs: ["Sub-second barcode scan", "Receipt & terminal drivers", "Zero transaction loss"],
+        latency: "<30ms",
+      },
+      {
+        tier: "Tier 02",
+        name: "Central Cloud ERP Hub",
+        highlight: "Multi-Store Inventory Engine",
+        specs: ["Live warehouse reorders", "Automated invoice dispatch", "GAAP-compliant ledgers"],
+        latency: "<50ms",
+      },
+      {
+        tier: "Tier 03",
+        name: "Executive Audit & Telemetry",
+        highlight: "Financial Reporting & Analytics",
+        specs: ["Role-based access control", "End-of-day auto balance", "Live profit & loss telemetry"],
+        latency: "Real-time",
+      },
+    ],
+  },
+  "business-automation": {
+    heading: "Autonomous Enterprise Workflow Engine",
+    subheading: "Event-driven micro-automations, intelligent document parsing, and resilient self-healing background workers.",
+    tiers: [
+      {
+        tier: "Tier 01",
+        name: "Event Ingress & Webhook Mesh",
+        highlight: "Omni-Channel Trigger Bus",
+        specs: ["Kafka / Redis event stream", "Zero-drop webhook queuing", "Payload schema validation"],
+        latency: "<10ms",
+      },
+      {
+        tier: "Tier 02",
+        name: "Autonomous Execution Core",
+        highlight: "Idempotent Agentic Processing",
+        specs: ["AI document OCR + parsing", "Multi-step logic branching", "Self-healing retry policies"],
+        latency: "<100ms",
+      },
+      {
+        tier: "Tier 03",
+        name: "Operational Telemetry & Logs",
+        highlight: "Audit Trail & Efficiency Metrics",
+        specs: ["Hours saved calculations", "Slack / WhatsApp alerts", "99.99% operational uptime"],
+        latency: "24/7 Live",
+      },
+    ],
+  },
 };
 
 export function ServiceArchitectureFlow({ slug }: { slug: string }) {

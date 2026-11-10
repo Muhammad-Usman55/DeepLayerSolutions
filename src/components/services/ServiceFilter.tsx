@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { ArrowRight, Brain, Sparkles, Code2, Globe, Database, Cloud, Smartphone, Compass, SearchCheck } from "lucide-react";
+import { ArrowRight, Brain, Sparkles, Code2, Globe, Database, Cloud, Smartphone, Compass, SearchCheck, ShoppingCart, Store, Workflow } from "lucide-react";
 import { servicesData } from "@/data/services";
 import { cn } from "@/lib/utils";
 
@@ -16,6 +16,9 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Smartphone,
   Compass,
   SearchCheck,
+  ShoppingCart,
+  Store,
+  Workflow,
 };
 
 const categories = [
@@ -29,6 +32,9 @@ const categories = [
   "Mobile Platforms",
   "Strategic Advisory",
   "Search & Visibility",
+  "Digital Commerce",
+  "Enterprise Systems",
+  "Intelligent Automation",
 ];
 
 export function ServiceFilter() {

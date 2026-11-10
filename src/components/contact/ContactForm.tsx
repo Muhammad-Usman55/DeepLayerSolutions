@@ -265,6 +265,9 @@ export function ContactForm() {
                 <option value="Mobile App Development">Mobile App Development</option>
                 <option value="SEO">SEO &amp; Search Engine Optimization</option>
                 <option value="IT Consulting">IT Consulting & Modernization</option>
+                <option value="E-Commerce Solutions">E-Commerce Solutions</option>
+                <option value="ERP & POS Solutions">ERP & POS Solutions</option>
+                <option value="Business Automation">Business Automation</option>
               </select>
             </div>
           </div>

@@ -763,6 +763,293 @@ export function SEO3DVisual({ className = "w-full h-64 sm:h-72" }: { className?:
 }
 
 // ==========================================
+// 10. E-Commerce Solutions 3D Visual
+// Isometric Headless Storefront, Payment Gateway & Conversion Mesh
+// ==========================================
+export function Ecommerce3DVisual({ className = "w-full h-64 sm:h-72" }: { className?: string }) {
+  return (
+    <div className={`relative ${className} flex items-center justify-center select-none`}>
+      <svg
+        viewBox="0 0 340 240"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className="w-full h-full max-h-72 overflow-visible drop-shadow-[0_16px_32px_rgba(0,143,83,0.14)]"
+      >
+        <defs>
+          <radialGradient id="ecomShadow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="#008F53" stopOpacity="0.28" />
+            <stop offset="60%" stopColor="#008F53" stopOpacity="0.08" />
+            <stop offset="100%" stopColor="#008F53" stopOpacity="0" />
+          </radialGradient>
+          <linearGradient id="ecomGlassPed" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.95" />
+            <stop offset="50%" stopColor="#F0FDF4" stopOpacity="0.9" />
+            <stop offset="100%" stopColor="#D2F6E3" stopOpacity="0.8" />
+          </linearGradient>
+          <linearGradient id="ecomCoreGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="#34D399" />
+            <stop offset="50%" stopColor="#00B86B" />
+            <stop offset="100%" stopColor="#008F53" />
+          </linearGradient>
+          <linearGradient id="ecomBoxGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="#FFFFFF" />
+            <stop offset="100%" stopColor="#E9FFF2" />
+          </linearGradient>
+        </defs>
+
+        {/* Ambient Ground Shadow */}
+        <ellipse cx="170" cy="195" rx="115" ry="26" fill="url(#ecomShadow)" />
+
+        {/* Glass Base Platform */}
+        <g>
+          <path d="M70 150 L170 186 L170 196 L70 160 Z" fill="#9CD8B6" fillOpacity="0.85" />
+          <path d="M170 186 L270 150 L270 160 L170 196 Z" fill="#81C8A4" fillOpacity="0.8" />
+          <path d="M70 150 L170 114 L270 150 L170 186 Z" fill="url(#ecomGlassPed)" stroke="#FFFFFF" strokeWidth="1.5" />
+          <path d="M80 150 L170 118 L260 150" stroke="#FFFFFF" strokeWidth="1" strokeOpacity="0.85" fill="none" />
+        </g>
+
+        {/* Central 3D Shopping Cart / Digital Storefront Core */}
+        <g transform="translate(170, 112)">
+          {/* Main Checkout Terminal / Isometric Cart Platform */}
+          <path d="M-36 -16 L0 -34 L36 -16 L0 2 Z" fill="#008F53" />
+          <path d="M-36 -16 L0 2 L0 36 L-36 18 Z" fill="#007343" />
+          <path d="M0 2 L36 -16 L36 18 L0 36 Z" fill="#005B35" />
+
+          {/* Front Grid Mesh on Cart Box */}
+          <line x1="-24" y1="-7" x2="-24" y2="24" stroke="#00B86B" strokeWidth="1.2" strokeOpacity="0.7" />
+          <line x1="-12" y1="-2" x2="-12" y2="30" stroke="#00B86B" strokeWidth="1.2" strokeOpacity="0.7" />
+          <line x1="12" y1="-2" x2="12" y2="30" stroke="#00B86B" strokeWidth="1.2" strokeOpacity="0.7" />
+          <line x1="24" y1="-7" x2="24" y2="24" stroke="#00B86B" strokeWidth="1.2" strokeOpacity="0.7" />
+
+          {/* Floating Product Package Cubes */}
+          <g transform="translate(-18, -48)">
+            <path d="M0 -14 L12 -7 L0 0 L-12 -7 Z" fill="#34D399" />
+            <path d="M-12 -7 L0 0 L0 14 L-12 7 Z" fill="#00B86B" />
+            <path d="M0 0 L12 -7 L12 7 L0 14 Z" fill="#008F53" />
+          </g>
+
+          <g transform="translate(18, -42)">
+            <path d="M0 -14 L12 -7 L0 0 L-12 -7 Z" fill="#E9FFF2" stroke="#BCE8CF" strokeWidth="0.8" />
+            <path d="M-12 -7 L0 0 L0 14 L-12 7 Z" fill="#9CD8B6" />
+            <path d="M0 0 L12 -7 L12 7 L0 14 Z" fill="#81C8A4" />
+          </g>
+
+          {/* Golden Currency Token */}
+          <g transform="translate(0, -64)">
+            <ellipse cx="0" cy="0" rx="14" ry="7" fill="#FBBF24" stroke="#F59E0B" strokeWidth="1.2" />
+            <path d="M-14 0 L-14 5 A14 7 0 0 0 14 5 L14 0 Z" fill="#D97706" />
+            <text x="0" y="2.5" fill="#78350F" fontSize="8" fontWeight="bold" textAnchor="middle">$</text>
+          </g>
+        </g>
+
+        {/* Left Side: Omni-Channel Payment Node */}
+        <g transform="translate(42, 68)">
+          <rect x="0" y="0" width="86" height="42" rx="10" fill="#FFFFFF" stroke="#DFEDE5" strokeWidth="1" filter="drop-shadow(0 4px 14px rgba(0,0,0,0.06))" />
+          <circle cx="16" cy="21" r="7" fill="#E9FFF2" />
+          <path d="M12 21 L15 24 L20 18" stroke="#008F53" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+          <text x="29" y="18" fill="#142A27" fontSize="10" fontWeight="bold">1-Click Buy</text>
+          <text x="29" y="30" fill="#64736F" fontSize="8" fontFamily="monospace">&lt;250ms SLA</text>
+        </g>
+
+        {/* Right Side: Conversion Telemetry Pill */}
+        <g transform="translate(202, 48)">
+          <rect x="0" y="0" width="124" height="34" rx="17" fill="#FFFFFF" stroke="#DFEDE5" strokeWidth="1" filter="drop-shadow(0 4px 14px rgba(0,0,0,0.06))" />
+          <circle cx="17" cy="17" r="4.5" fill="#00B86B" />
+          <text x="30" y="21" fill="#142A27" fontSize="11" fontFamily="monospace" fontWeight="bold">+45% Conversion</text>
+        </g>
+
+        {/* Bottom Cart Badge */}
+        <g transform="translate(208, 155)">
+          <rect x="0" y="0" width="102" height="28" rx="8" fill="#142A27" filter="drop-shadow(0 4px 12px rgba(0,0,0,0.12))" />
+          <text x="12" y="18" fill="#E9FFF2" fontSize="9" fontFamily="monospace" fontWeight="bold">1M+ SKUs Sync</text>
+        </g>
+      </svg>
+    </div>
+  );
+}
+
+// ==========================================
+// 11. ERP & POS Solutions 3D Visual
+// Multi-Store Terminal, Central Ledger Hub & Real-Time Sync
+// ==========================================
+export function ERPPOS3DVisual({ className = "w-full h-64 sm:h-72" }: { className?: string }) {
+  return (
+    <div className={`relative ${className} flex items-center justify-center select-none`}>
+      <svg
+        viewBox="0 0 340 240"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className="w-full h-full max-h-72 overflow-visible drop-shadow-[0_16px_32px_rgba(0,143,83,0.14)]"
+      >
+        <defs>
+          <radialGradient id="erpShadow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="#008F53" stopOpacity="0.28" />
+            <stop offset="60%" stopColor="#008F53" stopOpacity="0.08" />
+            <stop offset="100%" stopColor="#008F53" stopOpacity="0" />
+          </radialGradient>
+          <linearGradient id="erpGlassPed" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.95" />
+            <stop offset="50%" stopColor="#F0FDF4" stopOpacity="0.9" />
+            <stop offset="100%" stopColor="#D0F4DF" stopOpacity="0.8" />
+          </linearGradient>
+          <linearGradient id="erpScreenGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#142A27" />
+            <stop offset="100%" stopColor="#0A1816" />
+          </linearGradient>
+        </defs>
+
+        {/* Ambient Ground Shadow */}
+        <ellipse cx="170" cy="195" rx="115" ry="26" fill="url(#erpShadow)" />
+
+        {/* Base Platform */}
+        <g>
+          <path d="M70 150 L170 186 L170 196 L70 160 Z" fill="#9CD8B6" fillOpacity="0.85" />
+          <path d="M170 186 L270 150 L270 160 L170 196 Z" fill="#81C8A4" fillOpacity="0.8" />
+          <path d="M70 150 L170 114 L270 150 L170 186 Z" fill="url(#erpGlassPed)" stroke="#FFFFFF" strokeWidth="1.5" />
+          <path d="M80 150 L170 118 L260 150" stroke="#FFFFFF" strokeWidth="1" strokeOpacity="0.85" fill="none" />
+        </g>
+
+        {/* Central 3D POS Terminal Screen & Stand */}
+        <g transform="translate(170, 105)">
+          {/* Terminal Stand Pedestal */}
+          <path d="M-12 12 L0 6 L12 12 L0 18 Z" fill="#81C8A4" />
+          <path d="M-12 12 L0 18 L0 30 L-12 24 Z" fill="#008F53" />
+          <path d="M0 18 L12 12 L12 24 L0 30 Z" fill="#075B3E" />
+
+          {/* POS Terminal Screen Shell (Isometric Angled Display) */}
+          <path d="M-36 -32 L20 -54 L44 -38 L-12 -16 Z" fill="#FFFFFF" stroke="#DFEDE5" strokeWidth="1" />
+          <path d="M-36 -32 L-12 -16 L-12 -6 L-36 -22 Z" fill="#008F53" />
+          <path d="M-12 -16 L44 -38 L44 -28 L-12 -6 Z" fill="#075B3E" />
+
+          {/* Screen Display Face */}
+          <path d="M-32 -30 L16 -49 L38 -35 L-10 -16 Z" fill="url(#erpScreenGrad)" />
+          {/* POS Interface lines on screen */}
+          <line x1="-24" y1="-27" x2="-6" y2="-34" stroke="#00B86B" strokeWidth="1.5" />
+          <line x1="-22" y1="-21" x2="10" y2="-33" stroke="#34D399" strokeWidth="1.2" />
+          <line x1="-16" y1="-17" x2="20" y2="-31" stroke="#FFFFFF" strokeWidth="1.2" strokeOpacity="0.6" />
+          <circle cx="28" cy="-39" r="2.5" fill="#00B86B" />
+
+          {/* Receipt Tape Emerging */}
+          <path d="M-28 -42 L-16 -47 L-14 -35 L-26 -30 Z" fill="#FFFFFF" stroke="#DFEDE5" strokeWidth="0.8" />
+          <line x1="-25" y1="-39" x2="-18" y2="-42" stroke="#64736F" strokeWidth="0.7" />
+          <line x1="-24" y1="-35" x2="-17" y2="-38" stroke="#64736F" strokeWidth="0.7" />
+
+          {/* Red Laser Barcode Scanner Beam */}
+          <line x1="-42" y1="-12" x2="-78" y2="4" stroke="#EF4444" strokeWidth="1.5" strokeDasharray="3 2" />
+          <circle cx="-78" cy="4" r="3" fill="#EF4444" />
+        </g>
+
+        {/* Multi-Branch Inventory Cubes (Warehouse satellite node) */}
+        <g transform="translate(62, 132)">
+          <rect x="0" y="0" width="82" height="38" rx="8" fill="#FFFFFF" stroke="#DFEDE5" strokeWidth="1" filter="drop-shadow(0 4px 12px rgba(0,0,0,0.06))" />
+          <text x="10" y="16" fill="#142A27" fontSize="9" fontWeight="bold">500+ Stores</text>
+          <text x="10" y="28" fill="#008F53" fontSize="8" fontFamily="monospace">99.98% Sync</text>
+        </g>
+
+        {/* Right Telemetry Badge */}
+        <g transform="translate(196, 42)">
+          <rect x="0" y="0" width="130" height="32" rx="16" fill="#FFFFFF" stroke="#DFEDE5" strokeWidth="1" filter="drop-shadow(0 4px 14px rgba(0,0,0,0.06))" />
+          <circle cx="16" cy="16" r="4.5" fill="#00B86B" />
+          <text x="28" y="20" fill="#142A27" fontSize="11" fontFamily="monospace" fontWeight="bold">Real-Time POS Sync</text>
+        </g>
+      </svg>
+    </div>
+  );
+}
+
+// ==========================================
+// 12. Business Automation 3D Visual
+// Autonomous Workflow Pipeline, Decision Tree & Robotic Triggers
+// ==========================================
+export function BusinessAutomation3DVisual({ className = "w-full h-64 sm:h-72" }: { className?: string }) {
+  return (
+    <div className={`relative ${className} flex items-center justify-center select-none`}>
+      <svg
+        viewBox="0 0 340 240"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className="w-full h-full max-h-72 overflow-visible drop-shadow-[0_16px_32px_rgba(0,143,83,0.14)]"
+      >
+        <defs>
+          <radialGradient id="autoShadow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="#008F53" stopOpacity="0.28" />
+            <stop offset="60%" stopColor="#008F53" stopOpacity="0.08" />
+            <stop offset="100%" stopColor="#008F53" stopOpacity="0" />
+          </radialGradient>
+          <linearGradient id="autoGlassPed" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.95" />
+            <stop offset="50%" stopColor="#F0FDF4" stopOpacity="0.9" />
+            <stop offset="100%" stopColor="#CEF2DC" stopOpacity="0.8" />
+          </linearGradient>
+          <linearGradient id="autoPillar" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="#00B86B" />
+            <stop offset="100%" stopColor="#008F53" />
+          </linearGradient>
+        </defs>
+
+        {/* Ambient Ground Shadow */}
+        <ellipse cx="170" cy="195" rx="115" ry="26" fill="url(#autoShadow)" />
+
+        {/* Base Platform */}
+        <g>
+          <path d="M70 150 L170 186 L170 196 L70 160 Z" fill="#9CD8B6" fillOpacity="0.85" />
+          <path d="M170 186 L270 150 L270 160 L170 196 Z" fill="#81C8A4" fillOpacity="0.8" />
+          <path d="M70 150 L170 114 L270 150 L170 186 Z" fill="url(#autoGlassPed)" stroke="#FFFFFF" strokeWidth="1.5" />
+          <path d="M80 150 L170 118 L260 150" stroke="#FFFFFF" strokeWidth="1" strokeOpacity="0.85" fill="none" />
+        </g>
+
+        {/* Central Workflow Automation Hub (Tiered Branching Nodes) */}
+        <g transform="translate(170, 110)">
+          {/* Main Central Automation Core Cylinder / Cube */}
+          <path d="M0 -34 L32 -18 L0 -2 L-32 -18 Z" fill="#E9FFF2" stroke="#BCE8CF" strokeWidth="1" />
+          <path d="M-32 -18 L0 -2 L0 34 L-32 18 Z" fill="url(#autoPillar)" />
+          <path d="M0 -2 L32 -18 L32 18 L0 34 Z" fill="#075B3E" />
+
+          {/* Workflow Gear Icon inside top face */}
+          <circle cx="0" cy="-18" r="8" fill="#008F53" />
+          <circle cx="0" cy="-18" r="4" fill="#FFFFFF" />
+
+          {/* Branching Logic Pipeline Left (Trigger Ingress) */}
+          <line x1="-32" y1="-18" x2="-75" y2="-40" stroke="#00B86B" strokeWidth="2" strokeDasharray="3 3" />
+          <g transform="translate(-75, -40)">
+            <rect x="-18" y="-12" width="36" height="24" rx="6" fill="#FFFFFF" stroke="#00B86B" strokeWidth="1.2" />
+            <text x="0" y="3" fill="#142A27" fontSize="8" fontWeight="bold" textAnchor="middle">Trigger</text>
+          </g>
+
+          {/* Branching Logic Pipeline Right (Automated Action / Dispatch) */}
+          <line x1="32" y1="-18" x2="75" y2="-40" stroke="#00B86B" strokeWidth="2" strokeDasharray="3 3" />
+          <g transform="translate(75, -40)">
+            <rect x="-18" y="-12" width="36" height="24" rx="6" fill="#142A27" />
+            <text x="0" y="3" fill="#34D399" fontSize="8" fontWeight="bold" textAnchor="middle">Action</text>
+          </g>
+
+          {/* Top Automated AI Reasoning Node */}
+          <line x1="0" y1="-34" x2="0" y2="-66" stroke="#008F53" strokeWidth="2" />
+          <g transform="translate(0, -66)">
+            <circle cx="0" cy="0" r="14" fill="#34D399" stroke="#FFFFFF" strokeWidth="1.5" />
+            <path d="M-5 0 L-1 4 L6 -3" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          </g>
+        </g>
+
+        {/* Top Telemetry Pill */}
+        <g transform="translate(194, 40)">
+          <rect x="0" y="0" width="134" height="32" rx="16" fill="#FFFFFF" stroke="#DFEDE5" strokeWidth="1" filter="drop-shadow(0 4px 14px rgba(0,0,0,0.06))" />
+          <circle cx="16" cy="16" r="4.5" fill="#00B86B" />
+          <text x="28" y="20" fill="#142A27" fontSize="11" fontFamily="monospace" fontWeight="bold">80% Manual Effort Cut</text>
+        </g>
+
+        {/* Bottom Efficiency Badge */}
+        <g transform="translate(42, 60)">
+          <rect x="0" y="0" width="94" height="34" rx="8" fill="#FFFFFF" stroke="#DFEDE5" strokeWidth="1" filter="drop-shadow(0 4px 12px rgba(0,0,0,0.06))" />
+          <text x="10" y="15" fill="#142A27" fontSize="9" fontWeight="bold">Self-Healing</text>
+          <text x="10" y="27" fill="#008F53" fontSize="8" fontFamily="monospace">0.01% Defect</text>
+        </g>
+      </svg>
+    </div>
+  );
+}
+
+// ==========================================
 // Main Dispatcher: ServiceHero3DVisual
 // Returns the correct bespoke visual for any slug
 // ==========================================
@@ -786,6 +1073,12 @@ export function ServiceHero3DVisual({ slug, className }: { slug: string; classNa
       return <ITConsulting3DVisual className={className} />;
     case "seo":
       return <SEO3DVisual className={className} />;
+    case "ecommerce-solutions":
+      return <Ecommerce3DVisual className={className} />;
+    case "erp-pos-solutions":
+      return <ERPPOS3DVisual className={className} />;
+    case "business-automation":
+      return <BusinessAutomation3DVisual className={className} />;
     default:
       return <AIMachineLearning3DVisual className={className} />;
   }
