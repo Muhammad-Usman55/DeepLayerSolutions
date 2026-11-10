@@ -99,7 +99,7 @@ async function verifyAndActivateToken(rawToken?: string): Promise<ConfirmResult>
     };
   }
 
-  // Dispatch Welcome Email via Resend
+  // Dispatch Welcome Email via Gmail API
   await sendNewsletterWelcomeEmail({
     email: subscriber.email,
     subscriberId: subscriber.id,

@@ -1,7 +1,13 @@
 import "server-only";
 
 import { createAdminClient } from "@/lib/supabase/admin";
-import { getResendClient, getFromEmail, getCompanyEmail, getSiteUrl } from "./resend";
+import {
+  getGmailClient,
+  getFromEmail,
+  getCompanyEmail,
+  getSiteUrl,
+  sendGmailMessage,
+} from "./gmail";
 import { generateContactNotificationEmail } from "./templates/contactNotificationEmail";
 import { generateContactConfirmationEmail } from "./templates/contactConfirmationEmail";
 import { generateNewsletterConfirmationEmail } from "./templates/newsletterConfirmationEmail";
@@ -50,7 +56,7 @@ async function logEmailAttempt(params: {
 
 /**
  * Dispatches both the internal company alert and the client confirmation email
- * for a validated, stored contact inquiry.
+ * for a validated, stored contact inquiry via Google Cloud Gmail API.
  *
  * CRITICAL RELIABILITY RULES:
  * 1. The inquiry record is already committed in PostgreSQL before this function is called.
@@ -71,22 +77,22 @@ export async function sendContactInquiryEmails(inquiry: {
   notification: EmailDispatchResult;
   confirmation: EmailDispatchResult;
 }> {
-  const resend = getResendClient();
-  const fromEmail = getFromEmail();
+  const gmail = getGmailClient();
   const companyEmail = getCompanyEmail();
   const siteUrl = getSiteUrl();
 
-  // If Resend API key is not yet configured, record failed status in audit log and return gracefully
-  if (!resend) {
+  // If Gmail API credentials are not yet configured, record failed status in audit log and return gracefully
+  if (!gmail) {
     console.warn(
-      `[RESEND UNCONFIGURED] Inquiry ${inquiry.referenceNumber} saved to DB. Email dispatch skipped: RESEND_API_KEY is not set.`
+      `[GMAIL UNCONFIGURED] Inquiry ${inquiry.referenceNumber} saved to DB. Email dispatch skipped: GOOGLE_CLIENT_SECRET or GOOGLE_REFRESH_TOKEN is not set.`
     );
 
     const unconfiguredResult: EmailDispatchResult = {
       recipient: companyEmail,
       type: "contact_notification",
       status: "failed",
-      error: "RESEND_API_KEY environment variable is not configured.",
+      error:
+        "Gmail API credentials (GOOGLE_CLIENT_SECRET, GOOGLE_REFRESH_TOKEN) are not configured.",
     };
 
     await logEmailAttempt({
@@ -94,7 +100,8 @@ export async function sendContactInquiryEmails(inquiry: {
       emailType: "contact_notification",
       relatedRecordId: inquiry.id,
       status: "failed",
-      errorMessage: "RESEND_API_KEY is not configured in environment.",
+      errorMessage:
+        "Gmail API credentials (GOOGLE_CLIENT_SECRET, GOOGLE_REFRESH_TOKEN) are not configured in environment.",
     });
 
     await logEmailAttempt({
@@ -102,7 +109,8 @@ export async function sendContactInquiryEmails(inquiry: {
       emailType: "contact_autoresponder",
       relatedRecordId: inquiry.id,
       status: "failed",
-      errorMessage: "RESEND_API_KEY is not configured in environment.",
+      errorMessage:
+        "Gmail API credentials (GOOGLE_CLIENT_SECRET, GOOGLE_REFRESH_TOKEN) are not configured in environment.",
     });
 
     return {
@@ -111,7 +119,8 @@ export async function sendContactInquiryEmails(inquiry: {
         recipient: inquiry.email,
         type: "contact_autoresponder",
         status: "failed",
-        error: "RESEND_API_KEY environment variable is not configured.",
+        error:
+          "Gmail API credentials (GOOGLE_CLIENT_SECRET, GOOGLE_REFRESH_TOKEN) are not configured.",
       },
     };
   }
@@ -123,50 +132,37 @@ export async function sendContactInquiryEmails(inquiry: {
   try {
     const notificationTemplate = generateContactNotificationEmail(inquiry);
 
-    const { data, error } = await resend.emails.send({
-      from: fromEmail,
-      to: [companyEmail],
+    const sendRes = await sendGmailMessage({
+      to: companyEmail,
       replyTo: inquiry.email, // Allows one-click reply directly to client
       subject: notificationTemplate.subject,
       html: notificationTemplate.html,
       text: notificationTemplate.text,
     });
 
-    if (error || !data?.id) {
-      const errStr = error?.message || "Resend rejected company notification";
-      console.error(`[RESEND NOTIFICATION ERROR] Ref: ${inquiry.referenceNumber}:`, errStr);
-      notificationResult = {
-        recipient: companyEmail,
-        type: "contact_notification",
-        status: "failed",
-        error: errStr,
-      };
-      await logEmailAttempt({
-        recipient: companyEmail,
-        emailType: "contact_notification",
-        relatedRecordId: inquiry.id,
-        status: "failed",
-        errorMessage: errStr,
-      });
-    } else {
-      console.info(`[RESEND NOTIFICATION SENT] Ref: ${inquiry.referenceNumber} | ID: ${data.id}`);
-      notificationResult = {
-        recipient: companyEmail,
-        type: "contact_notification",
-        status: "sent",
-        providerMessageId: data.id,
-      };
-      await logEmailAttempt({
-        recipient: companyEmail,
-        emailType: "contact_notification",
-        relatedRecordId: inquiry.id,
-        providerMessageId: data.id,
-        status: "sent",
-      });
-    }
+    console.info(
+      `[GMAIL NOTIFICATION SENT] Ref: ${inquiry.referenceNumber} | ID: ${sendRes.id}`
+    );
+    notificationResult = {
+      recipient: companyEmail,
+      type: "contact_notification",
+      status: "sent",
+      providerMessageId: sendRes.id,
+    };
+    await logEmailAttempt({
+      recipient: companyEmail,
+      emailType: "contact_notification",
+      relatedRecordId: inquiry.id,
+      providerMessageId: sendRes.id,
+      status: "sent",
+    });
   } catch (err: any) {
-    const errStr = err?.message || "Unexpected error during notification dispatch";
-    console.error(`[RESEND NOTIFICATION EXCEPTION] Ref: ${inquiry.referenceNumber}:`, errStr);
+    const errStr =
+      err?.message || "Unexpected error during Gmail notification dispatch";
+    console.error(
+      `[GMAIL NOTIFICATION ERROR] Ref: ${inquiry.referenceNumber}:`,
+      errStr
+    );
     notificationResult = {
       recipient: companyEmail,
       type: "contact_notification",
@@ -196,50 +192,37 @@ export async function sendContactInquiryEmails(inquiry: {
       siteUrl,
     });
 
-    const { data, error } = await resend.emails.send({
-      from: fromEmail,
-      to: [inquiry.email],
+    const sendRes = await sendGmailMessage({
+      to: inquiry.email,
       replyTo: companyEmail,
       subject: confirmationTemplate.subject,
       html: confirmationTemplate.html,
       text: confirmationTemplate.text,
     });
 
-    if (error || !data?.id) {
-      const errStr = error?.message || "Resend rejected visitor confirmation";
-      console.error(`[RESEND CONFIRMATION ERROR] Ref: ${inquiry.referenceNumber}:`, errStr);
-      confirmationResult = {
-        recipient: inquiry.email,
-        type: "contact_autoresponder",
-        status: "failed",
-        error: errStr,
-      };
-      await logEmailAttempt({
-        recipient: inquiry.email,
-        emailType: "contact_autoresponder",
-        relatedRecordId: inquiry.id,
-        status: "failed",
-        errorMessage: errStr,
-      });
-    } else {
-      console.info(`[RESEND CONFIRMATION SENT] Ref: ${inquiry.referenceNumber} | ID: ${data.id}`);
-      confirmationResult = {
-        recipient: inquiry.email,
-        type: "contact_autoresponder",
-        status: "sent",
-        providerMessageId: data.id,
-      };
-      await logEmailAttempt({
-        recipient: inquiry.email,
-        emailType: "contact_autoresponder",
-        relatedRecordId: inquiry.id,
-        providerMessageId: data.id,
-        status: "sent",
-      });
-    }
+    console.info(
+      `[GMAIL CONFIRMATION SENT] Ref: ${inquiry.referenceNumber} | ID: ${sendRes.id}`
+    );
+    confirmationResult = {
+      recipient: inquiry.email,
+      type: "contact_autoresponder",
+      status: "sent",
+      providerMessageId: sendRes.id,
+    };
+    await logEmailAttempt({
+      recipient: inquiry.email,
+      emailType: "contact_autoresponder",
+      relatedRecordId: inquiry.id,
+      providerMessageId: sendRes.id,
+      status: "sent",
+    });
   } catch (err: any) {
-    const errStr = err?.message || "Unexpected error during confirmation dispatch";
-    console.error(`[RESEND CONFIRMATION EXCEPTION] Ref: ${inquiry.referenceNumber}:`, errStr);
+    const errStr =
+      err?.message || "Unexpected error during Gmail confirmation dispatch";
+    console.error(
+      `[GMAIL CONFIRMATION ERROR] Ref: ${inquiry.referenceNumber}:`,
+      errStr
+    );
     confirmationResult = {
       recipient: inquiry.email,
       type: "contact_autoresponder",
@@ -271,26 +254,27 @@ export async function sendNewsletterConfirmationEmail(params: {
   subscriberId?: string | null;
 }): Promise<EmailDispatchResult> {
   const { email, rawToken, subscriberId } = params;
-  const resend = getResendClient();
-  const fromEmail = getFromEmail();
+  const gmail = getGmailClient();
   const siteUrl = getSiteUrl();
 
-  if (!resend) {
+  if (!gmail) {
     console.warn(
-      `[RESEND UNCONFIGURED] Newsletter confirmation for ${email} skipped: RESEND_API_KEY is not set.`
+      `[GMAIL UNCONFIGURED] Newsletter confirmation for ${email} skipped: GOOGLE_CLIENT_SECRET or GOOGLE_REFRESH_TOKEN is not set.`
     );
     const unconfiguredResult: EmailDispatchResult = {
       recipient: email,
       type: "newsletter_confirmation",
       status: "failed",
-      error: "RESEND_API_KEY environment variable is not configured.",
+      error:
+        "Gmail API credentials (GOOGLE_CLIENT_SECRET, GOOGLE_REFRESH_TOKEN) are not configured.",
     };
     await logEmailAttempt({
       recipient: email,
       emailType: "newsletter_confirmation",
       relatedRecordId: subscriberId || null,
       status: "failed",
-      errorMessage: "RESEND_API_KEY is not configured in environment.",
+      errorMessage:
+        "Gmail API credentials (GOOGLE_CLIENT_SECRET, GOOGLE_REFRESH_TOKEN) are not configured in environment.",
     });
     return unconfiguredResult;
   }
@@ -302,51 +286,32 @@ export async function sendNewsletterConfirmationEmail(params: {
       siteUrl,
     });
 
-    const { data, error } = await resend.emails.send({
-      from: fromEmail,
-      to: [email],
+    const sendRes = await sendGmailMessage({
+      to: email,
       subject: template.subject,
       html: template.html,
       text: template.text,
     });
 
-    if (error || !data?.id) {
-      const errStr = error?.message || "Resend rejected newsletter confirmation";
-      console.error(`[NEWSLETTER CONFIRMATION ERROR] ${email}:`, errStr);
-      const failedResult: EmailDispatchResult = {
-        recipient: email,
-        type: "newsletter_confirmation",
-        status: "failed",
-        error: errStr,
-      };
-      await logEmailAttempt({
-        recipient: email,
-        emailType: "newsletter_confirmation",
-        relatedRecordId: subscriberId || null,
-        status: "failed",
-        errorMessage: errStr,
-      });
-      return failedResult;
-    }
-
-    console.info(`[NEWSLETTER CONFIRMATION SENT] ${email} | ID: ${data.id}`);
+    console.info(`[GMAIL NEWSLETTER CONFIRMATION SENT] ${email} | ID: ${sendRes.id}`);
     const successResult: EmailDispatchResult = {
       recipient: email,
       type: "newsletter_confirmation",
       status: "sent",
-      providerMessageId: data.id,
+      providerMessageId: sendRes.id,
     };
     await logEmailAttempt({
       recipient: email,
       emailType: "newsletter_confirmation",
       relatedRecordId: subscriberId || null,
-      providerMessageId: data.id,
+      providerMessageId: sendRes.id,
       status: "sent",
     });
     return successResult;
   } catch (err: any) {
-    const errStr = err?.message || "Unexpected error during confirmation dispatch";
-    console.error(`[NEWSLETTER CONFIRMATION EXCEPTION] ${email}:`, errStr);
+    const errStr =
+      err?.message || "Unexpected error during Gmail confirmation dispatch";
+    console.error(`[GMAIL NEWSLETTER CONFIRMATION ERROR] ${email}:`, errStr);
     const exceptionResult: EmailDispatchResult = {
       recipient: email,
       type: "newsletter_confirmation",
@@ -373,28 +338,29 @@ export async function sendNewsletterWelcomeEmail(params: {
   subscriberId?: string | null;
 }): Promise<EmailDispatchResult> {
   const { email, subscriberId } = params;
-  const resend = getResendClient();
-  const fromEmail = getFromEmail();
+  const gmail = getGmailClient();
   const siteUrl = getSiteUrl();
 
   const unsubscribeKey = generateUnsubscribeToken(email);
 
-  if (!resend) {
+  if (!gmail) {
     console.warn(
-      `[RESEND UNCONFIGURED] Newsletter welcome for ${email} skipped: RESEND_API_KEY is not set.`
+      `[GMAIL UNCONFIGURED] Newsletter welcome for ${email} skipped: GOOGLE_CLIENT_SECRET or GOOGLE_REFRESH_TOKEN is not set.`
     );
     const unconfiguredResult: EmailDispatchResult = {
       recipient: email,
       type: "newsletter_welcome",
       status: "failed",
-      error: "RESEND_API_KEY environment variable is not configured.",
+      error:
+        "Gmail API credentials (GOOGLE_CLIENT_SECRET, GOOGLE_REFRESH_TOKEN) are not configured.",
     };
     await logEmailAttempt({
       recipient: email,
       emailType: "newsletter_welcome",
       relatedRecordId: subscriberId || null,
       status: "failed",
-      errorMessage: "RESEND_API_KEY is not configured in environment.",
+      errorMessage:
+        "Gmail API credentials (GOOGLE_CLIENT_SECRET, GOOGLE_REFRESH_TOKEN) are not configured in environment.",
     });
     return unconfiguredResult;
   }
@@ -406,51 +372,32 @@ export async function sendNewsletterWelcomeEmail(params: {
       siteUrl,
     });
 
-    const { data, error } = await resend.emails.send({
-      from: fromEmail,
-      to: [email],
+    const sendRes = await sendGmailMessage({
+      to: email,
       subject: template.subject,
       html: template.html,
       text: template.text,
     });
 
-    if (error || !data?.id) {
-      const errStr = error?.message || "Resend rejected newsletter welcome";
-      console.error(`[NEWSLETTER WELCOME ERROR] ${email}:`, errStr);
-      const failedResult: EmailDispatchResult = {
-        recipient: email,
-        type: "newsletter_welcome",
-        status: "failed",
-        error: errStr,
-      };
-      await logEmailAttempt({
-        recipient: email,
-        emailType: "newsletter_welcome",
-        relatedRecordId: subscriberId || null,
-        status: "failed",
-        errorMessage: errStr,
-      });
-      return failedResult;
-    }
-
-    console.info(`[NEWSLETTER WELCOME SENT] ${email} | ID: ${data.id}`);
+    console.info(`[GMAIL NEWSLETTER WELCOME SENT] ${email} | ID: ${sendRes.id}`);
     const successResult: EmailDispatchResult = {
       recipient: email,
       type: "newsletter_welcome",
       status: "sent",
-      providerMessageId: data.id,
+      providerMessageId: sendRes.id,
     };
     await logEmailAttempt({
       recipient: email,
       emailType: "newsletter_welcome",
       relatedRecordId: subscriberId || null,
-      providerMessageId: data.id,
+      providerMessageId: sendRes.id,
       status: "sent",
     });
     return successResult;
   } catch (err: any) {
-    const errStr = err?.message || "Unexpected error during welcome dispatch";
-    console.error(`[NEWSLETTER WELCOME EXCEPTION] ${email}:`, errStr);
+    const errStr =
+      err?.message || "Unexpected error during Gmail welcome dispatch";
+    console.error(`[GMAIL NEWSLETTER WELCOME ERROR] ${email}:`, errStr);
     const exceptionResult: EmailDispatchResult = {
       recipient: email,
       type: "newsletter_welcome",
@@ -467,4 +414,3 @@ export async function sendNewsletterWelcomeEmail(params: {
     return exceptionResult;
   }
 }
-

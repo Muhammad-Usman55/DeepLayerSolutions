@@ -168,7 +168,7 @@ export async function POST(req: NextRequest) {
       subscriberId = newRecord.id;
     }
 
-    // 8. Dispatch confirmation email via Resend
+    // 8. Dispatch confirmation email via Gmail API
     // Important: an email delivery issue does not delete or roll back the pending subscriber
     try {
       await sendNewsletterConfirmationEmail({

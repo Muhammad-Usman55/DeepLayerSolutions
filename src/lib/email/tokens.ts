@@ -39,7 +39,7 @@ export function hashToken(rawToken: string): string {
 function getSigningSecret(): string {
   return (
     process.env.SUPABASE_SERVICE_ROLE_KEY ||
-    process.env.RESEND_API_KEY ||
+    process.env.GOOGLE_CLIENT_SECRET ||
     "deeplayer-solutions-newsletter-secret"
   );
 }

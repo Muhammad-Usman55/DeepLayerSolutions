@@ -78,7 +78,7 @@ export default function AdminEmailsPage() {
           Email Audit Logs
         </h1>
         <p className="text-xs sm:text-sm text-[#64736F] mt-1">
-          Complete delivery audit trail for Resend transactional dispatches, customer confirmations, and alerts.
+          Complete delivery audit trail for Gmail API transactional dispatches, customer confirmations, and alerts.
         </p>
       </div>
 
