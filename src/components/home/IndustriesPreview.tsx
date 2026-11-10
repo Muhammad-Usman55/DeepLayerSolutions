@@ -3,13 +3,30 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Activity, BarChart3, GraduationCap, ArrowRight } from "lucide-react";
+import {
+  Activity,
+  BarChart3,
+  GraduationCap,
+  ShoppingBag,
+  UtensilsCrossed,
+  Factory,
+  Truck,
+  Building2,
+  Briefcase,
+  ArrowRight,
+} from "lucide-react";
 import { Container } from "../common/Container";
 import {
   Healthcare3DVisual,
   Finance3DVisual,
   Education3DVisual,
-} from "./industries/Industry3DVisuals";
+  Ecommerce3DVisual,
+  Hospitality3DVisual,
+  Manufacturing3DVisual,
+  Logistics3DVisual,
+  RealEstate3DVisual,
+  LegalServices3DVisual,
+} from "../industries/IndustryVisuals";
 
 interface IndustryCardData {
   id: string;
@@ -44,6 +61,54 @@ const industryCards: IndustryCardData[] = [
     subtitle: "Adaptive Learning & Academic AI",
     badgeIcon: GraduationCap,
     VisualComponent: Education3DVisual,
+  },
+  {
+    id: "retail-ecommerce",
+    slug: "retail-ecommerce",
+    title: "Retail & E-commerce",
+    subtitle: "Omni-Channel Commerce & POS",
+    badgeIcon: ShoppingBag,
+    VisualComponent: Ecommerce3DVisual,
+  },
+  {
+    id: "hospitality",
+    slug: "hospitality-restaurants",
+    title: "Hospitality & Dining",
+    subtitle: "Kitchen KDS & Contactless Order",
+    badgeIcon: UtensilsCrossed,
+    VisualComponent: Hospitality3DVisual,
+  },
+  {
+    id: "manufacturing",
+    slug: "manufacturing",
+    title: "Manufacturing & IoT",
+    subtitle: "Defect Vision & Machine Telemetry",
+    badgeIcon: Factory,
+    VisualComponent: Manufacturing3DVisual,
+  },
+  {
+    id: "logistics",
+    slug: "logistics-transportation",
+    title: "Logistics & Transport",
+    subtitle: "Dynamic Route & Fleet Telematics",
+    badgeIcon: Truck,
+    VisualComponent: Logistics3DVisual,
+  },
+  {
+    id: "realestate",
+    slug: "real-estate",
+    title: "Real Estate & PropTech",
+    subtitle: "3D Digital Twins & AVM Valuations",
+    badgeIcon: Building2,
+    VisualComponent: RealEstate3DVisual,
+  },
+  {
+    id: "professional-services",
+    slug: "professional-services",
+    title: "Legal & Professional",
+    subtitle: "Contract Intelligence & Virtual Rooms",
+    badgeIcon: Briefcase,
+    VisualComponent: LegalServices3DVisual,
   },
 ];
 
@@ -159,19 +224,30 @@ export function IndustriesPreview() {
           })}
         </div>
 
-        {/* 3 Pagination Indicator Dots (Desktop Only) */}
-        <div className="mt-10 sm:mt-12 hidden sm:flex items-center justify-center gap-2" aria-hidden="true">
-          {industryCards.map((_, dotIdx) => (
+        {/* Explore All Button */}
+        <div className="mt-10 sm:mt-14 text-center">
+          <Link
+            href="/industries"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-xs font-bold uppercase tracking-wider bg-[#008F53] text-white hover:bg-[#007343] transition-all duration-300 shadow-xs hover:shadow-md hover:scale-105"
+          >
+            <span>Explore All Sector Engineering Solutions</span>
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+
+        {/* Indicator Dots for Rows (Desktop Only) */}
+        <div className="mt-8 hidden sm:flex items-center justify-center gap-2" aria-hidden="true">
+          {[0, 1, 2].map((rowIdx) => (
             <button
-              key={dotIdx}
+              key={rowIdx}
               type="button"
-              onClick={() => setActiveDot(dotIdx)}
+              onClick={() => setActiveDot(rowIdx * 3)}
               className={`transition-all duration-300 rounded-full ${
-                activeDot === dotIdx
+                Math.floor(activeDot / 3) === rowIdx
                   ? "w-6 h-2 bg-[#008F53]"
                   : "w-2 h-2 bg-[#DFEDE5] hover:bg-[#008F53]/40"
               }`}
-              aria-label={`Highlight industry card ${dotIdx + 1}`}
+              aria-label={`Highlight industry row ${rowIdx + 1}`}
             />
           ))}
         </div>
