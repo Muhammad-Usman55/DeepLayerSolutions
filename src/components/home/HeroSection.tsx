@@ -1,39 +1,11 @@
-"use client";
-
 import React from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { ArrowRight, Sparkles, Cpu, Zap, ShieldCheck } from "lucide-react";
 import { Button } from "../common/Button";
 import { Container } from "../common/Container";
 import { TechLayerVisual } from "../common/TechLayerVisual";
-import { FloatingElement } from "../animations/FloatingElement";
 
 export function HeroSection() {
-  // Staggered motion variants
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.12,
-        delayChildren: 0.05,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 22 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.65,
-        ease: "easeOut" as const,
-      },
-    },
-  };
-
   return (
     <section className="relative overflow-hidden pt-6 pb-16 lg:pt-12 lg:pb-24 hero-section-wrapper">
       {/* Background Ambience */}
@@ -43,14 +15,9 @@ export function HeroSection() {
       <Container size="wide" className="h-full flex flex-col justify-center">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-0 lg:gap-8 items-center w-full">
           {/* Left Hero Content (Cols 1-7 on lg/xl) */}
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-            className="lg:col-span-7 xl:col-span-7 flex flex-col items-start text-left hero-content-col"
-          >
+          <div className="lg:col-span-7 xl:col-span-7 flex flex-col items-start text-left hero-content-col">
             {/* Bespoke Studio Eyebrow Pill */}
-            <motion.div variants={itemVariants} className="max-w-full">
+            <div className="max-w-full">
               <Link
                 href="/services"
                 className="group inline-flex items-center gap-2 sm:gap-2.5 pl-2.5 pr-3 sm:pr-3.5 py-1.5 rounded-full bg-white/95 backdrop-blur-sm border border-[#DFEDE5] hover:border-[#00B86B] shadow-[0_2px_10px_-2px_rgba(0,184,107,0.08)] hover:shadow-md transition-all duration-300 mb-6 cursor-pointer max-w-full"
@@ -67,13 +34,10 @@ export function HeroSection() {
                   Explore <ArrowRight className="w-3 h-3" />
                 </span>
               </Link>
-            </motion.div>
+            </div>
 
             {/* Main Headline with Highlight Reveal */}
-            <motion.h1
-              variants={itemVariants}
-              className="text-3xl sm:text-5xl lg:text-6xl xl:text-[68px] font-extrabold tracking-tight text-[#142A27] leading-[1.12] sm:leading-[1.08] hero-headline"
-            >
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl xl:text-[68px] font-extrabold tracking-tight text-[#142A27] leading-[1.12] sm:leading-[1.08] hero-headline">
               We Build{" "}
               <span className="text-[#008F53] relative inline-block">
                 Intelligent
@@ -86,21 +50,15 @@ export function HeroSection() {
                 </svg>
               </span>{" "}
               Digital Experiences.
-            </motion.h1>
+            </h1>
 
             {/* Supporting Copy */}
-            <motion.p
-              variants={itemVariants}
-              className="mt-5 sm:mt-6 text-base sm:text-lg lg:text-xl text-[#64736F] leading-relaxed max-w-2xl font-normal hero-subtext"
-            >
+            <p className="mt-5 sm:mt-6 text-base sm:text-lg lg:text-xl text-[#64736F] leading-relaxed max-w-2xl font-normal hero-subtext">
               Cutting-edge software engineering, AI, and digital products to help your business innovate, grow, and stay ahead in the age of intelligence.
-            </motion.p>
+            </p>
 
             {/* CTAs with hover lift */}
-            <motion.div
-              variants={itemVariants}
-              className="mt-7 sm:mt-10 flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 sm:gap-4 w-full sm:w-auto hero-cta-group"
-            >
+            <div className="mt-7 sm:mt-10 flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 sm:gap-4 w-full sm:w-auto hero-cta-group">
               <Button
                 href="/services"
                 variant="primary"
@@ -118,13 +76,10 @@ export function HeroSection() {
               >
                 Book a Consultation
               </Button>
-            </motion.div>
+            </div>
 
             {/* Engineering Pillars & Architecture Spec Strip (Responsive 3-Column on mobile & desktop) */}
-            <motion.div
-              variants={itemVariants}
-              className="mt-6 sm:mt-10 pt-4 sm:pt-7 border-t border-[#DFEDE5] w-full"
-            >
+            <div className="mt-6 sm:mt-10 pt-4 sm:pt-7 border-t border-[#DFEDE5] w-full">
               <div className="grid grid-cols-3 gap-2 sm:gap-4 divide-x divide-[#DFEDE5] text-center sm:text-left">
                 {/* 01: Capability */}
                 <div className="flex flex-col items-center sm:block px-1 sm:px-4">
@@ -168,14 +123,14 @@ export function HeroSection() {
                   </p>
                 </div>
               </div>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
 
-          {/* Right Hero Visual (Cols 8-12 on lg/xl) with subtle floating motion */}
+          {/* Right Hero Visual (Cols 8-12 on lg/xl) */}
           <div className="hidden lg:flex lg:col-span-5 xl:col-span-5 items-center justify-center lg:justify-end w-full hero-tech-visual-container">
-            <FloatingElement duration={6.5} distance={10} rotation={1.2} className="w-full flex items-center justify-center">
+            <div className="w-full flex items-center justify-center">
               <TechLayerVisual />
-            </FloatingElement>
+            </div>
           </div>
         </div>
       </Container>
