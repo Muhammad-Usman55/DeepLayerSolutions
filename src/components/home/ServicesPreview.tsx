@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useCallback, useEffect } from "react";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
+import useEmblaCarousel from "embla-carousel-react";
 import { Container } from "../common/Container";
 import { Eyebrow } from "../common/Eyebrow";
 import { Central3DVisual } from "./services-preview/Central3DVisual";
@@ -37,6 +38,63 @@ export function ServicesPreview() {
     return previewServices.filter((s) => s.categoryGroup === activeCategory);
   }, [activeCategory]);
 
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    align: "start",
+    containScroll: "trimSnaps",
+    dragFree: false,
+    loop: false,
+  });
+
+  const [canScrollPrev, setCanScrollPrev] = useState(false);
+  const [canScrollNext, setCanScrollNext] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
+
+  const scrollPrev = useCallback(() => {
+    if (emblaApi) emblaApi.scrollPrev();
+  }, [emblaApi]);
+
+  const scrollNext = useCallback(() => {
+    if (emblaApi) emblaApi.scrollNext();
+  }, [emblaApi]);
+
+  const scrollTo = useCallback(
+    (index: number) => {
+      if (emblaApi) emblaApi.scrollTo(index);
+    },
+    [emblaApi]
+  );
+
+  const onSelect = useCallback((api: NonNullable<typeof emblaApi>) => {
+    setSelectedIndex(api.selectedScrollSnap());
+    setCanScrollPrev(api.canScrollPrev());
+    setCanScrollNext(api.canScrollNext());
+  }, []);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    setScrollSnaps(emblaApi.scrollSnapList());
+    onSelect(emblaApi);
+    emblaApi.on("select", onSelect);
+    emblaApi.on("reInit", onSelect);
+    return () => {
+      emblaApi.off("select", onSelect);
+      emblaApi.off("reInit", onSelect);
+    };
+  }, [emblaApi, onSelect]);
+
+  // Re-sync on filter category change
+  useEffect(() => {
+    if (emblaApi) {
+      emblaApi.reInit();
+      emblaApi.scrollTo(0);
+      setScrollSnaps(emblaApi.scrollSnapList());
+      setSelectedIndex(0);
+      setCanScrollPrev(emblaApi.canScrollPrev());
+      setCanScrollNext(emblaApi.canScrollNext());
+    }
+  }, [activeCategory, emblaApi, filteredServices]);
+
   return (
     <section
       className="relative overflow-hidden py-16 sm:py-20 lg:py-28 bg-gradient-to-b from-[#FAFCF9] via-[#F4FAF6] to-[#FAFCF9] border-t border-[#E3EDE5]"
@@ -56,7 +114,7 @@ export function ServicesPreview() {
       />
 
       <Container size="wide">
-        {/* Mobile Section Heading Matching Mockup */}
+        {/* Mobile Section Heading */}
         <div className="text-center mb-6 lg:hidden">
           <h2 className="text-xl sm:text-2xl font-extrabold text-[#142A27] tracking-tight">
             Our <span className="text-[#008F53]">Services</span>
@@ -68,14 +126,13 @@ export function ServicesPreview() {
 
         {/* Upper Zone: Left 3D Central Visual & Right Content Block (Desktop Only) */}
         <div className="hidden lg:grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
-          {/* Left 3D Visualization Area (Cols 1-7 on desktop, 2nd on mobile) */}
+          {/* Left 3D Visualization Area */}
           <div className="order-2 lg:order-1 lg:col-span-7 flex items-center justify-center relative">
             <Central3DVisual />
           </div>
 
-          {/* Right Content Area (Cols 8-12 on desktop, 1st on mobile) */}
+          {/* Right Content Area */}
           <div className="order-1 lg:order-2 lg:col-span-5 flex flex-col items-start text-left">
-            {/* Eyebrow Label */}
             <motion.div
               initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -87,7 +144,6 @@ export function ServicesPreview() {
               </Eyebrow>
             </motion.div>
 
-            {/* Main Section Heading */}
             <motion.h2
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -109,7 +165,6 @@ export function ServicesPreview() {
               Forward.
             </motion.h2>
 
-            {/* Single CTA Pill Button */}
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -133,10 +188,11 @@ export function ServicesPreview() {
           </div>
         </div>
 
-        {/* Lower Zone: Category Filter Tabs & Responsive Service Cards */}
+        {/* Lower Zone: Premium Horizontal Card Carousel */}
         <div className="lg:mt-16">
-          {/* Interactive Category Filter Pills */}
-          <div className="mt-8 sm:mt-10 mb-6 sm:mb-8 flex items-center justify-between flex-wrap gap-3 border-b border-[#DFEDE5]/70 pb-4">
+          {/* Controls Bar: Category Filter Pills + Navigation Arrows */}
+          <div className="mt-8 sm:mt-10 mb-6 sm:mb-8 flex items-center justify-between flex-wrap gap-4 border-b border-[#DFEDE5]/70 pb-4">
+            {/* Filter Pills */}
             <div className="flex items-center gap-2 overflow-x-auto pb-1 max-w-full no-scrollbar">
               {filterCategories.map((cat) => {
                 const isActive = activeCategory === cat.id;
@@ -164,23 +220,80 @@ export function ServicesPreview() {
               })}
             </div>
 
-            <Link
-              href="/services"
-              className="hidden sm:inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-[#008F53] hover:text-[#075B3E] transition-colors"
-            >
-              <span>View Full Services Catalog</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </Link>
+            {/* Right Action: Carousel Navigation Arrows & View Catalog Link */}
+            <div className="flex items-center gap-3 ml-auto">
+              <Link
+                href="/services"
+                className="hidden md:inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-[#008F53] hover:text-[#075B3E] transition-colors mr-2"
+              >
+                <span>Full Catalog</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+
+              {/* Prev / Next Carousel Arrow Buttons */}
+              <div className="flex items-center gap-1.5 sm:gap-2">
+                <button
+                  type="button"
+                  onClick={scrollPrev}
+                  disabled={!canScrollPrev}
+                  aria-label="Previous services slide"
+                  className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition-all duration-200 border ${
+                    canScrollPrev
+                      ? "bg-white hover:bg-[#008F53] text-[#142A27] hover:text-white border-[#DFEDE5] hover:border-[#008F53] shadow-xs hover:shadow-md cursor-pointer hover:scale-105 active:scale-95"
+                      : "bg-[#F4FAF6] text-[#A0AEC0] border-[#DFEDE5]/60 cursor-not-allowed opacity-40 shadow-none"
+                  }`}
+                >
+                  <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
+                </button>
+                <button
+                  type="button"
+                  onClick={scrollNext}
+                  disabled={!canScrollNext}
+                  aria-label="Next services slide"
+                  className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition-all duration-200 border ${
+                    canScrollNext
+                      ? "bg-white hover:bg-[#008F53] text-[#142A27] hover:text-white border-[#DFEDE5] hover:border-[#008F53] shadow-xs hover:shadow-md cursor-pointer hover:scale-105 active:scale-95"
+                      : "bg-[#F4FAF6] text-[#A0AEC0] border-[#DFEDE5]/60 cursor-not-allowed opacity-40 shadow-none"
+                  }`}
+                >
+                  <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
+                </button>
+              </div>
+            </div>
           </div>
 
-          {/* Service Cards Grid (Desktop: 4 columns, Tablet: 3 columns, Mobile: 2 columns) */}
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3.5 sm:gap-6">
-            {filteredServices.map((service, index) => (
-              <div key={service.id} className="h-full">
-                <ServiceCard service={service} index={index} />
-              </div>
-            ))}
+          {/* Embla Carousel Viewport & Track */}
+          <div className="relative overflow-hidden py-2" ref={emblaRef}>
+            <div className="flex -ml-4 sm:-ml-5 lg:-ml-6 touch-pan-y">
+              {filteredServices.map((service, index) => (
+                <div
+                  key={service.id}
+                  className="flex-[0_0_100%] sm:flex-[0_0_50%] lg:flex-[0_0_33.333333%] xl:flex-[0_0_25%] min-w-0 pl-4 sm:pl-5 lg:pl-6 h-full"
+                >
+                  <ServiceCard service={service} index={index} />
+                </div>
+              ))}
+            </div>
           </div>
+
+          {/* Carousel Pagination Dots */}
+          {scrollSnaps.length > 1 && (
+            <div className="mt-7 flex items-center justify-center gap-2" aria-hidden="true">
+              {scrollSnaps.map((_, idx) => (
+                <button
+                  key={idx}
+                  type="button"
+                  onClick={() => scrollTo(idx)}
+                  aria-label={`Go to services slide ${idx + 1}`}
+                  className={`transition-all duration-300 rounded-full cursor-pointer ${
+                    selectedIndex === idx
+                      ? "w-7 h-2 bg-[#008F53]"
+                      : "w-2 h-2 bg-[#DFEDE5] hover:bg-[#008F53]/50"
+                  }`}
+                />
+              ))}
+            </div>
+          )}
 
           {/* Bottom Custom Architecture Banner */}
           <div className="mt-10 sm:mt-14 rounded-2xl bg-white/80 backdrop-blur-xs border border-[#DFEDE5] p-5 sm:p-7 flex flex-col sm:flex-row items-center justify-between gap-5 shadow-xs">
