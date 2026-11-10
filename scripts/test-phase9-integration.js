@@ -14,7 +14,6 @@
  * 10. Google Analytics consent behavior
  * 11. Admin authentication
  * 12. Admin dashboard authorization
- * 13. Cloudflare Turnstile bot verification
  * 14. Distributed rate limiting
  * 15. Mobile & desktop frontend page functionality
  */
@@ -145,7 +144,6 @@ async function run() {
         service: "AI & Machine Learning",
         subject: contactSubject,
         message: "We need production architecture review for enterprise LLM agents and multi-agent systems.",
-        turnstileToken: "1x00000000000000000000AA",
       }),
     });
 
@@ -229,7 +227,6 @@ async function run() {
       },
       body: JSON.stringify({
         email: newsletterEmail,
-        turnstileToken: "1x00000000000000000000AA",
       }),
     });
 
@@ -487,36 +484,6 @@ async function run() {
   }
 
   // --------------------------------------------------------------------------
-  // FEATURE 13: Cloudflare Turnstile
-  // --------------------------------------------------------------------------
-  console.log("\n--- 13. Cloudflare Turnstile Bot Verification ---");
-  try {
-    const turnstileIp = `198.51.100.${Math.floor(Math.random() * 200) + 10}`;
-    const missingTokenRes = await fetch(`${BASE_URL}/api/contact`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Origin: "http://localhost:3000",
-        "X-Forwarded-For": turnstileIp,
-      },
-      body: JSON.stringify({
-        fullName: "Automated Bot",
-        email: "bot@spammer.net",
-        subject: "Turnstile Bypass Attempt",
-        message: "Attempting to submit contact inquiry without valid Turnstile token.",
-        turnstileToken: "", // empty
-      }),
-    });
-
-    report(
-      missingTokenRes.status === 403,
-      `Missing / empty Turnstile challenge token rejected with HTTP 403 Forbidden`
-    );
-  } catch (err) {
-    report(false, `Turnstile check failed: ${err.message}`);
-  }
-
-  // --------------------------------------------------------------------------
   // FEATURE 14: Rate Limiting
   // --------------------------------------------------------------------------
   console.log("\n--- 14. Distributed Rate Limiting ---");
@@ -537,7 +504,6 @@ async function run() {
           email: `burst.${Date.now()}.${i}@example.com`,
           subject: `Burst Test Subject ${i}`,
           message: `Testing rate limiting thresholds on serverless deployment iteration ${i}.`,
-          turnstileToken: "1x00000000000000000000AA",
         }),
       });
 

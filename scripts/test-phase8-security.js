@@ -2,8 +2,7 @@
  * DeepLayer Solutions — Phase 8 Backend Security Verification Test Suite
  *
  * Verifies:
- * 1. Cloudflare Turnstile token validation & rejection
- * 2. Distributed rate limiting (5 req max -> 429 on 6th)
+ * 1. Distributed rate limiting (5 req max -> 429 on 6th)
  * 3. CSRF / Unauthorized Origin blocking (HTTP 403)
  * 4. Input sanitization & field length enforcement (HTTP 400)
  * 5. Brute-force protection on Admin Login (HTTP 429)
@@ -138,41 +137,8 @@ async function runTests() {
   }
 
   // --------------------------------------------------------------------------
-  // TEST 4: Cloudflare Turnstile Verification & Rejection
+  // TEST 4: Input Length / Injection Defense
   // --------------------------------------------------------------------------
-  console.log("\n--- TEST 4: Cloudflare Turnstile Server Verification ---");
-  try {
-    // 4a: Submitting without Turnstile token must be rejected with 403 Forbidden
-    const missingTokenRes = await fetch(`${BASE_URL}/api/contact`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Origin: "http://localhost:3000",
-        "X-Forwarded-For": "198.51.100.99",
-      },
-      body: JSON.stringify({
-        fullName: "Security Bot Tester",
-        email: `bot.${Date.now()}@deeplayersolutions.com`,
-        subject: "Turnstile Missing Token Test",
-        message: "Testing that requests without valid Turnstile tokens are rejected by the server.",
-        turnstileToken: "", // empty / omitted token
-      }),
-    });
-
-    assert(
-      missingTokenRes.status === 403,
-      `Missing/empty Turnstile token rejected with HTTP 403 Forbidden (got status ${missingTokenRes.status})`
-    );
-
-    const missingTokenData = await missingTokenRes.json();
-    assert(
-      missingTokenData.success === false && missingTokenData.message.includes("Security verification failed"),
-      `Clear security error message returned without database modification: "${missingTokenData.message}"`
-    );
-  } catch (err) {
-    console.error("Test 4 error:", err.message);
-    assert(false, "Test 4 failed due to exception");
-  }
 
   // --------------------------------------------------------------------------
   // TEST 5: Distributed Rate Limiting Enforcement
@@ -196,7 +162,6 @@ async function runTests() {
           email: `rate.test.${Date.now()}.${i}@example.com`,
           subject: `Rate Limit Test Subject ${i}`,
           message: `This is a test message to evaluate the rate limiter threshold number ${i}.`,
-          turnstileToken: "1x00000000000000000000AA", // Cloudflare test pass token
         }),
       });
 

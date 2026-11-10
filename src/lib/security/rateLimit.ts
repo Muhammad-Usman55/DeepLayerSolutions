@@ -28,7 +28,7 @@ const fallbackStore = new Map<string, { count: number; resetAtMs: number }>();
 
 /**
  * Extracts the real client IP address from request headers.
- * Respects Cloudflare and reverse proxy headers.
+ * Supports reverse proxy, load balancer, and edge CDN headers.
  */
 export function getClientIp(req: Request | NextRequest): string {
   const headers = req.headers;

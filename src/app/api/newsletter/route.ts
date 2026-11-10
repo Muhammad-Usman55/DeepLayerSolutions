@@ -3,7 +3,6 @@ import { createAdminClient } from "@/lib/supabase/admin";
 import { generateConfirmationToken } from "@/lib/email/tokens";
 import { sendNewsletterConfirmationEmail } from "@/lib/email/dispatch";
 import { checkRateLimit, getClientIp } from "@/lib/security/rateLimit";
-import { verifyTurnstileToken } from "@/lib/security/turnstile";
 import { validateRequestOrigin } from "@/lib/security/csrf";
 
 const EMAIL_REGEX = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
@@ -61,21 +60,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // 5. Turnstile Bot Check (if provided in body or if Turnstile is configured)
-    if (body.turnstileToken) {
-      const turnstileResult = await verifyTurnstileToken(body.turnstileToken, ip);
-      if (!turnstileResult.success) {
-        return NextResponse.json(
-          {
-            success: false,
-            message: "Security verification failed. Please try again.",
-          },
-          { status: 403 }
-        );
-      }
-    }
-
-    // 6. Server-Side Email Validation & Sanitization
+    // 5. Server-Side Email Validation & Sanitization
     const rawEmail = typeof body.email === "string" ? body.email.trim().toLowerCase() : "";
     // Strip control characters and HTML tags
     const email = rawEmail.replace(/<[^>]+>/g, "").replace(/[\u0000-\u001F]/g, "");

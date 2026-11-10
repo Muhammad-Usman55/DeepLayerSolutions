@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { sendContactInquiryEmails } from "@/lib/email/dispatch";
 import { checkRateLimit, getClientIp } from "@/lib/security/rateLimit";
-import { verifyTurnstileToken } from "@/lib/security/turnstile";
 import { validateRequestOrigin } from "@/lib/security/csrf";
 
 // Basic HTML and script tag stripping to prevent XSS / malicious payloads
@@ -69,7 +68,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const { fullName, email, company, service, subject, message, botField, turnstileToken } = body;
+    const { fullName, email, company, service, subject, message, botField } = body;
 
     // 5. Honeypot Spam Check (silent response to defeat automated spam bots)
     if (botField) {
@@ -127,19 +126,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // 7. Cloudflare Turnstile Bot Verification
-    const turnstileResult = await verifyTurnstileToken(turnstileToken, ip);
-    if (!turnstileResult.success) {
-      return NextResponse.json(
-        {
-          success: false,
-          message: "Security verification failed. Please refresh the page and try again.",
-        },
-        { status: 403 }
-      );
-    }
-
-    // 8. Clean & Sanitize Inputs
+    // 7. Clean & Sanitize Inputs
     const sanitizedFullName = sanitize(fullName);
     const sanitizedEmail = trimmedEmail.toLowerCase();
     const sanitizedCompany = company ? sanitize(String(company)) : null;

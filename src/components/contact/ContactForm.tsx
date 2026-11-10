@@ -4,7 +4,6 @@ import { useState, FormEvent } from "react";
 import { CheckCircle2, AlertCircle } from "lucide-react";
 import { Button } from "../common/Button";
 import { siteConfig } from "@/config/site";
-import { TurnstileWidget } from "../security/TurnstileWidget";
 
 interface FormState {
   fullName: string;
@@ -33,7 +32,6 @@ export function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [referenceNumber, setReferenceNumber] = useState<string | null>(null);
-  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
 
   const validate = (): boolean => {
     const newErrors: Partial<Record<keyof FormState, string>> = {};
@@ -83,10 +81,7 @@ export function ContactForm() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          ...form,
-          turnstileToken,
-        }),
+        body: JSON.stringify(form),
       });
 
       const data = await response.json().catch(() => null);
@@ -321,13 +316,6 @@ export function ContactForm() {
               </p>
             )}
           </div>
-
-          {/* Cloudflare Turnstile Bot Verification */}
-          <TurnstileWidget
-            action="contact_form"
-            onVerify={(token) => setTurnstileToken(token)}
-            onExpire={() => setTurnstileToken(null)}
-          />
 
           {/* Submit Button */}
           <div>
