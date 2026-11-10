@@ -14,7 +14,7 @@ const categories = ["All", "AI & Tech", "Process & Timeline", "Security & IP"] a
 
 export function FAQSection() {
   const [activeCategory, setActiveCategory] = useState<string>("All");
-  const [openId, setOpenId] = useState<string | null>("faq-1"); // First one open by default
+  const [openId, setOpenId] = useState<string | null>(null); // All questions closed by default
 
   const filteredFaqs =
     activeCategory === "All"
