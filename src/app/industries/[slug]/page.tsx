@@ -644,3 +644,4 @@ export default async function IndustryDetailPage({
     </PageWrapper>
   );
 }
+

@@ -176,6 +176,37 @@ export default function ContactPage() {
                 </div>
               </div>
 
+              {/* Facebook Official Page Card */}
+              <div className="p-6 rounded-2xl bg-white border border-[#DFEDE5] shadow-xs flex items-start gap-4">
+                <div className="w-12 h-12 rounded-xl bg-[#1877F2]/10 text-[#1877F2] flex items-center justify-center shrink-0">
+                  <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24">
+                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                  </svg>
+                </div>
+                <div className="flex-1">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-bold uppercase tracking-wider text-[#64736F] block">
+                      Facebook Page
+                    </span>
+                    <span className="inline-flex items-center gap-1 text-[11px] font-mono font-bold text-[#1877F2] bg-[#1877F2]/10 border border-[#1877F2]/20 px-2 py-0.5 rounded-md">
+                      Community
+                    </span>
+                  </div>
+                  <a
+                    href={siteConfig.social.facebook}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-base font-bold text-[#1877F2] hover:underline flex items-center gap-1.5 mt-0.5"
+                  >
+                    <span>DeepLayer Solutions</span>
+                    <ArrowUpRight className="w-4 h-4" />
+                  </a>
+                  <span className="text-xs text-[#64736F] mt-1 block">
+                    Follow social updates, tech highlights & announcements
+                  </span>
+                </div>
+              </div>
+
               {/* Assurance Banner */}
               <div className="p-5 rounded-2xl bg-[#E9FFF2] border border-[#DFEDE5] flex items-start gap-3">
                 <ShieldCheck className="w-5 h-5 text-[#008F53] shrink-0 mt-0.5" />
