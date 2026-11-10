@@ -225,39 +225,13 @@ export function IndustriesPreview() {
             </span>
           </div>
 
-          {/* Desktop/Tablet Navigation Controls: Prev / Next Buttons (hidden on mobile) */}
-          <div className="hidden sm:flex items-center gap-2">
-            <span className="text-xs font-mono text-[#64736F] mr-1">
-              {String(selectedIndex + 1).padStart(2, "0")} / {String(scrollSnaps.length || 1).padStart(2, "0")}
-            </span>
-
-            <button
-              type="button"
-              onClick={scrollPrev}
-              disabled={!canScrollPrev}
-              aria-label="Previous industry slide"
-              className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition-all duration-200 border ${
-                canScrollPrev
-                  ? "bg-white hover:bg-[#008F53] text-[#142A27] hover:text-white border-[#DFEDE5] hover:border-[#008F53] shadow-xs hover:shadow-md cursor-pointer hover:scale-105 active:scale-95"
-                  : "bg-[#F4FAF6] text-[#A0AEC0] border-[#DFEDE5]/60 cursor-not-allowed opacity-40 shadow-none"
-              }`}
-            >
-              <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
-            </button>
-            <button
-              type="button"
-              onClick={scrollNext}
-              disabled={!canScrollNext}
-              aria-label="Next industry slide"
-              className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition-all duration-200 border ${
-                canScrollNext
-                  ? "bg-white hover:bg-[#008F53] text-[#142A27] hover:text-white border-[#DFEDE5] hover:border-[#008F53] shadow-xs hover:shadow-md cursor-pointer hover:scale-105 active:scale-95"
-                  : "bg-[#F4FAF6] text-[#A0AEC0] border-[#DFEDE5]/60 cursor-not-allowed opacity-40 shadow-none"
-              }`}
-            >
-              <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
-            </button>
-          </div>
+          <Link
+            href="/industries"
+            className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-[#008F53] hover:text-[#075B3E] transition-colors"
+          >
+            <span>All Sectors</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </Link>
         </div>
 
         {/* Embla Horizontal Card Carousel Viewport & Track */}
@@ -318,16 +292,16 @@ export function IndustriesPreview() {
           </div>
         </div>
 
-        {/* Mobile Navigation Controls: Horizontal Prev / Next Buttons Directly Below Cards (sm:hidden) */}
-        <div className="flex sm:hidden items-center justify-center gap-3 mt-4.5">
+        {/* Navigation Controls: Horizontal Prev / Next Buttons Directly Below Cards (Desktop & Mobile) */}
+        <div className="flex items-center justify-center gap-3 sm:gap-4 mt-5 sm:mt-6">
           <button
             type="button"
             onClick={scrollPrev}
             disabled={!canScrollPrev}
             aria-label="Previous industry slide"
-            className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 border ${
+            className={`w-10 h-10 sm:w-11 sm:h-11 rounded-full flex items-center justify-center transition-all duration-200 border ${
               canScrollPrev
-                ? "bg-white hover:bg-[#008F53] text-[#142A27] hover:text-white border-[#DFEDE5] hover:border-[#008F53] shadow-xs active:scale-95 cursor-pointer"
+                ? "bg-white hover:bg-[#008F53] text-[#142A27] hover:text-white border-[#DFEDE5] hover:border-[#008F53] shadow-xs hover:shadow-md cursor-pointer hover:scale-105 active:scale-95"
                 : "bg-[#F4FAF6] text-[#A0AEC0] border-[#DFEDE5]/60 cursor-not-allowed opacity-40 shadow-none"
             }`}
           >
@@ -338,9 +312,9 @@ export function IndustriesPreview() {
             onClick={scrollNext}
             disabled={!canScrollNext}
             aria-label="Next industry slide"
-            className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 border ${
+            className={`w-10 h-10 sm:w-11 sm:h-11 rounded-full flex items-center justify-center transition-all duration-200 border ${
               canScrollNext
-                ? "bg-white hover:bg-[#008F53] text-[#142A27] hover:text-white border-[#DFEDE5] hover:border-[#008F53] shadow-xs active:scale-95 cursor-pointer"
+                ? "bg-white hover:bg-[#008F53] text-[#142A27] hover:text-white border-[#DFEDE5] hover:border-[#008F53] shadow-xs hover:shadow-md cursor-pointer hover:scale-105 active:scale-95"
                 : "bg-[#F4FAF6] text-[#A0AEC0] border-[#DFEDE5]/60 cursor-not-allowed opacity-40 shadow-none"
             }`}
           >
@@ -350,7 +324,7 @@ export function IndustriesPreview() {
 
         {/* Carousel Pagination Dots */}
         {scrollSnaps.length > 1 && (
-          <div className="mt-3.5 sm:mt-8 flex items-center justify-center gap-2" aria-hidden="true">
+          <div className="mt-3.5 sm:mt-4 flex items-center justify-center gap-2" aria-hidden="true">
             {scrollSnaps.map((_, idx) => (
               <button
                 key={idx}
