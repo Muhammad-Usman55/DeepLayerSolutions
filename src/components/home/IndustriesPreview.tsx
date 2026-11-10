@@ -225,9 +225,9 @@ export function IndustriesPreview() {
             </span>
           </div>
 
-          {/* Navigation Controls: Prev / Next Buttons */}
-          <div className="flex items-center gap-2">
-            <span className="text-xs font-mono text-[#64736F] mr-1 hidden sm:inline">
+          {/* Desktop/Tablet Navigation Controls: Prev / Next Buttons (hidden on mobile) */}
+          <div className="hidden sm:flex items-center gap-2">
+            <span className="text-xs font-mono text-[#64736F] mr-1">
               {String(selectedIndex + 1).padStart(2, "0")} / {String(scrollSnaps.length || 1).padStart(2, "0")}
             </span>
 
@@ -318,9 +318,39 @@ export function IndustriesPreview() {
           </div>
         </div>
 
+        {/* Mobile Navigation Controls: Horizontal Prev / Next Buttons Directly Below Cards (sm:hidden) */}
+        <div className="flex sm:hidden items-center justify-center gap-3 mt-4.5">
+          <button
+            type="button"
+            onClick={scrollPrev}
+            disabled={!canScrollPrev}
+            aria-label="Previous industry slide"
+            className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 border ${
+              canScrollPrev
+                ? "bg-white hover:bg-[#008F53] text-[#142A27] hover:text-white border-[#DFEDE5] hover:border-[#008F53] shadow-xs active:scale-95 cursor-pointer"
+                : "bg-[#F4FAF6] text-[#A0AEC0] border-[#DFEDE5]/60 cursor-not-allowed opacity-40 shadow-none"
+            }`}
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+          <button
+            type="button"
+            onClick={scrollNext}
+            disabled={!canScrollNext}
+            aria-label="Next industry slide"
+            className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 border ${
+              canScrollNext
+                ? "bg-white hover:bg-[#008F53] text-[#142A27] hover:text-white border-[#DFEDE5] hover:border-[#008F53] shadow-xs active:scale-95 cursor-pointer"
+                : "bg-[#F4FAF6] text-[#A0AEC0] border-[#DFEDE5]/60 cursor-not-allowed opacity-40 shadow-none"
+            }`}
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
+        </div>
+
         {/* Carousel Pagination Dots */}
         {scrollSnaps.length > 1 && (
-          <div className="mt-8 flex items-center justify-center gap-2" aria-hidden="true">
+          <div className="mt-3.5 sm:mt-8 flex items-center justify-center gap-2" aria-hidden="true">
             {scrollSnaps.map((_, idx) => (
               <button
                 key={idx}
