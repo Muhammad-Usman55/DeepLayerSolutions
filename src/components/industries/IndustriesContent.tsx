@@ -307,15 +307,15 @@ export function IndustriesContent() {
                     {/* Bottom CTA Action Row */}
                     <div className="pt-4 border-t border-[#DFEDE5]/80 flex items-center justify-between">
                       <Link
-                        href={`/contact?industry=${ind.slug}`}
+                        href={`/industries/${ind.slug}`}
                         className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#008F53] group-hover:text-[#007343] transition-colors"
                       >
-                        <span>Discuss {ind.title.split("&")[0].trim()}</span>
+                        <span>Explore {ind.title.split("&")[0].trim()} Solutions</span>
                         <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
                       </Link>
 
                       <Link
-                        href={`/contact?industry=${ind.slug}`}
+                        href={`/industries/${ind.slug}`}
                         className="w-10 h-10 rounded-full bg-[#E9FFF2] text-[#008F53] flex items-center justify-center group-hover:bg-[#008F53] group-hover:text-white transition-all duration-300 shadow-xs"
                         aria-label={`Inquire about ${ind.title}`}
                       >

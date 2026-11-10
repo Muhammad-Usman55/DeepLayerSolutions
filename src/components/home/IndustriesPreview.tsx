@@ -253,7 +253,7 @@ export function IndustriesPreview() {
                   className="flex-[0_0_100%] sm:flex-[0_0_50%] lg:flex-[0_0_33.333333%] min-w-0 pl-4 sm:pl-6 lg:pl-7 h-full"
                 >
                   <Link
-                    href={`/industries#${card.slug}`}
+                    href={`/industries/${card.slug}`}
                     className="group relative flex flex-col justify-between rounded-2xl sm:rounded-[30px] bg-white border border-[#DFEDE5] hover:border-[#008F53]/50 p-6 sm:p-7 transition-all duration-300 hover:-translate-y-2 shadow-[0_8px_24px_rgba(0,143,83,0.04)] hover:shadow-[0_20px_40px_rgba(0,143,83,0.12)] focus:outline-hidden focus:ring-2 focus:ring-[#008F53] text-left h-full select-none"
                     aria-label={`Explore ${card.title} domain solutions`}
                   >
