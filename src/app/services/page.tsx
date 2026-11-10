@@ -5,7 +5,7 @@ import { Eyebrow } from "@/components/common/Eyebrow";
 import { CTASection } from "@/components/common/CTASection";
 import { ServiceFilter } from "@/components/services/ServiceFilter";
 import { PageWrapper } from "@/components/layout/PageWrapper";
-import { TechLayerVisual } from "@/components/common/TechLayerVisual";
+import { ServicesHeroVisual } from "@/components/services/ServicesHeroVisual";
 
 export const metadata: Metadata = {
   title: "Services & Capabilities",
@@ -28,7 +28,7 @@ export default function ServicesPage() {
           />
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-            <div className="lg:col-span-8">
+            <div className="lg:col-span-7">
               <Eyebrow variant="chip" className="mb-4">
                 Comprehensive Capabilities
               </Eyebrow>
@@ -43,10 +43,8 @@ export default function ServicesPage() {
               </p>
             </div>
 
-            <div className="lg:col-span-4 hidden lg:flex justify-end">
-              <div className="w-56 h-56 relative">
-                <TechLayerVisual className="max-w-[220px]" />
-              </div>
+            <div className="lg:col-span-5 hidden lg:flex justify-end">
+              <ServicesHeroVisual />
             </div>
           </div>
         </Container>
