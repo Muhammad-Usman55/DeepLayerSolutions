@@ -2,6 +2,9 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import "./mobile.css";
+import "lenis/dist/lenis.css";
+import { SmoothScrollProvider } from "@/components/common/SmoothScrollProvider";
+import { PageTransition } from "@/components/layout/PageTransition";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { MotionProvider } from "@/components/common/MotionProvider";
@@ -205,7 +208,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full scroll-smooth antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <head>
         <script
@@ -224,10 +227,12 @@ export default function RootLayout({
         <MotionProvider>
           <ConsentProvider>
             <GoogleAnalytics />
+            <SmoothScrollProvider>
             <Navbar />
-            {children}
+            <PageTransition>{children}</PageTransition>
             <Footer />
             <CookieConsent />
+          </SmoothScrollProvider>
           </ConsentProvider>
         </MotionProvider>
       </body>

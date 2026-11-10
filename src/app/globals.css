@@ -26,8 +26,10 @@
   --muted-text: #65736D;
 }
 
-html {
-  scroll-behavior: smooth;
+/* Smooth scrolling orchestrated via Lenis */
+html.lenis,
+html.lenis body {
+  height: auto;
 }
 
 body {

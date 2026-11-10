@@ -120,6 +120,8 @@ export function IndustriesPreview() {
     align: "start",
     containScroll: "trimSnaps",
     dragFree: false,
+    duration: 35,
+    skipSnaps: false,
     loop: false,
   });
 
@@ -235,8 +237,12 @@ export function IndustriesPreview() {
         </div>
 
         {/* Embla Horizontal Card Carousel Viewport & Track */}
-        <div className="relative overflow-hidden py-2" ref={emblaRef}>
-          <div className="flex -ml-4 sm:-ml-6 lg:-ml-7 touch-pan-y">
+        <div
+          className="relative overflow-hidden py-2"
+          ref={emblaRef}
+          data-lenis-prevent-horizontal="true"
+        >
+          <div className="flex -ml-4 sm:-ml-6 lg:-ml-7 touch-pan-y transform-gpu will-change-transform">
             {industryCards.map((card) => {
               const BadgeIcon = card.badgeIcon;
               const Visual = card.VisualComponent;

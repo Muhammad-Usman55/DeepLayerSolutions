@@ -42,6 +42,8 @@ export function ServicesPreview() {
     align: "start",
     containScroll: "trimSnaps",
     dragFree: false,
+    duration: 35,
+    skipSnaps: false,
     loop: false,
   });
 
@@ -233,8 +235,12 @@ export function ServicesPreview() {
           </div>
 
           {/* Embla Carousel Viewport & Track */}
-          <div className="relative overflow-hidden py-2" ref={emblaRef}>
-            <div className="flex -ml-4 sm:-ml-5 lg:-ml-6 touch-pan-y">
+          <div
+            className="relative overflow-hidden py-2"
+            ref={emblaRef}
+            data-lenis-prevent-horizontal="true"
+          >
+            <div className="flex -ml-4 sm:-ml-5 lg:-ml-6 touch-pan-y transform-gpu will-change-transform">
               {filteredServices.map((service, index) => (
                 <div
                   key={service.id}
