@@ -1,8 +1,7 @@
 import { Suspense } from "react";
 import { redirect } from "next/navigation";
 import { getAuthenticatedAdmin } from "@/lib/auth/admin";
-import { AdminHeader } from "@/components/admin/AdminHeader";
-import { AdminNav } from "@/components/admin/AdminNav";
+import { AdminDashboardShell } from "@/components/admin/AdminDashboardShell";
 import { Loader2 } from "lucide-react";
 
 export const metadata = {
@@ -13,7 +12,7 @@ export const metadata = {
   },
 };
 
-async function AuthenticatedAdminShell({
+async function AuthenticatedAdminLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -25,14 +24,13 @@ async function AuthenticatedAdminShell({
   }
 
   return (
-    <div className="min-h-screen bg-[#F8FAF8] text-[#142A27] flex flex-col font-sans">
-      <AdminHeader email={admin.user.email} role={admin.profile.role} />
-
-      <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pt-4 pb-12 flex-1 flex flex-col">
-        <AdminNav />
-        <main className="mt-6 flex-1">{children}</main>
-      </div>
-    </div>
+    <AdminDashboardShell
+      email={admin.user.email}
+      role={admin.profile.role}
+      fullName={admin.profile.full_name}
+    >
+      {children}
+    </AdminDashboardShell>
   );
 }
 
@@ -56,7 +54,7 @@ export default function AdminDashboardLayout({
 }) {
   return (
     <Suspense fallback={<AdminLoadingFallback />}>
-      <AuthenticatedAdminShell>{children}</AuthenticatedAdminShell>
+      <AuthenticatedAdminLayout>{children}</AuthenticatedAdminLayout>
     </Suspense>
   );
 }

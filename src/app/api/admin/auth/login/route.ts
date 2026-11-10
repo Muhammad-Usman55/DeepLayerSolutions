@@ -96,6 +96,25 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    // 6. Record last sign in and activity log
+    try {
+      await adminDb
+        .from("admin_profiles")
+        .update({ last_sign_in_at: new Date().toISOString() })
+        .eq("id", authData.user.id);
+
+      await adminDb.from("activity_logs").insert({
+        admin_id: authData.user.id,
+        admin_email: email,
+        action: "admin_login",
+        entity_type: "auth",
+        details: { role: profile.role, ip },
+        ip_address: ip,
+      });
+    } catch {
+      // Non-critical logging failure
+    }
+
     return NextResponse.json(
       {
         success: true,

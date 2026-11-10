@@ -10,6 +10,9 @@ export interface AdminAuthResult {
   profile: {
     id: string;
     role: AdminRole;
+    full_name?: string | null;
+    email?: string | null;
+    avatar_url?: string | null;
     created_at: string;
   };
   isAdmin: boolean;
@@ -40,7 +43,7 @@ export async function getAuthenticatedAdmin(): Promise<AdminAuthResult | null> {
     const adminDb = createAdminClient();
     const { data: profile, error: profileError } = await adminDb
       .from("admin_profiles")
-      .select("id, role, created_at")
+      .select("id, role, full_name, email, avatar_url, created_at")
       .eq("id", user.id)
       .maybeSingle();
 
@@ -49,7 +52,13 @@ export async function getAuthenticatedAdmin(): Promise<AdminAuthResult | null> {
       return null;
     }
 
-    const validRoles: AdminRole[] = ["superadmin", "admin", "editor"];
+    const validRoles: AdminRole[] = [
+      "superadmin",
+      "admin",
+      "recruitment_manager",
+      "content_manager",
+      "editor",
+    ];
     if (!validRoles.includes(profile.role)) {
       console.warn(`[SECURITY] User ${user.email} has unauthorized role: ${profile.role}`);
       return null;
@@ -57,11 +66,47 @@ export async function getAuthenticatedAdmin(): Promise<AdminAuthResult | null> {
 
     return {
       user,
-      profile,
+      profile: {
+        id: profile.id,
+        role: profile.role,
+        full_name: profile.full_name || user.user_metadata?.full_name || null,
+        email: profile.email || user.email || null,
+        avatar_url: profile.avatar_url || user.user_metadata?.avatar_url || null,
+        created_at: profile.created_at,
+      },
       isAdmin: true,
     };
   } catch (error) {
     console.error("[AUTH ERROR] Failed to authenticate admin:", error);
     return null;
+  }
+}
+
+/**
+ * Helper to record an administrative action in the activity_logs table.
+ * Never throws an error that interrupts the caller.
+ */
+export async function logAdminActivity(params: {
+  adminId?: string | null;
+  adminEmail: string;
+  action: string;
+  entityType: string;
+  entityId?: string | null;
+  details?: Record<string, any>;
+  ipAddress?: string | null;
+}) {
+  try {
+    const adminDb = createAdminClient();
+    await adminDb.from("activity_logs").insert({
+      admin_id: params.adminId || null,
+      admin_email: params.adminEmail.toLowerCase().trim(),
+      action: params.action,
+      entity_type: params.entityType,
+      entity_id: params.entityId || null,
+      details: params.details || {},
+      ip_address: params.ipAddress || null,
+    });
+  } catch (err: any) {
+    console.error("[ACTIVITY LOG INSERT ERROR]:", err?.message || err);
   }
 }

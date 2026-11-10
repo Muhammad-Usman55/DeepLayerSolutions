@@ -2,7 +2,8 @@
  * DeepLayer Solutions — Supabase Database Types
  *
  * Generated TypeScript representations of the production PostgreSQL schema.
- * Matches `supabase/migrations/20261109000000_create_core_schema.sql`.
+ * Matches `supabase/migrations/20261109000000_create_core_schema.sql` and
+ * `supabase/migrations/20261111000000_phase1_admin_schema.sql`.
  */
 
 export type Json =
@@ -22,7 +23,12 @@ export type ContactSubmissionStatus =
 
 export type SubscriberStatus = "pending" | "active" | "unsubscribed";
 
-export type AdminRole = "superadmin" | "admin" | "editor";
+export type AdminRole =
+  | "superadmin"
+  | "admin"
+  | "recruitment_manager"
+  | "content_manager"
+  | "editor";
 
 export type EmailType =
   | "contact_notification"
@@ -37,6 +43,21 @@ export type EmailLogStatus =
   | "delivered"
   | "failed"
   | "bounced";
+
+export type JobStatus = "draft" | "published" | "unpublished" | "closed";
+export type EmploymentType = "full_time" | "part_time" | "contract" | "internship" | "freelance";
+export type WorkplaceType = "remote" | "onsite" | "hybrid";
+
+export type JobApplicationStatus =
+  | "new"
+  | "under_review"
+  | "shortlisted"
+  | "interview"
+  | "selected"
+  | "rejected"
+  | "hired";
+
+export type NotificationType = "info" | "inquiry" | "application" | "subscriber" | "alert" | "system";
 
 export interface Database {
   public: {
@@ -190,16 +211,31 @@ export interface Database {
         Row: {
           id: string;
           role: AdminRole;
+          full_name: string | null;
+          email: string | null;
+          avatar_url: string | null;
+          last_sign_in_at: string | null;
+          updated_at: string | null;
           created_at: string;
         };
         Insert: {
           id: string;
           role?: AdminRole;
+          full_name?: string | null;
+          email?: string | null;
+          avatar_url?: string | null;
+          last_sign_in_at?: string | null;
+          updated_at?: string | null;
           created_at?: string;
         };
         Update: {
           id?: string;
           role?: AdminRole;
+          full_name?: string | null;
+          email?: string | null;
+          avatar_url?: string | null;
+          last_sign_in_at?: string | null;
+          updated_at?: string | null;
           created_at?: string;
         };
         Relationships: [
@@ -211,6 +247,267 @@ export interface Database {
             referencedColumns: ["id"];
           }
         ];
+      };
+
+      activity_logs: {
+        Row: {
+          id: string;
+          admin_id: string | null;
+          admin_email: string;
+          action: string;
+          entity_type: string;
+          entity_id: string | null;
+          details: Json;
+          ip_address: string | null;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          admin_id?: string | null;
+          admin_email: string;
+          action: string;
+          entity_type: string;
+          entity_id?: string | null;
+          details?: Json;
+          ip_address?: string | null;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          admin_id?: string | null;
+          admin_email?: string;
+          action?: string;
+          entity_type?: string;
+          entity_id?: string | null;
+          details?: Json;
+          ip_address?: string | null;
+          created_at?: string;
+        };
+        Relationships: [];
+      };
+
+      notifications: {
+        Row: {
+          id: string;
+          title: string;
+          message: string;
+          type: NotificationType;
+          link: string | null;
+          is_read: boolean;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          title: string;
+          message: string;
+          type?: NotificationType;
+          link?: string | null;
+          is_read?: boolean;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          title?: string;
+          message?: string;
+          type?: NotificationType;
+          link?: string | null;
+          is_read?: boolean;
+          created_at?: string;
+        };
+        Relationships: [];
+      };
+
+      analytics_events: {
+        Row: {
+          id: string;
+          event_type: string;
+          path: string;
+          referrer: string | null;
+          device_category: "desktop" | "mobile" | "tablet" | "unknown";
+          browser: string | null;
+          country: string | null;
+          visitor_hash: string;
+          session_id: string;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          event_type?: string;
+          path: string;
+          referrer?: string | null;
+          device_category?: "desktop" | "mobile" | "tablet" | "unknown";
+          browser?: string | null;
+          country?: string | null;
+          visitor_hash: string;
+          session_id: string;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          event_type?: string;
+          path?: string;
+          referrer?: string | null;
+          device_category?: "desktop" | "mobile" | "tablet" | "unknown";
+          browser?: string | null;
+          country?: string | null;
+          visitor_hash?: string;
+          session_id?: string;
+          created_at?: string;
+        };
+        Relationships: [];
+      };
+
+      jobs: {
+        Row: {
+          id: string;
+          title: string;
+          slug: string;
+          department: string;
+          description: string;
+          responsibilities: string[];
+          requirements: string[];
+          skills: string[];
+          experience_level: string;
+          employment_type: EmploymentType;
+          workplace_type: WorkplaceType;
+          location: string;
+          salary_range: string | null;
+          vacancies: number;
+          deadline: string | null;
+          is_featured: boolean;
+          status: JobStatus;
+          seo_title: string | null;
+          seo_description: string | null;
+          views_count: number;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          title: string;
+          slug: string;
+          department: string;
+          description: string;
+          responsibilities?: string[];
+          requirements?: string[];
+          skills?: string[];
+          experience_level: string;
+          employment_type: EmploymentType;
+          workplace_type: WorkplaceType;
+          location?: string;
+          salary_range?: string | null;
+          vacancies?: number;
+          deadline?: string | null;
+          is_featured?: boolean;
+          status?: JobStatus;
+          seo_title?: string | null;
+          seo_description?: string | null;
+          views_count?: number;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          title?: string;
+          slug?: string;
+          department?: string;
+          description?: string;
+          responsibilities?: string[];
+          requirements?: string[];
+          skills?: string[];
+          experience_level?: string;
+          employment_type?: EmploymentType;
+          workplace_type?: WorkplaceType;
+          location?: string;
+          salary_range?: string | null;
+          vacancies?: number;
+          deadline?: string | null;
+          is_featured?: boolean;
+          status?: JobStatus;
+          seo_title?: string | null;
+          seo_description?: string | null;
+          views_count?: number;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
+
+      job_applications: {
+        Row: {
+          id: string;
+          job_id: string | null;
+          full_name: string;
+          email: string;
+          phone: string;
+          applied_position: string;
+          experience_years: number | null;
+          skills: string[];
+          linkedin_url: string | null;
+          portfolio_url: string | null;
+          resume_path: string | null;
+          cover_letter: string | null;
+          status: JobApplicationStatus;
+          admin_notes: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          job_id?: string | null;
+          full_name: string;
+          email: string;
+          phone: string;
+          applied_position: string;
+          experience_years?: number | null;
+          skills?: string[];
+          linkedin_url?: string | null;
+          portfolio_url?: string | null;
+          resume_path?: string | null;
+          cover_letter?: string | null;
+          status?: JobApplicationStatus;
+          admin_notes?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          job_id?: string | null;
+          full_name?: string;
+          email?: string;
+          phone?: string;
+          applied_position?: string;
+          experience_years?: number | null;
+          skills?: string[];
+          linkedin_url?: string | null;
+          portfolio_url?: string | null;
+          resume_path?: string | null;
+          cover_letter?: string | null;
+          status?: JobApplicationStatus;
+          admin_notes?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
+
+      admin_settings: {
+        Row: {
+          id: string;
+          settings: Json;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          settings?: Json;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          settings?: Json;
+          updated_at?: string;
+        };
+        Relationships: [];
       };
 
       rate_limits: {
@@ -241,6 +538,10 @@ export interface Database {
         Args: Record<string, never>;
         Returns: boolean;
       };
+      has_admin_role: {
+        Args: { required_role: string };
+        Returns: boolean;
+      };
       generate_contact_reference: {
         Args: Record<string, never>;
         Returns: string;
@@ -252,6 +553,8 @@ export interface Database {
       admin_role: AdminRole;
       email_type: EmailType;
       email_log_status: EmailLogStatus;
+      job_status: JobStatus;
+      job_application_status: JobApplicationStatus;
     };
     CompositeTypes: Record<string, never>;
   };
