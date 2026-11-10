@@ -23,10 +23,25 @@ import {
   ShoppingCart,
   Store,
   Workflow,
+  Activity,
+  BarChart3,
+  GraduationCap,
+  ShoppingBag,
+  UtensilsCrossed,
+  Factory,
+  Truck,
+  Building2,
+  Briefcase,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Logo } from "./Logo";
-import { headerNavLinks, servicesMegaMenuData, ServiceNavItem } from "@/data/navigation";
+import {
+  headerNavLinks,
+  servicesMegaMenuData,
+  ServiceNavItem,
+  industriesMegaMenuData,
+  IndustryNavItem,
+} from "@/data/navigation";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 
@@ -54,9 +69,22 @@ const serviceIcons: Record<ServiceNavItem["iconName"], React.ComponentType<{ cla
   Workflow,
 };
 
+const industryIcons: Record<IndustryNavItem["iconName"], React.ComponentType<{ className?: string }>> = {
+  Activity,
+  BarChart3,
+  GraduationCap,
+  ShoppingBag,
+  UtensilsCrossed,
+  Factory,
+  Truck,
+  Building2,
+  Briefcase,
+};
+
 export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
   const pathname = usePathname();
   const [servicesExpanded, setServicesExpanded] = useState(false);
+  const [industriesExpanded, setIndustriesExpanded] = useState(false);
 
   // Prevent background scrolling while open and listen for Escape key
   useEffect(() => {
@@ -116,15 +144,17 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                 </button>
               </div>
 
-              {/* Navigation Links + Services Accordion */}
+              {/* Navigation Links + Accordions */}
               <nav className="mt-6 flex flex-col gap-1.5" aria-label="Mobile Navigation">
                 {headerNavLinks.map((item) => {
                   const isServices = item.label === "Services";
+                  const isIndustries = item.label === "Industries";
                   const isActive =
                     item.href === "/"
                       ? pathname === "/"
                       : pathname.startsWith(item.href);
 
+                  // Services Accordion Item
                   if (isServices) {
                     return (
                       <div key={item.href} className="flex flex-col">
@@ -188,6 +218,71 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                     );
                   }
 
+                  // Industries Accordion Item
+                  if (isIndustries) {
+                    return (
+                      <div key={item.href} className="flex flex-col">
+                        <button
+                          type="button"
+                          onClick={() => setIndustriesExpanded((prev) => !prev)}
+                          aria-expanded={industriesExpanded}
+                          className={cn(
+                            "flex items-center justify-between px-4 py-3 rounded-xl text-base font-medium transition-colors text-left",
+                            isActive || industriesExpanded
+                              ? "bg-[#E9FFF2] text-[#008F53] font-semibold"
+                              : "text-[#142A27] hover:bg-[#E9FFF2]/60"
+                          )}
+                        >
+                          <span>{item.label}</span>
+                          <ChevronDown
+                            className={cn(
+                              "w-4 h-4 transition-transform duration-250 ease-out",
+                              industriesExpanded ? "rotate-180 text-[#008F53]" : "text-[#64736F]"
+                            )}
+                          />
+                        </button>
+
+                        {/* Industries Accordion List */}
+                        <AnimatePresence>
+                          {industriesExpanded && (
+                            <motion.div
+                              initial={{ opacity: 0, height: 0 }}
+                              animate={{ opacity: 1, height: "auto" }}
+                              exit={{ opacity: 0, height: 0 }}
+                              transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+                              className="overflow-hidden pl-2 pr-1 pt-1 pb-2 flex flex-col gap-1 border-l-2 border-[#008F53] ml-4 mt-1"
+                            >
+                              {industriesMegaMenuData.map((industry) => {
+                                const IconComponent = industryIcons[industry.iconName];
+                                return (
+                                  <Link
+                                    key={industry.id}
+                                    href={industry.href}
+                                    onClick={onClose}
+                                    className="flex items-start gap-2.5 px-3 py-2 rounded-lg hover:bg-[#E9FFF2]/60 transition-colors group"
+                                  >
+                                    <div className="w-7 h-7 rounded-md bg-[#E9FFF2] text-[#008F53] flex items-center justify-center shrink-0 mt-0.5 group-hover:bg-[#008F53] group-hover:text-white transition-colors">
+                                      <IconComponent className="w-3.5 h-3.5" />
+                                    </div>
+                                    <div className="flex-1 min-w-0">
+                                      <p className="text-sm font-medium text-[#142A27] group-hover:text-[#008F53] transition-colors">
+                                        {industry.title}
+                                      </p>
+                                      <p className="text-[11px] text-[#64736F] line-clamp-1">
+                                        {industry.description}
+                                      </p>
+                                    </div>
+                                  </Link>
+                                );
+                              })}
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </div>
+                    );
+                  }
+
+                  // Regular Nav Links
                   return (
                     <Link
                       key={item.href}
@@ -201,48 +296,30 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                       )}
                     >
                       <span>{item.label}</span>
-                      <ArrowRight className="w-4 h-4 opacity-40 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all text-[#008F53]" />
+                      <ArrowRight className="w-4 h-4 text-[#A8C7B0]" />
                     </Link>
                   );
                 })}
               </nav>
             </div>
 
-            {/* Bottom Actions & Contact Info */}
-            <div className="pt-6 border-t border-[#DFEDE5] mt-6 flex flex-col gap-4">
+            {/* Footer with Let's Talk CTA & Contact Details */}
+            <div className="pt-6 border-t border-[#DFEDE5] flex flex-col gap-4">
               <Link
                 href="/contact"
                 onClick={onClose}
-                className="w-full flex items-center justify-center gap-2 py-3.5 px-5 rounded-full bg-[#008F53] hover:bg-[#007343] text-white font-semibold text-sm shadow-sm transition-all duration-200"
+                className="w-full flex items-center justify-center gap-2 py-3 px-5 rounded-full bg-[#008F53] text-white font-semibold text-sm hover:bg-[#007343] shadow-md transition-colors"
               >
                 <span>Let&apos;s Talk</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
-
-              <div className="text-xs text-[#64736F] space-y-1.5">
-                <p className="font-semibold text-[#142A27] flex items-center justify-between">
-                  <span>{siteConfig.name}</span>
-                  <span className="text-[11px] text-[#008F53] font-medium">{siteConfig.contact.address}</span>
-                </p>
-                <p>
-                  <a href={`mailto:${siteConfig.contact.email}`} className="hover:text-[#008F53] transition-colors">
-                    {siteConfig.contact.email}
-                  </a>
-                </p>
-                <p className="flex items-center gap-2">
-                  <a href={`tel:${siteConfig.contact.phone.replace(/\s+/g, "")}`} className="hover:text-[#008F53] transition-colors">
-                    {siteConfig.contact.phone}
-                  </a>
-                  <span>•</span>
-                  <a
-                    href={siteConfig.contact.whatsappUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-[#25D366] font-semibold hover:underline"
-                  >
-                    WhatsApp
-                  </a>
-                </p>
+              <div className="text-center">
+                <a
+                  href={`mailto:${siteConfig.contact.email}`}
+                  className="text-xs text-[#64736F] hover:text-[#008F53] transition-colors"
+                >
+                  {siteConfig.contact.email}
+                </a>
               </div>
             </div>
           </motion.div>

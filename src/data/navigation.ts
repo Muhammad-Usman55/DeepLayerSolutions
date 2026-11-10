@@ -24,6 +24,23 @@ export interface ServiceNavItem {
     | "Workflow";
 }
 
+export interface IndustryNavItem {
+  id: string;
+  title: string;
+  description: string;
+  href: string;
+  iconName:
+    | "Activity"
+    | "BarChart3"
+    | "GraduationCap"
+    | "ShoppingBag"
+    | "UtensilsCrossed"
+    | "Factory"
+    | "Truck"
+    | "Building2"
+    | "Briefcase";
+}
+
 export const servicesMegaMenuData: ServiceNavItem[] = [
   {
     id: "ai-ml",
@@ -108,6 +125,72 @@ export const servicesMegaMenuData: ServiceNavItem[] = [
     description: "Robotic process automation (RPA), webhook pipelines & automated ops.",
     href: "/services/business-automation",
     iconName: "Workflow",
+  },
+];
+
+export const industriesMegaMenuData: IndustryNavItem[] = [
+  {
+    id: "healthcare",
+    title: "Healthcare & Life Sciences",
+    description: "HIPAA-compliant diagnostic AI & clinical workflow automation.",
+    href: "/industries#healthcare",
+    iconName: "Activity",
+  },
+  {
+    id: "finance",
+    title: "Finance & FinTech",
+    description: "Real-time fraud scoring engines & automated ledger systems.",
+    href: "/industries#finance-fintech",
+    iconName: "BarChart3",
+  },
+  {
+    id: "education",
+    title: "Education & Research",
+    description: "Adaptive learning curricula & scientific literature RAG.",
+    href: "/industries#education-research",
+    iconName: "GraduationCap",
+  },
+  {
+    id: "retail-ecommerce",
+    title: "Retail & E-commerce",
+    description: "Omni-channel storefronts, POS sync & cart intelligence.",
+    href: "/industries#retail-ecommerce",
+    iconName: "ShoppingBag",
+  },
+  {
+    id: "hospitality",
+    title: "Hospitality & Dining",
+    description: "Kitchen display systems, contactless ordering & table CRM.",
+    href: "/industries#hospitality-restaurants",
+    iconName: "UtensilsCrossed",
+  },
+  {
+    id: "manufacturing",
+    title: "Manufacturing & IoT",
+    description: "Defect inspection vision & predictive machine telemetry.",
+    href: "/industries#manufacturing",
+    iconName: "Factory",
+  },
+  {
+    id: "logistics",
+    title: "Logistics & Transport",
+    description: "Dynamic route optimization & fleet tracking telematics.",
+    href: "/industries#logistics-transportation",
+    iconName: "Truck",
+  },
+  {
+    id: "realestate",
+    title: "Real Estate & PropTech",
+    description: "3D digital twins, AVM valuation models & leasing ops.",
+    href: "/industries#real-estate",
+    iconName: "Building2",
+  },
+  {
+    id: "professional-services",
+    title: "Legal & Professional",
+    description: "Contract intelligence & secure virtual deal rooms.",
+    href: "/industries#professional-services",
+    iconName: "Briefcase",
   },
 ];
 
