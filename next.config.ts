@@ -116,6 +116,26 @@ const nextConfig: NextConfig = {
         destination: "/services/business-automation",
         permanent: true,
       },
+      {
+        source: "/industries/education-edtech",
+        destination: "/industries",
+        permanent: true,
+      },
+      {
+        source: "/industries/ecommerce-retail",
+        destination: "/industries",
+        permanent: true,
+      },
+      {
+        source: "/industries/hospitality",
+        destination: "/industries",
+        permanent: true,
+      },
+      {
+        source: "/industries/restaurants",
+        destination: "/industries",
+        permanent: true,
+      },
     ];
   },
   async headers() {

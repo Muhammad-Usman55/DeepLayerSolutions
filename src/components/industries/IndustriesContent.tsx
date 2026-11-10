@@ -12,6 +12,7 @@ import {
   Building2,
   Truck,
   Briefcase,
+  UtensilsCrossed,
   ArrowRight,
   ShieldCheck,
   Zap,
@@ -30,6 +31,7 @@ import {
   RealEstate3DVisual,
   Logistics3DVisual,
   LegalServices3DVisual,
+  Hospitality3DVisual,
 } from "./IndustryVisuals";
 
 interface IndustryShowcase {
@@ -71,25 +73,25 @@ const industriesList: IndustryShowcase[] = [
   },
   {
     id: "education",
-    slug: "education-edtech",
-    title: "Education & EdTech",
-    category: "ADAPTIVE PEDAGOGY",
-    metric: "2.4x Higher Course Completion",
+    slug: "education-research",
+    title: "Education & Research",
+    category: "RESEARCH & ADAPTIVE AI",
+    metric: "3.5x Faster Research Analysis",
     summary:
-      "Dynamic mastery calibration, curriculum-grounded conversational tutors, and automated formative grading engines.",
-    capabilities: ["Adaptive Pathways", "24/7 AI Tutors", "Formative Grading"],
+      "RAG-powered academic literature analysis, dynamic student mastery calibration, and automated formative evaluation.",
+    capabilities: ["Literature Copilot", "Adaptive Pathways", "Grant Telemetry"],
     VisualComponent: Education3DVisual,
     icon: GraduationCap,
   },
   {
     id: "ecommerce",
-    slug: "ecommerce-retail",
-    title: "E-Commerce & Retail",
-    category: "COMMERCE INTELLIGENCE",
-    metric: "+32% Checkout Conversion",
+    slug: "retail-ecommerce",
+    title: "Retail & E-commerce",
+    category: "OMNI-CHANNEL COMMERCE",
+    metric: "+35% Conversion & Turnover",
     summary:
-      "Real-time visual search, personalized recommendation engines, and predictive multi-warehouse inventory forecasting.",
-    capabilities: ["Visual Search", "Dynamic Inventory", "Headless Velocity"],
+      "Headless digital storefronts, AI visual search, omni-channel retail POS synchronization, and automated warehouse inventory replenishment.",
+    capabilities: ["Headless Storefronts", "Omni-Channel POS", "Predictive Stock"],
     VisualComponent: Ecommerce3DVisual,
     icon: ShoppingBag,
   },
@@ -141,6 +143,18 @@ const industriesList: IndustryShowcase[] = [
     VisualComponent: LegalServices3DVisual,
     icon: Briefcase,
   },
+  {
+    id: "hospitality",
+    slug: "hospitality-restaurants",
+    title: "Hospitality & Restaurants",
+    category: "GUEST EXPERIENCE & POS",
+    metric: "+40% Table Turnover",
+    summary:
+      "Real-time kitchen display systems (KDS), automated table reservations, dynamic menu pricing, and contactless mobile QR ordering.",
+    capabilities: ["Unified Kitchen KDS", "QR Order & Pay", "Dynamic Seating"],
+    VisualComponent: Hospitality3DVisual,
+    icon: UtensilsCrossed,
+  },
 ];
 
 export function IndustriesContent() {
@@ -190,7 +204,7 @@ export function IndustriesContent() {
                     : "bg-white border border-[#DFEDE5] text-[#142A27] hover:border-[#008F53] hover:bg-[#E9FFF2]"
                 }`}
               >
-                All Industries (8)
+                All Industries ({industriesList.length})
               </button>
 
               {industriesList.map((ind) => (

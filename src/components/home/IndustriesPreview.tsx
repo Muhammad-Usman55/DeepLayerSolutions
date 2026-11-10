@@ -39,9 +39,9 @@ const industryCards: IndustryCardData[] = [
   },
   {
     id: "education",
-    slug: "education-edtech",
-    title: "Education & EdTech",
-    subtitle: "Adaptive Learning Technology",
+    slug: "education-research",
+    title: "Education & Research",
+    subtitle: "Adaptive Learning & Academic AI",
     badgeIcon: GraduationCap,
     VisualComponent: Education3DVisual,
   },

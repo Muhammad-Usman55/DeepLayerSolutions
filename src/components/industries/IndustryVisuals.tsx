@@ -492,3 +492,116 @@ export function LegalServices3DVisual({ className = "w-full h-48 sm:h-52" }: { c
   );
 }
 
+/**
+ * 9. Hospitality & Restaurants 3D Visual
+ * 3D Isometric Dining Cloche, POS Order Slip & Guest Telemetry
+ */
+export function Hospitality3DVisual({ className = "w-full h-48 sm:h-52" }: { className?: string }) {
+  return (
+    <div className={`relative ${className} flex items-center justify-center select-none pointer-events-none`}>
+      <svg
+        viewBox="0 0 320 220"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className="w-full h-full max-h-56 overflow-visible drop-shadow-[0_12px_24px_rgba(0,143,83,0.12)]"
+      >
+        <defs>
+          <radialGradient id="hospPlatShadow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="#008F53" stopOpacity="0.22" />
+            <stop offset="60%" stopColor="#008F53" stopOpacity="0.08" />
+            <stop offset="100%" stopColor="#008F53" stopOpacity="0" />
+          </radialGradient>
+
+          <linearGradient id="hospGlassTop" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.95" />
+            <stop offset="45%" stopColor="#F3FFF7" stopOpacity="0.88" />
+            <stop offset="100%" stopColor="#D5F9E6" stopOpacity="0.75" />
+          </linearGradient>
+
+          <linearGradient id="hospGlassEdgeL" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#BCE8CF" stopOpacity="0.9" />
+            <stop offset="100%" stopColor="#9BD8B6" stopOpacity="0.7" />
+          </linearGradient>
+
+          <linearGradient id="hospGlassEdgeR" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#A3DAC0" stopOpacity="0.85" />
+            <stop offset="100%" stopColor="#81C8A4" stopOpacity="0.65" />
+          </linearGradient>
+
+          <linearGradient id="hospCloche" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="#FFFFFF" />
+            <stop offset="35%" stopColor="#E2E8F0" />
+            <stop offset="70%" stopColor="#00B86B" />
+            <stop offset="100%" stopColor="#008F53" />
+          </linearGradient>
+
+          <linearGradient id="hospGold" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="#FDE68A" />
+            <stop offset="100%" stopColor="#F59E0B" />
+          </linearGradient>
+        </defs>
+
+        {/* Ambient Ground Shadow */}
+        <ellipse cx="160" cy="180" rx="95" ry="24" fill="url(#hospPlatShadow)" />
+
+        {/* Glass Pedestal */}
+        <g>
+          <path d="M72 136 L160 170 L160 179 L72 145 Z" fill="url(#hospGlassEdgeL)" />
+          <path d="M160 170 L248 136 L248 145 L160 179 Z" fill="url(#hospGlassEdgeR)" />
+          <path d="M72 136 L160 102 L248 136 L160 170 Z" fill="url(#hospGlassTop)" stroke="#FFFFFF" strokeWidth="1.5" />
+          <path d="M82 135 L160 106 L238 135" stroke="#FFFFFF" strokeWidth="1" strokeOpacity="0.8" fill="none" />
+        </g>
+
+        {/* Center Stage: 3D Dining Cloche / Serving Platter */}
+        <g transform="translate(160, 118)">
+          {/* Base Serving Platter Rim */}
+          <ellipse cx="0" cy="16" rx="42" ry="16" fill="#FFFFFF" stroke="#DFEDE5" strokeWidth="1.2" />
+          <ellipse cx="0" cy="14" rx="36" ry="13" fill="#E9FFF2" stroke="#00B86B" strokeWidth="1" />
+
+          {/* Dome Cloche */}
+          <path
+            d="M-30 12 C-30 -16 -18 -32 0 -32 C18 -32 30 -16 30 12 Z"
+            fill="url(#hospCloche)"
+            stroke="#FFFFFF"
+            strokeWidth="1.2"
+          />
+
+          {/* Cloche Knob Handle */}
+          <circle cx="0" cy="-35" r="4.5" fill="url(#hospGold)" stroke="#FFFFFF" strokeWidth="0.8" />
+
+          {/* Cloche Accent Shimmer */}
+          <path
+            d="M-18 6 C-18 -8 -10 -22 0 -24"
+            stroke="#FFFFFF"
+            strokeWidth="1.8"
+            strokeLinecap="round"
+            strokeOpacity="0.8"
+            fill="none"
+          />
+        </g>
+
+        {/* Left Side: Digital KDS Order Slip */}
+        <g transform="translate(48, 70)">
+          <path d="M0 0 L46 -12 L54 36 L8 48 Z" fill="#FFFFFF" stroke="#DFEDE5" strokeWidth="1" />
+          <line x1="10" y1="8" x2="38" y2="0" stroke="#008F53" strokeWidth="1.8" strokeLinecap="round" />
+          <line x1="12" y1="16" x2="42" y2="8" stroke="#64736F" strokeWidth="1.2" strokeLinecap="round" />
+          <line x1="14" y1="24" x2="40" y2="17" stroke="#64736F" strokeWidth="1.2" strokeLinecap="round" />
+          <circle cx="22" cy="36" r="3" fill="#00B86B" />
+          <text x="29" y="38" fill="#142A27" fontSize="7" fontWeight="bold">KDS Ready</text>
+        </g>
+
+        {/* Right Side: 5-Star Rating & Turnover Telemetry Badge */}
+        <g transform="translate(188, 48)">
+          <rect x="0" y="0" width="118" height="32" rx="16" fill="#FFFFFF" stroke="#DFEDE5" strokeWidth="1" filter="drop-shadow(0 4px 12px rgba(0,0,0,0.06))" />
+          <circle cx="16" cy="16" r="4.5" fill="#00B86B" />
+          <text x="28" y="20" fill="#142A27" fontSize="10" fontFamily="monospace" fontWeight="bold">+40% Turnover</text>
+        </g>
+
+        {/* Ambient Specular Lighting */}
+        <circle cx="228" cy="74" r="2.5" fill="#34D399" fillOpacity="0.85" />
+        <circle cx="85" cy="120" r="2" fill="#008F53" fillOpacity="0.6" />
+      </svg>
+    </div>
+  );
+}
+
