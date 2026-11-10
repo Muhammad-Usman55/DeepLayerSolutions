@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState, useMemo } from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
@@ -8,9 +8,35 @@ import { Container } from "../common/Container";
 import { Eyebrow } from "../common/Eyebrow";
 import { Central3DVisual } from "./services-preview/Central3DVisual";
 import { ServiceCard } from "./services-preview/ServiceCard";
-import { previewServices } from "./services-preview/types";
+import { previewServices, ServiceFilterCategory } from "./services-preview/types";
+
+const filterCategories: { id: ServiceFilterCategory; label: string; count: number }[] = [
+  { id: "all", label: "All Services", count: previewServices.length },
+  {
+    id: "ai-automation",
+    label: "AI & Automation",
+    count: previewServices.filter((s) => s.categoryGroup === "ai-automation").length,
+  },
+  {
+    id: "enterprise-commerce",
+    label: "Platforms & Commerce",
+    count: previewServices.filter((s) => s.categoryGroup === "enterprise-commerce").length,
+  },
+  {
+    id: "cloud-growth",
+    label: "Cloud & Growth",
+    count: previewServices.filter((s) => s.categoryGroup === "cloud-growth").length,
+  },
+];
 
 export function ServicesPreview() {
+  const [activeCategory, setActiveCategory] = useState<ServiceFilterCategory>("all");
+
+  const filteredServices = useMemo(() => {
+    if (activeCategory === "all") return previewServices;
+    return previewServices.filter((s) => s.categoryGroup === activeCategory);
+  }, [activeCategory]);
+
   return (
     <section
       className="relative overflow-hidden py-16 sm:py-20 lg:py-28 bg-gradient-to-b from-[#FAFCF9] via-[#F4FAF6] to-[#FAFCF9] border-t border-[#E3EDE5]"
@@ -95,7 +121,7 @@ export function ServicesPreview() {
                 href="/services"
                 className="group inline-flex items-center gap-3.5 px-6 py-3.5 rounded-full bg-white hover:bg-[#F4FAF6] border border-[#087A3D]/30 hover:border-[#087A3D] text-[#101C19] hover:text-[#087A3D] font-semibold text-sm sm:text-base shadow-xs hover:shadow-md transition-all duration-300 w-fit"
               >
-                <span>Explore Services</span>
+                <span>Explore All Services</span>
                 <span
                   className="w-7 h-7 rounded-full bg-[#E8F5E9] border border-[#C4D9C8]/60 text-[#087A3D] group-hover:bg-[#087A3D] group-hover:text-white group-hover:border-[#087A3D] flex items-center justify-center transition-all duration-300 shadow-2xs group-hover:translate-x-0.5"
                   aria-hidden="true"
@@ -107,14 +133,72 @@ export function ServicesPreview() {
           </div>
         </div>
 
-        {/* Lower Zone: Responsive Service Cards (Single Unified DOM Tree) */}
-        <div className="lg:mt-20">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
-            {previewServices.map((service, index) => (
+        {/* Lower Zone: Category Filter Tabs & Responsive Service Cards */}
+        <div className="lg:mt-16">
+          {/* Interactive Category Filter Pills */}
+          <div className="mt-8 sm:mt-10 mb-6 sm:mb-8 flex items-center justify-between flex-wrap gap-3 border-b border-[#DFEDE5]/70 pb-4">
+            <div className="flex items-center gap-2 overflow-x-auto pb-1 max-w-full no-scrollbar">
+              {filterCategories.map((cat) => {
+                const isActive = activeCategory === cat.id;
+                return (
+                  <button
+                    key={cat.id}
+                    type="button"
+                    onClick={() => setActiveCategory(cat.id)}
+                    className={`inline-flex items-center gap-2 px-3.5 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 shrink-0 cursor-pointer ${
+                      isActive
+                        ? "bg-[#008F53] text-white shadow-xs border border-[#008F53]"
+                        : "bg-white/85 hover:bg-white text-[#142A27] hover:text-[#008F53] border border-[#DFEDE5]"
+                    }`}
+                  >
+                    <span>{cat.label}</span>
+                    <span
+                      className={`text-[10px] sm:text-[11px] font-mono px-1.5 py-0.5 rounded-full ${
+                        isActive ? "bg-white/20 text-white" : "bg-[#E9FFF2] text-[#008F53]"
+                      }`}
+                    >
+                      {cat.count}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+
+            <Link
+              href="/services"
+              className="hidden sm:inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-[#008F53] hover:text-[#075B3E] transition-colors"
+            >
+              <span>View Full Services Catalog</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+          </div>
+
+          {/* Service Cards Grid (Desktop: 4 columns, Tablet: 3 columns, Mobile: 2 columns) */}
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3.5 sm:gap-6">
+            {filteredServices.map((service, index) => (
               <div key={service.id} className="h-full">
                 <ServiceCard service={service} index={index} />
               </div>
             ))}
+          </div>
+
+          {/* Bottom Custom Architecture Banner */}
+          <div className="mt-10 sm:mt-14 rounded-2xl bg-white/80 backdrop-blur-xs border border-[#DFEDE5] p-5 sm:p-7 flex flex-col sm:flex-row items-center justify-between gap-5 shadow-xs">
+            <div className="text-center sm:text-left">
+              <h3 className="text-sm sm:text-base lg:text-lg font-bold text-[#142A27]">
+                Need a bespoke multi-service architecture?
+              </h3>
+              <p className="text-xs sm:text-sm text-[#64736F] mt-1 max-w-2xl">
+                We design integrated platforms pairing autonomous AI models, modern headless e-commerce, cloud DevOps, and ERP workflows engineered for your enterprise requirements.
+              </p>
+            </div>
+            <Link
+              href="/contact"
+              className="shrink-0 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#008F53] hover:bg-[#075B3E] text-white font-semibold text-xs sm:text-sm shadow-xs transition-colors"
+            >
+              <span>Schedule Architecture Call</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
           </div>
         </div>
       </Container>
