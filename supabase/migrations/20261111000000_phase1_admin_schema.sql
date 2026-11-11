@@ -268,3 +268,4 @@ CREATE POLICY "admin_settings_update_superadmin"
   TO authenticated
   USING (public.has_admin_role('superadmin'))
   WITH CHECK (public.has_admin_role('superadmin'));
+

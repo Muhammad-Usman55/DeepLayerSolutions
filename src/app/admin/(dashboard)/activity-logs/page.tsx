@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { FileText, Shield, Clock, Search, Filter } from "lucide-react";
+import { FileText } from "lucide-react";
 
 export default function AdminActivityLogsPage() {
   return (
@@ -33,3 +33,4 @@ export default function AdminActivityLogsPage() {
     </div>
   );
 }
+

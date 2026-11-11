@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Shield, UserPlus, Users, Key } from "lucide-react";
+import { Shield } from "lucide-react";
 
 export default function AdminUsersPage() {
   return (
@@ -33,3 +33,4 @@ export default function AdminUsersPage() {
     </div>
   );
 }
+

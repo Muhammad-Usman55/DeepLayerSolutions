@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { BarChart3, TrendingUp, Users, Globe, Eye } from "lucide-react";
+import { BarChart3 } from "lucide-react";
 
 export default function AdminAnalyticsPage() {
   return (
@@ -33,3 +33,4 @@ export default function AdminAnalyticsPage() {
     </div>
   );
 }
+

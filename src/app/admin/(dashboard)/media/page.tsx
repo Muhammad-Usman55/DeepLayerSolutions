@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Image as ImageIcon, Upload, Folder, Search } from "lucide-react";
+import { Image as ImageIcon } from "lucide-react";
 
 export default function AdminMediaPage() {
   return (
@@ -33,3 +33,4 @@ export default function AdminMediaPage() {
     </div>
   );
 }
+

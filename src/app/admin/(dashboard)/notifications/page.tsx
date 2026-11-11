@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Bell, CheckCircle2, AlertCircle, Info, Inbox } from "lucide-react";
+import { Bell } from "lucide-react";
 
 export default function AdminNotificationsPage() {
   return (
@@ -33,3 +33,4 @@ export default function AdminNotificationsPage() {
     </div>
   );
 }
+

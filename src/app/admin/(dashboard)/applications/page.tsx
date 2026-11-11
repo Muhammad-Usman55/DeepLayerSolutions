@@ -1,8 +1,7 @@
 "use client";
 
 import React from "react";
-import Link from "next/link";
-import { Users, Search, Filter, Download, FileText } from "lucide-react";
+import { Users } from "lucide-react";
 
 export default function AdminApplicationsPage() {
   return (
@@ -34,3 +33,4 @@ export default function AdminApplicationsPage() {
     </div>
   );
 }
+

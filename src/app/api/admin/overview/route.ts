@@ -42,7 +42,6 @@ export async function GET(req: NextRequest) {
         break;
     }
 
-    const isoStart = startDate.toISOString();
     const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate()).toISOString();
 
     // 1. BUSINESS STATS: Contact Submissions
@@ -52,7 +51,6 @@ export async function GET(req: NextRequest) {
       { count: inProgressInquiries },
       { count: totalSubscribers },
       { count: activeSubscribers },
-      { count: pendingSubscribers },
       { count: totalEmails },
       { count: sentEmails },
     ] = await Promise.all([
@@ -61,7 +59,6 @@ export async function GET(req: NextRequest) {
       supabase.from("contact_submissions").select("*", { count: "exact", head: true }).in("status", ["in_review", "contacted"]),
       supabase.from("subscribers").select("*", { count: "exact", head: true }),
       supabase.from("subscribers").select("*", { count: "exact", head: true }).eq("status", "active"),
-      supabase.from("subscribers").select("*", { count: "exact", head: true }).eq("status", "pending"),
       supabase.from("email_logs").select("*", { count: "exact", head: true }),
       supabase.from("email_logs").select("*", { count: "exact", head: true }).eq("status", "sent"),
     ]);
@@ -72,7 +69,7 @@ export async function GET(req: NextRequest) {
     let totalApplications = 0;
     let newApplications = 0;
     let shortlistedApplications = 0;
-    let applicationStatusCounts: Record<string, number> = {
+    const applicationStatusCounts: Record<string, number> = {
       new: 0,
       under_review: 0,
       shortlisted: 0,

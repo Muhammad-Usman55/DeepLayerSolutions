@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Settings, Shield, Mail, Globe, Bell } from "lucide-react";
+import { Settings } from "lucide-react";
 
 export default function AdminSettingsPage() {
   return (
@@ -33,3 +33,4 @@ export default function AdminSettingsPage() {
     </div>
   );
 }
+

@@ -58,7 +58,7 @@ function getServiceIcon(type: VisualType) {
 }
 
 export function ServiceCard({ service, index }: ServiceCardProps) {
-  const Icon = getServiceIcon(service.visualType);
+  const iconComponent = getServiceIcon(service.visualType);
 
   return (
     <motion.div
@@ -82,7 +82,7 @@ export function ServiceCard({ service, index }: ServiceCardProps) {
             {service.category}
           </span>
           <div className="w-8 h-8 rounded-full bg-[#E9FFF2] border border-[#BCE8CF] text-[#008F53] flex items-center justify-center shadow-2xs group-hover:scale-110 group-hover:bg-[#008F53] group-hover:text-white transition-all duration-300">
-            <Icon className="w-4 h-4" />
+            {React.createElement(iconComponent, { className: "w-4 h-4" })}
           </div>
         </div>
 

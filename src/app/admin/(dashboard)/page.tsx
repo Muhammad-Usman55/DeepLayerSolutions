@@ -10,15 +10,9 @@ import {
   Mail,
   TrendingUp,
   Eye,
-  CheckCircle2,
-  Clock,
-  ArrowRight,
   RefreshCw,
-  Loader2,
-  FileText,
   AlertTriangle,
   ChevronRight,
-  Filter,
 } from "lucide-react";
 
 interface OverviewState {
@@ -208,7 +202,7 @@ export default function AdminOverviewPage() {
 
           <div className="bg-white border border-[#DFEDE5] rounded-2xl p-4 sm:p-5 shadow-2xs hover:shadow-xs transition-shadow">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-xs font-medium text-[#64736F]">Today's Visitors</span>
+              <span className="text-xs font-medium text-[#64736F]">Today&apos;s Visitors</span>
               <TrendingUp className="w-4 h-4 text-emerald-600" />
             </div>
             <div className="text-2xl sm:text-3xl font-extrabold text-[#142A27]">

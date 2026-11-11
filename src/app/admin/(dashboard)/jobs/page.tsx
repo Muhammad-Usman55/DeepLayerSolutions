@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { Briefcase, Plus, Search, Filter, AlertCircle } from "lucide-react";
+import { Briefcase, Plus } from "lucide-react";
 
 export default function AdminJobsPage() {
   return (
@@ -52,3 +52,4 @@ export default function AdminJobsPage() {
     </div>
   );
 }
+

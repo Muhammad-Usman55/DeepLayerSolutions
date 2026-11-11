@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Brain, Code2, Cloud, ShoppingCart, Sparkles, Cpu, Database, CheckCircle2 } from "lucide-react";
+import { Brain, Code2, Cloud, ShoppingCart } from "lucide-react";
 
 export function ServicesHeroVisual() {
   return (
