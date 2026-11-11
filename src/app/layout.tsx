@@ -208,15 +208,19 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <head>
+      <body
+        suppressHydrationWarning
+        className="min-h-full flex flex-col bg-[#FAFCF9] text-[#142A27] overflow-x-clip"
+      >
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdSchema) }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(jsonLdSchema).replace(/</g, "\\u003c"),
+          }}
         />
-      </head>
-      <body className="min-h-full flex flex-col bg-[#FAFCF9] text-[#142A27] overflow-x-clip">
         {/* Skip to Main Content Link for WCAG 2.2 AA Compliance */}
         <a
           href="#main-content"
@@ -228,11 +232,11 @@ export default function RootLayout({
           <ConsentProvider>
             <GoogleAnalytics />
             <SmoothScrollProvider>
-            <Navbar />
-            <PageTransition>{children}</PageTransition>
-            <Footer />
-            <CookieConsent />
-          </SmoothScrollProvider>
+              <Navbar />
+              <PageTransition>{children}</PageTransition>
+              <Footer />
+              <CookieConsent />
+            </SmoothScrollProvider>
           </ConsentProvider>
         </MotionProvider>
       </body>

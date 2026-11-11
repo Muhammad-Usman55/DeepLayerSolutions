@@ -76,7 +76,10 @@ export async function getAuthenticatedAdmin(): Promise<AdminAuthResult | null> {
       },
       isAdmin: true,
     };
-  } catch (error) {
+  } catch (error: any) {
+    if (error && typeof error === "object" && ("digest" in error || error?.message?.includes("cookies()"))) {
+      throw error;
+    }
     console.error("[AUTH ERROR] Failed to authenticate admin:", error);
     return null;
   }
