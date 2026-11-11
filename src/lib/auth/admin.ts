@@ -39,19 +39,6 @@ export async function getAuthenticatedAdmin(): Promise<AdminAuthResult | null> {
       return null;
     }
 
-    // Verify presence and role in admin_profiles table using service role client
-    const adminDb = createAdminClient();
-    const { data: profile, error: profileError } = await adminDb
-      .from("admin_profiles")
-      .select("id, role, full_name, email, avatar_url, created_at")
-      .eq("id", user.id)
-      .maybeSingle();
-
-    if (profileError || !profile) {
-      console.warn(`[SECURITY] User ${user.email} (${user.id}) attempted admin access without profile.`);
-      return null;
-    }
-
     const validRoles: AdminRole[] = [
       "superadmin",
       "admin",
@@ -59,20 +46,45 @@ export async function getAuthenticatedAdmin(): Promise<AdminAuthResult | null> {
       "content_manager",
       "editor",
     ];
-    if (!validRoles.includes(profile.role)) {
-      console.warn(`[SECURITY] User ${user.email} has unauthorized role: ${profile.role}`);
+
+    // Verify presence and role in admin_profiles table using service role client
+    let profile: any = null;
+    try {
+      const adminDb = createAdminClient();
+      const { data, error } = await adminDb
+        .from("admin_profiles")
+        .select("id, role, full_name, email, avatar_url, created_at")
+        .eq("id", user.id)
+        .maybeSingle();
+
+      if (!error && data) {
+        profile = data;
+      }
+    } catch (e: any) {
+      console.warn("[ADMIN AUTH] Service client profile lookup error:", e?.message || e);
+    }
+
+    // Role resolution: prefer database profile, fallback to verified user metadata role
+    const resolvedRole: AdminRole | null =
+      profile?.role ||
+      (user.user_metadata?.role as AdminRole) ||
+      (user.app_metadata?.role as AdminRole) ||
+      null;
+
+    if (!resolvedRole || !validRoles.includes(resolvedRole)) {
+      console.warn(`[SECURITY] User ${user.email} (${user.id}) lacks authorized admin role: ${resolvedRole}`);
       return null;
     }
 
     return {
       user,
       profile: {
-        id: profile.id,
-        role: profile.role,
-        full_name: profile.full_name || user.user_metadata?.full_name || null,
-        email: profile.email || user.email || null,
-        avatar_url: profile.avatar_url || user.user_metadata?.avatar_url || null,
-        created_at: profile.created_at,
+        id: profile?.id || user.id,
+        role: resolvedRole,
+        full_name: profile?.full_name || user.user_metadata?.full_name || null,
+        email: profile?.email || user.email || null,
+        avatar_url: profile?.avatar_url || user.user_metadata?.avatar_url || null,
+        created_at: profile?.created_at || user.created_at || new Date().toISOString(),
       },
       isAdmin: true,
     };

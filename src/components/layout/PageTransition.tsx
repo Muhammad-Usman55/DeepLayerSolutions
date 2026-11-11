@@ -11,6 +11,11 @@ interface PageTransitionProps {
 export function PageTransition({ children }: PageTransitionProps) {
   const pathname = usePathname();
 
+  // Bypass animation on all admin views to eliminate UI flashes and blinking
+  if (pathname.startsWith("/admin")) {
+    return <div className="flex-1 flex flex-col w-full">{children}</div>;
+  }
+
   return (
     <AnimatePresence mode="wait" initial={false}>
       <motion.div

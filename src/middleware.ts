@@ -13,15 +13,8 @@ export async function middleware(request: NextRequest) {
       pathname === "/admin/forgot-password" ||
       pathname === "/admin/reset-password";
 
-    // If already logged in and visiting an auth page, redirect to admin dashboard
+    // Allow unauthenticated and auth pages without redirect loops
     if (isAuthPage) {
-      if (user) {
-        const url = request.nextUrl.clone();
-        url.pathname = "/admin";
-        const redirectRes = NextResponse.redirect(url);
-        supabaseResponse.cookies.getAll().forEach((c) => redirectRes.cookies.set(c));
-        return redirectRes;
-      }
       return supabaseResponse;
     }
 

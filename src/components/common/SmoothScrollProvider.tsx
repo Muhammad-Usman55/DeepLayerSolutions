@@ -20,6 +20,11 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
   const pathname = usePathname();
 
   useEffect(() => {
+    // Disable smooth-scrolling entirely on admin dashboards to prevent scroll conflicts
+    if (pathname.startsWith("/admin")) {
+      return;
+    }
+
     // Initialize Lenis for momentum smooth vertical scrolling
     const instance = new Lenis({
       duration: 1.15,
@@ -67,7 +72,7 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
 
   // Handle route changes: smoothly scroll to target hash or reset to top
   useEffect(() => {
-    if (!lenisRef.current) return;
+    if (!lenisRef.current || pathname.startsWith("/admin")) return;
 
     if (typeof window !== "undefined" && window.location.hash) {
       const target = document.querySelector(window.location.hash);

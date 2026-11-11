@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
   Mail,
   Phone,
@@ -42,6 +43,13 @@ function WhatsAppIcon({ className }: { className?: string }) {
 }
 
 export function Footer() {
+  const pathname = usePathname();
+
+  // Completely omit public footer on all administrative surfaces
+  if (pathname.startsWith("/admin")) {
+    return null;
+  }
+
   const currentYear = 2026;
 
   return (

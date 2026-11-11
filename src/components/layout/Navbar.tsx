@@ -79,11 +79,17 @@ const industryIcons: Record<IndustryNavItem["iconName"], React.ComponentType<{ c
 };
 
 export function Navbar() {
+  const pathname = usePathname();
+
+  // Completely omit public navigation on all administrative surfaces
+  if (pathname.startsWith("/admin")) {
+    return null;
+  }
+
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [industriesOpen, setIndustriesOpen] = useState(false);
-  const pathname = usePathname();
 
   const servicesDropdownRef = useRef<HTMLDivElement>(null);
   const industriesDropdownRef = useRef<HTMLDivElement>(null);
