@@ -8,26 +8,33 @@ export async function middleware(request: NextRequest) {
   if (pathname.startsWith("/admin")) {
     const { supabaseResponse, user } = await updateSession(request);
 
-    const isLoginPage = pathname === "/admin/login";
+    const isAuthPage =
+      pathname === "/admin/login" ||
+      pathname === "/admin/forgot-password" ||
+      pathname === "/admin/reset-password";
 
-    // If already logged in and visiting login page, redirect to overview
-    if (isLoginPage) {
+    // If already logged in and visiting an auth page, redirect to admin dashboard
+    if (isAuthPage) {
       if (user) {
         const url = request.nextUrl.clone();
         url.pathname = "/admin";
-        return NextResponse.redirect(url);
+        const redirectRes = NextResponse.redirect(url);
+        supabaseResponse.cookies.getAll().forEach((c) => redirectRes.cookies.set(c));
+        return redirectRes;
       }
       return supabaseResponse;
     }
 
-    // For all other /admin routes, unauthenticated visitors are redirected to /admin/login
+    // For protected /admin routes, unauthenticated visitors are redirected to /admin/login
     if (!user) {
       const url = request.nextUrl.clone();
       url.pathname = "/admin/login";
       if (pathname !== "/admin") {
         url.searchParams.set("next", pathname);
       }
-      return NextResponse.redirect(url);
+      const redirectRes = NextResponse.redirect(url);
+      supabaseResponse.cookies.getAll().forEach((c) => redirectRes.cookies.set(c));
+      return redirectRes;
     }
 
     return supabaseResponse;

@@ -21,6 +21,11 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        source: "/admin/dashboard",
+        destination: "/admin",
+        permanent: true,
+      },
+      {
         source: "/portfolio/gender-detection",
         destination: "/portfolio/visionsense-video-analytics",
         permanent: true,

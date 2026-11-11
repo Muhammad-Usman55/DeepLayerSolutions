@@ -66,6 +66,17 @@ export async function POST(req: NextRequest) {
     }
 
     // 4. Authenticate with Supabase Auth via SSR client (sets HTTP session cookies)
+    if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
+      return NextResponse.json(
+        {
+          success: false,
+          message:
+            "Database credentials missing in production. Please configure NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY in Vercel Environment Variables.",
+        },
+        { status: 503 }
+      );
+    }
+
     const supabase = await createClient();
     const { data: authData, error: authError } = await supabase.auth.signInWithPassword({
       email,
@@ -129,8 +140,12 @@ export async function POST(req: NextRequest) {
     );
   } catch (error: any) {
     console.error("[ADMIN LOGIN ERROR]:", error?.message || error);
+    const msg =
+      error?.message?.includes("Missing") || error?.message?.includes("SUPABASE")
+        ? error.message
+        : "An unexpected authentication error occurred.";
     return NextResponse.json(
-      { success: false, message: "An unexpected authentication error occurred." },
+      { success: false, message: msg },
       { status: 500 }
     );
   }

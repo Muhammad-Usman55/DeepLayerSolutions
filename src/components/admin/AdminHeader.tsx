@@ -42,8 +42,7 @@ export function AdminHeader({
     try {
       setLoggingOut(true);
       await fetch("/api/admin/auth/logout", { method: "POST" });
-      router.push("/admin/login");
-      router.refresh();
+      window.location.href = "/admin/login";
     } catch (err) {
       console.error("Logout failed:", err);
       setLoggingOut(false);

@@ -8,6 +8,14 @@ const ALLOWED_HOSTS = new Set([
   "127.0.0.1:3000",
 ]);
 
+function isHostAllowed(host: string): boolean {
+  if (ALLOWED_HOSTS.has(host)) return true;
+  if (host.endsWith(".vercel.app")) return true;
+  if (host.startsWith("localhost:") || host === "localhost") return true;
+  if (host.startsWith("127.0.0.1:") || host === "127.0.0.1") return true;
+  return false;
+}
+
 /**
  * Validates Origin and Referer headers against authorized hostnames
  * to protect state-mutating API routes against Cross-Site Request Forgery (CSRF).
@@ -31,7 +39,7 @@ export function validateRequestOrigin(req: NextRequest): boolean {
   if (origin) {
     try {
       const originUrl = new URL(origin);
-      if (ALLOWED_HOSTS.has(originUrl.host)) {
+      if (isHostAllowed(originUrl.host)) {
         return true;
       }
       return false;
@@ -44,7 +52,7 @@ export function validateRequestOrigin(req: NextRequest): boolean {
   if (referer) {
     try {
       const refererUrl = new URL(referer);
-      if (ALLOWED_HOSTS.has(refererUrl.host)) {
+      if (isHostAllowed(refererUrl.host)) {
         return true;
       }
       return false;
