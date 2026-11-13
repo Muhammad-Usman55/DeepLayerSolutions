@@ -7,6 +7,38 @@
 
 @media (max-width: 1023px) {
   /* ------------------------------------------------------------------------
+     MOBILE GPU RASTERIZATION & PERFORMANCE GUARDS (Zero Scroll Lag)
+     ------------------------------------------------------------------------ */
+  /* Reduce Gaussian blur radius on mobile to prevent GPU rasterization stalls */
+  [class*="blur-3xl"] {
+    filter: blur(20px) !important;
+  }
+  [class*="blur-2xl"] {
+    filter: blur(14px) !important;
+  }
+  [class*="blur-xl"] {
+    filter: blur(10px) !important;
+  }
+
+  /* Disable heavy GPU/CPU floating animations on mobile */
+  .animate-float-gentle,
+  .animate-float-reverse,
+  .animate-float-subtle,
+  .animate-pulse-shadow,
+  .animate-laser-sweep {
+    animation: none !important;
+    transform: none !important;
+    will-change: auto !important;
+  }
+
+  /* Remove expensive GPU alpha mask re-rasterization on mobile marquees */
+  .marquee-row,
+  .dl-marquee-row {
+    mask-image: none !important;
+    -webkit-mask-image: none !important;
+  }
+
+  /* ------------------------------------------------------------------------
      1. EXCLUDE UPLOADED 3D NEURAL SPHERE & DESKTOP-ONLY SPEC STRIP ON MOBILE
      ------------------------------------------------------------------------ */
   .hero-tech-visual-container,

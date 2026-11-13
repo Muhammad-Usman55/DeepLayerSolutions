@@ -11,6 +11,8 @@ interface TechLayerVisualProps {
 
 export function TechLayerVisual({ className }: TechLayerVisualProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const rafIdRef = useRef<number | null>(null);
+  const rectRef = useRef<DOMRect | null>(null);
 
   // Normalized cursor coordinates (-0.5 to 0.5)
   const mouseX = useMotionValue(0);
@@ -27,19 +29,44 @@ export function TechLayerVisual({ className }: TechLayerVisualProps) {
   const depthX = useTransform(smoothX, [-0.5, 0.5], [-14, 14]);
   const depthY = useTransform(smoothY, [-0.5, 0.5], [-14, 14]);
 
+  const handleMouseEnter = () => {
+    if (containerRef.current) {
+      rectRef.current = containerRef.current.getBoundingClientRect();
+    }
+  };
+
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!containerRef.current) return;
     if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     // Skip on touch/mobile devices to keep CPU 100% idle
     if (window.matchMedia && !window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
-    mouseX.set(x);
-    mouseY.set(y);
+
+    // Throttle to display refresh rate to eliminate layout thrashing
+    if (rafIdRef.current !== null) return;
+
+    const clientX = e.clientX;
+    const clientY = e.clientY;
+
+    rafIdRef.current = requestAnimationFrame(() => {
+      rafIdRef.current = null;
+      if (!rectRef.current && containerRef.current) {
+        rectRef.current = containerRef.current.getBoundingClientRect();
+      }
+      const rect = rectRef.current;
+      if (!rect || rect.width === 0 || rect.height === 0) return;
+      const x = (clientX - rect.left) / rect.width - 0.5;
+      const y = (clientY - rect.top) / rect.height - 0.5;
+      mouseX.set(x);
+      mouseY.set(y);
+    });
   };
 
   const handleMouseLeave = () => {
+    if (rafIdRef.current !== null) {
+      cancelAnimationFrame(rafIdRef.current);
+      rafIdRef.current = null;
+    }
+    rectRef.current = null;
     mouseX.set(0);
     mouseY.set(0);
   };
@@ -47,6 +74,7 @@ export function TechLayerVisual({ className }: TechLayerVisualProps) {
   return (
     <div
       ref={containerRef}
+      onMouseEnter={handleMouseEnter}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       className={cn(

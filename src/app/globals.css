@@ -315,17 +315,14 @@ body {
 
 .animate-float-gentle {
   animation: float-gentle 5s ease-in-out infinite;
-  will-change: transform;
 }
 
 .animate-float-reverse {
   animation: float-reverse 5.5s ease-in-out infinite;
-  will-change: transform;
 }
 
 .animate-float-subtle {
   animation: float-subtle 4s ease-in-out infinite;
-  will-change: transform;
 }
 
 .animate-laser-sweep {
@@ -334,7 +331,6 @@ body {
 
 .animate-pulse-shadow {
   animation: pulse-shadow 5.5s ease-in-out infinite;
-  will-change: transform, opacity;
 }
 
 /* Mobile Performance Optimizations */
@@ -367,4 +363,19 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #159B50;
+}
+
+/* GPU-accelerated Blur Containment & Rasterization Performance */
+[class*="blur-3xl"],
+[class*="blur-2xl"],
+[class*="blur-xl"] {
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  contain: paint layout;
+}
+
+/* Content visibility optimization for below-the-fold content: bypass off-screen rendering until scrolled near */
+main > section:not(:first-child) {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 650px;
 }

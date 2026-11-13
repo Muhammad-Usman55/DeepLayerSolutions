@@ -20,20 +20,35 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
   const pathname = usePathname();
 
   useEffect(() => {
-    // Disable smooth-scrolling entirely on admin dashboards to prevent scroll conflicts
+    // 1. Never run on admin routes to prevent table/sidebar scroll interference
     if (pathname.startsWith("/admin")) {
       return;
     }
 
-    // Initialize Lenis for momentum smooth vertical scrolling
+    // 2. CRITICAL PERFORMANCE RULE: Never hijack touch scroll on mobile / touch devices.
+    // iOS and Android have native 120Hz compositor-thread momentum scrolling.
+    // Intercepting touch in JavaScript causes severe mobile lag, stutter, and hanging.
+    const isTouchDevice =
+      typeof window !== "undefined" &&
+      ("ontouchstart" in window ||
+        navigator.maxTouchPoints > 0 ||
+        window.matchMedia("(pointer: coarse)").matches ||
+        window.innerWidth < 1024);
+
+    if (isTouchDevice) {
+      return;
+    }
+
+    // 3. Desktop-only responsive, ultra-lightweight smooth wheel scrolling
     const instance = new Lenis({
-      duration: 1.15,
+      duration: 0.75, // Snappy & luxurious without sluggish inertia drag
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: "vertical",
       gestureOrientation: "vertical",
       smoothWheel: true,
-      wheelMultiplier: 0.9,
-      touchMultiplier: 1.5,
+      wheelMultiplier: 1.0, // Direct 1:1 response to mouse wheel notches
+      touchMultiplier: 0, // NEVER intercept touch gestures
+      syncTouch: false,
       anchors: true,
       respectReducedMotion: true,
       prevent: (node) => {
@@ -55,11 +70,10 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
     }
     rafId = requestAnimationFrame(raf);
 
-    // Global resize observer so dynamic DOM additions update scroll limits
     const onResize = () => {
       instance.resize();
     };
-    window.addEventListener("resize", onResize);
+    window.addEventListener("resize", onResize, { passive: true });
 
     return () => {
       window.removeEventListener("resize", onResize);
@@ -68,7 +82,7 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
       lenisRef.current = null;
       setLenis(null);
     };
-  }, []);
+  }, [pathname]);
 
   // Handle route changes: smoothly scroll to target hash or reset to top
   useEffect(() => {
@@ -80,7 +94,7 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
         lenisRef.current.scrollTo(target as HTMLElement, {
           offset: -80, // compensate for fixed navbar
           immediate: false,
-          duration: 0.8,
+          duration: 0.6,
         });
         return;
       }
@@ -96,4 +110,3 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
     </LenisContext.Provider>
   );
 }
-
