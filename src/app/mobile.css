@@ -174,11 +174,23 @@
     letter-spacing: -0.025em !important;
   }
 
-  /* General Button Touch Targets */
+  /* General Button Touch Targets (Excluding carousel pagination indicators) */
   .btn,
-  button:not([aria-hidden="true"]),
+  button:not([aria-hidden="true"]):not([aria-label*="slide"]):not([aria-label*="Slide"]),
   a.inline-flex:not(.tag-badge) {
     min-height: 46px;
+  }
+
+  /* Completely remove carousel pagination indicators on mobile view */
+  [aria-label*="slide"],
+  [aria-label*="Slide"] {
+    display: none !important;
+    height: 0 !important;
+    width: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    pointer-events: none !important;
+    overflow: hidden !important;
   }
 
   /* Stats Strip on Mobile */

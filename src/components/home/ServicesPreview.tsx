@@ -288,9 +288,9 @@ export function ServicesPreview() {
             </button>
           </div>
 
-          {/* Carousel Pagination Dots */}
+          {/* Carousel Pagination Dots (Desktop & Tablet only, hidden on mobile) */}
           {scrollSnaps.length > 1 && (
-            <div className="mt-3.5 sm:mt-4 flex items-center justify-center gap-2" aria-hidden="true">
+            <div className="hidden sm:flex mt-4 items-center justify-center gap-2" aria-hidden="true">
               {scrollSnaps.map((_, idx) => (
                 <button
                   key={idx}
