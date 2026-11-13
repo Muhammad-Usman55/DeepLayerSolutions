@@ -81,11 +81,6 @@ const industryIcons: Record<IndustryNavItem["iconName"], React.ComponentType<{ c
 export function Navbar() {
   const pathname = usePathname();
 
-  // Completely omit public navigation on all administrative surfaces
-  if (pathname.startsWith("/admin")) {
-    return null;
-  }
-
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
@@ -194,14 +189,19 @@ export function Navbar() {
     }, 220);
   };
 
+  // Completely omit public navigation on all administrative surfaces
+  if (pathname.startsWith("/admin")) {
+    return null;
+  }
+
   return (
     <>
       <header
         className={cn(
-          "sticky top-0 z-50 w-full h-[72px] sm:h-[78px] transition-[background-color,border-color,box-shadow,backdrop-filter] duration-300 ease-out will-change-[background-color,backdrop-filter]",
+          "sticky top-0 z-50 w-full h-[72px] sm:h-[78px] transition-[background-color,border-color,box-shadow] duration-200 ease-out",
           isScrolled
-            ? "bg-white/90 backdrop-blur-md shadow-[0_4px_24px_-4px_rgba(0,143,83,0.08)] border-b border-[#DFEDE5]"
-            : "bg-[#FAFCF9]/80 backdrop-blur-xs border-b border-transparent"
+            ? "bg-white/95 lg:bg-white/90 backdrop-blur-sm lg:backdrop-blur-md shadow-[0_4px_24px_-4px_rgba(0,143,83,0.08)] border-b border-[#DFEDE5]"
+            : "bg-[#FAFCF9]/90 lg:bg-[#FAFCF9]/80 backdrop-blur-xs border-b border-transparent"
         )}
       >
         <Container size="wide" className="h-full">

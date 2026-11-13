@@ -1,12 +1,18 @@
 "use client";
 
 import React from "react";
+import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 import { Container } from "../common/Container";
 import { Eyebrow } from "../common/Eyebrow";
-import { GrowthVisual } from "./why-choose-us/GrowthVisual";
 import { ValueCard } from "./why-choose-us/ValueCard";
 import { valueCardsData } from "./why-choose-us/types";
+
+// Desktop-only dynamic import: zero bundle and complex SVG filter overhead on mobile devices
+const GrowthVisual = dynamic(
+  () => import("./why-choose-us/GrowthVisual").then((mod) => mod.GrowthVisual),
+  { ssr: false }
+);
 
 export function WhyChooseUs() {
   return (

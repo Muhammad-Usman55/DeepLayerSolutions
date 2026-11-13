@@ -11,13 +11,15 @@
      ------------------------------------------------------------------------ */
   /* Reduce Gaussian blur radius on mobile to prevent GPU rasterization stalls */
   [class*="blur-3xl"] {
-    filter: blur(20px) !important;
+    filter: blur(8px) !important;
+    opacity: 0.55 !important;
   }
   [class*="blur-2xl"] {
-    filter: blur(14px) !important;
+    filter: blur(6px) !important;
+    opacity: 0.65 !important;
   }
   [class*="blur-xl"] {
-    filter: blur(10px) !important;
+    filter: blur(5px) !important;
   }
 
   /* Disable heavy GPU/CPU floating animations on mobile */
@@ -83,9 +85,10 @@
   /* ------------------------------------------------------------------------
      3. MOBILE HEADER & NAVIGATION
      ------------------------------------------------------------------------ */
-  header.fixed {
-    backdrop-filter: blur(14px) !important;
-    -webkit-backdrop-filter: blur(14px) !important;
+  header {
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    will-change: auto !important;
   }
 
   /* Mobile menu drawer improvements */

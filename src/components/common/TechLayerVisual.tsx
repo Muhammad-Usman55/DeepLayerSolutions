@@ -177,9 +177,7 @@ export function TechLayerVisual({ className }: TechLayerVisualProps) {
               alt="DeepLayer Solutions Neural Architecture"
               width={640}
               height={640}
-              priority
-              loading="eager"
-              fetchPriority="high"
+              loading="lazy"
               unoptimized
               className="w-full h-full object-contain transition-all duration-500 scale-100"
             />

@@ -109,7 +109,11 @@ export function TechEcosystem() {
           padding-right: 1.25rem;
           flex-shrink: 0;
         }
-        @media (max-width: 768px) {
+        @media (max-width: 1023px) {
+          .dl-marquee-row {
+            mask-image: none !important;
+            -webkit-mask-image: none !important;
+          }
           .dl-marquee-track.dl-left {
             animation-duration: 34s !important;
           }

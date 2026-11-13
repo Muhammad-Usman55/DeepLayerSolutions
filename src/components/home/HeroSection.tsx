@@ -1,9 +1,14 @@
 import React from "react";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import { ArrowRight, Sparkles, Cpu, Zap, ShieldCheck } from "lucide-react";
 import { Button } from "../common/Button";
 import { Container } from "../common/Container";
-import { TechLayerVisual } from "../common/TechLayerVisual";
+
+// Desktop-only dynamic import: zero synchronous bundle overhead
+const TechLayerVisual = dynamic(
+  () => import("../common/TechLayerVisual").then((mod) => mod.TechLayerVisual)
+);
 
 export function HeroSection() {
   return (

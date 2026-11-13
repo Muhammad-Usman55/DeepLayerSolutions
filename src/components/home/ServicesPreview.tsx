@@ -1,15 +1,21 @@
 "use client";
 
 import React, { useState, useMemo, useCallback, useEffect } from "react";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
 import useEmblaCarousel from "embla-carousel-react";
 import { Container } from "../common/Container";
 import { Eyebrow } from "../common/Eyebrow";
-import { Central3DVisual } from "./services-preview/Central3DVisual";
 import { ServiceCard } from "./services-preview/ServiceCard";
 import { previewServices, ServiceFilterCategory } from "./services-preview/types";
+
+// Desktop-only dynamic import: zero bundle and SVG filter overhead on mobile devices
+const Central3DVisual = dynamic(
+  () => import("./services-preview/Central3DVisual").then((mod) => mod.Central3DVisual),
+  { ssr: false }
+);
 
 const filterCategories: { id: ServiceFilterCategory; label: string; count: number }[] = [
   { id: "all", label: "All Services", count: previewServices.length },
