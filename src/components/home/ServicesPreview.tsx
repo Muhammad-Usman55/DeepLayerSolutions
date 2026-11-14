@@ -44,6 +44,15 @@ export function ServicesPreview() {
     return previewServices.filter((s) => s.categoryGroup === activeCategory);
   }, [activeCategory]);
 
+  // Group into sets of 4 services per slide (2x2 grid on mobile, 4-in-a-row on desktop)
+  const serviceChunks = useMemo(() => {
+    const chunks: (typeof filteredServices)[] = [];
+    for (let i = 0; i < filteredServices.length; i += 4) {
+      chunks.push(filteredServices.slice(i, i + 4));
+    }
+    return chunks;
+  }, [filteredServices]);
+
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: "start",
     containScroll: "trimSnaps",
@@ -101,7 +110,7 @@ export function ServicesPreview() {
       setCanScrollPrev(emblaApi.canScrollPrev());
       setCanScrollNext(emblaApi.canScrollNext());
     }
-  }, [activeCategory, emblaApi, filteredServices]);
+  }, [activeCategory, emblaApi, serviceChunks]);
 
   return (
     <section
@@ -246,13 +255,22 @@ export function ServicesPreview() {
             ref={emblaRef}
             data-lenis-prevent-horizontal="true"
           >
-            <div className="flex -ml-4 sm:-ml-5 lg:-ml-6 touch-pan-y transform-gpu will-change-transform">
-              {filteredServices.map((service, index) => (
+            <div className="flex touch-pan-y transform-gpu will-change-transform">
+              {serviceChunks.map((chunk, chunkIndex) => (
                 <div
-                  key={service.id}
-                  className="flex-[0_0_100%] sm:flex-[0_0_50%] lg:flex-[0_0_33.333333%] xl:flex-[0_0_25%] min-w-0 pl-4 sm:pl-5 lg:pl-6 h-full"
+                  key={chunkIndex}
+                  className="flex-[0_0_100%] min-w-0 px-0.5 sm:px-1"
                 >
-                  <ServiceCard service={service} index={index} />
+                  <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4 lg:gap-5 items-stretch">
+                    {chunk.map((service, index) => (
+                      <div key={service.id} className="h-full">
+                        <ServiceCard
+                          service={service}
+                          index={chunkIndex * 4 + index}
+                        />
+                      </div>
+                    ))}
+                  </div>
                 </div>
               ))}
             </div>
