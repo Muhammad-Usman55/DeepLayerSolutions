@@ -16,7 +16,7 @@ Engineered with Next.js App Router, Turbopack, Lenis smooth scrolling, Embla hor
 
 ## 🌐 Official Channels & Direct Contacts
 
-- **Production Website:** [deeplayersolutions.vercel.app](https://deeplayersolutions.vercel.app)
+- **Production Website:** [www.deeplayersolutions.com](https://www.deeplayersolutions.com)
 - **GitHub Repository:** [Muhammad-Usman55/DeepLayerSolutions](https://github.com/Muhammad-Usman55/DeepLayerSolutions)
 - **LinkedIn:** [DeepLayer Solutions on LinkedIn](https://www.linkedin.com/company/deeplayersolutions/)
 - **Facebook:** [DeepLayer Solutions on Facebook](https://www.facebook.com/people/DeepLayer-Solutions/61596345801437/)
@@ -71,11 +71,24 @@ DeepLayer Solutions adheres to an engineered **Emerald / Obsidian** design langu
   - Automated OAuth 2.0 token refresher with local interactive generator script (`scripts/get-google-refresh-token.js`).
   - RFC 2822 base64url encoded MIME builder supporting formatted HTML templates, candidate confirmations, and admin notifications.
 
+### Mobile-First Performance & Desktop Parity Engineering
+- **Mobile 4-Card Grid Sliders:** The **Services**, **Showcase Projects (Portfolio)**, and **Industries** sections dynamically chunk items into 4-card groups. On mobile screens, items render in an ergonomic 2x2 grid (`grid-cols-2 lg:grid-cols-4`), with Left/Right arrow controls advancing an entire 4-card set per interaction.
+- **Sleek Horizontal Pagination Indicators:** Custom-engineered horizontal capsule dots (`22px` active, `6px` inactive) protected against touch-target vertical distortion, providing clean visual pagination with minimal slide count.
+- **Mobile "Desktop Site" Mode Support:** Custom Tailwind v4 breakpoint (`--breakpoint-lg: 61.25rem` / `980px`) and encapsulated `mobile.css` media queries (`max-width: 979px`). When a mobile user toggles "Request Desktop Site" in Chrome or Safari, the browser's 980px layout viewport automatically triggers the full, uncompromised desktop layout (floating pill mega menu, 12-col hero with interactive 3D sphere, 4-in-a-row card tracks).
+- **Streamlined Compact Mobile Footer:** Optimized for thumb navigation with a 2-column quick links subgrid, 2-column capabilities directory, direct WhatsApp messaging, and zero redundant clutter.
+
 ### Security, Privacy & Bot Mitigation
 - **Native Bot Trap Defense:** Invisible honeypot inputs and server-side timing validation, silently neutralizing automated spam bots without user-facing friction.
 - **Zero Cloudflare Challenge Dependencies:** Cloudflare Turnstile scripts and blockers have been eliminated, providing instantaneous page loads and unrestricted access.
 - **Serverless In-Memory Rate Limiting:** Enforces strict burst protection (`MAX_REQUESTS_PER_WINDOW = 5` per 15-minute sliding window) across all mutation endpoints.
 - **Input Sanitization & Validation:** Strict schema validation with HTML tag stripping to neutralize XSS, SQL injection, and parameter tampering.
+
+---
+
+### Search Engine Optimization (SEO) & Comprehensive Sitemap
+- **Complete 45-Route Sitemap (`/sitemap.xml`):** Dynamic route generation indexing all 10 core static pages, 12 service practices, 9 industry domains, 6 case studies, and 8 technical articles under the canonical domain `https://www.deeplayersolutions.com`.
+- **Dynamic Crawler Directives (`/robots.txt`):** Directs Googlebot and search engines to the complete XML sitemap while strictly disallowing administrative (`/admin`) and serverless API (`/api`) paths.
+- **Structured Data (JSON-LD):** Implements `Organization` and `ProfessionalService` schemas with location, pricing, and direct communication channels.
 
 ---
 
@@ -322,7 +335,7 @@ npm install
 Create a `.env.local` file in the project root:
 ```env
 # Public App URL
-NEXT_PUBLIC_SITE_URL=http://localhost:3000
+NEXT_PUBLIC_SITE_URL=https://www.deeplayersolutions.com
 
 # Supabase PostgreSQL Configuration
 NEXT_PUBLIC_SUPABASE_URL=https://kzrgbqvpzstyyantunqs.supabase.co
