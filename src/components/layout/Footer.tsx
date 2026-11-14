@@ -7,7 +7,6 @@ import {
   Mail,
   Phone,
   MapPin,
-  Clock,
   ChevronRight,
 } from "lucide-react";
 import { Logo } from "./Logo";
@@ -235,17 +234,6 @@ export function Footer() {
                   </div>
                 </li>
               </ul>
-
-              {/* Office Hours Minimal Card */}
-              <div className="mt-2 sm:mt-3 p-1.5 sm:p-2 rounded-lg bg-[#12382C] border border-white/10 text-white/80 lg:bg-[#F0FAF4] lg:border-[#DFEDE5] lg:text-[#64736F] text-[10px] sm:text-[11px]">
-                <div className="flex items-center gap-1.5 font-bold text-[#34D399] lg:text-[#00B86B] mb-0.5">
-                  <Clock className="w-3 h-3" />
-                  <span>Office Hours</span>
-                </div>
-                <p className="font-medium leading-tight">
-                  Monday – Friday: 9:00 AM – 6:00 PM (PKT)
-                </p>
-              </div>
             </div>
           </div>
 
