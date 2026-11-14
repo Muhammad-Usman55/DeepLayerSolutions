@@ -88,7 +88,7 @@ export function Carousel({
     const width = window.innerWidth;
     if (width < 640) {
       setVisibleItems(mobileVisible);
-    } else if (width < 1024) {
+    } else if (width < 980) {
       setVisibleItems(tabletVisible);
     } else {
       setVisibleItems(desktopVisible);

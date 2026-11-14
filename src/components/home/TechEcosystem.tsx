@@ -109,7 +109,7 @@ export function TechEcosystem() {
           padding-right: 1.25rem;
           flex-shrink: 0;
         }
-        @media (max-width: 1023px) {
+        @media (max-width: 979px) {
           .dl-marquee-row {
             mask-image: none !important;
             -webkit-mask-image: none !important;

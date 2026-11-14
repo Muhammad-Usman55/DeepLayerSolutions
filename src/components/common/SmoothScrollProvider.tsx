@@ -33,7 +33,7 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
       ("ontouchstart" in window ||
         navigator.maxTouchPoints > 0 ||
         window.matchMedia("(pointer: coarse)").matches ||
-        window.innerWidth < 1024);
+        window.innerWidth < 980);
 
     if (isTouchDevice) {
       return;

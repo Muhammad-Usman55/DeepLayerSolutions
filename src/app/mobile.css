@@ -1,11 +1,11 @@
 /* ==========================================================================
    DEEPLAYER SOLUTIONS — DEDICATED MOBILE & TABLET STYLESHEET
-   Scope: @media (max-width: 1023px) ONLY.
-   STRICT CONSTRAINT: DO NOT MODIFY WEB DESKTOP VIEW (>= 1024px).
+   Scope: @media (max-width: 979px) ONLY.
+   STRICT CONSTRAINT: DO NOT MODIFY DESKTOP VIEW (>= 980px / desktop screens and mobile desktop mode).
    All rules in this file are strictly encapsulated within mobile media queries.
    ========================================================================== */
 
-@media (max-width: 1023px) {
+@media (max-width: 979px) {
   /* ------------------------------------------------------------------------
      MOBILE GPU RASTERIZATION & PERFORMANCE GUARDS (Zero Scroll Lag)
      ------------------------------------------------------------------------ */
