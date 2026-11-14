@@ -251,11 +251,11 @@ export function ServicesPreview() {
 
           {/* Embla Carousel Viewport & Track */}
           <div
-            className="relative overflow-hidden py-2"
+            className="relative overflow-hidden py-2 touch-pan-y"
             ref={emblaRef}
             data-lenis-prevent-horizontal="true"
           >
-            <div className="flex touch-pan-y transform-gpu will-change-transform">
+            <div className="flex touch-pan-y transform-gpu">
               {serviceChunks.map((chunk, chunkIndex) => (
                 <div
                   key={chunkIndex}

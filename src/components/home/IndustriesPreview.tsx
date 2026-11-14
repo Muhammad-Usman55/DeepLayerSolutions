@@ -175,7 +175,7 @@ export function IndustriesPreview() {
   return (
     <section
       id="industries"
-      className="relative overflow-hidden py-20 sm:py-24 lg:py-28 bg-[#FFFFFF] border-t border-[#DFEDE5] select-none content-visibility-auto"
+      className="relative overflow-hidden py-20 sm:py-24 lg:py-28 bg-[#FFFFFF] border-t border-[#DFEDE5] select-none"
       aria-label="Industry-Specific Expertise"
     >
       {/* Soft Ambient Background Lighting & Gradients */}
@@ -247,11 +247,11 @@ export function IndustriesPreview() {
 
         {/* Embla Horizontal Card Carousel Viewport & Track */}
         <div
-          className="relative overflow-hidden py-2"
+          className="relative overflow-hidden py-2 touch-pan-y"
           ref={emblaRef}
           data-lenis-prevent-horizontal="true"
         >
-          <div className="flex touch-pan-y transform-gpu will-change-transform">
+          <div className="flex touch-pan-y transform-gpu">
             {industryChunks.map((chunk, chunkIndex) => (
               <div
                 key={chunkIndex}

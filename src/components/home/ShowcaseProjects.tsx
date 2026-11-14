@@ -147,7 +147,7 @@ export function ShowcaseProjects() {
   return (
     <section
       id="portfolio"
-      className="py-20 md:py-28 relative bg-[#FAFCF9] border-t border-[#DFEDE5] overflow-hidden content-visibility-auto"
+      className="py-20 md:py-28 relative bg-[#FAFCF9] border-t border-[#DFEDE5] overflow-hidden"
       aria-label="Featured Portfolio Showcase"
     >
       {/* Background Soft Ambient Glow & Fluid Waves */}
@@ -270,11 +270,11 @@ export function ShowcaseProjects() {
 
         {/* Embla Horizontal Card Carousel Viewport & Track */}
         <div
-          className="relative overflow-hidden py-2"
+          className="relative overflow-hidden py-2 touch-pan-y"
           ref={emblaRef}
           data-lenis-prevent-horizontal="true"
         >
-          <div className="flex touch-pan-y transform-gpu will-change-transform">
+          <div className="flex touch-pan-y transform-gpu">
             {projectChunks.map((chunk, chunkIndex) => (
               <div
                 key={chunkIndex}

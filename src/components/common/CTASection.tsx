@@ -36,7 +36,7 @@ export function CTASection({
     ? displayTitle.slice(0, -displayHighlight.length).trim()
     : displayTitle;
   return (
-    <section className={cn("py-16 sm:py-20 lg:py-24 content-visibility-auto", className)} aria-label="Call to Action">
+    <section className={cn("py-16 sm:py-20 lg:py-24", className)} aria-label="Call to Action">
       <Container size="wide">
         <div className="relative overflow-hidden rounded-2xl sm:rounded-[36px] lg:rounded-[40px] bg-gradient-to-r from-[#008F53] to-[#007343] lg:bg-gradient-to-br lg:from-[#FFFFFF] lg:via-[#F0FAF4] lg:to-[#D5F9E6]/80 p-6 sm:p-12 lg:p-16 border border-[#00B86B]/40 lg:border-[#BCE8CF] shadow-[0_16px_48px_-12px_rgba(0,143,83,0.2)] lg:shadow-[0_16px_48px_-12px_rgba(0,143,83,0.12)] cta-box-container">
           {/* Subtle Ambient Background Gradients & Soft Waves */}

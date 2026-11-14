@@ -356,12 +356,6 @@ body {
   filter: blur(8px);
 }
 
-/* Off-screen Section Rendering Optimization (Defers below-the-fold paint until scrolled near) */
-.content-visibility-auto {
-  content-visibility: auto;
-  contain-intrinsic-size: auto 600px;
-}
-
 /* Mobile Performance Optimizations */
 @media (max-width: 768px) {
   .marquee-track.scroll-left,
