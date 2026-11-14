@@ -3,6 +3,8 @@ import "server-only";
 import { NextRequest } from "next/server";
 
 const ALLOWED_HOSTS = new Set([
+  "deeplayersolutions.com",
+  "www.deeplayersolutions.com",
   "deeplayersolutions.vercel.app",
   "localhost:3000",
   "127.0.0.1:3000",
