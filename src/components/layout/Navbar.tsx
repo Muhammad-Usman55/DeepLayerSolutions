@@ -211,6 +211,12 @@ export function Navbar() {
               <Logo size="md" variant="navbar" />
             </div>
 
+            {/* Center: Mobile AI STATUS: ACTIVE Pill Badge (Option 1 Mockup) */}
+            <div className="lg:hidden inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#E9FFF2] border border-[#BCE8CF] text-[10px] font-mono font-bold text-[#008F53] shadow-2xs select-none">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#008F53] animate-pulse" />
+              <span>AI STATUS: ACTIVE</span>
+            </div>
+
             {/* Center: Desktop Navigation Floating Pill Container (Desktop lg: 1024px+) */}
             <nav
               aria-label="Main Navigation"

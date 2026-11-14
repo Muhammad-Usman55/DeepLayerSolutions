@@ -186,11 +186,17 @@
     letter-spacing: -0.025em !important;
   }
 
-  /* General Button Touch Targets (Exempt carousel pagination dots) */
+  /* General Button Touch Targets (Exempt carousel pagination dots & dock toggles) */
   .btn,
-  button:not([aria-hidden="true"]):not([data-carousel-dot]),
+  button:not([aria-hidden="true"]):not([data-carousel-dot]):not([data-dock-toggle]),
   a.inline-flex:not(.tag-badge) {
     min-height: 46px;
+  }
+
+  /* Mobile Hero Tactile Dock Toggles */
+  [data-dock-toggle] {
+    min-height: unset !important;
+    min-width: unset !important;
   }
 
   /* Carousel Pagination Dots on Mobile — sleek, compact & proportional */
