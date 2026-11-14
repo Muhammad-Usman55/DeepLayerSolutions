@@ -4,7 +4,6 @@ import Link from "next/link";
 import { ArrowRight, Sparkles, Cpu, Zap, ShieldCheck } from "lucide-react";
 import { Button } from "../common/Button";
 import { Container } from "../common/Container";
-import { MobileHeroView } from "./hero/MobileHeroView";
 
 // Desktop-only dynamic import: zero synchronous bundle overhead
 const TechLayerVisual = dynamic(
@@ -13,18 +12,12 @@ const TechLayerVisual = dynamic(
 
 export function HeroSection() {
   return (
-    <section className="relative overflow-hidden pt-3 pb-8 lg:pt-12 lg:pb-24 hero-section-wrapper">
+    <section className="relative overflow-hidden pt-6 pb-16 lg:pt-12 lg:pb-24 hero-section-wrapper">
       {/* Background Ambience */}
       <div className="absolute top-0 right-1/4 -z-10 w-[600px] h-[500px] bg-gradient-to-br from-[#E8F5E9] via-[#F4FAF3] to-transparent rounded-full blur-3xl opacity-70 pointer-events-none" />
       <div className="absolute -top-32 left-10 -z-10 w-[450px] h-[450px] bg-[#34D399]/10 rounded-full blur-3xl pointer-events-none" />
 
-      {/* 1. Mobile-Exclusive Option 1 Redesign (< 980px / lg:hidden) */}
-      <div className="lg:hidden w-full flex items-center justify-center">
-        <MobileHeroView />
-      </div>
-
-      {/* 2. Desktop Hero View (100% Untouched on lg: >= 1024px / 980px desktop mode) */}
-      <Container size="wide" className="h-full hidden lg:flex flex-col justify-center">
+      <Container size="wide" className="h-full flex flex-col justify-center">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-0 lg:gap-8 items-center w-full">
           {/* Left Hero Content (Cols 1-7 on lg/xl) */}
           <div className="lg:col-span-7 xl:col-span-7 flex flex-col items-start text-left hero-content-col">
