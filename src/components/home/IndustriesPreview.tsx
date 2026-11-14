@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback, useEffect, useMemo } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import {
@@ -116,6 +116,15 @@ const industryCards: IndustryCardData[] = [
 ];
 
 export function IndustriesPreview() {
+  // Group industries into sets of 4 (2x2 grid on mobile, 4-in-a-row on desktop)
+  const industryChunks = useMemo(() => {
+    const chunks: (typeof industryCards)[] = [];
+    for (let i = 0; i < industryCards.length; i += 4) {
+      chunks.push(industryCards.slice(i, i + 4));
+    }
+    return chunks;
+  }, []);
+
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: "start",
     containScroll: "trimSnaps",
@@ -242,59 +251,65 @@ export function IndustriesPreview() {
           ref={emblaRef}
           data-lenis-prevent-horizontal="true"
         >
-          <div className="flex -ml-4 sm:-ml-6 lg:-ml-7 touch-pan-y transform-gpu will-change-transform">
-            {industryCards.map((card) => {
-              const BadgeIcon = card.badgeIcon;
-              const Visual = card.VisualComponent;
+          <div className="flex touch-pan-y transform-gpu will-change-transform">
+            {industryChunks.map((chunk, chunkIndex) => (
+              <div
+                key={chunkIndex}
+                className="flex-[0_0_100%] min-w-0 px-0.5 sm:px-1"
+              >
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4 lg:gap-5 items-stretch">
+                  {chunk.map((card) => {
+                    const BadgeIcon = card.badgeIcon;
+                    const Visual = card.VisualComponent;
 
-              return (
-                <div
-                  key={card.id}
-                  className="flex-[0_0_100%] sm:flex-[0_0_50%] lg:flex-[0_0_33.333333%] min-w-0 pl-4 sm:pl-6 lg:pl-7 h-full"
-                >
-                  <Link
-                    href={`/industries/${card.slug}`}
-                    className="group relative flex flex-col justify-between rounded-2xl sm:rounded-[30px] bg-white border border-[#DFEDE5] hover:border-[#008F53]/50 p-6 sm:p-7 transition-all duration-300 hover:-translate-y-2 shadow-[0_8px_24px_rgba(0,143,83,0.04)] hover:shadow-[0_20px_40px_rgba(0,143,83,0.12)] focus:outline-hidden focus:ring-2 focus:ring-[#008F53] text-left h-full select-none"
-                    aria-label={`Explore ${card.title} domain solutions`}
-                  >
-                    {/* Top Header: Sector Badge Icon & Label */}
-                    <div className="flex items-center justify-between w-full mb-2">
-                      <span className="text-[10px] sm:text-[11px] font-mono uppercase tracking-wider text-[#008F53] font-semibold bg-[#E9FFF2] px-2.5 py-1 rounded-full border border-[#BCE8CF]/60">
-                        Sector
-                      </span>
-                      <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#E9FFF2] border border-[#DFEDE5] flex items-center justify-center text-[#008F53] group-hover:scale-110 group-hover:bg-[#008F53] group-hover:text-white transition-all duration-300 shadow-xs">
-                        <BadgeIcon className="w-4 h-4 sm:w-5 sm:h-5 stroke-[2.2]" />
+                    return (
+                      <div key={card.id} className="h-full">
+                        <Link
+                          href={`/industries/${card.slug}`}
+                          className="group relative flex flex-col justify-between rounded-xl sm:rounded-2xl lg:rounded-[24px] bg-white border border-[#DFEDE5] hover:border-[#008F53]/50 p-3 sm:p-5 lg:p-6 transition-all duration-300 hover:-translate-y-1.5 shadow-[0_4px_16px_rgba(0,143,83,0.04)] hover:shadow-[0_12px_28px_rgba(0,143,83,0.1)] focus:outline-hidden focus:ring-2 focus:ring-[#008F53] text-left h-full select-none"
+                          aria-label={`Explore ${card.title} domain solutions`}
+                        >
+                          {/* Top Header: Sector Badge Icon & Label */}
+                          <div className="flex items-center justify-between w-full mb-1.5 sm:mb-2 gap-1">
+                            <span className="text-[9px] sm:text-[10px] lg:text-[11px] font-mono uppercase tracking-wider text-[#008F53] font-semibold bg-[#E9FFF2] px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full border border-[#BCE8CF]/60 truncate max-w-[85px] xs:max-w-none">
+                              Sector
+                            </span>
+                            <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-[#E9FFF2] border border-[#DFEDE5] flex items-center justify-center text-[#008F53] group-hover:scale-110 group-hover:bg-[#008F53] group-hover:text-white transition-all duration-300 shadow-xs shrink-0">
+                              <BadgeIcon className="w-3 h-3 sm:w-4 sm:h-4 stroke-[2.2]" />
+                            </div>
+                          </div>
+
+                          {/* Center: Bespoke 3D Glass & Isometric Vector Illustration */}
+                          <div className="my-1 sm:my-2 flex items-center justify-center h-20 sm:h-32 lg:h-36 overflow-hidden">
+                            <div className="w-full scale-[0.65] sm:scale-80 lg:scale-95 origin-center flex items-center justify-center transition-transform duration-500 ease-out group-hover:scale-105">
+                              <Visual />
+                            </div>
+                          </div>
+
+                          {/* Bottom: Title, Subtitle & Circular Action Button */}
+                          <div className="mt-1 pt-2 sm:pt-3 border-t border-[#DFEDE5]/60 flex flex-col justify-between mt-auto gap-1.5 sm:gap-2">
+                            <div className="flex items-start justify-between gap-1.5 sm:gap-2">
+                              <h3 className="text-xs sm:text-base lg:text-lg font-bold text-[#142A27] tracking-tight group-hover:text-[#008F53] transition-colors duration-200 leading-snug line-clamp-1">
+                                {card.title}
+                              </h3>
+
+                              {/* Circular Action Button */}
+                              <div className="w-6 h-6 sm:w-8 sm:h-8 lg:w-9 lg:h-9 rounded-full bg-[#E9FFF2] text-[#008F53] group-hover:bg-[#008F53] group-hover:text-white transition-all duration-300 flex items-center justify-center shadow-xs group-hover:scale-105 shrink-0 mt-0.5">
+                                <ArrowRight className="w-3 h-3 sm:w-3.5 sm:h-3.5 lg:w-4 lg:h-4 transition-transform duration-300 group-hover:translate-x-0.5" />
+                              </div>
+                            </div>
+
+                            <p className="text-[10px] sm:text-xs text-[#64736F] line-clamp-1 xs:line-clamp-2 font-normal leading-relaxed">
+                              {card.subtitle}
+                            </p>
+                          </div>
+                        </Link>
                       </div>
-                    </div>
-
-                    {/* Center: Bespoke 3D Glass & Isometric Vector Illustration */}
-                    <div className="my-2 sm:my-3 flex items-center justify-center">
-                      <div className="w-full transition-transform duration-500 ease-out group-hover:scale-105">
-                        <Visual />
-                      </div>
-                    </div>
-
-                    {/* Bottom: Title, Subtitle & Circular Action Button */}
-                    <div className="mt-2 pt-3 border-t border-[#DFEDE5]/60 flex flex-col justify-between mt-auto gap-2">
-                      <div className="flex items-start justify-between gap-2">
-                        <h3 className="text-lg sm:text-xl font-bold text-[#142A27] tracking-tight group-hover:text-[#008F53] transition-colors duration-200 leading-snug line-clamp-1">
-                          {card.title}
-                        </h3>
-
-                        {/* Circular Action Button */}
-                        <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#E9FFF2] text-[#008F53] group-hover:bg-[#008F53] group-hover:text-white transition-all duration-300 flex items-center justify-center shadow-xs group-hover:scale-105 shrink-0 mt-0.5">
-                          <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5" />
-                        </div>
-                      </div>
-
-                      <p className="text-xs text-[#64736F] line-clamp-2 font-normal leading-relaxed">
-                        {card.subtitle}
-                      </p>
-                    </div>
-                  </Link>
+                    );
+                  })}
                 </div>
-              );
-            })}
+              </div>
+            ))}
           </div>
         </div>
 
@@ -330,7 +345,7 @@ export function IndustriesPreview() {
 
         {/* Carousel Pagination Dots */}
         {scrollSnaps.length > 1 && (
-          <div className="mt-3 sm:mt-4 flex items-center justify-center gap-1 sm:gap-2" aria-label="Slide navigation">
+          <div className="mt-3 sm:mt-4 flex items-center justify-center gap-1.5 sm:gap-2" aria-label="Slide navigation">
             {scrollSnaps.map((_, idx) => (
               <button
                 key={idx}
@@ -338,15 +353,16 @@ export function IndustriesPreview() {
                 data-carousel-dot
                 onClick={() => scrollTo(idx)}
                 aria-label={`Go to industry slide ${idx + 1}`}
-                className="p-1 focus:outline-none cursor-pointer flex items-center justify-center group"
-                style={{ minHeight: "unset" }}
+                className="h-6 flex items-center justify-center cursor-pointer p-1 focus:outline-none group"
+                style={{ minHeight: "unset", minWidth: "unset" }}
               >
                 <span
-                  className={`block transition-all duration-300 rounded-full ${
-                    selectedIndex === idx
-                      ? "w-4.5 sm:w-6 h-1 sm:h-1.5 bg-[#008F53]"
-                      : "w-1.5 sm:w-2 h-1 sm:h-1.5 bg-[#DFEDE5] group-hover:bg-[#008F53]/50"
-                  }`}
+                  className="block transition-all duration-300 rounded-full"
+                  style={{
+                    width: selectedIndex === idx ? "22px" : "6px",
+                    height: "6px",
+                    backgroundColor: selectedIndex === idx ? "#008F53" : "#DFEDE5",
+                  }}
                 />
               </button>
             ))}

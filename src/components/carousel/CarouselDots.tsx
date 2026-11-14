@@ -31,17 +31,23 @@ export function CarouselDots({
             key={idx}
             type="button"
             role="tab"
+            data-carousel-dot
             tabIndex={isActive ? 0 : -1}
             aria-selected={isActive}
             aria-label={`Go to slide ${idx + 1} of ${total}`}
             onClick={() => onSelect(idx)}
-            className={cn(
-              "h-2 rounded-full transition-all duration-300 cursor-pointer",
-              isActive
-                ? "w-8 bg-[#008F53]"
-                : "w-2 bg-[#DFEDE5] hover:bg-[#008F53]/60"
-            )}
-          />
+            className="h-6 flex items-center justify-center cursor-pointer p-1 focus:outline-none"
+            style={{ minHeight: "unset", minWidth: "unset" }}
+          >
+            <span
+              className="block transition-all duration-300 rounded-full"
+              style={{
+                width: isActive ? "22px" : "6px",
+                height: "6px",
+                backgroundColor: isActive ? "#008F53" : "#DFEDE5",
+              }}
+            />
+          </button>
         );
       })}
     </div>

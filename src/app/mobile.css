@@ -184,8 +184,17 @@
   /* Carousel Pagination Dots on Mobile — sleek, compact & proportional */
   [data-carousel-dot] {
     min-height: unset !important;
-    height: auto !important;
-    padding: 4px 2px !important;
+    min-width: unset !important;
+    height: 24px !important;
+    padding: 0 4px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  [data-carousel-dot] > span {
+    min-height: unset !important;
+    min-width: unset !important;
   }
 
   /* Stats Strip on Mobile */
