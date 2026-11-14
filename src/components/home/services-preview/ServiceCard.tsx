@@ -17,13 +17,12 @@ import {
   Compass,
   SearchCheck,
 } from "lucide-react";
-import { motion } from "framer-motion";
 import { PreviewService, VisualType } from "./types";
 import { Card3DVisual } from "./Card3DVisual";
 
 interface ServiceCardProps {
   service: PreviewService;
-  index: number;
+  index?: number;
 }
 
 function getServiceIcon(type: VisualType) {
@@ -57,17 +56,11 @@ function getServiceIcon(type: VisualType) {
   }
 }
 
-export function ServiceCard({ service, index }: ServiceCardProps) {
+export function ServiceCard({ service }: ServiceCardProps) {
   const iconComponent = getServiceIcon(service.visualType);
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 16 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-10px" }}
-      transition={{ duration: 0.45, delay: (index % 4) * 0.05, ease: "easeOut" }}
-      className="h-full select-none"
-    >
+    <div className="h-full select-none service-card-item">
       <Link
         href={`/services/${service.slug}`}
         className="group relative flex flex-col justify-between h-full rounded-xl sm:rounded-2xl lg:rounded-[24px] bg-white/95 hover:bg-white backdrop-blur-xs border border-[#DFEDE5] hover:border-[#008F53]/50 shadow-xs hover:shadow-xl hover:shadow-[#008F53]/10 transition-all duration-300 hover:-translate-y-1.5 overflow-hidden p-3 sm:p-5 lg:p-6"
@@ -114,6 +107,6 @@ export function ServiceCard({ service, index }: ServiceCardProps) {
           </p>
         </div>
       </Link>
-    </motion.div>
+    </div>
   );
 }

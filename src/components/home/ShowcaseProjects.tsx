@@ -14,18 +14,12 @@ import { CaseStudyProject } from "@/types";
 
 interface ProjectCardProps {
   project: CaseStudyProject;
-  index: number;
+  index?: number;
 }
 
-function ProjectCard({ project, index }: ProjectCardProps) {
+function ProjectCard({ project }: ProjectCardProps) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 16 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-10px" }}
-      transition={{ duration: 0.45, delay: (index % 4) * 0.05, ease: "easeOut" }}
-      className="h-full select-none"
-    >
+    <div className="h-full select-none project-card-item">
       <Link
         href={`/portfolio/${project.slug}`}
         className="group relative flex flex-col justify-between h-full rounded-xl sm:rounded-2xl lg:rounded-[24px] bg-white/95 hover:bg-white backdrop-blur-xs border border-[#DFEDE5] hover:border-[#008F53]/50 shadow-xs hover:shadow-xl hover:shadow-[#008F53]/10 transition-all duration-300 hover:-translate-y-1.5 overflow-hidden p-3 sm:p-5 lg:p-6"
@@ -87,7 +81,7 @@ function ProjectCard({ project, index }: ProjectCardProps) {
           </div>
         </div>
       </Link>
-    </motion.div>
+    </div>
   );
 }
 
