@@ -174,11 +174,18 @@
     letter-spacing: -0.025em !important;
   }
 
-  /* General Button Touch Targets */
+  /* General Button Touch Targets (Exempt carousel pagination dots) */
   .btn,
-  button:not([aria-hidden="true"]),
+  button:not([aria-hidden="true"]):not([data-carousel-dot]),
   a.inline-flex:not(.tag-badge) {
     min-height: 46px;
+  }
+
+  /* Carousel Pagination Dots on Mobile — sleek, compact & proportional */
+  [data-carousel-dot] {
+    min-height: unset !important;
+    height: auto !important;
+    padding: 4px 2px !important;
   }
 
   /* Stats Strip on Mobile */

@@ -290,19 +290,25 @@ export function ServicesPreview() {
 
           {/* Carousel Pagination Dots */}
           {scrollSnaps.length > 1 && (
-            <div className="mt-3.5 sm:mt-4 flex items-center justify-center gap-2" aria-hidden="true">
+            <div className="mt-3 sm:mt-4 flex items-center justify-center gap-1 sm:gap-2" aria-label="Slide navigation">
               {scrollSnaps.map((_, idx) => (
                 <button
                   key={idx}
                   type="button"
+                  data-carousel-dot
                   onClick={() => scrollTo(idx)}
                   aria-label={`Go to services slide ${idx + 1}`}
-                  className={`transition-all duration-300 rounded-full cursor-pointer ${
-                    selectedIndex === idx
-                      ? "w-7 h-2 bg-[#008F53]"
-                      : "w-2 h-2 bg-[#DFEDE5] hover:bg-[#008F53]/50"
-                  }`}
-                />
+                  className="p-1 focus:outline-none cursor-pointer flex items-center justify-center group"
+                  style={{ minHeight: "unset" }}
+                >
+                  <span
+                    className={`block transition-all duration-300 rounded-full ${
+                      selectedIndex === idx
+                        ? "w-4.5 sm:w-6 h-1 sm:h-1.5 bg-[#008F53]"
+                        : "w-1.5 sm:w-2 h-1 sm:h-1.5 bg-[#DFEDE5] group-hover:bg-[#008F53]/50"
+                    }`}
+                  />
+                </button>
               ))}
             </div>
           )}
