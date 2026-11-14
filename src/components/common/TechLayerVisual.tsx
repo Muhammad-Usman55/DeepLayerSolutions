@@ -183,7 +183,7 @@ export function TechLayerVisual({ className }: TechLayerVisualProps) {
             />
 
             {/* Subtle Emerald / Mint Laser Scanner Sweep (Compositor Thread) */}
-            <div className="absolute left-[15%] right-[15%] h-[2px] bg-gradient-to-r from-transparent via-[#00B86B] to-transparent shadow-[0_0_12px_rgba(0,184,107,0.55)] pointer-events-none animate-laser-sweep">
+            <div className="absolute top-1/2 -translate-y-1/2 left-[15%] right-[15%] h-[2px] bg-gradient-to-r from-transparent via-[#00B86B] to-transparent shadow-[0_0_12px_rgba(0,184,107,0.55)] pointer-events-none animate-laser-sweep">
               <div className="absolute -top-3 left-0 right-0 h-6 bg-gradient-to-b from-transparent via-[#008F53]/15 to-transparent blur-xs" />
             </div>
           </div>

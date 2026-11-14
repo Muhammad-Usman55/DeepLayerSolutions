@@ -54,7 +54,7 @@ function TechBadge({ item }: { item: TechItem }) {
 
 export function TechEcosystem() {
   return (
-    <section className="py-20 md:py-24 bg-[#FAFCF9] overflow-hidden" aria-label="Technology Ecosystem">
+    <section className="py-20 md:py-24 bg-[#FAFCF9] overflow-hidden content-visibility-auto" aria-label="Technology Ecosystem">
       {/* Self-contained CSS for 100% guaranteed hardware-accelerated animation */}
       <style>{`
         @keyframes dl-marquee-left {
@@ -85,8 +85,7 @@ export function TechEcosystem() {
           width: 100%;
           overflow: hidden;
           user-select: none;
-          mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
-          -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+          
         }
         .dl-marquee-track {
           display: flex;
@@ -111,9 +110,7 @@ export function TechEcosystem() {
         }
         @media (max-width: 979px) {
           .dl-marquee-row {
-            mask-image: none !important;
-            -webkit-mask-image: none !important;
-          }
+            }
           .dl-marquee-track.dl-left {
             animation-duration: 34s !important;
           }

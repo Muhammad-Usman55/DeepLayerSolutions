@@ -13,6 +13,8 @@
   [class*="blur-3xl"] {
     filter: blur(8px) !important;
     opacity: 0.55 !important;
+    transform: translate3d(0, 0, 0) !important;
+    contain: layout style paint !important;
   }
   [class*="blur-2xl"] {
     filter: blur(6px) !important;
@@ -27,7 +29,9 @@
   .animate-float-reverse,
   .animate-float-subtle,
   .animate-pulse-shadow,
-  .animate-laser-sweep {
+  .animate-laser-sweep,
+  .animate-ping,
+  .animate-pulse {
     animation: none !important;
     transform: none !important;
     will-change: auto !important;
@@ -63,8 +67,8 @@
      ------------------------------------------------------------------------ */
   html,
   body {
-    overflow-x: hidden !important;
-    max-width: 100vw !important;
+    overflow-x: clip !important;
+    max-width: 100% !important;
     -webkit-overflow-scrolling: touch;
   }
 

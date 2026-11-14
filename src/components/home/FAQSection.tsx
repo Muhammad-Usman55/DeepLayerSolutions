@@ -28,7 +28,7 @@ export function FAQSection() {
   return (
     <section
       id="faqs"
-      className="relative overflow-hidden py-20 sm:py-24 lg:py-28 bg-[#FAFCF9] border-t border-[#DFEDE5]"
+      className="relative overflow-hidden py-20 sm:py-24 lg:py-28 bg-[#FAFCF9] border-t border-[#DFEDE5] content-visibility-auto"
       aria-label="Frequently Asked Questions"
     >
       {/* Background Volumetric Ambience */}

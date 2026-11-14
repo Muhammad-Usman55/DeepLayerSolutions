@@ -51,7 +51,7 @@ export function ProcessTimeline() {
   return (
     <section
       id="approach"
-      className="relative overflow-hidden py-20 sm:py-24 lg:py-32 bg-[#F8FCF9] border-t border-[#DFEDE5] select-none"
+      className="relative overflow-hidden py-20 sm:py-24 lg:py-32 bg-[#F8FCF9] border-t border-[#DFEDE5] select-none content-visibility-auto"
       aria-label="Our Development Approach"
     >
       {/* Background Ambient Lighting & Decorative Corner Accents */}

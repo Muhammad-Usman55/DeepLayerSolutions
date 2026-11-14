@@ -153,7 +153,7 @@ export function ShowcaseProjects() {
   return (
     <section
       id="portfolio"
-      className="py-20 md:py-28 relative bg-[#FAFCF9] border-t border-[#DFEDE5] overflow-hidden"
+      className="py-20 md:py-28 relative bg-[#FAFCF9] border-t border-[#DFEDE5] overflow-hidden content-visibility-auto"
       aria-label="Featured Portfolio Showcase"
     >
       {/* Background Soft Ambient Glow & Fluid Waves */}

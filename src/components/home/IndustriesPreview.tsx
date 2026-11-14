@@ -175,7 +175,7 @@ export function IndustriesPreview() {
   return (
     <section
       id="industries"
-      className="relative overflow-hidden py-20 sm:py-24 lg:py-28 bg-[#FFFFFF] border-t border-[#DFEDE5] select-none"
+      className="relative overflow-hidden py-20 sm:py-24 lg:py-28 bg-[#FFFFFF] border-t border-[#DFEDE5] select-none content-visibility-auto"
       aria-label="Industry-Specific Expertise"
     >
       {/* Soft Ambient Background Lighting & Gradients */}
