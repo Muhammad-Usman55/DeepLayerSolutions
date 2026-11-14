@@ -62,32 +62,32 @@ export function Footer() {
       <div className="absolute bottom-10 right-10 -z-10 w-[400px] h-[400px] bg-[#34D399]/10 rounded-full blur-3xl pointer-events-none hidden lg:block" />
 
       {/* Top Newsletter Section - Mint on Mobile, Integrated on Desktop */}
-      <div className="bg-[#FAFCF9] lg:bg-white pt-8 pb-4 lg:pt-10 lg:pb-0">
+      <div className="bg-[#FAFCF9] lg:bg-white pt-4 pb-2 sm:pt-8 sm:pb-4 lg:pt-10 lg:pb-0">
         <Container size="wide">
           <FooterNewsletter />
         </Container>
       </div>
 
       {/* Main Footer Container: Dark Emerald on Mobile, Clean White on Desktop */}
-      <div className="bg-[#0A251D] text-white lg:bg-white lg:text-[#142A27] pt-10 sm:pt-12 pb-6 sm:pb-8 border-t border-white/10 lg:border-[#DFEDE5]">
+      <div className="bg-[#0A251D] text-white lg:bg-white lg:text-[#142A27] pt-6 sm:pt-10 lg:pt-12 pb-5 sm:pb-6 lg:pb-8 border-t border-white/10 lg:border-[#DFEDE5]">
         <Container size="wide" className="relative z-10">
           {/* Main 4-Column Balanced Footer Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-6 xl:gap-8 pb-8 items-start">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-5 sm:gap-7 lg:gap-6 xl:gap-8 pb-5 sm:pb-7 lg:pb-8 items-start">
             {/* Column 1: Company Branding & Socials (Cols 1-3) */}
             <div className="lg:col-span-3 flex flex-col justify-between">
               <div>
                 <Logo variant="default" size="md" className="hidden lg:inline-flex" />
                 <Logo variant="light" size="md" className="inline-flex lg:hidden" />
-                <p className="mt-3 text-xs sm:text-[13px] text-white/80 lg:text-[#64736F] leading-relaxed max-w-sm font-normal">
+                <p className="mt-2 sm:mt-3 text-xs sm:text-[13px] text-white/80 lg:text-[#64736F] leading-relaxed max-w-sm font-normal line-clamp-2 sm:line-clamp-none">
                   {siteConfig.description}
                 </p>
-                <p className="mt-2 text-[11px] text-[#34D399] lg:text-[#008F53] font-semibold tracking-wide">
+                <p className="mt-1 sm:mt-2 text-[11px] text-[#34D399] lg:text-[#008F53] font-semibold tracking-wide">
                   Build • Innovate • Scale
                 </p>
               </div>
 
               {/* Social Icons Row */}
-              <div className="mt-4 flex items-center gap-2">
+              <div className="mt-3 sm:mt-4 flex items-center gap-2">
                 <a
                   href={siteConfig.social.linkedin}
                   target="_blank"
@@ -126,7 +126,7 @@ export function Footer() {
                   Quick Links
                 </h4>
               </div>
-              <ul className="space-y-1.5">
+              <ul className="grid grid-cols-2 gap-x-4 gap-y-1 sm:block sm:space-y-1.5">
                 {footerQuickLinks.map((link) => (
                   <li key={link.href}>
                     <Link
@@ -156,7 +156,7 @@ export function Footer() {
                   Our Capabilities
                 </h4>
               </div>
-              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-3 gap-y-1.5 footer-capabilities-grid">
+              <ul className="grid grid-cols-2 gap-x-3 gap-y-1 sm:gap-y-1.5 footer-capabilities-grid">
                 {footerServiceLinks.map((service) => (
                   <li key={service.href}>
                     <Link
@@ -180,7 +180,7 @@ export function Footer() {
                 </h4>
               </div>
 
-              <ul className="space-y-2 text-xs sm:text-[13px] text-white/80 lg:text-[#64736F]">
+              <ul className="space-y-1.5 sm:space-y-2 text-xs sm:text-[13px] text-white/80 lg:text-[#64736F]">
                 {/* Location */}
                 <li className="flex items-center gap-2">
                   <div className="w-6 h-6 rounded-md bg-[#12382C] text-[#34D399] border-white/10 lg:bg-[#F0FAF4] lg:text-[#00B86B] lg:border-[#DFEDE5] flex items-center justify-center shrink-0 border">
@@ -237,7 +237,7 @@ export function Footer() {
               </ul>
 
               {/* Office Hours Minimal Card */}
-              <div className="mt-3 p-2 rounded-lg bg-[#12382C] border border-white/10 text-white/80 lg:bg-[#F0FAF4] lg:border-[#DFEDE5] lg:text-[#64736F] text-[11px]">
+              <div className="mt-2 sm:mt-3 p-1.5 sm:p-2 rounded-lg bg-[#12382C] border border-white/10 text-white/80 lg:bg-[#F0FAF4] lg:border-[#DFEDE5] lg:text-[#64736F] text-[10px] sm:text-[11px]">
                 <div className="flex items-center gap-1.5 font-bold text-[#34D399] lg:text-[#00B86B] mb-0.5">
                   <Clock className="w-3 h-3" />
                   <span>Office Hours</span>
@@ -250,7 +250,7 @@ export function Footer() {
           </div>
 
           {/* Subtle Horizontal Divider */}
-          <div className="border-t border-white/15 lg:border-[#DFEDE5] pt-5 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/70 lg:text-[#64736F]">
+          <div className="border-t border-white/15 lg:border-[#DFEDE5] pt-3.5 sm:pt-5 flex flex-col sm:flex-row items-center justify-between gap-2.5 sm:gap-4 text-xs text-white/70 lg:text-[#64736F]">
             {/* Left: Copyright */}
             <p className="font-normal text-center sm:text-left">
               © {currentYear} <span className="font-semibold text-[#34D399] lg:text-[#008F53]">DeepLayer Solutions</span>. All rights reserved.

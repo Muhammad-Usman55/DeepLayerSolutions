@@ -47,7 +47,7 @@ export function FooterNewsletter() {
   };
 
   return (
-    <div className="relative overflow-hidden rounded-2xl bg-transparent lg:bg-gradient-to-r lg:from-[#E9FFF2]/95 lg:via-[#F3FFF7] lg:to-[#E9FFF2]/95 border-0 lg:border lg:border-[#DFEDE5] lg:shadow-[0_4px_24px_-6px_rgba(0,184,107,0.06)] p-0 lg:p-6 mb-8 sm:mb-10 text-center lg:text-left">
+    <div className="relative overflow-hidden rounded-2xl bg-transparent lg:bg-gradient-to-r lg:from-[#E9FFF2]/95 lg:via-[#F3FFF7] lg:to-[#E9FFF2]/95 border-0 lg:border lg:border-[#DFEDE5] lg:shadow-[0_4px_24px_-6px_rgba(0,184,107,0.06)] p-0 lg:p-6 mb-3 sm:mb-6 lg:mb-10 text-center lg:text-left">
       {/* Decorative Light Radial Ambience */}
       <div className="absolute -top-12 -right-12 w-48 h-48 bg-[#34D399]/15 rounded-full blur-2xl pointer-events-none hidden lg:block" />
 
