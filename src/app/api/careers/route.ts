@@ -2,8 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 import { checkRateLimit, getClientIp, hashClientIdentifier } from "@/lib/security/rateLimit";
 import { validateRequestOrigin } from "@/lib/security/csrf";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { getCompanyEmail, sendGmailMessage } from "@/lib/email/gmail";
+import { getCompanyEmail, getSiteUrl, sendGmailMessage } from "@/lib/email/gmail";
 import { generateCareerNotificationEmail } from "@/lib/email/templates/careerNotificationEmail";
+import { generateCareerConfirmationEmail } from "@/lib/email/templates/careerConfirmationEmail";
 
 function sanitize(str: string): string {
   return str
@@ -256,8 +257,10 @@ export async function POST(req: NextRequest) {
     }
 
     // 9. Dispatch Email Alert to DeepLayer Recruitment Team
+    const companyEmail = getCompanyEmail();
+    const siteUrl = getSiteUrl();
+
     try {
-      const companyEmail = getCompanyEmail();
       const emailTemplate = generateCareerNotificationEmail({
         id: applicationId,
         fullName: sanitizedFullName,
@@ -284,6 +287,32 @@ export async function POST(req: NextRequest) {
       );
     } catch (emailEx: any) {
       console.warn("[CAREER EMAIL NOTIFICATION FAILED]", emailEx?.message || emailEx);
+    }
+
+    // 10. Dispatch Confirmation Email to Applicant
+    try {
+      const applicantEmailTemplate = generateCareerConfirmationEmail({
+        id: applicationId,
+        fullName: sanitizedFullName,
+        position: sanitizedPosition,
+        email: sanitizedEmail,
+        siteUrl,
+        submittedAt,
+      });
+
+      await sendGmailMessage({
+        to: sanitizedEmail,
+        replyTo: companyEmail,
+        subject: applicantEmailTemplate.subject,
+        html: applicantEmailTemplate.html,
+        text: applicantEmailTemplate.text,
+      });
+
+      console.info(
+        `[CAREER APPLICANT CONFIRMATION SENT] To ${sanitizedEmail} for position "${sanitizedPosition}"`
+      );
+    } catch (confEx: any) {
+      console.warn("[CAREER APPLICANT CONFIRMATION FAILED]", confEx?.message || confEx);
     }
 
     return NextResponse.json(
