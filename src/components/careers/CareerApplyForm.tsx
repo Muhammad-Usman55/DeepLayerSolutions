@@ -13,6 +13,8 @@ import {
   UploadCloud,
   X,
   FileCheck,
+  Check,
+  MessageSquare,
 } from "lucide-react";
 import { Button } from "../common/Button";
 
@@ -50,6 +52,8 @@ export function CareerApplyForm({ selectedPosition }: CareerApplyFormProps) {
   const [serverError, setServerError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [submittedRole, setSubmittedRole] = useState<string>("AI/ML Engineer Intern");
+  const [applicationId, setApplicationId] = useState<string | null>(null);
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
@@ -203,6 +207,8 @@ export function CareerApplyForm({ selectedPosition }: CareerApplyFormProps) {
         return;
       }
 
+      setSubmittedRole(form.position);
+      setApplicationId(data?.applicationId || null);
       setIsSuccess(true);
       setForm(initialCareerForm);
       setResumeFile(null);
@@ -237,25 +243,92 @@ export function CareerApplyForm({ selectedPosition }: CareerApplyFormProps) {
       </div>
 
       {isSuccess ? (
-        <div className="py-12 flex flex-col items-center text-center">
-          <div className="w-16 h-16 rounded-full bg-[#E9FFF2] text-[#008F53] flex items-center justify-center mb-6 shadow-sm">
-            <CheckCircle2 className="w-8 h-8 text-[#008F53]" />
+        <div className="py-6 sm:py-8 flex flex-col items-center text-center">
+          {/* Animated Glowing Orb */}
+          <div className="relative w-20 h-20 sm:w-24 sm:h-24 flex items-center justify-center mb-6">
+            <div className="absolute inset-0 rounded-full bg-[#008F53]/15 animate-ping opacity-75 pointer-events-none" />
+            <div className="absolute inset-1 rounded-full bg-[#E9FFF2] border border-[#BCE8CF]" />
+            <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gradient-to-tr from-[#008F53] to-[#00B86B] text-white flex items-center justify-center shadow-[0_10px_24px_rgba(0,143,83,0.30)]">
+              <CheckCircle2 className="w-8 h-8 sm:w-9 sm:h-9" />
+            </div>
           </div>
 
-          <h4 className="text-2xl font-extrabold text-[#142A27]">
-            Application Received!
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wider uppercase bg-[#E9FFF2] text-[#008F53] border border-[#BCE8CF] mb-3">
+            <Sparkles className="w-3.5 h-3.5 text-[#00B86B]" />
+            <span>APPLICATION SECURED</span>
+          </div>
+
+          <h4 className="text-2xl sm:text-3xl font-extrabold text-[#142A27] tracking-tight">
+            Application Received
           </h4>
 
-          <p className="mt-3 text-sm sm:text-base text-[#64736F] max-w-md leading-relaxed">
-            Thank you for applying to DeepLayer Solutions. Your resume and candidate profile have been securely stored in our system. Our recruitment leads will review your application and reach out within 48 business hours.
+          <p className="mt-2 text-xs sm:text-sm text-[#64736F] max-w-md leading-relaxed">
+            Thank you for applying. Your candidate profile and uploaded resume have been securely registered in our Applicant Tracking System.
           </p>
 
+          {/* Application Tracking Ticket */}
+          <div className="w-full max-w-md mt-6 p-4 sm:p-5 rounded-2xl bg-[#FAFCF9] border border-[#DFEDE5] text-left">
+            <div className="flex items-center justify-between mb-3 pb-3 border-b border-[#DFEDE5]">
+              <div>
+                <span className="text-[10px] font-bold text-[#64736F] uppercase tracking-wider block">
+                  Target Position
+                </span>
+                <span className="text-xs sm:text-sm font-extrabold text-[#008F53]">
+                  {submittedRole}
+                </span>
+              </div>
+              <span className="px-2.5 py-1 rounded-full text-[10px] font-bold bg-[#E9FFF2] text-[#008F53] border border-[#BCE8CF]">
+                Under Review
+              </span>
+            </div>
+
+            <div className="space-y-2 text-xs text-[#334155]">
+              <div className="flex items-center justify-between">
+                <span className="text-[#64736F]">Resume Vault:</span>
+                <span className="font-semibold text-[#008F53] flex items-center gap-1.5">
+                  <Check className="w-3.5 h-3.5" />
+                  Uploaded to Supabase
+                </span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-[#64736F]">Evaluation Horizon:</span>
+                <span className="font-semibold text-[#142A27]">Within 48 business hours</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-[#64736F]">Email Receipt:</span>
+                <span className="font-semibold text-[#142A27]">Confirmation email dispatched</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Urgent WhatsApp Consultation Banner */}
+          <div className="w-full max-w-md mt-4 p-3.5 rounded-2xl bg-[#F0FAF4] border border-[#BCE8CF] flex items-center justify-between gap-3 text-left">
+            <div>
+              <p className="text-xs font-bold text-[#142A27]">Have urgent questions or portfolio updates?</p>
+              <p className="text-[11px] text-[#64736F]">Chat directly with our technical recruiter on WhatsApp.</p>
+            </div>
+            <a
+              href="https://wa.me/923166007316"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold bg-[#008F53] text-white hover:bg-[#007343] transition-colors shrink-0 shadow-xs cursor-pointer"
+            >
+              <MessageSquare className="w-3.5 h-3.5" />
+              <span>WhatsApp</span>
+            </a>
+          </div>
+
+          {/* Reset button */}
           <button
             type="button"
-            onClick={() => setIsSuccess(false)}
-            className="mt-8 px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#008F53] text-white hover:bg-[#007343] transition-colors cursor-pointer"
+            onClick={() => {
+              setIsSuccess(false);
+              setApplicationId(null);
+            }}
+            className="mt-6 text-xs font-semibold text-[#64736F] hover:text-[#008F53] transition-colors cursor-pointer underline decoration-dotted"
           >
-            Submit Another Application
+            Submit Another Application &rarr;
           </button>
         </div>
       ) : (
