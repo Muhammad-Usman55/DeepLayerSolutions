@@ -6,6 +6,7 @@
    ========================================================================== */
 
 @media (max-width: 979px) {
+
   /* ------------------------------------------------------------------------
      MOBILE GPU RASTERIZATION & PERFORMANCE GUARDS (Zero Scroll Lag)
      ------------------------------------------------------------------------ */
@@ -16,10 +17,12 @@
     transform: translate3d(0, 0, 0) !important;
     contain: layout style paint !important;
   }
+
   [class~="blur-2xl"]:not([class*="backdrop-blur"]) {
     filter: blur(6px) !important;
     opacity: 0.65 !important;
   }
+
   [class~="blur-xl"]:not([class*="backdrop-blur"]) {
     filter: blur(5px) !important;
   }
@@ -69,7 +72,7 @@
   body {
     overflow-x: clip !important;
     max-width: 100% !important;
-    overscroll-behavior-y: auto !important;
+    -webkit-overflow-scrolling: touch;
   }
 
   /* Disable mobile tap flash */
@@ -146,8 +149,8 @@
     margin-top: 1.5rem !important;
   }
 
-  .hero-cta-group > a,
-  .hero-cta-group > button {
+  .hero-cta-group>a,
+  .hero-cta-group>button {
     width: 100% !important;
     min-height: 48px !important;
     justify-content: center !important;
@@ -159,6 +162,7 @@
    5. TIGHT MOBILE VIEWPORT OPTIMIZATIONS (< 768px)
    -------------------------------------------------------------------------- */
 @media (max-width: 767px) {
+
   /* Section Spacing - eliminate excessive empty vertical gaps while preserving breathing room */
   section:not(.hero-section-wrapper) {
     padding-top: 2.75rem !important;
@@ -204,7 +208,7 @@
     justify-content: center !important;
   }
 
-  [data-carousel-dot] > span {
+  [data-carousel-dot]>span {
     min-height: unset !important;
     min-width: unset !important;
   }
