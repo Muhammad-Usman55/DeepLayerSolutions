@@ -9,7 +9,6 @@ import useEmblaCarousel from "embla-carousel-react";
 import { Container } from "../common/Container";
 import { Eyebrow } from "../common/Eyebrow";
 import { ServiceCard } from "./services-preview/ServiceCard";
-import { ServicesMobilePreview } from "./services-preview/ServicesMobilePreview";
 import { previewServices, ServiceFilterCategory } from "./services-preview/types";
 
 // Desktop-only dynamic import: zero bundle and SVG filter overhead on mobile devices
@@ -132,9 +131,14 @@ export function ServicesPreview() {
       />
 
       <Container size="wide">
-        {/* Dedicated Modern Mobile View (< lg) */}
-        <div className="block lg:hidden py-2">
-          <ServicesMobilePreview />
+        {/* Mobile Section Heading */}
+        <div className="text-center mb-6 lg:hidden">
+          <h2 className="text-xl sm:text-2xl font-extrabold text-[#142A27] tracking-tight">
+            Our <span className="text-[#008F53]">Services</span>
+          </h2>
+          <p className="text-xs sm:text-sm text-[#64736F] mt-1 font-normal">
+            Innovative solutions for a smarter tomorrow.
+          </p>
         </div>
 
         {/* Upper Zone: Left 3D Central Visual & Right Content Block (Desktop Only) */}
@@ -201,8 +205,8 @@ export function ServicesPreview() {
           </div>
         </div>
 
-        {/* Lower Zone: Premium Horizontal Card Carousel (Desktop Only) */}
-        <div className="hidden lg:block lg:mt-16">
+        {/* Lower Zone: Premium Horizontal Card Carousel */}
+        <div className="lg:mt-16">
           {/* Controls Bar: Category Filter Pills + Navigation Arrows */}
           <div className="mt-8 sm:mt-10 mb-6 sm:mb-8 flex items-center justify-between flex-wrap gap-4 border-b border-[#DFEDE5]/70 pb-4">
             {/* Filter Pills */}
