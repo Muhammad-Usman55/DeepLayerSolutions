@@ -61,7 +61,10 @@ export default function AdminForgotPasswordPage() {
           </div>
         </div>
 
-        <div className="bg-white/10 backdrop-blur-xl border border-white/15 rounded-3xl p-6 sm:p-8 shadow-[0_24px_64px_rgba(0,0,0,0.4)] text-[#142A27]">
+        <div
+          className="bg-[#0D2D23]/95 backdrop-blur-md border border-white/15 rounded-3xl p-6 sm:p-8 shadow-[0_24px_64px_rgba(0,0,0,0.45)] text-white relative z-10"
+          style={{ filter: "none" }}
+        >
           <div className="mb-6 text-center">
             <h1 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
               Reset Password

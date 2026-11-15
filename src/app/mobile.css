@@ -9,18 +9,18 @@
   /* ------------------------------------------------------------------------
      MOBILE GPU RASTERIZATION & PERFORMANCE GUARDS (Zero Scroll Lag)
      ------------------------------------------------------------------------ */
-  /* Reduce Gaussian blur radius on mobile to prevent GPU rasterization stalls */
-  [class*="blur-3xl"] {
+  /* Reduce Gaussian blur radius on mobile to prevent GPU rasterization stalls (never targets backdrop-blur UI cards) */
+  [class~="blur-3xl"]:not([class*="backdrop-blur"]) {
     filter: blur(8px) !important;
     opacity: 0.55 !important;
     transform: translate3d(0, 0, 0) !important;
     contain: layout style paint !important;
   }
-  [class*="blur-2xl"] {
+  [class~="blur-2xl"]:not([class*="backdrop-blur"]) {
     filter: blur(6px) !important;
     opacity: 0.65 !important;
   }
-  [class*="blur-xl"] {
+  [class~="blur-xl"]:not([class*="backdrop-blur"]) {
     filter: blur(5px) !important;
   }
 

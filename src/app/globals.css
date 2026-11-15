@@ -336,23 +336,24 @@ body {
 
 /* --------------------------------------------------------------------------
    GPU RASTERIZATION & PERFORMANCE GUARDS (Zero Scroll Lag & Stutter)
+   Strictly targets background blur orbs only; never matches backdrop-blur UI elements
    -------------------------------------------------------------------------- */
-[class*="blur-3xl"],
-[class*="blur-2xl"],
-[class*="blur-xl"] {
+[class~="blur-3xl"]:not([class*="backdrop-blur"]),
+[class~="blur-2xl"]:not([class*="backdrop-blur"]),
+[class~="blur-xl"]:not([class*="backdrop-blur"]) {
   transform: translate3d(0, 0, 0);
   contain: layout style paint;
 }
 
-[class*="blur-3xl"] {
+[class~="blur-3xl"]:not([class*="backdrop-blur"]) {
   filter: blur(20px);
 }
 
-[class*="blur-2xl"] {
+[class~="blur-2xl"]:not([class*="backdrop-blur"]) {
   filter: blur(14px);
 }
 
-[class*="blur-xl"] {
+[class~="blur-xl"]:not([class*="backdrop-blur"]) {
   filter: blur(8px);
 }
 
@@ -389,9 +390,9 @@ body {
 }
 
 /* GPU-accelerated Blur Containment & Rasterization Performance */
-[class*="blur-3xl"],
-[class*="blur-2xl"],
-[class*="blur-xl"] {
+[class~="blur-3xl"]:not([class*="backdrop-blur"]),
+[class~="blur-2xl"]:not([class*="backdrop-blur"]),
+[class~="blur-xl"]:not([class*="backdrop-blur"]) {
   transform: translate3d(0, 0, 0);
   backface-visibility: hidden;
   contain: paint layout;
