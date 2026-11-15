@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { Calendar, Clock, User, ArrowRight, Tag } from "lucide-react";
 import { blogPostsData } from "@/data/blog";
 import { formatDate } from "@/lib/utils";
@@ -29,6 +30,9 @@ export async function generateMetadata({
   }
 
   const url = `${siteConfig.url}/blog/${post.slug}`;
+  const ogImageUrl = post.featuredImage
+    ? `${siteConfig.url}${post.featuredImage}`
+    : siteConfig.ogImage;
 
   return {
     title: `${post.title} — DeepLayer Solutions Blog`,
@@ -44,13 +48,13 @@ export async function generateMetadata({
       publishedTime: post.publishedAt,
       authors: [post.author.name],
       tags: post.tags,
-      images: [siteConfig.ogImage],
+      images: [ogImageUrl],
     },
     twitter: {
       card: "summary_large_image",
       title: `${post.title} | DeepLayer Solutions`,
       description: post.excerpt,
-      images: [siteConfig.ogImage],
+      images: [ogImageUrl],
     },
   };
 }
@@ -74,6 +78,7 @@ export default async function BlogPostPage({
     "@type": "BlogPosting",
     headline: post.title,
     description: post.excerpt,
+    image: post.featuredImage ? `${siteConfig.url}${post.featuredImage}` : undefined,
     datePublished: post.publishedAt,
     author: {
       "@type": "Person",
@@ -152,6 +157,20 @@ export default async function BlogPostPage({
       <section className="py-14 sm:py-20">
         <Container size="default">
           <div className="prose prose-lg max-w-none text-[#142A27]">
+            {/* Featured Image Hero Banner */}
+            {post.featuredImage && (
+              <div className="relative w-full aspect-[16/9] max-h-[500px] rounded-3xl overflow-hidden border border-[#DFEDE5] shadow-xl mb-10 bg-[#0A1614] not-prose">
+                <Image
+                  src={post.featuredImage}
+                  alt={post.title}
+                  fill
+                  priority
+                  sizes="(max-width: 1280px) 100vw, 1200px"
+                  className="object-cover"
+                />
+              </div>
+            )}
+
             {/* Intro Lead Paragraph */}
             <p className="text-lg sm:text-xl text-[#142A27] font-medium leading-relaxed bg-[#E9FFF2]/60 p-6 sm:p-8 rounded-2xl border-l-4 border-[#008F53] mb-10">
               {post.content.intro}
@@ -224,9 +243,20 @@ export default async function BlogPostPage({
                   <Link
                     key={rel.id}
                     href={`/blog/${rel.slug}`}
-                    className="p-6 rounded-2xl bg-white border border-[#DFEDE5] hover:border-[#008F53] shadow-xs hover:shadow-md transition-all group flex flex-col justify-between"
+                    className="p-6 rounded-2xl bg-white border border-[#DFEDE5] hover:border-[#008F53] shadow-xs hover:shadow-md transition-all group flex flex-col justify-between overflow-hidden"
                   >
                     <div>
+                      {rel.featuredImage && (
+                        <div className="relative h-44 w-full rounded-xl overflow-hidden mb-4 bg-[#0A1614] border border-[#DFEDE5]">
+                          <Image
+                            src={rel.featuredImage}
+                            alt={rel.title}
+                            fill
+                            sizes="(max-width: 768px) 100vw, 50vw"
+                            className="object-cover group-hover:scale-105 transition-transform duration-500"
+                          />
+                        </div>
+                      )}
                       <span className="text-xs font-mono uppercase text-[#008F53] font-semibold">
                         {rel.category}
                       </span>

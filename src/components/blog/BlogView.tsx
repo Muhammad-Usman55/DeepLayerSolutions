@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, Calendar, Clock, BookOpen, Search } from "lucide-react";
 import { blogPostsData } from "@/data/blog";
 import { formatDate, cn } from "@/lib/utils";
@@ -72,11 +73,23 @@ export function BlogView() {
             className="group flex flex-col justify-between rounded-2xl bg-white border border-[#DFEDE5] hover:border-[#008F53]/60 shadow-xs hover:shadow-xl transition-all duration-300 overflow-hidden hover:-translate-y-1"
           >
             {/* Visual Header Banner */}
-            <div className="relative h-44 w-full bg-gradient-to-br from-[#E9FFF2] to-[#FAFCF9] border-b border-[#DFEDE5] flex items-center justify-center p-6">
-              <div className="absolute inset-0 bg-grid-pattern opacity-10" />
-              <div className="w-12 h-12 rounded-2xl bg-white shadow-md border border-[#DFEDE5] flex items-center justify-center text-[#008F53] group-hover:scale-110 transition-transform">
-                <BookOpen className="w-6 h-6" />
-              </div>
+            <div className="relative h-48 sm:h-52 w-full overflow-hidden bg-[#0A1614] border-b border-[#DFEDE5]">
+              {post.featuredImage ? (
+                <Image
+                  src={post.featuredImage}
+                  alt={post.title}
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              ) : (
+                <div className="w-full h-full bg-gradient-to-br from-[#E9FFF2] to-[#FAFCF9] flex items-center justify-center p-6">
+                  <div className="w-12 h-12 rounded-2xl bg-white shadow-md border border-[#DFEDE5] flex items-center justify-center text-[#008F53] group-hover:scale-110 transition-transform">
+                    <BookOpen className="w-6 h-6" />
+                  </div>
+                </div>
+              )}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0A1614]/70 via-transparent to-transparent pointer-events-none" />
             </div>
 
             {/* Post Meta & Content */}

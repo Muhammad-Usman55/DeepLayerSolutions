@@ -12,6 +12,7 @@ export const blogPostsData: BlogPostItem[] = [
       name: "DeepLayer Solutions",
       role: "AI Engineering Team · Lahore",
     },
+    featuredImage: "/images/blog/ai-agents-that-do-real-work.jpg",
     excerpt:
       "A lot of teams spend their day on work that does not need a person. Here is what AI agents actually do, how businesses use them in production, and how to know if your workflows need one.",
     content: {
@@ -102,6 +103,7 @@ export const blogPostsData: BlogPostItem[] = [
       name: "Engineering Team",
       role: "AI Architecture Group",
     },
+    featuredImage: "/images/blog/future-of-ai-2026.jpg",
     excerpt:
       "Why single-prompt LLM wrappers are being replaced by compound AI systems, verified agent tools, and real-time multimodal reasoning.",
     content: {
@@ -153,6 +155,7 @@ export const blogPostsData: BlogPostItem[] = [
       name: "Engineering Team",
       role: "Systems & Data Group",
     },
+    featuredImage: "/images/blog/building-with-llms.jpg",
     excerpt:
       "A technical deep dive into building reliable enterprise RAG architectures that eliminate hallucinations and protect proprietary data.",
     content: {
@@ -200,6 +203,7 @@ export const blogPostsData: BlogPostItem[] = [
       name: "Engineering Team",
       role: "Frontend Engineering Group",
     },
+    featuredImage: "/images/blog/top-web-dev-trends.jpg",
     excerpt:
       "How modern full-stack web frameworks have evolved to deliver near-zero client JavaScript and sub-second Core Web Vitals.",
     content: {
@@ -246,6 +250,7 @@ export const blogPostsData: BlogPostItem[] = [
       name: "Engineering Team",
       role: "DevOps & Cloud Practice",
     },
+    featuredImage: "/images/blog/scaling-cloud-infrastructure.jpg",
     excerpt:
       "Practical strategies to orchestrate GPU clusters, automate deployments, and eliminate runaway cloud computing bills.",
     content: {
