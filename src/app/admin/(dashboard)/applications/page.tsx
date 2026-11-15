@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect, useCallback } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import {
   Search,
   Filter,
@@ -21,14 +20,8 @@ import {
   Link2,
   ExternalLink,
   Trash2,
-  CheckCircle2,
-  AlertCircle,
-  FileCheck,
 } from "lucide-react";
 import type { JobApplicationStatus } from "@/types/supabase";
-import { AdminDrawer } from "@/components/admin/AdminDrawer";
-import { AdminModal } from "@/components/admin/AdminModal";
-import { useAdminToast } from "@/components/admin/AdminToast";
 
 interface JobApplication {
   id: string;
@@ -48,19 +41,18 @@ interface JobApplication {
   updated_at: string;
 }
 
-const STATUS_OPTIONS: Array<{ label: string; value: string }> = [
-  { label: "All Statuses", value: "all" },
-  { label: "New", value: "new" },
-  { label: "Under Review", value: "under_review" },
-  { label: "Shortlisted", value: "shortlisted" },
-  { label: "Interview", value: "interview" },
-  { label: "Selected", value: "selected" },
-  { label: "Hired", value: "hired" },
-  { label: "Rejected", value: "rejected" },
+const STATUS_OPTIONS: Array<{ label: string; value: string; color: string }> = [
+  { label: "All Statuses", value: "all", color: "bg-gray-100 text-gray-700" },
+  { label: "New", value: "new", color: "bg-emerald-100 text-emerald-800 border-emerald-200" },
+  { label: "Under Review", value: "under_review", color: "bg-blue-100 text-blue-800 border-blue-200" },
+  { label: "Shortlisted", value: "shortlisted", color: "bg-purple-100 text-purple-800 border-purple-200" },
+  { label: "Interview", value: "interview", color: "bg-amber-100 text-amber-800 border-amber-200" },
+  { label: "Selected", value: "selected", color: "bg-teal-100 text-teal-800 border-teal-200" },
+  { label: "Hired", value: "hired", color: "bg-green-100 text-green-900 border-green-300" },
+  { label: "Rejected", value: "rejected", color: "bg-rose-100 text-rose-800 border-rose-200" },
 ];
 
 export default function AdminApplicationsPage() {
-  const toast = useAdminToast();
   const [applications, setApplications] = useState<JobApplication[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
@@ -70,15 +62,12 @@ export default function AdminApplicationsPage() {
   const [totalPages, setTotalPages] = useState(1);
   const [totalCount, setTotalCount] = useState(0);
 
-  // Selected for Drawer Detail / Status update
+  // Selected for Modal Detail / Status update
   const [selectedApp, setSelectedApp] = useState<JobApplication | null>(null);
   const [newStatus, setNewStatus] = useState<JobApplicationStatus>("new");
   const [adminNotes, setAdminNotes] = useState("");
   const [savingUpdates, setSavingUpdates] = useState(false);
-
-  // Selected for CV Preview Modal
-  const [previewCvUrl, setPreviewCvUrl] = useState<string | null>(null);
-  const [previewCandidateName, setPreviewCandidateName] = useState("");
+  const [saveSuccess, setSaveSuccess] = useState(false);
 
   const fetchApplications = useCallback(async () => {
     try {
@@ -101,20 +90,20 @@ export default function AdminApplicationsPage() {
       }
     } catch (err) {
       console.error(err);
-      toast.error("Failed to load applicant records", "Please check your network connection.");
     } finally {
       setLoading(false);
     }
-  }, [page, pageSize, status, search, toast]);
+  }, [page, pageSize, status, search]);
 
   useEffect(() => {
     fetchApplications();
   }, [fetchApplications]);
 
-  const openDetailDrawer = (app: JobApplication) => {
+  const openDetailModal = (app: JobApplication) => {
     setSelectedApp(app);
     setNewStatus(app.status);
     setAdminNotes(app.admin_notes || "");
+    setSaveSuccess(false);
   };
 
   const handleUpdateStatus = async () => {
@@ -136,29 +125,22 @@ export default function AdminApplicationsPage() {
       const data = await res.json();
 
       if (data.success) {
+        setSaveSuccess(true);
         setSelectedApp(data.application);
         setApplications((prev) =>
           prev.map((a) => (a.id === data.application.id ? data.application : a))
         );
-        toast.success(
-          "Status Updated & Candidate Notified",
-          `Status changed to "${newStatus.replace("_", " ").toUpperCase()}". Candidate notified via email.`
-        );
+        setTimeout(() => setSaveSuccess(false), 3000);
       }
     } catch (err) {
       console.error(err);
-      toast.error("Status Update Failed", "Could not persist status change.");
     } finally {
       setSavingUpdates(false);
     }
   };
 
   const handleDeleteApplication = async (app: JobApplication) => {
-    if (
-      !window.confirm(
-        `Are you sure you want to permanently delete application from candidate "${app.full_name}"?`
-      )
-    ) {
+    if (!window.confirm(`Are you sure you want to delete application from candidate "${app.full_name}"?`)) {
       return;
     }
 
@@ -170,72 +152,32 @@ export default function AdminApplicationsPage() {
       if (res.ok && data.success) {
         setApplications((prev) => prev.filter((a) => a.id !== app.id));
         if (selectedApp?.id === app.id) setSelectedApp(null);
-        toast.success("Application Deleted", `Removed candidate ${app.full_name}.`);
       } else {
-        toast.error("Deletion Failed", data.message || "Failed to delete application.");
+        alert(data.message || "Failed to delete application.");
       }
     } catch {
-      toast.error("Network Error", "Could not complete deletion.");
+      alert("Network error occurred while attempting deletion.");
     }
   };
 
   const getStatusBadge = (appStatus: JobApplicationStatus) => {
     switch (appStatus) {
       case "new":
-        return (
-          <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-            <span>New</span>
-          </span>
-        );
+        return <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">New</span>;
       case "under_review":
-        return (
-          <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold bg-blue-50 text-blue-700 border border-blue-200">
-            <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
-            <span>Under Review</span>
-          </span>
-        );
+        return <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200">Under Review</span>;
       case "shortlisted":
-        return (
-          <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold bg-purple-50 text-purple-700 border border-purple-200">
-            <span className="w-1.5 h-1.5 rounded-full bg-purple-500" />
-            <span>Shortlisted</span>
-          </span>
-        );
+        return <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-purple-50 text-purple-700 border border-purple-200">Shortlisted</span>;
       case "interview":
-        return (
-          <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold bg-amber-50 text-amber-700 border border-amber-200">
-            <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
-            <span>Interview</span>
-          </span>
-        );
+        return <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-200">Interview</span>;
       case "selected":
-        return (
-          <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold bg-teal-50 text-teal-700 border border-teal-200">
-            <span className="w-1.5 h-1.5 rounded-full bg-teal-500" />
-            <span>Selected</span>
-          </span>
-        );
+        return <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-teal-50 text-teal-700 border border-teal-200">Selected</span>;
       case "hired":
-        return (
-          <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold bg-green-50 text-green-800 border border-green-300">
-            <span className="w-1.5 h-1.5 rounded-full bg-green-600" />
-            <span>Hired</span>
-          </span>
-        );
+        return <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-green-50 text-green-800 border border-green-300">Hired</span>;
       case "rejected":
-        return (
-          <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold bg-rose-50 text-rose-700 border border-rose-200">
-            <span className="w-1.5 h-1.5 rounded-full bg-rose-500" />
-            <span>Rejected</span>
-          </span>
-        );
+        return <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-rose-50 text-rose-700 border border-rose-200">Rejected</span>;
       default:
-        return (
-          <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-gray-50 text-gray-700 border border-gray-200">
-            {appStatus}
-          </span>
-        );
+        return <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-gray-50 text-gray-700 border border-gray-200">{appStatus}</span>;
     }
   };
 
@@ -244,11 +186,9 @@ export default function AdminApplicationsPage() {
       {/* Top Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <div className="flex items-center gap-2">
-            <h1 className="text-2xl font-extrabold text-[#142A27] tracking-tight">
-              Applicant Tracking System (ATS)
-            </h1>
-          </div>
+          <h1 className="text-2xl font-extrabold text-[#142A27] tracking-tight">
+            Applicant Tracking System (ATS)
+          </h1>
           <p className="text-xs sm:text-sm text-[#64736F] mt-1">
             Review candidate submissions, resume downloads, status triage, and candidate pipelines.
           </p>
@@ -273,7 +213,7 @@ export default function AdminApplicationsPage() {
                 setSearch(e.target.value);
                 setPage(1);
               }}
-              className="w-full pl-10 pr-4 py-2 text-xs sm:text-sm rounded-xl border border-[#DFEDE5] bg-[#FAFCF9] text-[#142A27] placeholder:text-[#A0AEA7] focus:outline-none focus:border-[#008F53] focus:bg-white transition-all"
+              className="w-full pl-10 pr-4 py-2 text-xs sm:text-sm rounded-xl border border-[#DFEDE5] bg-[#FAFCF9] text-[#142A27] placeholder:text-[#A0AEA7] focus:outline-none focus:ring-2 focus:ring-[#008F53]"
             />
           </div>
 
@@ -285,7 +225,7 @@ export default function AdminApplicationsPage() {
                 setStatus(e.target.value);
                 setPage(1);
               }}
-              className="w-full pl-10 pr-8 py-2 text-xs sm:text-sm rounded-xl border border-[#DFEDE5] bg-[#FAFCF9] text-[#142A27] focus:outline-none focus:border-[#008F53] focus:bg-white transition-all appearance-none cursor-pointer"
+              className="w-full pl-10 pr-8 py-2 text-xs sm:text-sm rounded-xl border border-[#DFEDE5] bg-[#FAFCF9] text-[#142A27] focus:outline-none focus:ring-2 focus:ring-[#008F53] appearance-none cursor-pointer"
             >
               {STATUS_OPTIONS.map((opt) => (
                 <option key={opt.value} value={opt.value}>
@@ -328,14 +268,8 @@ export default function AdminApplicationsPage() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-[#DFEDE5] text-xs">
-                {applications.map((app, idx) => (
-                  <motion.tr
-                    key={app.id}
-                    initial={{ opacity: 0, y: 4 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.2, delay: idx * 0.02 }}
-                    className="hover:bg-[#F6FAF7] transition-colors group"
-                  >
+                {applications.map((app) => (
+                  <tr key={app.id} className="hover:bg-[#FAFCF9] transition-colors">
                     <td className="py-4 px-4 sm:px-6">
                       <div className="font-bold text-[#142A27]">{app.full_name}</div>
                       <div className="text-[11px] text-[#64736F] flex items-center gap-1.5 mt-0.5">
@@ -349,9 +283,7 @@ export default function AdminApplicationsPage() {
                     </td>
 
                     <td className="py-4 px-4">
-                      <span className="font-semibold text-[#142A27] block">
-                        {app.applied_position}
-                      </span>
+                      <span className="font-semibold text-[#142A27] block">{app.applied_position}</span>
                       {app.linkedin_url && (
                         <a
                           href={app.linkedin_url}
@@ -377,18 +309,16 @@ export default function AdminApplicationsPage() {
 
                     <td className="py-4 px-4">
                       {app.resume_path ? (
-                        <button
-                          type="button"
-                          onClick={() => {
-                            setPreviewCvUrl(app.resume_path);
-                            setPreviewCandidateName(app.full_name);
-                          }}
-                          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-[#E9FFF2] text-[#008F53] hover:bg-[#008F53] hover:text-white transition-colors cursor-pointer"
+                        <a
+                          href={app.resume_path}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-[#E9FFF2] text-[#008F53] hover:bg-[#008F53] hover:text-white transition-colors"
                         >
                           <FileText className="w-3.5 h-3.5" />
-                          <span>Preview CV</span>
+                          <span>View CV</span>
                           <ExternalLink className="w-3 h-3 opacity-70" />
-                        </button>
+                        </a>
                       ) : (
                         <span className="text-[11px] text-[#A0AEA7]">No resume uploaded</span>
                       )}
@@ -397,8 +327,8 @@ export default function AdminApplicationsPage() {
                     <td className="py-4 px-4 sm:px-6 text-right">
                       <div className="inline-flex items-center gap-1.5 justify-end">
                         <button
-                          onClick={() => openDetailDrawer(app)}
-                          className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-bold border border-[#DFEDE5] text-[#142A27] hover:bg-[#E9FFF2] hover:text-[#008F53] hover:border-[#008F53] transition-colors cursor-pointer"
+                          onClick={() => openDetailModal(app)}
+                          className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-bold border border-[#DFEDE5] text-[#142A27] hover:bg-[#E9FFF2] hover:text-[#008F53] transition-colors cursor-pointer"
                         >
                           <Eye className="w-3.5 h-3.5" />
                           <span>Review</span>
@@ -412,7 +342,7 @@ export default function AdminApplicationsPage() {
                         </button>
                       </div>
                     </td>
-                  </motion.tr>
+                  </tr>
                 ))}
               </tbody>
             </table>
@@ -446,276 +376,221 @@ export default function AdminApplicationsPage() {
         )}
       </div>
 
-      {/* Candidate Review Drawer (Slide-in from right) */}
-      <AdminDrawer
-        isOpen={!!selectedApp}
-        onClose={() => setSelectedApp(null)}
-        title={selectedApp ? selectedApp.full_name : "Candidate Details"}
-        subtitle={selectedApp ? `Applied for ${selectedApp.applied_position}` : undefined}
-        width="xl"
-        footer={
-          selectedApp && (
-            <div className="flex items-center justify-between w-full">
+      {/* Candidate Detail & Triage Modal */}
+      {selectedApp && (
+        <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-xs flex items-center justify-center p-4">
+          <div className="bg-white border border-[#DFEDE5] rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl flex flex-col">
+            {/* Modal Header */}
+            <div className="p-6 border-b border-[#DFEDE5] flex items-center justify-between sticky top-0 bg-white z-10">
+              <div>
+                <span className="text-[11px] font-bold text-[#008F53] uppercase tracking-wider">
+                  Candidate Application
+                </span>
+                <h3 className="text-xl font-extrabold text-[#142A27]">
+                  {selectedApp.full_name}
+                </h3>
+              </div>
               <button
-                type="button"
-                onClick={() => handleDeleteApplication(selectedApp)}
-                className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold border border-rose-200 text-rose-600 hover:bg-rose-50 transition-colors cursor-pointer"
+                onClick={() => setSelectedApp(null)}
+                className="p-2 rounded-xl text-[#64736F] hover:bg-[#FAFCF9] hover:text-[#142A27] transition-colors cursor-pointer"
               >
-                <Trash2 className="w-3.5 h-3.5" />
-                <span>Delete</span>
+                <X className="w-5 h-5" />
               </button>
+            </div>
 
-              <div className="flex items-center gap-2">
+            {/* Modal Content */}
+            <div className="p-6 space-y-6 flex-1 text-xs sm:text-sm text-[#142A27]">
+              {/* Candidate Info Grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-[#FAFCF9] p-4 rounded-2xl border border-[#DFEDE5]">
+                <div>
+                  <span className="text-[11px] font-bold text-[#64736F] uppercase block">
+                    Target Position
+                  </span>
+                  <span className="font-bold text-[#008F53] text-sm">
+                    {selectedApp.applied_position}
+                  </span>
+                </div>
+                <div>
+                  <span className="text-[11px] font-bold text-[#64736F] uppercase block">
+                    Submitted At
+                  </span>
+                  <span>{new Date(selectedApp.created_at).toLocaleString()}</span>
+                </div>
+                <div>
+                  <span className="text-[11px] font-bold text-[#64736F] uppercase block">
+                    Email Address
+                  </span>
+                  <a
+                    href={`mailto:${selectedApp.email}`}
+                    className="text-[#008F53] hover:underline"
+                  >
+                    {selectedApp.email}
+                  </a>
+                </div>
+                <div>
+                  <span className="text-[11px] font-bold text-[#64736F] uppercase block">
+                    Phone / WhatsApp
+                  </span>
+                  <a
+                    href={`https://wa.me/${selectedApp.phone.replace(/[^0-9]/g, "")}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:underline"
+                  >
+                    {selectedApp.phone}
+                  </a>
+                </div>
+              </div>
+
+              {/* Links & Resume CTA */}
+              <div className="p-4 rounded-2xl bg-[#F0FAF4] border border-[#BCE8CF] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div>
+                  <h4 className="font-bold text-[#142A27] text-sm">Resume / CV Document</h4>
+                  <p className="text-xs text-[#64736F] mt-0.5">
+                    Uploaded directly by the candidate into Supabase Storage.
+                  </p>
+                </div>
+                {selectedApp.resume_path ? (
+                  <a
+                    href={selectedApp.resume_path}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold bg-[#008F53] text-white hover:bg-[#007343] transition-colors shrink-0"
+                  >
+                    <Download className="w-4 h-4" />
+                    <span>Download / Open CV</span>
+                  </a>
+                ) : (
+                  <span className="text-xs text-[#64736F]">No file uploaded</span>
+                )}
+              </div>
+
+              {/* LinkedIn & Portfolio */}
+              <div className="flex flex-wrap gap-3">
+                {selectedApp.linkedin_url && (
+                  <a
+                    href={selectedApp.linkedin_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-[#DFEDE5] bg-[#FAFCF9] hover:bg-white text-xs font-semibold text-[#142A27]"
+                  >
+                    <Link2 className="w-3.5 h-3.5 text-[#008F53]" />
+                    <span>LinkedIn Profile</span>
+                    <ExternalLink className="w-3 h-3 text-[#64736F]" />
+                  </a>
+                )}
+                {selectedApp.portfolio_url && (
+                  <a
+                    href={selectedApp.portfolio_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-[#DFEDE5] bg-[#FAFCF9] hover:bg-white text-xs font-semibold text-[#142A27]"
+                  >
+                    <Link2 className="w-3.5 h-3.5 text-[#008F53]" />
+                    <span>Portfolio / GitHub</span>
+                    <ExternalLink className="w-3 h-3 text-[#64736F]" />
+                  </a>
+                )}
+              </div>
+
+              {/* Cover Letter */}
+              {selectedApp.cover_letter && (
+                <div>
+                  <h4 className="text-xs font-bold text-[#64736F] uppercase tracking-wider mb-2">
+                    Cover Note / Ambition
+                  </h4>
+                  <div className="p-4 rounded-2xl bg-[#FAFCF9] border border-[#DFEDE5] whitespace-pre-wrap text-xs leading-relaxed text-[#142A27]">
+                    {selectedApp.cover_letter}
+                  </div>
+                </div>
+              )}
+
+              {/* Status & Admin Notes Triage */}
+              <div className="pt-4 border-t border-[#DFEDE5] space-y-4">
+                <h4 className="text-xs font-bold text-[#142A27] uppercase tracking-wider">
+                  Recruitment Status Triage
+                </h4>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-bold text-[#64736F] mb-1.5">
+                      Pipeline Status
+                    </label>
+                    <select
+                      value={newStatus}
+                      onChange={(e) => setNewStatus(e.target.value as JobApplicationStatus)}
+                      className="w-full px-3 py-2 rounded-xl border border-[#DFEDE5] bg-[#FAFCF9] text-xs font-semibold text-[#142A27] focus:outline-none focus:ring-2 focus:ring-[#008F53]"
+                    >
+                      <option value="new">New</option>
+                      <option value="under_review">Under Review</option>
+                      <option value="shortlisted">Shortlisted</option>
+                      <option value="interview">Interview</option>
+                      <option value="selected">Selected</option>
+                      <option value="hired">Hired</option>
+                      <option value="rejected">Rejected</option>
+                    </select>
+                    <p className="text-[11px] text-[#008F53] mt-1.5 flex items-center gap-1 font-medium">
+                      <Mail className="w-3 h-3" />
+                      <span>Candidate will automatically receive an official status update email ({selectedApp.email}).</span>
+                    </p>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-[#64736F] mb-1.5">
+                    Internal Interview Notes &amp; Feedback
+                  </label>
+                  <textarea
+                    rows={3}
+                    placeholder="Add interview assessment notes, evaluation feedback, or next steps..."
+                    value={adminNotes}
+                    onChange={(e) => setAdminNotes(e.target.value)}
+                    className="w-full p-3 text-xs rounded-xl border border-[#DFEDE5] bg-[#FAFCF9] text-[#142A27] focus:outline-none focus:ring-2 focus:ring-[#008F53]"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Modal Footer */}
+            <div className="p-4 sm:p-6 border-t border-[#DFEDE5] bg-[#FAFCF9] flex items-center justify-between sticky bottom-0">
+              <div className="flex items-center gap-3">
+                <button
+                  type="button"
+                  onClick={() => selectedApp && handleDeleteApplication(selectedApp)}
+                  className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold border border-rose-200 text-rose-600 hover:bg-rose-50 transition-colors cursor-pointer"
+                >
+                  <Trash2 className="w-3.5 h-3.5" />
+                  <span>Delete Candidate</span>
+                </button>
+                {saveSuccess && (
+                  <div className="flex items-center gap-1.5 text-xs text-emerald-700 font-bold">
+                    <Check className="w-4 h-4 text-emerald-600" />
+                    <span>Application updated &amp; candidate notified via email!</span>
+                  </div>
+                )}
+              </div>
+              <div className="flex items-center gap-3">
                 <button
                   type="button"
                   onClick={() => setSelectedApp(null)}
-                  className="px-4 py-2 rounded-xl text-xs font-bold text-[#64736F] hover:bg-neutral-100 transition-colors cursor-pointer"
+                  className="px-4 py-2 rounded-xl text-xs font-bold text-[#64736F] hover:bg-gray-100 transition-colors cursor-pointer"
                 >
-                  Cancel
+                  Close
                 </button>
                 <button
                   type="button"
                   onClick={handleUpdateStatus}
                   disabled={savingUpdates}
-                  className="px-5 py-2 rounded-xl text-xs font-bold bg-[#008F53] text-white hover:bg-[#007343] transition-colors disabled:opacity-50 cursor-pointer flex items-center gap-2 shadow-2xs"
+                  className="px-5 py-2 rounded-xl text-xs font-bold bg-[#008F53] text-white hover:bg-[#007343] transition-colors disabled:opacity-50 cursor-pointer flex items-center gap-2"
                 >
                   {savingUpdates && <Loader2 className="w-3.5 h-3.5 animate-spin" />}
-                  <span>Save Status</span>
+                  <span>Save Changes</span>
                 </button>
               </div>
             </div>
-          )
-        }
-      >
-        {selectedApp && (
-          <div className="space-y-6 text-xs sm:text-sm text-[#142A27]">
-            {/* Candidate Info Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-[#F7FAF8] p-4 rounded-2xl border border-[#DFEDE5]">
-              <div>
-                <span className="text-[11px] font-bold text-[#64736F] uppercase block">
-                  Target Position
-                </span>
-                <span className="font-bold text-[#008F53] text-sm">
-                  {selectedApp.applied_position}
-                </span>
-              </div>
-              <div>
-                <span className="text-[11px] font-bold text-[#64736F] uppercase block">
-                  Submitted At
-                </span>
-                <span>{new Date(selectedApp.created_at).toLocaleString()}</span>
-              </div>
-              <div>
-                <span className="text-[11px] font-bold text-[#64736F] uppercase block">
-                  Email Address
-                </span>
-                <a
-                  href={`mailto:${selectedApp.email}`}
-                  className="text-[#008F53] hover:underline font-medium"
-                >
-                  {selectedApp.email}
-                </a>
-              </div>
-              <div>
-                <span className="text-[11px] font-bold text-[#64736F] uppercase block">
-                  Phone / WhatsApp
-                </span>
-                <a
-                  href={`https://wa.me/${selectedApp.phone.replace(/[^0-9]/g, "")}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:underline font-medium"
-                >
-                  {selectedApp.phone}
-                </a>
-              </div>
-            </div>
-
-            {/* Resume CTA */}
-            <div className="p-4 rounded-2xl bg-[#E9FFF2]/70 border border-[#BCE8CF] flex items-center justify-between gap-3">
-              <div>
-                <h4 className="font-bold text-[#142A27] text-sm">Resume / CV Document</h4>
-                <p className="text-xs text-[#64736F] mt-0.5">
-                  Uploaded directly by candidate into Supabase Storage.
-                </p>
-              </div>
-              {selectedApp.resume_path ? (
-                <div className="flex items-center gap-2">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setPreviewCvUrl(selectedApp.resume_path);
-                      setPreviewCandidateName(selectedApp.full_name);
-                    }}
-                    className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold bg-[#008F53] text-white hover:bg-[#007343] transition-colors cursor-pointer"
-                  >
-                    <Eye className="w-3.5 h-3.5" />
-                    <span>View CV</span>
-                  </button>
-                  <a
-                    href={selectedApp.resume_path}
-                    download
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-2 rounded-xl border border-[#BCE8CF] text-[#008F53] hover:bg-white transition-colors"
-                    title="Download CV"
-                  >
-                    <Download className="w-4 h-4" />
-                  </a>
-                </div>
-              ) : (
-                <span className="text-xs text-[#64736F]">No file uploaded</span>
-              )}
-            </div>
-
-            {/* LinkedIn & Portfolio */}
-            <div className="flex flex-wrap gap-3">
-              {selectedApp.linkedin_url && (
-                <a
-                  href={selectedApp.linkedin_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-[#DFEDE5] bg-[#FAFCF9] hover:bg-white text-xs font-semibold text-[#142A27]"
-                >
-                  <Link2 className="w-3.5 h-3.5 text-[#008F53]" />
-                  <span>LinkedIn Profile</span>
-                  <ExternalLink className="w-3 h-3 text-[#64736F]" />
-                </a>
-              )}
-              {selectedApp.portfolio_url && (
-                <a
-                  href={selectedApp.portfolio_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-[#DFEDE5] bg-[#FAFCF9] hover:bg-white text-xs font-semibold text-[#142A27]"
-                >
-                  <Link2 className="w-3.5 h-3.5 text-[#008F53]" />
-                  <span>Portfolio / GitHub</span>
-                  <ExternalLink className="w-3 h-3 text-[#64736F]" />
-                </a>
-              )}
-            </div>
-
-            {/* Cover Letter */}
-            {selectedApp.cover_letter && (
-              <div>
-                <h4 className="text-xs font-bold text-[#64736F] uppercase tracking-wider mb-2">
-                  Cover Note / Ambition
-                </h4>
-                <div className="p-4 rounded-2xl bg-[#FAFCF9] border border-[#DFEDE5] whitespace-pre-wrap text-xs leading-relaxed text-[#142A27]">
-                  {selectedApp.cover_letter}
-                </div>
-              </div>
-            )}
-
-            {/* Pipeline Status Triage */}
-            <div className="pt-4 border-t border-[#DFEDE5] space-y-4">
-              <h4 className="text-xs font-bold text-[#142A27] uppercase tracking-wider">
-                Pipeline Status Triage
-              </h4>
-
-              <div>
-                <label className="block text-xs font-bold text-[#64736F] mb-1.5">
-                  Update Pipeline Status
-                </label>
-                <select
-                  value={newStatus}
-                  onChange={(e) => setNewStatus(e.target.value as JobApplicationStatus)}
-                  className="w-full px-3 py-2 rounded-xl border border-[#DFEDE5] bg-white text-xs font-semibold text-[#142A27] focus:outline-none focus:ring-2 focus:ring-[#008F53]"
-                >
-                  <option value="new">New</option>
-                  <option value="under_review">Under Review</option>
-                  <option value="shortlisted">Shortlisted</option>
-                  <option value="interview">Interview</option>
-                  <option value="selected">Selected</option>
-                  <option value="hired">Hired</option>
-                  <option value="rejected">Rejected</option>
-                </select>
-                <p className="text-[11px] text-[#008F53] mt-1.5 flex items-center gap-1 font-medium">
-                  <Mail className="w-3 h-3" />
-                  <span>
-                    Candidate will automatically receive an official status update email (
-                    {selectedApp.email}).
-                  </span>
-                </p>
-              </div>
-
-              <div>
-                <label className="block text-xs font-bold text-[#64736F] mb-1.5">
-                  Internal Interview Notes &amp; Feedback
-                </label>
-                <textarea
-                  rows={3}
-                  placeholder="Add interview assessment notes, evaluation feedback, or next steps..."
-                  value={adminNotes}
-                  onChange={(e) => setAdminNotes(e.target.value)}
-                  className="w-full p-3 text-xs rounded-xl border border-[#DFEDE5] bg-white text-[#142A27] focus:outline-none focus:ring-2 focus:ring-[#008F53]"
-                />
-              </div>
-            </div>
           </div>
-        )}
-      </AdminDrawer>
-
-      {/* CV Preview Modal */}
-      <AdminModal
-        isOpen={!!previewCvUrl}
-        onClose={() => setPreviewCvUrl(null)}
-        title={`CV Document — ${previewCandidateName}`}
-        description="Inspect submitted candidate credentials and portfolio artifacts."
-        maxWidth="4xl"
-        footer={
-          <div className="flex items-center justify-between w-full">
-            <a
-              href={previewCvUrl || "#"}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 text-xs font-semibold text-[#008F53] hover:underline"
-            >
-              <ExternalLink className="w-3.5 h-3.5" />
-              <span>Open in new tab</span>
-            </a>
-            <button
-              type="button"
-              onClick={() => setPreviewCvUrl(null)}
-              className="px-4 py-2 rounded-xl text-xs font-bold bg-[#008F53] text-white hover:bg-[#007343] transition-colors cursor-pointer"
-            >
-              Done Reviewing
-            </button>
-          </div>
-        }
-      >
-        {previewCvUrl && (
-          <div className="w-full h-[65vh] rounded-2xl overflow-hidden border border-[#DFEDE5] bg-[#F5F8F6] flex items-center justify-center">
-            {previewCvUrl.endsWith(".pdf") || previewCvUrl.includes(".pdf") ? (
-              <iframe
-                src={previewCvUrl}
-                title="CV Document Viewer"
-                className="w-full h-full border-none"
-              />
-            ) : (
-              <div className="text-center p-8 space-y-4">
-                <FileCheck className="w-12 h-12 text-[#008F53] mx-auto" />
-                <div>
-                  <h4 className="font-bold text-[#142A27] text-base">Resume File Attached</h4>
-                  <p className="text-xs text-[#64736F] mt-1 max-w-sm mx-auto">
-                    This file format is best viewed or downloaded directly.
-                  </p>
-                </div>
-                <a
-                  href={previewCvUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold bg-[#008F53] text-white hover:bg-[#007343] transition-colors"
-                >
-                  <Download className="w-4 h-4" />
-                  <span>Download / Open Resume</span>
-                </a>
-              </div>
-            )}
-          </div>
-        )}
-      </AdminModal>
+        </div>
+      )}
     </div>
   );
 }
