@@ -3,6 +3,8 @@
 import React, { useState } from "react";
 import { AdminSidebar } from "./AdminSidebar";
 import { AdminHeader } from "./AdminHeader";
+import { AdminToastProvider } from "./AdminToast";
+import { AdminPageTransition } from "./AdminPageTransition";
 import { AdminRole } from "@/types/supabase";
 
 interface AdminDashboardShellProps {
@@ -22,30 +24,32 @@ export function AdminDashboardShell({
   const [isMobileOpen, setIsMobileOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-[#F8FAF8] text-[#142A27] flex font-sans antialiased">
-      {/* Responsive Collapsible Sidebar */}
-      <AdminSidebar
-        role={role}
-        isCollapsed={isCollapsed}
-        onToggleCollapse={() => setIsCollapsed(!isCollapsed)}
-        isMobileOpen={isMobileOpen}
-        onCloseMobile={() => setIsMobileOpen(false)}
-      />
-
-      {/* Main Content Area */}
-      <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
-        <AdminHeader
-          email={email}
+    <AdminToastProvider>
+      <div className="min-h-screen bg-[#F8FAF8] text-[#142A27] flex font-sans antialiased selection:bg-[#008F53]/20 selection:text-[#082019]">
+        {/* Responsive Collapsible Sidebar */}
+        <AdminSidebar
           role={role}
-          fullName={fullName}
-          onOpenMobileSidebar={() => setIsMobileOpen(true)}
+          isCollapsed={isCollapsed}
+          onToggleCollapse={() => setIsCollapsed(!isCollapsed)}
+          isMobileOpen={isMobileOpen}
+          onCloseMobile={() => setIsMobileOpen(false)}
         />
 
-        <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl w-full mx-auto overflow-y-auto">
-          {children}
-        </main>
+        {/* Main Content Area */}
+        <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
+          <AdminHeader
+            email={email}
+            role={role}
+            fullName={fullName}
+            onOpenMobileSidebar={() => setIsMobileOpen(true)}
+          />
+
+          <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl w-full mx-auto overflow-y-auto">
+            <AdminPageTransition>{children}</AdminPageTransition>
+          </main>
+        </div>
       </div>
-    </div>
+    </AdminToastProvider>
   );
 }
 
