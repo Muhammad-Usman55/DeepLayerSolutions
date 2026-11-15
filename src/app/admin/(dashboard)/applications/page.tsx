@@ -529,6 +529,10 @@ export default function AdminApplicationsPage() {
                       <option value="hired">Hired</option>
                       <option value="rejected">Rejected</option>
                     </select>
+                    <p className="text-[11px] text-[#008F53] mt-1.5 flex items-center gap-1 font-medium">
+                      <Mail className="w-3 h-3" />
+                      <span>Candidate will automatically receive an official status update email ({selectedApp.email}).</span>
+                    </p>
                   </div>
                 </div>
 
@@ -561,7 +565,7 @@ export default function AdminApplicationsPage() {
                 {saveSuccess && (
                   <div className="flex items-center gap-1.5 text-xs text-emerald-700 font-bold">
                     <Check className="w-4 h-4 text-emerald-600" />
-                    <span>Application updated successfully!</span>
+                    <span>Application updated &amp; candidate notified via email!</span>
                   </div>
                 )}
               </div>

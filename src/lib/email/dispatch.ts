@@ -11,7 +11,10 @@ import { generateContactNotificationEmail } from "./templates/contactNotificatio
 import { generateContactConfirmationEmail } from "./templates/contactConfirmationEmail";
 import { generateNewsletterConfirmationEmail } from "./templates/newsletterConfirmationEmail";
 import { generateNewsletterWelcomeEmail } from "./templates/newsletterWelcomeEmail";
+import { generateInquiryStatusUpdateEmail } from "./templates/inquiryStatusUpdateEmail";
+import { generateCareerStatusUpdateEmail } from "./templates/careerStatusUpdateEmail";
 import { generateUnsubscribeToken } from "./tokens";
+import type { ContactSubmissionStatus, JobApplicationStatus } from "@/types/supabase";
 
 export interface EmailDispatchResult {
   recipient: string;
@@ -412,5 +415,214 @@ export async function sendNewsletterWelcomeEmail(params: {
       errorMessage: errStr,
     });
     return exceptionResult;
+  }
+}
+
+/**
+ * Dispatches an automated status update email to the client when their
+ * contact inquiry status is changed in the admin console.
+ */
+export async function sendInquiryStatusUpdateEmail(params: {
+  inquiryId?: string;
+  referenceNumber: string;
+  fullName: string;
+  email: string;
+  service?: string | null;
+  subject: string;
+  status: ContactSubmissionStatus;
+  adminNotes?: string | null;
+}): Promise<EmailDispatchResult> {
+  const { inquiryId, referenceNumber, fullName, email, service, subject, status, adminNotes } = params;
+  const siteUrl = getSiteUrl();
+  const companyEmail = getCompanyEmail();
+  const gmail = getGmailClient();
+
+  // If status is spam, don't email
+  if (status === "spam") {
+    return {
+      recipient: email,
+      type: "contact_autoresponder",
+      status: "skipped",
+    };
+  }
+
+  if (!gmail) {
+    console.warn(
+      `[GMAIL UNCONFIGURED] Inquiry status update for ${referenceNumber} (${email}) skipped: Gmail credentials not active.`
+    );
+    const unconfiguredResult: EmailDispatchResult = {
+      recipient: email,
+      type: "contact_autoresponder",
+      status: "failed",
+      error: "Gmail API credentials not configured in environment.",
+    };
+    await logEmailAttempt({
+      recipient: email,
+      emailType: "contact_autoresponder",
+      relatedRecordId: inquiryId || null,
+      status: "failed",
+      errorMessage: "Gmail API credentials not configured.",
+    });
+    return unconfiguredResult;
+  }
+
+  try {
+    const template = generateInquiryStatusUpdateEmail({
+      referenceNumber,
+      fullName,
+      subject,
+      service,
+      status,
+      adminNotes,
+      siteUrl,
+    });
+
+    const sendRes = await sendGmailMessage({
+      to: email,
+      replyTo: companyEmail,
+      subject: template.subject,
+      html: template.html,
+      text: template.plainText,
+    });
+
+    console.info(
+      `[GMAIL INQUIRY STATUS SENT] Ref: ${referenceNumber} to ${email} (status: ${status}) | ID: ${sendRes.id}`
+    );
+
+    const successResult: EmailDispatchResult = {
+      recipient: email,
+      type: "contact_autoresponder",
+      status: "sent",
+      providerMessageId: sendRes.id,
+    };
+
+    await logEmailAttempt({
+      recipient: email,
+      emailType: "contact_autoresponder",
+      relatedRecordId: inquiryId || null,
+      providerMessageId: sendRes.id,
+      status: "sent",
+    });
+
+    return successResult;
+  } catch (err: any) {
+    const errStr = err?.message || "Unexpected error during inquiry status email dispatch";
+    console.error(`[GMAIL INQUIRY STATUS ERROR] Ref: ${referenceNumber}:`, errStr);
+
+    const failResult: EmailDispatchResult = {
+      recipient: email,
+      type: "contact_autoresponder",
+      status: "failed",
+      error: errStr,
+    };
+
+    await logEmailAttempt({
+      recipient: email,
+      emailType: "contact_autoresponder",
+      relatedRecordId: inquiryId || null,
+      status: "failed",
+      errorMessage: errStr,
+    });
+
+    return failResult;
+  }
+}
+
+/**
+ * Dispatches an automated status update email to the candidate when their
+ * recruitment application status is changed in the admin console.
+ */
+export async function sendCareerStatusUpdateEmail(params: {
+  applicationId?: string;
+  fullName: string;
+  email: string;
+  position: string;
+  status: JobApplicationStatus;
+  adminNotes?: string | null;
+}): Promise<EmailDispatchResult> {
+  const { applicationId, fullName, email, position, status, adminNotes } = params;
+  const siteUrl = getSiteUrl();
+  const companyEmail = getCompanyEmail();
+  const gmail = getGmailClient();
+
+  if (!gmail) {
+    console.warn(
+      `[GMAIL UNCONFIGURED] Career status update for candidate ${fullName} (${email}) skipped: Gmail credentials not active.`
+    );
+    const unconfiguredResult: EmailDispatchResult = {
+      recipient: email,
+      type: "system_alert",
+      status: "failed",
+      error: "Gmail API credentials not configured in environment.",
+    };
+    await logEmailAttempt({
+      recipient: email,
+      emailType: "system_alert",
+      relatedRecordId: applicationId || null,
+      status: "failed",
+      errorMessage: "Gmail API credentials not configured.",
+    });
+    return unconfiguredResult;
+  }
+
+  try {
+    const template = generateCareerStatusUpdateEmail({
+      id: applicationId,
+      fullName,
+      email,
+      position,
+      status,
+      adminNotes,
+      siteUrl,
+    });
+
+    const sendRes = await sendGmailMessage({
+      to: email,
+      replyTo: companyEmail,
+      subject: template.subject,
+      html: template.html,
+      text: template.plainText,
+    });
+
+    console.info(
+      `[GMAIL CAREER STATUS SENT] Candidate: ${fullName} (${email}) (status: ${status}) | ID: ${sendRes.id}`
+    );
+
+    const successResult: EmailDispatchResult = {
+      recipient: email,
+      type: "system_alert",
+      status: "sent",
+      providerMessageId: sendRes.id,
+    };
+
+    await logEmailAttempt({
+      recipient: email,
+      emailType: "system_alert",
+      relatedRecordId: applicationId || null,
+      providerMessageId: sendRes.id,
+      status: "sent",
+    });
+
+    return successResult;
+  } catch (err: any) {
+    const errStr = err?.message || "Unexpected error during career status email dispatch";
+    console.error(`[GMAIL CAREER STATUS ERROR] Candidate: ${fullName}:`, errStr);
+
+    const failResult: EmailDispatchResult = {
+      recipient: email,
+      type: "system_alert",
+      status: "failed",
+      error: errStr,
+    };
+
+    await logEmailAttempt({
+      recipient: email,
+      emailType: "system_alert",
+      relatedRecordId: applicationId || null,
+      status: "failed",
+      errorMessage: errStr,
+    });
+
+    return failResult;
   }
 }

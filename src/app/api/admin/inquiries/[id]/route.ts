@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getAuthenticatedAdmin } from "@/lib/auth/admin";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { sendInquiryStatusUpdateEmail } from "@/lib/email/dispatch";
 import type { ContactSubmissionStatus } from "@/types/supabase";
 
 const VALID_STATUSES: ContactSubmissionStatus[] = [
@@ -79,11 +80,35 @@ export async function PATCH(
       );
     }
 
+    // Automatically send status update notification email to the client
+    let emailStatus: "sent" | "failed" | "skipped" = "skipped";
+    if (body.status !== undefined && updated.email) {
+      try {
+        const dispatchRes = await sendInquiryStatusUpdateEmail({
+          inquiryId: updated.id,
+          referenceNumber: updated.reference_number,
+          fullName: updated.full_name,
+          email: updated.email,
+          service: updated.service,
+          subject: updated.subject,
+          status: updated.status,
+          adminNotes: updated.admin_notes,
+        });
+        emailStatus = dispatchRes.status;
+      } catch (emailErr) {
+        console.error("[INQUIRY STATUS EMAIL ERROR]:", emailErr);
+      }
+    }
+
     return NextResponse.json(
       {
         success: true,
-        message: "Inquiry updated successfully.",
+        message:
+          emailStatus === "sent"
+            ? "Inquiry updated and status notification email sent to client."
+            : "Inquiry updated successfully.",
         inquiry: updated,
+        emailStatus,
       },
       { status: 200 }
     );

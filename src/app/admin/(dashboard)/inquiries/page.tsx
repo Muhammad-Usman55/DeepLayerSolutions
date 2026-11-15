@@ -123,6 +123,7 @@ export default function AdminInquiriesPage() {
         setInquiries((prev) =>
           prev.map((item) => (item.id === json.inquiry.id ? json.inquiry : item))
         );
+        setTimeout(() => setSaveSuccess(false), 4000);
       } else {
         alert(json.message || "Failed to update inquiry.");
       }
@@ -440,6 +441,10 @@ export default function AdminInquiriesPage() {
                     <option value="closed">Closed (Engaged / Resolved)</option>
                     <option value="spam">Spam (Automated / Junk)</option>
                   </select>
+                  <p className="text-[11px] text-[#008F53] mt-1.5 flex items-center gap-1 font-medium">
+                    <Mail className="w-3 h-3" />
+                    <span>Client will automatically receive a branded status update email ({selectedInquiry.email}).</span>
+                  </p>
                 </div>
 
                 <div>
@@ -472,7 +477,7 @@ export default function AdminInquiriesPage() {
                 {saveSuccess && (
                   <span className="inline-flex items-center gap-1 text-xs font-bold text-[#008F53]">
                     <Check className="w-3.5 h-3.5" />
-                    <span>Inquiry updated successfully</span>
+                    <span>Inquiry updated &amp; client notified via email</span>
                   </span>
                 )}
               </div>

@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getAuthenticatedAdmin } from "@/lib/auth/admin";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { sendCareerStatusUpdateEmail } from "@/lib/email/dispatch";
 import type { Database, JobApplicationStatus } from "@/types/supabase";
 
 type JobApplicationUpdate = Database["public"]["Tables"]["job_applications"]["Update"];
@@ -127,9 +128,32 @@ export async function PATCH(req: NextRequest) {
       );
     }
 
+    // Automatically dispatch career status notification email to candidate
+    let emailStatus: "sent" | "failed" | "skipped" = "skipped";
+    if (status && data?.email) {
+      try {
+        const dispatchRes = await sendCareerStatusUpdateEmail({
+          applicationId: data.id,
+          fullName: data.full_name,
+          email: data.email,
+          position: data.applied_position,
+          status: data.status,
+          adminNotes: data.admin_notes,
+        });
+        emailStatus = dispatchRes.status;
+      } catch (emailErr) {
+        console.error("[CAREER STATUS EMAIL ERROR]:", emailErr);
+      }
+    }
+
     return NextResponse.json({
       success: true,
+      message:
+        emailStatus === "sent"
+          ? "Application updated and status notification email sent to candidate."
+          : "Application updated successfully.",
       application: data,
+      emailStatus,
     });
   } catch (error: any) {
     console.error("[ADMIN APPLICATION UPDATE EXCEPTION]:", error?.message || error);
