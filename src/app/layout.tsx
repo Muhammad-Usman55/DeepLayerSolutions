@@ -25,7 +25,13 @@ const geistMono = Geist_Mono({
   display: "swap",
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || siteConfig.url || "https://deeplayersolutions.vercel.app";
+const siteUrl = (() => {
+  const envUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+  if (envUrl && !envUrl.includes("vercel.app")) {
+    return envUrl.replace(/\/$/, "");
+  }
+  return siteConfig.url || "https://www.deeplayersolutions.com";
+})();
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
