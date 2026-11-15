@@ -1,7 +1,19 @@
 "use client";
 
-import React, { useState, useEffect, FormEvent } from "react";
-import { CheckCircle2, AlertCircle, Sparkles, FileText, Link2, User, Mail, Phone } from "lucide-react";
+import React, { useState, useEffect, useRef, FormEvent, DragEvent, ChangeEvent } from "react";
+import {
+  CheckCircle2,
+  AlertCircle,
+  Sparkles,
+  FileText,
+  Link2,
+  User,
+  Mail,
+  Phone,
+  UploadCloud,
+  X,
+  FileCheck,
+} from "lucide-react";
 import { Button } from "../common/Button";
 
 interface CareerFormState {
@@ -11,7 +23,6 @@ interface CareerFormState {
   position: string;
   linkedin: string;
   portfolioOrGithub: string;
-  resumeUrl: string;
   coverNote: string;
   botField: string;
 }
@@ -23,7 +34,6 @@ const initialCareerForm: CareerFormState = {
   position: "AI/ML Engineer Intern",
   linkedin: "",
   portfolioOrGithub: "",
-  resumeUrl: "",
   coverNote: "",
   botField: "",
 };
@@ -34,10 +44,14 @@ interface CareerApplyFormProps {
 
 export function CareerApplyForm({ selectedPosition }: CareerApplyFormProps) {
   const [form, setForm] = useState<CareerFormState>(initialCareerForm);
-  const [errors, setErrors] = useState<Partial<Record<keyof CareerFormState, string>>>({});
+  const [resumeFile, setResumeFile] = useState<File | null>(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string>>({});
   const [serverError, setServerError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   // Update position if user selects from a job card
   useEffect(() => {
@@ -46,11 +60,79 @@ export function CareerApplyForm({ selectedPosition }: CareerApplyFormProps) {
     }
   }, [selectedPosition]);
 
+  const formatFileSize = (bytes: number): string => {
+    if (bytes < 1024) return `${bytes} B`;
+    if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
+    return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+  };
+
+  const handleFileSelect = (file: File | null) => {
+    if (!file) return;
+
+    const ext = file.name.split(".").pop()?.toLowerCase() || "";
+    if (!["pdf", "doc", "docx"].includes(ext)) {
+      setErrors((prev) => ({
+        ...prev,
+        resumeFile: "Please upload a valid document in PDF, DOC, or DOCX format.",
+      }));
+      return;
+    }
+
+    if (file.size > 10 * 1024 * 1024) {
+      setErrors((prev) => ({
+        ...prev,
+        resumeFile: "File size exceeds the 10MB limit. Please upload a smaller file.",
+      }));
+      return;
+    }
+
+    setResumeFile(file);
+    setErrors((prev) => {
+      const next = { ...prev };
+      delete next.resumeFile;
+      return next;
+    });
+  };
+
+  const handleFileInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      handleFileSelect(e.target.files[0]);
+    }
+  };
+
+  const handleDragOver = (e: DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(true);
+  };
+
+  const handleDragLeave = (e: DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(false);
+  };
+
+  const handleDrop = (e: DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(false);
+    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+      handleFileSelect(e.dataTransfer.files[0]);
+    }
+  };
+
+  const removeSelectedFile = () => {
+    setResumeFile(null);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
+  };
+
   const validate = (): boolean => {
-    const newErrors: Partial<Record<keyof CareerFormState, string>> = {};
+    const newErrors: Record<string, string> = {};
 
     if (!form.fullName.trim() || form.fullName.trim().length < 2) {
-      newErrors.fullName = "Please enter your full name.";
+      newErrors.fullName = "Please enter your full name (at least 2 characters).";
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -67,11 +149,11 @@ export function CareerApplyForm({ selectedPosition }: CareerApplyFormProps) {
     }
 
     if (!form.linkedin.trim() || !form.linkedin.includes("linkedin.com")) {
-      newErrors.linkedin = "Please provide your LinkedIn profile URL.";
+      newErrors.linkedin = "Please provide your valid LinkedIn profile URL.";
     }
 
-    if (!form.resumeUrl.trim()) {
-      newErrors.resumeUrl = "Please provide a link to your Resume / CV (Google Drive, Dropbox, or PDF link).";
+    if (!resumeFile) {
+      newErrors.resumeFile = "Please upload your Resume / CV (PDF, DOC, or DOCX up to 10MB).";
     }
 
     setErrors(newErrors);
@@ -89,10 +171,22 @@ export function CareerApplyForm({ selectedPosition }: CareerApplyFormProps) {
     setIsSubmitting(true);
 
     try {
+      const formData = new FormData();
+      formData.append("fullName", form.fullName);
+      formData.append("email", form.email);
+      formData.append("phone", form.phone);
+      formData.append("position", form.position);
+      formData.append("linkedin", form.linkedin);
+      formData.append("portfolioOrGithub", form.portfolioOrGithub);
+      formData.append("coverNote", form.coverNote);
+      formData.append("botField", form.botField);
+      if (resumeFile) {
+        formData.append("resumeFile", resumeFile);
+      }
+
       const response = await fetch("/api/careers", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: formData,
       });
 
       const data = await response.json().catch(() => null);
@@ -102,7 +196,8 @@ export function CareerApplyForm({ selectedPosition }: CareerApplyFormProps) {
           setErrors(data.errors);
         }
         setServerError(
-          data?.message || "Failed to submit application. Please try again or email us directly at deeplayersolutions@gmail.com."
+          data?.message ||
+            "Failed to submit application. Please try again or email your CV directly to deeplayersolutions@gmail.com."
         );
         setIsSubmitting(false);
         return;
@@ -110,17 +205,24 @@ export function CareerApplyForm({ selectedPosition }: CareerApplyFormProps) {
 
       setIsSuccess(true);
       setForm(initialCareerForm);
+      setResumeFile(null);
+      if (fileInputRef.current) fileInputRef.current.value = "";
       setErrors({});
       setServerError(null);
     } catch {
-      setServerError("Network error. Please check your connection or email your resume directly to deeplayersolutions@gmail.com.");
+      setServerError(
+        "Network error. Please check your connection or email your resume directly to deeplayersolutions@gmail.com."
+      );
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <div id="apply-form" className="p-7 sm:p-10 rounded-3xl bg-white border border-[#DFEDE5] shadow-xl relative scroll-mt-20">
+    <div
+      id="apply-form"
+      className="p-7 sm:p-10 rounded-3xl bg-white border border-[#DFEDE5] shadow-xl relative scroll-mt-20"
+    >
       <div className="mb-8">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold tracking-wider uppercase bg-[#E9FFF2] text-[#008F53] border border-[#BCE8CF] mb-3">
           <Sparkles className="w-3.5 h-3.5 text-[#00B86B]" />
@@ -130,7 +232,7 @@ export function CareerApplyForm({ selectedPosition }: CareerApplyFormProps) {
           Submit Your Application
         </h3>
         <p className="mt-2 text-sm text-[#64736F] leading-relaxed">
-          Tell us about your background, ambitions, and link your resume. We evaluate every application thoroughly.
+          Tell us about your background, ambitions, and upload your resume. We evaluate every application thoroughly.
         </p>
       </div>
 
@@ -145,7 +247,7 @@ export function CareerApplyForm({ selectedPosition }: CareerApplyFormProps) {
           </h4>
 
           <p className="mt-3 text-sm sm:text-base text-[#64736F] max-w-md leading-relaxed">
-            Thank you for applying to DeepLayer Solutions. Our technical and recruitment leads will review your profile and reach out within 48 business hours.
+            Thank you for applying to DeepLayer Solutions. Your resume and candidate profile have been securely stored in our system. Our recruitment leads will review your application and reach out within 48 business hours.
           </p>
 
           <button
@@ -159,7 +261,10 @@ export function CareerApplyForm({ selectedPosition }: CareerApplyFormProps) {
       ) : (
         <form onSubmit={handleSubmit} noValidate className="space-y-6">
           {serverError && (
-            <div role="alert" className="p-4 rounded-xl bg-red-50 border border-red-200 text-xs sm:text-sm text-red-700 flex items-start gap-2.5">
+            <div
+              role="alert"
+              className="p-4 rounded-xl bg-red-50 border border-red-200 text-xs sm:text-sm text-red-700 flex items-start gap-2.5"
+            >
               <AlertCircle className="w-4 h-4 shrink-0 mt-0.5 text-red-500" />
               <span>{serverError}</span>
             </div>
@@ -181,9 +286,14 @@ export function CareerApplyForm({ selectedPosition }: CareerApplyFormProps) {
           {/* Row 1: Full Name & Email */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div>
-              <label htmlFor="cFullName" className="block text-xs font-bold uppercase tracking-wider text-[#142A27] mb-2 flex items-center gap-1.5">
+              <label
+                htmlFor="cFullName"
+                className="block text-xs font-bold uppercase tracking-wider text-[#142A27] mb-2 flex items-center gap-1.5"
+              >
                 <User className="w-3.5 h-3.5 text-[#008F53]" />
-                <span>Full Name <span className="text-red-500">*</span></span>
+                <span>
+                  Full Name <span className="text-red-500">*</span>
+                </span>
               </label>
               <input
                 id="cFullName"
@@ -204,9 +314,14 @@ export function CareerApplyForm({ selectedPosition }: CareerApplyFormProps) {
             </div>
 
             <div>
-              <label htmlFor="cEmail" className="block text-xs font-bold uppercase tracking-wider text-[#142A27] mb-2 flex items-center gap-1.5">
+              <label
+                htmlFor="cEmail"
+                className="block text-xs font-bold uppercase tracking-wider text-[#142A27] mb-2 flex items-center gap-1.5"
+              >
                 <Mail className="w-3.5 h-3.5 text-[#008F53]" />
-                <span>Email Address <span className="text-red-500">*</span></span>
+                <span>
+                  Email Address <span className="text-red-500">*</span>
+                </span>
               </label>
               <input
                 id="cEmail"
@@ -230,9 +345,14 @@ export function CareerApplyForm({ selectedPosition }: CareerApplyFormProps) {
           {/* Row 2: Phone & Position */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div>
-              <label htmlFor="cPhone" className="block text-xs font-bold uppercase tracking-wider text-[#142A27] mb-2 flex items-center gap-1.5">
+              <label
+                htmlFor="cPhone"
+                className="block text-xs font-bold uppercase tracking-wider text-[#142A27] mb-2 flex items-center gap-1.5"
+              >
                 <Phone className="w-3.5 h-3.5 text-[#008F53]" />
-                <span>Phone / WhatsApp <span className="text-red-500">*</span></span>
+                <span>
+                  Phone / WhatsApp <span className="text-red-500">*</span>
+                </span>
               </label>
               <input
                 id="cPhone"
@@ -253,9 +373,14 @@ export function CareerApplyForm({ selectedPosition }: CareerApplyFormProps) {
             </div>
 
             <div>
-              <label htmlFor="cPosition" className="block text-xs font-bold uppercase tracking-wider text-[#142A27] mb-2 flex items-center gap-1.5">
+              <label
+                htmlFor="cPosition"
+                className="block text-xs font-bold uppercase tracking-wider text-[#142A27] mb-2 flex items-center gap-1.5"
+              >
                 <FileText className="w-3.5 h-3.5 text-[#008F53]" />
-                <span>Role Applied For <span className="text-red-500">*</span></span>
+                <span>
+                  Role Applied For <span className="text-red-500">*</span>
+                </span>
               </label>
               <select
                 id="cPosition"
@@ -265,9 +390,15 @@ export function CareerApplyForm({ selectedPosition }: CareerApplyFormProps) {
               >
                 <option value="AI/ML Engineer Intern">AI/ML Engineer Intern</option>
                 <option value="Digital Marketing Intern">Digital Marketing Intern</option>
-                <option value="Lead Generation & Business Development Intern">Lead Generation &amp; Business Development Intern</option>
-                <option value="Full-Stack Software Engineer Intern">Full-Stack Software Engineer Intern</option>
-                <option value="General Spontaneous Application">General Spontaneous Application</option>
+                <option value="Lead Generation & Business Development Intern">
+                  Lead Generation &amp; Business Development Intern
+                </option>
+                <option value="Full-Stack Software Engineer Intern">
+                  Full-Stack Software Engineer Intern
+                </option>
+                <option value="General Spontaneous Application">
+                  General Spontaneous Application
+                </option>
               </select>
             </div>
           </div>
@@ -275,9 +406,14 @@ export function CareerApplyForm({ selectedPosition }: CareerApplyFormProps) {
           {/* Row 3: LinkedIn URL & GitHub / Portfolio */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div>
-              <label htmlFor="cLinkedIn" className="block text-xs font-bold uppercase tracking-wider text-[#142A27] mb-2 flex items-center gap-1.5">
+              <label
+                htmlFor="cLinkedIn"
+                className="block text-xs font-bold uppercase tracking-wider text-[#142A27] mb-2 flex items-center gap-1.5"
+              >
                 <Link2 className="w-3.5 h-3.5 text-[#008F53]" />
-                <span>LinkedIn Profile URL <span className="text-red-500">*</span></span>
+                <span>
+                  LinkedIn Profile URL <span className="text-red-500">*</span>
+                </span>
               </label>
               <input
                 id="cLinkedIn"
@@ -298,7 +434,10 @@ export function CareerApplyForm({ selectedPosition }: CareerApplyFormProps) {
             </div>
 
             <div>
-              <label htmlFor="cPortfolio" className="block text-xs font-bold uppercase tracking-wider text-[#142A27] mb-2 flex items-center gap-1.5">
+              <label
+                htmlFor="cPortfolio"
+                className="block text-xs font-bold uppercase tracking-wider text-[#142A27] mb-2 flex items-center gap-1.5"
+              >
                 <Link2 className="w-3.5 h-3.5 text-[#008F53]" />
                 <span>GitHub / Portfolio / Project Link</span>
               </label>
@@ -313,36 +452,108 @@ export function CareerApplyForm({ selectedPosition }: CareerApplyFormProps) {
             </div>
           </div>
 
-          {/* Row 4: Resume Link (Drive / Dropbox / Public PDF) */}
+          {/* Row 4: CV / Resume File Upload (Dropzone) */}
           <div>
-            <label htmlFor="cResume" className="block text-xs font-bold uppercase tracking-wider text-[#142A27] mb-2 flex items-center gap-1.5">
-              <FileText className="w-3.5 h-3.5 text-[#008F53]" />
-              <span>Resume / CV Link <span className="text-red-500">*</span></span>
+            <label className="block text-xs font-bold uppercase tracking-wider text-[#142A27] mb-2 flex items-center justify-between">
+              <span className="flex items-center gap-1.5">
+                <UploadCloud className="w-3.5 h-3.5 text-[#008F53]" />
+                <span>
+                  Upload Resume / CV <span className="text-red-500">*</span>
+                </span>
+              </span>
+              <span className="text-[11px] font-normal text-[#64736F] lowercase">
+                PDF, DOC, DOCX up to 10MB
+              </span>
             </label>
+
             <input
-              id="cResume"
-              type="url"
-              placeholder="Google Drive, Dropbox, or public PDF link (ensure link sharing is ON)"
-              value={form.resumeUrl}
-              onChange={(e) => setForm({ ...form, resumeUrl: e.target.value })}
-              className={`w-full px-4 py-3 rounded-xl bg-[#FAFCF9] border text-sm text-[#142A27] placeholder:text-[#A0AEA7] focus:outline-none focus:ring-2 focus:ring-[#008F53] transition-colors ${
-                errors.resumeUrl ? "border-red-400 bg-red-50/20" : "border-[#DFEDE5]"
-              }`}
+              ref={fileInputRef}
+              type="file"
+              accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+              onChange={handleFileInputChange}
+              className="hidden"
+              id="cResumeFile"
             />
-            <p className="mt-1 text-[11px] text-[#64736F]">
-              Paste a viewable link to your PDF (e.g. Google Drive with &ldquo;Anyone with the link can view&rdquo; enabled).
-            </p>
-            {errors.resumeUrl && (
-              <p className="mt-1 text-xs text-red-600 flex items-center gap-1">
+
+            {!resumeFile ? (
+              <div
+                onClick={() => fileInputRef.current?.click()}
+                onDragOver={handleDragOver}
+                onDragLeave={handleDragLeave}
+                onDrop={handleDrop}
+                className={`p-6 border-2 border-dashed rounded-2xl text-center cursor-pointer transition-all duration-200 ${
+                  isDragging
+                    ? "border-[#008F53] bg-[#E9FFF2]/60 scale-[1.01]"
+                    : errors.resumeFile
+                    ? "border-red-300 bg-red-50/20 hover:border-red-400"
+                    : "border-[#CFE2D8] bg-[#FAFCF9] hover:border-[#008F53] hover:bg-[#F3F9F6]"
+                }`}
+              >
+                <div className="w-12 h-12 rounded-full bg-[#E9FFF2] text-[#008F53] flex items-center justify-center mx-auto mb-3">
+                  <UploadCloud className="w-6 h-6 text-[#008F53]" />
+                </div>
+                <p className="text-sm font-semibold text-[#142A27]">
+                  Click to upload or drag &amp; drop your CV here
+                </p>
+                <p className="text-xs text-[#64736F] mt-1">
+                  Supported formats: PDF, Microsoft Word (.doc, .docx) &bull; Maximum file size: 10MB
+                </p>
+              </div>
+            ) : (
+              <div className="p-4 rounded-2xl bg-[#F0FAF4] border border-[#BCE8CF] flex items-center justify-between gap-4 transition-all">
+                <div className="flex items-center gap-3 min-w-0">
+                  <div className="w-10 h-10 rounded-xl bg-[#008F53] text-white flex items-center justify-center shrink-0">
+                    <FileCheck className="w-5 h-5" />
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-sm font-bold text-[#142A27] truncate">
+                      {resumeFile.name}
+                    </p>
+                    <p className="text-xs text-[#008F53] font-medium flex items-center gap-1.5 mt-0.5">
+                      <span>{formatFileSize(resumeFile.size)}</span>
+                      <span>&bull;</span>
+                      <span className="inline-flex items-center gap-1">
+                        <CheckCircle2 className="w-3 h-3 text-[#008F53]" />
+                        Ready to upload
+                      </span>
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2 shrink-0">
+                  <button
+                    type="button"
+                    onClick={() => fileInputRef.current?.click()}
+                    className="px-3 py-1.5 text-xs font-semibold text-[#008F53] hover:text-[#007343] hover:bg-[#E9FFF2] rounded-lg transition-colors cursor-pointer"
+                  >
+                    Change
+                  </button>
+                  <button
+                    type="button"
+                    onClick={removeSelectedFile}
+                    aria-label="Remove uploaded CV"
+                    className="p-1.5 text-[#64736F] hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors cursor-pointer"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {errors.resumeFile && (
+              <p className="mt-1.5 text-xs text-red-600 flex items-center gap-1">
                 <AlertCircle className="w-3.5 h-3.5" />
-                <span>{errors.resumeUrl}</span>
+                <span>{errors.resumeFile}</span>
               </p>
             )}
           </div>
 
           {/* Row 5: Brief Cover Note */}
           <div>
-            <label htmlFor="cNote" className="block text-xs font-bold uppercase tracking-wider text-[#142A27] mb-2">
+            <label
+              htmlFor="cNote"
+              className="block text-xs font-bold uppercase tracking-wider text-[#142A27] mb-2"
+            >
               Why DeepLayer Solutions? (Optional Cover Note)
             </label>
             <textarea
@@ -363,12 +574,12 @@ export function CareerApplyForm({ selectedPosition }: CareerApplyFormProps) {
               size="lg"
               withArrow
               isLoading={isSubmitting}
-              className="w-full justify-center shadow-md shadow-[#008F53]/20 font-bold"
+              className="w-full justify-center shadow-md shadow-[#008F53]/20 font-bold cursor-pointer"
             >
-              Submit Internship Application
+              {isSubmitting ? "Uploading CV & Submitting..." : "Submit Application"}
             </Button>
             <p className="mt-3 text-center text-xs text-[#64736F]">
-              100% remote evaluation • Equal opportunity • Feedback on verified submissions
+              Your resume is securely stored in Supabase &bull; 100% confidential recruitment review
             </p>
           </div>
         </form>
@@ -376,4 +587,3 @@ export function CareerApplyForm({ selectedPosition }: CareerApplyFormProps) {
     </div>
   );
 }
-
