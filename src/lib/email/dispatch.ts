@@ -376,6 +376,7 @@ export async function sendNewsletterWelcomeEmail(params: {
       subject: template.subject,
       html: template.html,
       text: template.text,
+      listUnsubscribe: template.unsubscribeUrl,
     });
 
     console.info(`[GMAIL NEWSLETTER WELCOME SENT] ${email} | ID: ${sendRes.id}`);

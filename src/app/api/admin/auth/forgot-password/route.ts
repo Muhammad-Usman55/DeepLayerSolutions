@@ -59,7 +59,7 @@ export async function POST(req: NextRequest) {
         .maybeSingle();
 
       if (profile) {
-        const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://deeplayersolutions.vercel.app";
+        const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.deeplayersolutions.com";
         const redirectTo = `${siteUrl.replace(/\/$/, "")}/admin/reset-password`;
 
         await adminDb.auth.resetPasswordForEmail(email, {

@@ -1,6 +1,7 @@
 import "server-only";
 
 import { google, gmail_v1 } from "googleapis";
+import { siteConfig } from "@/config/site";
 
 let gmailInstance: gmail_v1.Gmail | null = null;
 
@@ -10,6 +11,7 @@ export interface SendGmailOptions {
   html: string;
   text?: string;
   replyTo?: string;
+  listUnsubscribe?: string;
 }
 
 /**
@@ -79,19 +81,25 @@ export function getCompanyEmail(): string {
 }
 
 /**
- * Returns the public site URL.
+ * Returns the verified public site URL, avoiding vercel.app staging URLs in emails.
  */
 export function getSiteUrl(): string {
-  const url = process.env.NEXT_PUBLIC_SITE_URL?.trim();
-  if (url && url.length > 0) {
-    return url.replace(/\/$/, "");
+  const envUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+  if (envUrl && envUrl.length > 0 && !envUrl.includes("vercel.app")) {
+    return envUrl.replace(/\/$/, "");
   }
-  return "https://deeplayersolutions.vercel.app";
+  return siteConfig.url || "https://www.deeplayersolutions.com";
 }
 
 /**
  * Builds an RFC 2822 MIME formatted message and returns a base64url encoded string
  * suitable for the Gmail API `users.messages.send` raw parameter.
+ *
+ * Includes standard anti-spam deliverability headers:
+ * - RFC 2822 Date
+ * - Unique Message-ID with company domain
+ * - Auto-Submitted / X-Auto-Response-Suppress for automated transactional notifications
+ * - RFC 8058 List-Unsubscribe when unsubscribe URL is provided
  */
 export function createRawEmail(params: {
   to: string | string[];
@@ -100,6 +108,7 @@ export function createRawEmail(params: {
   subject: string;
   html: string;
   text?: string;
+  listUnsubscribe?: string;
 }): string {
   const boundary = `dl_bnd_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`;
   const toHeader = Array.isArray(params.to) ? params.to.join(", ") : params.to;
@@ -107,12 +116,22 @@ export function createRawEmail(params: {
   // RFC 2047 encoded-word syntax for subject to support UTF-8 characters safely
   const encodedSubject = `=?UTF-8?B?${Buffer.from(params.subject, "utf-8").toString("base64")}?=`;
 
+  // Standard RFC 2822 Message-ID format (<timestamp.random@domain>)
+  const messageId = `<${Date.now()}.${Math.random().toString(36).substring(2, 11)}@deeplayersolutions.com>`;
+  const dateHeader = new Date().toUTCString();
+
   const headers = [
     `From: ${params.from}`,
     `To: ${toHeader}`,
     params.replyTo ? `Reply-To: ${params.replyTo}` : null,
     `Subject: ${encodedSubject}`,
+    `Date: ${dateHeader}`,
+    `Message-ID: ${messageId}`,
     `MIME-Version: 1.0`,
+    `Auto-Submitted: auto-generated`,
+    `X-Auto-Response-Suppress: All`,
+    params.listUnsubscribe ? `List-Unsubscribe: <${params.listUnsubscribe}>` : null,
+    params.listUnsubscribe ? `List-Unsubscribe-Post: List-Unsubscribe=One-Click` : null,
     `Content-Type: multipart/alternative; boundary="${boundary}"`,
   ]
     .filter(Boolean)
@@ -168,6 +187,7 @@ export async function sendGmailMessage(
     subject: options.subject,
     html: options.html,
     text: options.text,
+    listUnsubscribe: options.listUnsubscribe,
   });
 
   const response = await gmail.users.messages.send({
