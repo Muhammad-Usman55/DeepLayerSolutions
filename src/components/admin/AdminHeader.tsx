@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter, usePathname } from "next/navigation";
 import {
   Menu,
@@ -92,9 +93,23 @@ export function AdminHeader({
             </button>
           )}
 
-          <div className="lg:hidden flex items-center">
-            <Logo variant="default" size="sm" />
-          </div>
+          <Link href="/admin" className="lg:hidden flex items-center gap-2">
+            <div className="w-8 h-8 rounded-xl bg-[#E9FFF2] flex items-center justify-center shrink-0 border border-[#DFEDE5]">
+              <Image
+                src="/logo/logo-cropped.png"
+                alt="DeepLayer"
+                width={20}
+                height={20}
+                className="object-contain"
+              />
+            </div>
+            <span className="font-extrabold text-[#142A27] text-sm tracking-tight">
+              Deep<span className="text-[#008F53]">Layer</span>
+            </span>
+            <span className="px-1.5 py-0.5 rounded text-[10px] font-extrabold bg-[#E9FFF2] text-[#008F53] border border-[#DFEDE5] leading-none uppercase tracking-wider">
+              Admin
+            </span>
+          </Link>
 
           <div className="hidden sm:block">
             <div className="flex items-center gap-2 text-xs text-[#64736F]">

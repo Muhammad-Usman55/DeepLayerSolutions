@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import {
   LayoutDashboard,
@@ -155,13 +156,28 @@ export function AdminSidebar({
       <div className="h-16 flex items-center justify-between px-4 border-b border-[#DFEDE5] shrink-0">
         <Link
           href="/admin"
-          className="flex items-center gap-2.5 overflow-hidden transition-all"
+          className="flex items-center gap-2.5 overflow-hidden transition-all group"
+          title="DeepLayer Admin Console"
         >
-          <Logo variant="default" size="sm" />
+          <div className="w-8 h-8 rounded-xl bg-[#E9FFF2] flex items-center justify-center shrink-0 border border-[#DFEDE5] shadow-2xs group-hover:border-[#008F53]/40 transition-colors">
+            <Image
+              src="/logo/logo-cropped.png"
+              alt="DeepLayer Solutions"
+              width={22}
+              height={22}
+              className="object-contain"
+              priority
+            />
+          </div>
           {!isCollapsed && (
-            <span className="font-extrabold text-[#142A27] text-sm tracking-tight truncate">
-              Admin<span className="text-[#008F53]">Console</span>
-            </span>
+            <div className="flex items-center gap-1.5 min-w-0">
+              <span className="font-extrabold text-[#142A27] text-sm tracking-tight truncate">
+                Deep<span className="text-[#008F53]">Layer</span>
+              </span>
+              <span className="px-1.5 py-0.5 rounded-md text-[10px] font-extrabold bg-[#E9FFF2] text-[#008F53] border border-[#DFEDE5] leading-none uppercase tracking-wider shrink-0">
+                Admin
+              </span>
+            </div>
           )}
         </Link>
 
