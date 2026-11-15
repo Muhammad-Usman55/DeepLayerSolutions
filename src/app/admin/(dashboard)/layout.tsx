@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import { redirect } from "next/navigation";
+import { connection } from "next/server";
 import { getAuthenticatedAdmin } from "@/lib/auth/admin";
 import { AdminDashboardShell } from "@/components/admin/AdminDashboardShell";
 import { Loader2 } from "lucide-react";
@@ -17,6 +18,7 @@ async function AuthenticatedAdminLayout({
 }: {
   children: React.ReactNode;
 }) {
+  await connection();
   const admin = await getAuthenticatedAdmin();
 
   if (!admin) {
