@@ -1,0 +1,112 @@
+[
+  {
+    "id": "ai-ml-intern",
+    "slug": "ai-ml-engineer-intern",
+    "title": "AI/ML Engineer Intern",
+    "department": "Engineering & AI",
+    "type": "Internship",
+    "location": "Remote (Global / Pakistan)",
+    "duration": "3 – 6 Months",
+    "stipend": "Competitive Paid Stipend + Fast-Track Offer",
+    "iconName": "Brain",
+    "shortDescription": "Work alongside senior AI architects developing computer vision, neural models, LLM fine-tuning, and RAG pipelines.",
+    "description": "We are seeking an enthusiastic, intellectually curious AI/ML Engineer Intern to join our intelligence team. You will participate in developing production-grade AI pipelines, fine-tuning modern foundation models, experimenting with retrieval-augmented generation (RAG), and optimizing low-latency inference on edge and cloud clusters.",
+    "responsibilities": [
+      "Assist in training, evaluating, and quantizing machine learning models using PyTorch, TensorFlow, or ONNX.",
+      "Build and test Retrieval-Augmented Generation (RAG) pipelines using vector databases (Qdrant, Pinecone, Chroma).",
+      "Process, clean, and vectorize unstructured multimodal datasets (text, image, and tabular data).",
+      "Collaborate with senior engineers to deploy models via high-throughput FastAPI and Docker microservices.",
+      "Benchmark model accuracy, latency, and token consumption under rigorous test suites."
+    ],
+    "requirements": [
+      "Strong foundational knowledge of Python, NumPy, Pandas, and basic Linear Algebra / Calculus.",
+      "Hands-on experience with modern machine learning frameworks (PyTorch, Scikit-Learn, or TensorFlow).",
+      "Familiarity with Large Language Models (LLMs), prompt engineering, or Computer Vision concepts.",
+      "Good understanding of Git, version control, and collaborative software development.",
+      "Enrolled in or graduate of Computer Science, Software Engineering, Data Science, or related STEM field."
+    ],
+    "status": "published",
+    "createdAt": "2026-11-01T00:00:00.000Z"
+  },
+  {
+    "id": "full-stack-intern",
+    "slug": "full-stack-developer-intern",
+    "title": "Full-Stack Developer Intern",
+    "department": "Engineering & AI",
+    "type": "Internship",
+    "location": "Remote (Global / Pakistan)",
+    "duration": "3 – 6 Months",
+    "stipend": "Competitive Paid Stipend + Fast-Track Offer",
+    "iconName": "Code2",
+    "shortDescription": "Build modern, high-performance web applications using Next.js 16, TypeScript, Supabase, and Tailwind CSS.",
+    "description": "Join our core engineering group to develop scalable, interactive web platforms. You will work on full-stack web applications, integrating PostgreSQL databases, designing responsive UI systems, and ensuring sub-second response times.",
+    "responsibilities": [
+      "Develop responsive, accessible UI components using Next.js App Router, React, and Tailwind CSS.",
+      "Build secure RESTful and Server Actions endpoints connecting with Supabase PostgreSQL.",
+      "Optimize frontend asset delivery, Core Web Vitals, and client-side caching.",
+      "Participate in code reviews, automated testing, and CI/CD deployment pipelines."
+    ],
+    "requirements": [
+      "Proficiency with JavaScript / TypeScript and modern React hooks.",
+      "Understanding of HTML5, CSS3, Flexbox, Grid, and Tailwind styling.",
+      "Familiarity with SQL databases, relational schemas, and API integration.",
+      "Enthusiasm for building clean, user-centric software architectures."
+    ],
+    "status": "published",
+    "createdAt": "2026-11-02T00:00:00.000Z"
+  },
+  {
+    "id": "digital-marketing-intern",
+    "slug": "digital-marketing-intern",
+    "title": "Digital Marketing & Growth Intern",
+    "department": "Growth & Marketing",
+    "type": "Internship",
+    "location": "Remote (Global / Pakistan)",
+    "duration": "3 – 6 Months",
+    "stipend": "Performance Stipend + Full-Time Placement",
+    "iconName": "TrendingUp",
+    "shortDescription": "Scale our inbound brand awareness, technical content marketing, LinkedIn thought leadership, and organic traffic.",
+    "description": "We are seeking a driven Growth & Digital Marketing Intern to expand DeepLayer Solutions' global presence across enterprise B2B channels, search engines, and technical developer communities.",
+    "responsibilities": [
+      "Execute organic LinkedIn and social outreach campaigns showcasing architectural case studies.",
+      "Conduct keyword research, competitive analysis, and on-page technical SEO optimizations.",
+      "Coordinate engineering blog article dissemination across developer portals and tech communities.",
+      "Monitor analytics dashboards to evaluate acquisition funnels and subscriber growth."
+    ],
+    "requirements": [
+      "Strong written and verbal English communication skills.",
+      "Understanding of social media marketing, content strategy, and SEO fundamentals.",
+      "Analytical mindset with familiarity in Google Analytics or similar metrics platforms.",
+      "Self-directed worker capable of thriving in a fast-moving remote environment."
+    ],
+    "status": "published",
+    "createdAt": "2026-11-03T00:00:00.000Z"
+  },
+  {
+    "id": "lead-generation-intern",
+    "slug": "b2b-lead-generation-intern",
+    "title": "B2B Lead Generation & Sales Intern",
+    "department": "Business & Sales",
+    "type": "Internship",
+    "location": "Remote (Global / Pakistan)",
+    "duration": "3 – 6 Months",
+    "stipend": "Base Stipend + Commission on Qualified Deals",
+    "iconName": "Target",
+    "shortDescription": "Identify enterprise decision-makers, execute tailored outbound email campaigns, and book high-value discovery calls.",
+    "description": "DeepLayer Solutions is expanding our enterprise consulting client roster. You will be responsible for identifying high-fit international companies, conducting market research, and executing high-deliverability outbound outreach.",
+    "responsibilities": [
+      "Research prospective enterprise clients requiring AI engineering and software modernization.",
+      "Build targeted prospect lists using LinkedIn Sales Navigator, Apollo, or verified email tools.",
+      "Draft personalized, high-conversion cold outreach sequences and manage prospect follow-ups.",
+      "Schedule discovery calls with senior leadership and maintain pipeline CRM hygiene."
+    ],
+    "requirements": [
+      "Excellent research capabilities with strong attention to prospect qualification details.",
+      "Compelling business writing skills with the ability to articulate software value propositions.",
+      "Tenacity, high organizational skills, and persistence in follow-up workflows.",
+      "Eagerness to launch a high-impact career in technical B2B sales and business development."
+    ],
+    "status": "published",
+    "createdAt": "2026-11-04T00:00:00.000Z"
+  }
+]

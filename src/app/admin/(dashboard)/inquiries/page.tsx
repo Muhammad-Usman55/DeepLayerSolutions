@@ -17,6 +17,7 @@ import {
   User,
   MessageSquare,
   FileText,
+  Trash2,
 } from "lucide-react";
 import type { ContactSubmissionStatus } from "@/types/supabase";
 
@@ -129,6 +130,33 @@ export default function AdminInquiriesPage() {
       alert("Error saving inquiry updates.");
     } finally {
       setSavingUpdates(false);
+    }
+  };
+
+  const handleDeleteInquiry = async (inq: Inquiry) => {
+    if (
+      !window.confirm(
+        `Are you sure you want to permanently delete inquiry "${inq.reference_number}" from ${inq.full_name}?`
+      )
+    ) {
+      return;
+    }
+
+    try {
+      const res = await fetch(`/api/admin/inquiries/${inq.id}`, {
+        method: "DELETE",
+      });
+      const json = await res.json();
+      if (res.ok && json.success) {
+        setInquiries((prev) => prev.filter((item) => item.id !== inq.id));
+        if (selectedInquiry?.id === inq.id) {
+          setSelectedInquiry(null);
+        }
+      } else {
+        alert(json.message || "Failed to delete inquiry.");
+      }
+    } catch {
+      alert("Error deleting inquiry.");
     }
   };
 
@@ -258,14 +286,24 @@ export default function AdminInquiriesPage() {
                       })}
                     </td>
                     <td className="py-3.5 px-4 sm:px-6 text-right">
-                      <button
-                        type="button"
-                        onClick={() => openDetailModal(inq)}
-                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#E9FFF2] text-[#008F53] hover:bg-[#D5F9E6] font-semibold text-xs transition-colors cursor-pointer"
-                      >
-                        <Eye className="w-3.5 h-3.5" />
-                        <span>Inspect</span>
-                      </button>
+                      <div className="inline-flex items-center gap-1.5 justify-end">
+                        <button
+                          type="button"
+                          onClick={() => openDetailModal(inq)}
+                          className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-[#E9FFF2] text-[#008F53] hover:bg-[#D5F9E6] font-semibold text-xs transition-colors cursor-pointer"
+                        >
+                          <Eye className="w-3.5 h-3.5" />
+                          <span>Inspect</span>
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => handleDeleteInquiry(inq)}
+                          title="Delete Inquiry"
+                          className="p-1.5 rounded-lg border border-rose-200 text-rose-600 hover:bg-rose-50 transition-colors cursor-pointer"
+                        >
+                          <Trash2 className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))
@@ -422,7 +460,15 @@ export default function AdminInquiriesPage() {
 
             {/* Modal Footer */}
             <div className="px-6 py-4 border-t border-[#DFEDE5] bg-[#FAFCF9] flex items-center justify-between">
-              <div>
+              <div className="flex items-center gap-3">
+                <button
+                  type="button"
+                  onClick={() => selectedInquiry && handleDeleteInquiry(selectedInquiry)}
+                  className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl border border-rose-200 text-rose-600 hover:bg-rose-50 text-xs font-semibold cursor-pointer transition-colors"
+                >
+                  <Trash2 className="w-3.5 h-3.5" />
+                  <span>Delete Inquiry</span>
+                </button>
                 {saveSuccess && (
                   <span className="inline-flex items-center gap-1 text-xs font-bold text-[#008F53]">
                     <Check className="w-3.5 h-3.5" />

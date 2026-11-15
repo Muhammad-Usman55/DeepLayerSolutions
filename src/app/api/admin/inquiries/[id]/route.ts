@@ -96,3 +96,55 @@ export async function PATCH(
   }
 }
 
+export async function DELETE(
+  req: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  const admin = await getAuthenticatedAdmin();
+  if (!admin) {
+    return NextResponse.json(
+      { success: false, message: "Unauthorized." },
+      { status: 401 }
+    );
+  }
+
+  try {
+    const { id } = await params;
+    if (!id) {
+      return NextResponse.json(
+        { success: false, message: "Missing inquiry ID." },
+        { status: 400 }
+      );
+    }
+
+    const supabase = createAdminClient();
+    const { error } = await supabase
+      .from("contact_submissions")
+      .delete()
+      .eq("id", id);
+
+    if (error) {
+      console.error("[INQUIRY DELETE ERROR]:", error);
+      return NextResponse.json(
+        { success: false, message: error.message || "Failed to delete inquiry." },
+        { status: 500 }
+      );
+    }
+
+    return NextResponse.json(
+      {
+        success: true,
+        message: "Inquiry deleted successfully.",
+      },
+      { status: 200 }
+    );
+  } catch (error: any) {
+    console.error("[INQUIRY DELETE EXCEPTION]:", error?.message || error);
+    return NextResponse.json(
+      { success: false, message: error?.message || "Server error deleting inquiry." },
+      { status: 500 }
+    );
+  }
+}
+
+

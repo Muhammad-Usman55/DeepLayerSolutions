@@ -19,6 +19,7 @@ import {
   Phone,
   Link2,
   ExternalLink,
+  Trash2,
 } from "lucide-react";
 import type { JobApplicationStatus } from "@/types/supabase";
 
@@ -135,6 +136,27 @@ export default function AdminApplicationsPage() {
       console.error(err);
     } finally {
       setSavingUpdates(false);
+    }
+  };
+
+  const handleDeleteApplication = async (app: JobApplication) => {
+    if (!window.confirm(`Are you sure you want to delete application from candidate "${app.full_name}"?`)) {
+      return;
+    }
+
+    try {
+      const res = await fetch(`/api/admin/applications?id=${app.id}`, {
+        method: "DELETE",
+      });
+      const data = await res.json();
+      if (res.ok && data.success) {
+        setApplications((prev) => prev.filter((a) => a.id !== app.id));
+        if (selectedApp?.id === app.id) setSelectedApp(null);
+      } else {
+        alert(data.message || "Failed to delete application.");
+      }
+    } catch {
+      alert("Network error occurred while attempting deletion.");
     }
   };
 
@@ -303,13 +325,22 @@ export default function AdminApplicationsPage() {
                     </td>
 
                     <td className="py-4 px-4 sm:px-6 text-right">
-                      <button
-                        onClick={() => openDetailModal(app)}
-                        className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-bold border border-[#DFEDE5] text-[#142A27] hover:bg-[#E9FFF2] hover:text-[#008F53] transition-colors cursor-pointer"
-                      >
-                        <Eye className="w-3.5 h-3.5" />
-                        <span>Review</span>
-                      </button>
+                      <div className="inline-flex items-center gap-1.5 justify-end">
+                        <button
+                          onClick={() => openDetailModal(app)}
+                          className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-bold border border-[#DFEDE5] text-[#142A27] hover:bg-[#E9FFF2] hover:text-[#008F53] transition-colors cursor-pointer"
+                        >
+                          <Eye className="w-3.5 h-3.5" />
+                          <span>Review</span>
+                        </button>
+                        <button
+                          onClick={() => handleDeleteApplication(app)}
+                          title="Delete Application"
+                          className="p-1.5 rounded-lg border border-rose-200 text-rose-600 hover:bg-rose-50 transition-colors cursor-pointer"
+                        >
+                          <Trash2 className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))}
@@ -518,14 +549,22 @@ export default function AdminApplicationsPage() {
 
             {/* Modal Footer */}
             <div className="p-4 sm:p-6 border-t border-[#DFEDE5] bg-[#FAFCF9] flex items-center justify-between sticky bottom-0">
-              {saveSuccess ? (
-                <div className="flex items-center gap-1.5 text-xs text-emerald-700 font-bold">
-                  <Check className="w-4 h-4 text-emerald-600" />
-                  <span>Application updated successfully!</span>
-                </div>
-              ) : (
-                <div />
-              )}
+              <div className="flex items-center gap-3">
+                <button
+                  type="button"
+                  onClick={() => selectedApp && handleDeleteApplication(selectedApp)}
+                  className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold border border-rose-200 text-rose-600 hover:bg-rose-50 transition-colors cursor-pointer"
+                >
+                  <Trash2 className="w-3.5 h-3.5" />
+                  <span>Delete Candidate</span>
+                </button>
+                {saveSuccess && (
+                  <div className="flex items-center gap-1.5 text-xs text-emerald-700 font-bold">
+                    <Check className="w-4 h-4 text-emerald-600" />
+                    <span>Application updated successfully!</span>
+                  </div>
+                )}
+              </div>
               <div className="flex items-center gap-3">
                 <button
                   type="button"

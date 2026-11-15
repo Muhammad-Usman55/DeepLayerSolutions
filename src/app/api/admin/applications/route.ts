@@ -139,3 +139,46 @@ export async function PATCH(req: NextRequest) {
     );
   }
 }
+
+// DELETE /api/admin/applications?id=... - Delete candidate application
+export async function DELETE(req: NextRequest) {
+  const admin = await getAuthenticatedAdmin();
+  if (!admin) {
+    return NextResponse.json(
+      { success: false, message: "Unauthorized." },
+      { status: 401 }
+    );
+  }
+
+  try {
+    const { searchParams } = new URL(req.url);
+    const id = searchParams.get("id");
+
+    if (!id) {
+      return NextResponse.json(
+        { success: false, message: "Application ID is required." },
+        { status: 400 }
+      );
+    }
+
+    const supabase = createAdminClient();
+    const { error } = await supabase.from("job_applications").delete().eq("id", id);
+
+    if (error) {
+      return NextResponse.json(
+        { success: false, message: error.message },
+        { status: 500 }
+      );
+    }
+
+    return NextResponse.json({
+      success: true,
+      message: "Application deleted successfully.",
+    });
+  } catch (error: any) {
+    return NextResponse.json(
+      { success: false, message: error?.message || "Failed to delete application." },
+      { status: 500 }
+    );
+  }
+}
