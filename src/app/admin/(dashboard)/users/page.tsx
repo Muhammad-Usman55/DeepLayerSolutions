@@ -652,7 +652,7 @@ export default function AdminUsersPage() {
                   className="w-full px-3 py-2 rounded-xl border border-[#DFEDE5] text-xs text-[#142A27] focus:outline-none focus:ring-2 focus:ring-[#008F53]"
                 />
                 <span className="text-[10px] text-[#64736F] mt-1 block">
-                  Only fill this if you want to reset the user's password.
+                  Only fill this if you want to reset the user&apos;s password.
                 </span>
               </div>
 
