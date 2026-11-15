@@ -144,9 +144,9 @@ export default function AdminForgotPasswordPage() {
         <div className="text-center mt-6">
           <Link
             href="/"
-            className="text-xs text-white/60 hover:text-white transition-colors"
+            className="inline-flex items-center gap-1.5 text-xs text-white/60 hover:text-white transition-colors py-1 px-3 rounded-lg hover:bg-white/5"
           >
-            &larr; Return to DeepLayer Solutions Website
+            &larr; Back to Public Website
           </Link>
         </div>
       </div>

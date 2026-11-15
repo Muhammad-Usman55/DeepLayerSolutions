@@ -13,7 +13,11 @@ export async function middleware(request: NextRequest) {
   if (!isLocalhost) {
     const proto = request.headers.get("x-forwarded-proto") || "https";
     const isApex = host === "deeplayersolutions.com";
-    const isVercelSubdomain = host.endsWith(".vercel.app");
+    // Preserve /admin routes on vercel.app previews so testing and administration works across both domains
+    const isVercelSubdomain =
+      host.endsWith(".vercel.app") &&
+      !request.nextUrl.pathname.startsWith("/admin") &&
+      !request.nextUrl.pathname.startsWith("/api/admin");
     const isHttp = proto === "http";
 
     if (isApex || isVercelSubdomain || (host === "www.deeplayersolutions.com" && isHttp)) {
