@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import useEmblaCarousel from "embla-carousel-react";
 import { Container } from "../common/Container";
+import { IndustriesMobileMatrix } from "./industries-mobile/IndustriesMobileMatrix";
 import {
   Healthcare3DVisual,
   Finance3DVisual,
@@ -187,24 +188,20 @@ export function IndustriesPreview() {
       <div className="hidden lg:block absolute -bottom-20 -right-20 w-88 h-88 rounded-full border border-[#00B86B]/15 pointer-events-none -z-10" />
 
       <Container size="wide">
-        {/* Mobile Header (sm:hidden) */}
-        <div className="text-center mb-6 sm:hidden">
-          <h2 className="text-xl sm:text-2xl font-extrabold text-[#142A27] tracking-tight">
-            Industry-<span className="text-[#008F53]">Specific</span> Expertise
-          </h2>
-          <p className="text-xs sm:text-sm text-[#64736F] mt-1 font-normal">
-            Tailored solutions for your domain.
-          </p>
+        {/* Dedicated Modern Mobile View (< sm) */}
+        <div className="block sm:hidden py-2">
+          <IndustriesMobileMatrix />
         </div>
 
-        {/* Section Header (Desktop & Tablet) */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          className="text-center max-w-2xl mx-auto hidden sm:block"
-        >
+        {/* Section Content (Desktop & Tablet >= sm) */}
+        <div className="hidden sm:block">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            className="text-center max-w-2xl mx-auto"
+          >
           {/* Centered Pill Badge */}
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#DFEDE5] shadow-xs text-xs font-semibold text-[#142A27] mb-4">
             <span className="w-2 h-2 rounded-full bg-[#008F53]" />
@@ -378,6 +375,7 @@ export function IndustriesPreview() {
             <span>Explore All Sector Engineering Solutions</span>
             <ArrowRight className="w-4 h-4" />
           </Link>
+        </div>
         </div>
       </Container>
     </section>

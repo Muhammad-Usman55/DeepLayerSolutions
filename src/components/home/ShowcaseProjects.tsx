@@ -11,6 +11,7 @@ import { Button } from "../common/Button";
 import { projectsData } from "@/data/projects";
 import { ProjectVisualDispatcher } from "../portfolio/visuals/ProjectVisualDispatcher";
 import { CaseStudyProject } from "@/types";
+import { PortfolioMobileShowcase } from "./portfolio-mobile/PortfolioMobileShowcase";
 
 interface ProjectCardProps {
   project: CaseStudyProject;
@@ -176,25 +177,14 @@ export function ShowcaseProjects() {
       </svg>
 
       <Container size="wide">
-        {/* Mobile Header (< sm) */}
-        <div className="text-center mb-6 sm:hidden">
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            <h2 className="text-xl sm:text-2xl font-extrabold text-[#142A27] tracking-tight">
-              Featured <span className="text-[#008F53]">Portfolio</span>
-            </h2>
-            <p className="text-xs sm:text-sm text-[#64736F] mt-1 font-normal">
-              A glimpse of our recent enterprise software & AI engineering.
-            </p>
-          </motion.div>
+        {/* Dedicated Modern Mobile View (< sm) */}
+        <div className="block sm:hidden py-2">
+          <PortfolioMobileShowcase />
         </div>
 
-        {/* Tablet & Desktop Section Header (>= sm) */}
-        <div className="hidden sm:flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 sm:mb-14">
+        {/* Tablet & Desktop Content (>= sm) */}
+        <div className="hidden sm:block">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 sm:mb-14">
           <div className="max-w-2xl">
             <motion.div
               initial={{ opacity: 0, y: 12 }}
@@ -350,6 +340,7 @@ export function ShowcaseProjects() {
             ))}
           </div>
         )}
+        </div>
       </Container>
     </section>
   );
