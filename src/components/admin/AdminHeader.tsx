@@ -42,11 +42,24 @@ export function AdminHeader({
   const handleLogout = async () => {
     try {
       setLoggingOut(true);
-      await fetch("/api/admin/auth/logout", { method: "POST" });
+      await fetch("/api/admin/auth/logout", {
+        method: "POST",
+        cache: "no-store",
+        headers: { "Cache-Control": "no-cache" },
+      });
+
+      // Clear any stored client state or cached administrative sessions
+      if (typeof window !== "undefined") {
+        try {
+          localStorage.clear();
+          sessionStorage.clear();
+        } catch {}
+      }
+
       window.location.href = "/admin/login";
     } catch (err) {
       console.error("Logout failed:", err);
-      setLoggingOut(false);
+      window.location.href = "/admin/login";
     }
   };
 

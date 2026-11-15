@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { cookies } from "next/headers";
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { checkRateLimit, getClientIp } from "@/lib/security/rateLimit";
@@ -77,6 +78,18 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    const cookieStore = await cookies();
+
+    // 4a. Clear any lingering stale auth tokens from previous accounts
+    const existingCookies = cookieStore.getAll();
+    existingCookies.forEach((c) => {
+      if (c.name.startsWith("sb-") || c.name.includes("auth-token") || c.name.includes("session")) {
+        try {
+          cookieStore.delete(c.name);
+        } catch {}
+      }
+    });
+
     const supabase = await createClient();
     const { data: authData, error: authError } = await supabase.auth.signInWithPassword({
       email,
@@ -126,7 +139,7 @@ export async function POST(req: NextRequest) {
       // Non-critical logging failure
     }
 
-    return NextResponse.json(
+    const response = NextResponse.json(
       {
         success: true,
         message: "Authentication successful.",
@@ -138,6 +151,26 @@ export async function POST(req: NextRequest) {
       },
       { status: 200 }
     );
+
+    // 7. Explicitly propagate fresh Supabase session cookies into the returned response
+    const freshCookies = cookieStore.getAll();
+    freshCookies.forEach((c) => {
+      if (c.name.startsWith("sb-") || c.name.includes("auth-token")) {
+        response.cookies.set(c.name, c.value, {
+          path: "/",
+          httpOnly: true,
+          sameSite: "lax",
+          secure: process.env.NODE_ENV === "production",
+        });
+      }
+    });
+
+    // 8. Prevent caching of authentication handshake
+    response.headers.set("Cache-Control", "no-store, no-cache, must-revalidate, proxy-revalidate");
+    response.headers.set("Pragma", "no-cache");
+    response.headers.set("Expires", "0");
+
+    return response;
   } catch (error: any) {
     console.error("[ADMIN LOGIN ERROR]:", error?.message || error);
     const msg =

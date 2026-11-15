@@ -30,13 +30,21 @@ function LoginForm() {
 
       const res = await fetch("/api/admin/auth/login", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "Cache-Control": "no-cache",
+        },
         body: JSON.stringify({ email, password }),
       });
 
       const data = await res.json();
 
       if (res.ok && data.success) {
+        if (typeof window !== "undefined") {
+          try {
+            sessionStorage.clear();
+          } catch {}
+        }
         window.location.href = nextUrl;
       } else {
         setError(data.message || "Invalid credentials or unauthorized account.");

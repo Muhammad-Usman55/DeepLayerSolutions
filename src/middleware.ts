@@ -34,6 +34,14 @@ export async function middleware(request: NextRequest) {
   if (pathname.startsWith("/admin")) {
     const { supabaseResponse, user } = await updateSession(request);
 
+    // Prevent caching on administrative pages to ensure sessions are never stale
+    supabaseResponse.headers.set(
+      "Cache-Control",
+      "no-store, no-cache, must-revalidate, proxy-revalidate"
+    );
+    supabaseResponse.headers.set("Pragma", "no-cache");
+    supabaseResponse.headers.set("Expires", "0");
+
     const isAuthPage =
       pathname === "/admin/login" ||
       pathname === "/admin/forgot-password" ||
@@ -53,9 +61,25 @@ export async function middleware(request: NextRequest) {
       }
       const redirectRes = NextResponse.redirect(url);
       supabaseResponse.cookies.getAll().forEach((c) => redirectRes.cookies.set(c));
+      redirectRes.headers.set(
+        "Cache-Control",
+        "no-store, no-cache, must-revalidate, proxy-revalidate"
+      );
       return redirectRes;
     }
 
+    return supabaseResponse;
+  }
+
+  // Admin API routes anti-cache protection
+  if (pathname.startsWith("/api/admin")) {
+    const { supabaseResponse } = await updateSession(request);
+    supabaseResponse.headers.set(
+      "Cache-Control",
+      "no-store, no-cache, must-revalidate, proxy-revalidate"
+    );
+    supabaseResponse.headers.set("Pragma", "no-cache");
+    supabaseResponse.headers.set("Expires", "0");
     return supabaseResponse;
   }
 
