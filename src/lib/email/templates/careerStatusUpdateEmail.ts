@@ -39,12 +39,12 @@ const CAREER_STATUS_CONFIGS: Record<JobApplicationStatus, CareerStatusConfig> = 
     badgeBg: "#E0F2FE",
     badgeBorder: "#BAE6FD",
     badgeText: "#0369A1",
-    subject: "Exciting News: You have been Shortlisted!",
-    headline: "Congratulations! You are Shortlisted",
+    subject: "Application Update: Shortlisted for Role",
+    headline: "Application Status: Shortlisted",
     summary:
-      "We are delighted to let you know that after reviewing your profile, our technical leads have shortlisted you for the next phase of our hiring pipeline.",
+      "Following review of your profile and background, our technical team has shortlisted your application for the next evaluation stage.",
     nextSteps:
-      "Our talent team will reach out with the interview round schedule and meeting coordinates.",
+      "Our talent team will coordinate the technical discussion schedule and meeting details.",
   },
   interview: {
     badge: "Interview Stage",
@@ -52,35 +52,35 @@ const CAREER_STATUS_CONFIGS: Record<JobApplicationStatus, CareerStatusConfig> = 
     badgeBorder: "#E9D5FF",
     badgeText: "#6B21A8",
     subject: "Interview Next Steps: Technical Discussion",
-    headline: "Interview Stage Invitation",
+    headline: "Interview Stage Details",
     summary:
-      "You have officially moved forward to the interview stage at DeepLayer Solutions. Our team is excited to learn more about your technical journey and architectural mindset.",
+      "Your application has progressed to the interview stage at DeepLayer Solutions. Our team looks forward to discussing your technical experience and engineering projects.",
     nextSteps:
-      "Please keep an eye on your inbox for calendar invites or video conferencing links. Make sure your microphone, camera, and development environment are ready.",
+      "Please monitor your inbox for the calendar invite and meeting coordinates.",
   },
   selected: {
-    badge: "Selected for Offer",
+    badge: "Selected for Role",
     badgeBg: "#DCFCE7",
     badgeBorder: "#86EFAC",
     badgeText: "#15803D",
-    subject: "Congratulations! Selected for Position",
-    headline: "You Have Been Selected!",
+    subject: "Application Update: Selection Notice",
+    headline: "Application Status: Selected",
     summary:
-      "Congratulations! Following comprehensive interviews and project assessments, the DeepLayer Solutions panel has selected you for the role.",
+      "Following technical assessments and interviews, the DeepLayer Solutions engineering team has selected your application for the role.",
     nextSteps:
-      "Our HR and operations department will follow up shortly with formal offer documents, stipend/compensation details, and orientation schedules.",
+      "Our operations team will follow up directly with next steps and orientation details.",
   },
   hired: {
-    badge: "Welcome to Team",
+    badge: "Team Onboarding",
     badgeBg: "#DCFCE7",
     badgeBorder: "#4ADE80",
     badgeText: "#14532D",
-    subject: "Welcome to DeepLayer Solutions!",
-    headline: "Welcome Aboard the DeepLayer Team!",
+    subject: "Welcome to DeepLayer Solutions",
+    headline: "Welcome to DeepLayer Solutions",
     summary:
-      "We are thrilled to officially welcome you to the DeepLayer Solutions engineering team! You are now part of our mission to build world-class AI and software architecture.",
+      "We are pleased to welcome you to the DeepLayer Solutions engineering team. We look forward to working together.",
     nextSteps:
-      "Your orientation lead will assist with developer account provisioning, repository access, and workspace onboarding.",
+      "Your orientation lead will assist with workspace setup, repository access, and onboarding documentation.",
   },
   rejected: {
     badge: "Status Update",
@@ -113,7 +113,7 @@ export function generateCareerStatusUpdateEmail(params: CareerStatusUpdateParams
   const normalizedSiteUrl = siteUrl.replace(/\/$/, "");
   const config = CAREER_STATUS_CONFIGS[status] || CAREER_STATUS_CONFIGS.under_review;
 
-  const emailSubject = `${config.subject}: ${position} — DeepLayer Solutions`;
+  const emailSubject = `${config.subject}: ${position} - DeepLayer Solutions`;
 
   const plainText = `
 DeepLayer Solutions

@@ -11,7 +11,7 @@ export function generateContactConfirmationEmail(params: ContactConfirmationPara
   const { referenceNumber, fullName, subject, service, siteUrl } = params;
   const normalizedSiteUrl = siteUrl.replace(/\/$/, "");
 
-  const emailSubject = `Inquiry Confirmation [${referenceNumber}] — DeepLayer Solutions`;
+  const emailSubject = `Inquiry Confirmation [${referenceNumber}] - DeepLayer Solutions`;
 
   const plainText = `
 DeepLayer Solutions

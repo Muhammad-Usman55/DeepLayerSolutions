@@ -11,7 +11,7 @@ export function generateCareerConfirmationEmail(params: CareerConfirmationParams
   const { id, fullName, position, siteUrl } = params;
   const normalizedSiteUrl = siteUrl.replace(/\/$/, "");
 
-  const emailSubject = `Application Received: ${position} — DeepLayer Solutions`;
+  const emailSubject = `Application Received: ${position} - DeepLayer Solutions`;
 
   const plainText = `
 DeepLayer Solutions

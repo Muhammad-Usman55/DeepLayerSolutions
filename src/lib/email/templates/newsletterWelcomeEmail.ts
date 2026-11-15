@@ -9,7 +9,7 @@ export function generateNewsletterWelcomeEmail(params: NewsletterWelcomeParams) 
   const normalizedSiteUrl = siteUrl.replace(/\/$/, "");
   const unsubscribeUrl = `${normalizedSiteUrl}/newsletter/unsubscribe?email=${encodeURIComponent(email)}&key=${encodeURIComponent(unsubscribeKey)}`;
 
-  const emailSubject = "Subscription Confirmed — DeepLayer Solutions";
+  const emailSubject = "Subscription Confirmed - DeepLayer Solutions";
 
   const plainText = `
 DeepLayer Solutions

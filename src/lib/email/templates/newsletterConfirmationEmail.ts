@@ -9,7 +9,7 @@ export function generateNewsletterConfirmationEmail(params: NewsletterConfirmati
   const normalizedSiteUrl = siteUrl.replace(/\/$/, "");
   const confirmUrl = `${normalizedSiteUrl}/newsletter/confirm?token=${encodeURIComponent(rawToken)}`;
 
-  const emailSubject = "Confirm your subscription — DeepLayer Solutions";
+  const emailSubject = "Confirm your subscription - DeepLayer Solutions";
 
   const plainText = `
 DeepLayer Solutions

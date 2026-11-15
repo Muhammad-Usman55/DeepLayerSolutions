@@ -92,14 +92,40 @@ export function getSiteUrl(): string {
 }
 
 /**
+ * Wraps a base64 encoded string to 76 characters per line as strictly required by RFC 2045.
+ * Prevents MIME line-length violations (RFC 5322 998-character limit) that trigger spam filters.
+ */
+function wrapBase64(b64: string): string {
+  return b64.match(/.{1,76}/g)?.join("\r\n") || b64;
+}
+
+/**
+ * Cleanly formats the subject line. Standardizes dashes and smart quotes to ASCII.
+ * Uses plain ASCII headers when possible to avoid base64 subject spam heuristics.
+ */
+function formatSubject(subject: string): string {
+  const normalized = subject
+    .replace(/[\u2018\u2019]/g, "'")
+    .replace(/[\u201C\u201D]/g, '"')
+    .replace(/[\u2013\u2014]/g, "-")
+    .replace(/[!]+/g, ""); // Eliminate spammy exclamation marks from subject lines
+
+  const isAscii = /^[\x20-\x7E]+$/.test(normalized);
+  if (isAscii) {
+    return normalized.trim();
+  }
+  return `=?UTF-8?B?${Buffer.from(normalized.trim(), "utf-8").toString("base64")}?=`;
+}
+
+/**
  * Builds an RFC 2822 MIME formatted message and returns a base64url encoded string
  * suitable for the Gmail API `users.messages.send` raw parameter.
  *
- * Includes standard anti-spam deliverability headers:
- * - RFC 2822 Date
- * - Unique Message-ID with company domain
- * - Auto-Submitted / X-Auto-Response-Suppress for automated transactional notifications
- * - RFC 8058 List-Unsubscribe when unsubscribe URL is provided
+ * Anti-spam optimizations:
+ * - RFC 2045 76-character line wrapping on all base64 MIME parts (fixes SpamAssassin MIME_BASE64_BLOB)
+ * - Omits custom Message-ID so Google automatically generates an authentic, DKIM-aligned Message-ID
+ * - Omits Auto-Submitted / robotic headers that cause inbox filters to route messages to Spam
+ * - Clean ASCII subject lines without aggressive punctuation
  */
 export function createRawEmail(params: {
   to: string | string[];
@@ -112,24 +138,16 @@ export function createRawEmail(params: {
 }): string {
   const boundary = `dl_bnd_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`;
   const toHeader = Array.isArray(params.to) ? params.to.join(", ") : params.to;
-
-  // RFC 2047 encoded-word syntax for subject to support UTF-8 characters safely
-  const encodedSubject = `=?UTF-8?B?${Buffer.from(params.subject, "utf-8").toString("base64")}?=`;
-
-  // Standard RFC 2822 Message-ID format (<timestamp.random@domain>)
-  const messageId = `<${Date.now()}.${Math.random().toString(36).substring(2, 11)}@deeplayersolutions.com>`;
+  const cleanSubject = formatSubject(params.subject);
   const dateHeader = new Date().toUTCString();
 
   const headers = [
     `From: ${params.from}`,
     `To: ${toHeader}`,
     params.replyTo ? `Reply-To: ${params.replyTo}` : null,
-    `Subject: ${encodedSubject}`,
+    `Subject: ${cleanSubject}`,
     `Date: ${dateHeader}`,
-    `Message-ID: ${messageId}`,
     `MIME-Version: 1.0`,
-    `Auto-Submitted: auto-generated`,
-    `X-Auto-Response-Suppress: All`,
     params.listUnsubscribe ? `List-Unsubscribe: <${params.listUnsubscribe}>` : null,
     params.listUnsubscribe ? `List-Unsubscribe-Post: List-Unsubscribe=One-Click` : null,
     `Content-Type: multipart/alternative; boundary="${boundary}"`,
@@ -143,7 +161,7 @@ export function createRawEmail(params: {
         `Content-Type: text/plain; charset="UTF-8"`,
         `Content-Transfer-Encoding: base64`,
         ``,
-        Buffer.from(params.text, "utf-8").toString("base64"),
+        wrapBase64(Buffer.from(params.text, "utf-8").toString("base64")),
       ].join("\r\n")
     : "";
 
@@ -152,7 +170,7 @@ export function createRawEmail(params: {
     `Content-Type: text/html; charset="UTF-8"`,
     `Content-Transfer-Encoding: base64`,
     ``,
-    Buffer.from(params.html, "utf-8").toString("base64"),
+    wrapBase64(Buffer.from(params.html, "utf-8").toString("base64")),
   ].join("\r\n");
 
   const fullEmail = [headers, "", plainPart, htmlPart, `--${boundary}--`]

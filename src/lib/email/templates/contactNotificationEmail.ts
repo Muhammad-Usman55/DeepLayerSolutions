@@ -28,7 +28,7 @@ export function generateContactNotificationEmail(params: ContactNotificationPara
     timeZone: "UTC",
   });
 
-  const emailSubject = `[Inquiry Alert] ${referenceNumber}: ${subject} — ${fullName}`;
+  const emailSubject = `[Inquiry Alert] ${referenceNumber}: ${subject} - ${fullName}`;
 
   const plainText = `
 DeepLayer Solutions

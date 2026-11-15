@@ -81,7 +81,7 @@ export function generateInquiryStatusUpdateEmail(params: InquiryStatusUpdatePara
   const normalizedSiteUrl = siteUrl.replace(/\/$/, "");
   const config = STATUS_CONFIGS[status] || STATUS_CONFIGS.in_review;
 
-  const emailSubject = `Inquiry Status Update: ${config.label} [${referenceNumber}] — DeepLayer Solutions`;
+  const emailSubject = `Inquiry Status Update: ${config.label} [${referenceNumber}] - DeepLayer Solutions`;
 
   const plainText = `
 DeepLayer Solutions
@@ -101,7 +101,7 @@ ${adminNotes ? `\nMESSAGE FROM TECHNICAL TEAM:\n${adminNotes}\n` : ""}
 WHAT'S NEXT:
 ${config.nextSteps}
 
-Need immediate assistance or wish to attach scope briefs?
+If you have additional scope documents or questions:
 Reply directly to this email or reach us on WhatsApp at +92 316 6007316.
 
 Sincerely,

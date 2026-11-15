@@ -31,7 +31,7 @@ export function generateCareerNotificationEmail(params: CareerNotificationParams
     timeZone: "UTC",
   });
 
-  const emailSubject = `[Job Application] ${position} — ${fullName}`;
+  const emailSubject = `[Job Application] ${position} - ${fullName}`;
 
   const plainText = `
 DeepLayer Solutions
