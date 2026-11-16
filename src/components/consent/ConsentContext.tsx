@@ -45,6 +45,7 @@ export function ConsentProvider({ children }: { children: React.ReactNode }) {
 
       if (!existing.analytics) {
         disableGoogleAnalytics(process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || "G-VD708J25D8");
+        disableGoogleAnalytics(process.env.NEXT_PUBLIC_GTM_ID || "GTM-526SK93S");
       }
     } else {
       // First-time visitor or updated policy version
@@ -94,6 +95,7 @@ export function ConsentProvider({ children }: { children: React.ReactNode }) {
       // 3. If analytics was rejected or withdrawn, deactivate GA and clear cookies immediately
       if (!prefs.analytics) {
         disableGoogleAnalytics(process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || "G-VD708J25D8");
+        disableGoogleAnalytics(process.env.NEXT_PUBLIC_GTM_ID || "GTM-526SK93S");
       }
 
       // 4. Record consent receipt in Supabase asynchronously
