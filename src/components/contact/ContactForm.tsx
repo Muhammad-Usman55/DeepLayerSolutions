@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { Button } from "../common/Button";
 import { siteConfig } from "@/config/site";
+import { trackContactFormSubmit } from "@/lib/analytics";
 
 interface FormState {
   fullName: string;
@@ -119,6 +120,11 @@ export function ContactForm() {
 
       setIsSuccess(true);
       setReferenceNumber(data?.referenceNumber || null);
+      trackContactFormSubmit({
+        service: form.service,
+        hasCompany: Boolean(form.company.trim()),
+        referenceNumber: data?.referenceNumber || undefined,
+      });
       setForm(initialForm);
       setErrors({});
       setServerError(null);

@@ -31,6 +31,7 @@ import { ServiceHero3DVisual } from "@/components/services/Service3DVisuals";
 import { ServiceArchitectureFlow } from "@/components/services/ServiceArchitectureFlow";
 import { ServiceImpactMatrix } from "@/components/services/ServiceImpactMatrix";
 import { ServiceProcessTimeline } from "@/components/services/ServiceProcessTimeline";
+import { ServicePageTracker } from "@/components/analytics/ServicePageTracker";
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Brain,
@@ -191,6 +192,11 @@ export default async function ServiceDetailPage({
 
   return (
     <PageWrapper>
+      <ServicePageTracker
+        serviceName={service.title}
+        serviceSlug={service.slug}
+        category={service.category}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}

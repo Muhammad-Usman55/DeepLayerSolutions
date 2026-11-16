@@ -6,6 +6,7 @@ import { CTASection } from "@/components/common/CTASection";
 import { ServiceFilter } from "@/components/services/ServiceFilter";
 import { PageWrapper } from "@/components/layout/PageWrapper";
 import { ServicesHeroVisual } from "@/components/services/ServicesHeroVisual";
+import { ServicePageTracker } from "@/components/analytics/ServicePageTracker";
 
 export const metadata: Metadata = {
   title: "Services & Capabilities",
@@ -19,6 +20,11 @@ export const metadata: Metadata = {
 export default function ServicesPage() {
   return (
     <PageWrapper>
+      <ServicePageTracker
+        serviceName="All Services Hub"
+        serviceSlug="services"
+        category="Services Hub"
+      />
       {/* Services Hero */}
       <section className="relative overflow-hidden pt-8 pb-16 lg:pt-12 lg:pb-20 bg-gradient-to-b from-[#E9FFF2]/50 via-transparent to-transparent">
         <Container size="wide">
