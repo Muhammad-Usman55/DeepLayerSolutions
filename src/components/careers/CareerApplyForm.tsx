@@ -14,7 +14,6 @@ import {
   X,
   FileCheck,
   Check,
-  MessageSquare,
 } from "lucide-react";
 import { Button } from "../common/Button";
 
@@ -288,7 +287,7 @@ export function CareerApplyForm({ selectedPosition }: CareerApplyFormProps) {
                 <span className="text-[#64736F]">Resume Vault:</span>
                 <span className="font-semibold text-[#008F53] flex items-center gap-1.5">
                   <Check className="w-3.5 h-3.5" />
-                  Uploaded to Supabase
+                  Securely Uploaded
                 </span>
               </div>
               <div className="flex items-center justify-between">
@@ -300,23 +299,6 @@ export function CareerApplyForm({ selectedPosition }: CareerApplyFormProps) {
                 <span className="font-semibold text-[#142A27]">Confirmation email dispatched</span>
               </div>
             </div>
-          </div>
-
-          {/* Urgent WhatsApp Consultation Banner */}
-          <div className="w-full max-w-md mt-4 p-3.5 rounded-2xl bg-[#F0FAF4] border border-[#BCE8CF] flex items-center justify-between gap-3 text-left">
-            <div>
-              <p className="text-xs font-bold text-[#142A27]">Have urgent questions or portfolio updates?</p>
-              <p className="text-[11px] text-[#64736F]">Chat directly with our technical recruiter on WhatsApp.</p>
-            </div>
-            <a
-              href="https://wa.me/923166007316"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold bg-[#008F53] text-white hover:bg-[#007343] transition-colors shrink-0 shadow-xs cursor-pointer"
-            >
-              <MessageSquare className="w-3.5 h-3.5" />
-              <span>WhatsApp</span>
-            </a>
           </div>
 
           {/* Reset button */}
@@ -652,7 +634,7 @@ export function CareerApplyForm({ selectedPosition }: CareerApplyFormProps) {
               {isSubmitting ? "Uploading CV & Submitting..." : "Submit Application"}
             </Button>
             <p className="mt-3 text-center text-xs text-[#64736F]">
-              Your resume is securely stored in Supabase &bull; 100% confidential recruitment review
+              Your resume is securely encrypted &bull; 100% confidential recruitment review
             </p>
           </div>
         </form>

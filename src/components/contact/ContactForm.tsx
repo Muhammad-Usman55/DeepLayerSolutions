@@ -7,7 +7,6 @@ import {
   Copy,
   Check,
   Sparkles,
-  MessageSquare,
 } from "lucide-react";
 import { Button } from "../common/Button";
 import { siteConfig } from "@/config/site";
@@ -215,23 +214,6 @@ export function ContactForm() {
               </div>
             </div>
           )}
-
-          {/* Urgent WhatsApp Consultation Banner */}
-          <div className="w-full max-w-md mt-4 p-3.5 rounded-2xl bg-[#F0FAF4] border border-[#BCE8CF] flex items-center justify-between gap-3 text-left">
-            <div>
-              <p className="text-xs font-bold text-[#142A27]">Need immediate technical consultation?</p>
-              <p className="text-[11px] text-[#64736F]">Direct line to our technical lead on WhatsApp.</p>
-            </div>
-            <a
-              href="https://wa.me/923166007316"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold bg-[#008F53] text-white hover:bg-[#007343] transition-colors shrink-0 shadow-xs cursor-pointer"
-            >
-              <MessageSquare className="w-3.5 h-3.5" />
-              <span>WhatsApp</span>
-            </a>
-          </div>
 
           {/* Reset / Submit Another button */}
           <button
