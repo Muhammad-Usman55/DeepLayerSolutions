@@ -284,10 +284,10 @@ export function CareerApplyForm({ selectedPosition }: CareerApplyFormProps) {
 
             <div className="space-y-2 text-xs text-[#334155]">
               <div className="flex items-center justify-between">
-                <span className="text-[#64736F]">Resume Vault:</span>
+                <span className="text-[#64736F]">Application Status:</span>
                 <span className="font-semibold text-[#008F53] flex items-center gap-1.5">
                   <Check className="w-3.5 h-3.5" />
-                  Securely Uploaded
+                  Received &amp; Verified
                 </span>
               </div>
               <div className="flex items-center justify-between">
