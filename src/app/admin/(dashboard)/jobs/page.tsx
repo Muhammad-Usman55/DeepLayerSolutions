@@ -216,14 +216,17 @@ export default function AdminJobsPage() {
     if (!confirmed) return;
 
     try {
-      const res = await fetch(`/api/admin/jobs?id=${job.id}`, {
+      const res = await fetch(`/api/admin/jobs?id=${encodeURIComponent(job.id)}`, {
         method: "DELETE",
       });
       const data = await res.json();
       if (res.ok && data.success) {
         setSuccessMsg(`Vacancy "${job.title}" deleted successfully.`);
         setTimeout(() => setSuccessMsg(""), 4000);
-        setJobs(jobs.filter((j) => j.id !== job.id));
+        setJobs((prev) => prev.filter((j) => j.id !== job.id && j.slug !== job.slug));
+        if (viewingJob?.id === job.id) setViewingJob(null);
+        if (editingJob?.id === job.id) setEditingJob(null);
+        fetchJobs();
       } else {
         alert(data.message || "Failed to delete vacancy.");
       }

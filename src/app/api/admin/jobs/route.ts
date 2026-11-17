@@ -33,7 +33,7 @@ export async function GET() {
     });
 
     // 2. Read stored jobs
-    const storedJobs = getAllJobs();
+    const storedJobs = await getAllJobs();
 
     // 3. Augment each job with live application counts
     const jobs = storedJobs.map((job) => {
@@ -82,7 +82,7 @@ export async function POST(req: NextRequest) {
 
     const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 
-    const newJob = addJob({
+    const newJob = await addJob({
       title: title.trim(),
       slug,
       department: department || "Engineering & AI",
@@ -126,7 +126,7 @@ export async function PATCH(req: NextRequest) {
       );
     }
 
-    const updated = updateJob(id, updates);
+    const updated = await updateJob(id, updates);
     if (!updated) {
       return NextResponse.json(
         { success: false, message: "Job vacancy not found." },
@@ -163,7 +163,7 @@ export async function DELETE(req: NextRequest) {
       );
     }
 
-    const deleted = deleteJob(id);
+    const deleted = await deleteJob(id);
     if (!deleted) {
       return NextResponse.json(
         { success: false, message: "Job vacancy not found or already deleted." },

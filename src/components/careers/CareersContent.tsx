@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { Search, Briefcase } from "lucide-react";
 import { jobOpeningsData } from "@/data/careers";
+import type { JobOpeningItem } from "@/types";
 import { JobCard } from "./JobCard";
 import { CareerApplyForm } from "./CareerApplyForm";
 
@@ -14,11 +15,23 @@ const departments = [
 ];
 
 export function CareersContent() {
+  const [jobsList, setJobsList] = useState<JobOpeningItem[]>(jobOpeningsData);
   const [selectedDept, setSelectedDept] = useState("All Openings");
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedPositionForForm, setSelectedPositionForForm] = useState<string>("AI/ML Engineer Intern");
 
-  const filteredJobs = jobOpeningsData.filter((job) => {
+  React.useEffect(() => {
+    fetch("/api/careers")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success && Array.isArray(data.jobs) && data.jobs.length > 0) {
+          setJobsList(data.jobs);
+        }
+      })
+      .catch(() => {});
+  }, []);
+
+  const filteredJobs = jobsList.filter((job) => {
     const matchesDept =
       selectedDept === "All Openings" || job.department === selectedDept;
     const matchesSearch =
@@ -46,8 +59,8 @@ export function CareersContent() {
             const isActive = selectedDept === dept;
             const count =
               dept === "All Openings"
-                ? jobOpeningsData.length
-                : jobOpeningsData.filter((j) => j.department === dept).length;
+                ? jobsList.length
+                : jobsList.filter((j) => j.department === dept).length;
 
             return (
               <button

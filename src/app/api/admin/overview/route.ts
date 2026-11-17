@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { authorizeAdmin } from "@/lib/auth/admin";
 import { hasPermission } from "@/lib/auth/permissions";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { getAllJobs } from "@/lib/jobs/store";
 
 export async function GET(req: NextRequest) {
   const { admin, response } = await authorizeAdmin();
@@ -76,35 +77,19 @@ export async function GET(req: NextRequest) {
     };
     let popularJobs: Array<{ title: string; department: string; views: number; applications: number }> = [];
 
-    // Safely query jobs table
+    // Safely query jobs from persistent cloud storage
     try {
-      const { count: actJobs } = await supabase
-        .from("jobs")
-        .select("*", { count: "exact", head: true })
-        .eq("status", "published");
-      activeJobs = actJobs || 0;
-
-      const { count: totJobs } = await supabase
-        .from("jobs")
-        .select("*", { count: "exact", head: true });
-      totalJobs = totJobs || 0;
-
-      const { data: jobList } = await supabase
-        .from("jobs")
-        .select("id, title, department, views_count")
-        .order("views_count", { ascending: false })
-        .limit(5);
-
-      if (jobList) {
-        popularJobs = jobList.map((j) => ({
-          title: j.title,
-          department: j.department,
-          views: j.views_count || 0,
-          applications: 0,
-        }));
-      }
+      const allStored = await getAllJobs();
+      totalJobs = allStored.length;
+      activeJobs = allStored.filter((j) => j.status === "published" || !j.status).length;
+      popularJobs = allStored.slice(0, 5).map((j) => ({
+        title: j.title,
+        department: j.department,
+        views: 0,
+        applications: 0,
+      }));
     } catch {
-      // Table may not have been migrated yet in schema cache
+      // Fallback
     }
 
     // Safely query job_applications table

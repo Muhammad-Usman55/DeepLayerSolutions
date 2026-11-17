@@ -6,6 +6,32 @@ import { getCompanyEmail, getSiteUrl, sendGmailMessage } from "@/lib/email/gmail
 import { generateCareerNotificationEmail } from "@/lib/email/templates/careerNotificationEmail";
 import { generateCareerConfirmationEmail } from "@/lib/email/templates/careerConfirmationEmail";
 import { isDisposableEmail, checkSpamContent } from "@/lib/security/spamProtection";
+import { getAllJobs } from "@/lib/jobs/store";
+
+// GET /api/careers - Public endpoint to retrieve published open vacancies
+export async function GET() {
+  try {
+    const jobs = await getAllJobs();
+    const published = jobs.filter((j) => j.status === "published" || !j.status);
+    return NextResponse.json(
+      {
+        success: true,
+        jobs: published,
+      },
+      {
+        headers: {
+          "Cache-Control": "public, s-maxage=60, stale-while-revalidate=300",
+        },
+      }
+    );
+  } catch (error: unknown) {
+    const errorMsg = error instanceof Error ? error.message : String(error);
+    return NextResponse.json(
+      { success: false, message: errorMsg || "Failed to load jobs." },
+      { status: 500 }
+    );
+  }
+}
 
 function sanitize(str: string): string {
   return str
