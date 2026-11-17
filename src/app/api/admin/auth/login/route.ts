@@ -120,13 +120,8 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // 6. Record last sign in and activity log
+    // 6. Record activity log (non-blocking)
     try {
-      await adminDb
-        .from("admin_profiles")
-        .update({ last_sign_in_at: new Date().toISOString() })
-        .eq("id", authData.user.id);
-
       await adminDb.from("activity_logs").insert({
         admin_id: authData.user.id,
         admin_email: email,
@@ -171,11 +166,12 @@ export async function POST(req: NextRequest) {
     response.headers.set("Expires", "0");
 
     return response;
-  } catch (error: any) {
-    console.error("[ADMIN LOGIN ERROR]:", error?.message || error);
+  } catch (error: unknown) {
+    const errorMsg = error instanceof Error ? error.message : String(error);
+    console.error("[ADMIN LOGIN ERROR]:", errorMsg);
     const msg =
-      error?.message?.includes("Missing") || error?.message?.includes("SUPABASE")
-        ? error.message
+      errorMsg.includes("Missing") || errorMsg.includes("SUPABASE")
+        ? errorMsg
         : "An unexpected authentication error occurred.";
     return NextResponse.json(
       { success: false, message: msg },

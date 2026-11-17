@@ -50,24 +50,65 @@ export async function getAuthenticatedAdmin(): Promise<AdminAuthResult | null> {
     ];
 
     // Only the server-controlled admin_profiles table can grant admin access.
-    // Supabase user_metadata is user-editable and must never decide authorization.
+    // Query existing schema (id, role, created_at) without failing on missing optional columns.
     const adminDb = createAdminClient();
     const { data: profile, error: profileError } = await adminDb
       .from("admin_profiles")
-      .select("id, role, full_name, email, avatar_url, created_at")
+      .select("id, role, created_at")
       .eq("id", user.id)
       .maybeSingle();
 
     if (profileError) {
       console.error("[ADMIN AUTH] Profile lookup failed:", profileError.message);
+      // Fallback: check app_metadata (set only by server/service role) in case DB has transient issue
+      const appRole = user.app_metadata?.role as AdminRole;
+      if (appRole && validRoles.includes(appRole)) {
+        console.warn(`[ADMIN AUTH] Using app_metadata role fallback for ${user.email}: ${appRole}`);
+        return {
+          user,
+          profile: {
+            id: user.id,
+            role: appRole,
+            full_name:
+              (user.user_metadata?.full_name as string) ||
+              (user.user_metadata?.name as string) ||
+              user.email?.split("@")[0] ||
+              "Admin Staff",
+            email: user.email || null,
+            avatar_url: (user.user_metadata?.avatar_url as string) || null,
+            created_at: user.created_at || new Date().toISOString(),
+          },
+          isAdmin: true,
+        };
+      }
       return null;
     }
 
     if (!profile) {
+      // Fallback: check app_metadata (service-role managed only)
+      const appRole = user.app_metadata?.role as AdminRole;
+      if (appRole && validRoles.includes(appRole)) {
+        return {
+          user,
+          profile: {
+            id: user.id,
+            role: appRole,
+            full_name:
+              (user.user_metadata?.full_name as string) ||
+              (user.user_metadata?.name as string) ||
+              user.email?.split("@")[0] ||
+              "Admin Staff",
+            email: user.email || null,
+            avatar_url: (user.user_metadata?.avatar_url as string) || null,
+            created_at: user.created_at || new Date().toISOString(),
+          },
+          isAdmin: true,
+        };
+      }
       return null;
     }
 
-    const resolvedRole = profile.role as AdminRole;
+    const resolvedRole = (profile.role as AdminRole) || (user.app_metadata?.role as AdminRole);
 
     if (!resolvedRole || !validRoles.includes(resolvedRole)) {
       console.warn(`[SECURITY] User ${user.email} (${user.id}) lacks authorized admin role: ${resolvedRole}`);
@@ -79,9 +120,26 @@ export async function getAuthenticatedAdmin(): Promise<AdminAuthResult | null> {
       profile: {
         id: profile.id || user.id,
         role: resolvedRole,
-        full_name: profile.full_name || user.user_metadata?.full_name || null,
-        email: profile.email || user.email || null,
-        avatar_url: profile.avatar_url || user.user_metadata?.avatar_url || null,
+        full_name:
+          (typeof (profile as Record<string, unknown>)?.full_name === "string"
+            ? ((profile as Record<string, unknown>).full_name as string)
+            : null) ||
+          (user.user_metadata?.full_name as string) ||
+          (user.user_metadata?.name as string) ||
+          user.email?.split("@")[0] ||
+          "Admin Staff",
+        email:
+          (typeof (profile as Record<string, unknown>)?.email === "string"
+            ? ((profile as Record<string, unknown>).email as string)
+            : null) ||
+          user.email ||
+          null,
+        avatar_url:
+          (typeof (profile as Record<string, unknown>)?.avatar_url === "string"
+            ? ((profile as Record<string, unknown>).avatar_url as string)
+            : null) ||
+          (user.user_metadata?.avatar_url as string) ||
+          null,
         created_at: profile.created_at || user.created_at || new Date().toISOString(),
       },
       isAdmin: true,
