@@ -11,7 +11,7 @@ export function generateCareerConfirmationEmail(params: CareerConfirmationParams
   const { id, fullName, position, siteUrl } = params;
   const normalizedSiteUrl = siteUrl.replace(/\/$/, "");
 
-  const emailSubject = `Application Received: ${position} - DeepLayer Solutions`;
+  const emailSubject = `Application Received: ${position} | DeepLayer Solutions`;
 
   const plainText = `
 DeepLayer Solutions
@@ -142,13 +142,13 @@ Lahore, Pakistan
               <table role="presentation" cellpadding="0" cellspacing="0">
                 <tr>
                   <td style="padding-right: 10px;">
-                    <a href="mailto:deeplayersolutions@gmail.com?subject=Re:%20Application%20—%20${encodeURIComponent(position)}" style="display: inline-block; background-color: #008F53; color: #FFFFFF; font-size: 13px; font-weight: 600; text-decoration: none; padding: 10px 20px; border-radius: 6px;">
-                      Reply via Email
+                    <a href="mailto:deeplayersolutions@gmail.com?subject=Application%20-${encodeURIComponent(position)}" style="display: inline-block; background-color: #008F53; color: #FFFFFF; font-size: 13px; font-weight: 600; text-decoration: none; padding: 10px 22px; border-radius: 6px;">
+                      Reply to Email
                     </a>
                   </td>
                   <td>
-                    <a href="https://wa.me/923166007316" style="display: inline-block; background-color: #FFFFFF; color: #0F172A; border: 1px solid #CBD5E1; font-size: 13px; font-weight: 600; text-decoration: none; padding: 10px 20px; border-radius: 6px;">
-                      WhatsApp Contact
+                    <a href="${normalizedSiteUrl}/careers" style="display: inline-block; background-color: #FFFFFF; color: #0F172A; border: 1px solid #CBD5E1; font-size: 13px; font-weight: 600; text-decoration: none; padding: 10px 22px; border-radius: 6px;">
+                      View Careers Portal
                     </a>
                   </td>
                 </tr>
@@ -186,5 +186,6 @@ Lahore, Pakistan
     subject: emailSubject,
     html,
     text: plainText,
+    plainText,
   };
 }

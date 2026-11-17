@@ -11,7 +11,7 @@ export function generateContactConfirmationEmail(params: ContactConfirmationPara
   const { referenceNumber, fullName, subject, service, siteUrl } = params;
   const normalizedSiteUrl = siteUrl.replace(/\/$/, "");
 
-  const emailSubject = `Inquiry Confirmation [${referenceNumber}] - DeepLayer Solutions`;
+  const emailSubject = `Inquiry Received: #${referenceNumber} | DeepLayer Solutions`;
 
   const plainText = `
 DeepLayer Solutions
@@ -31,7 +31,7 @@ INQUIRY DETAILS:
 WHAT TO EXPECT NEXT:
 Our senior engineering team reviews project specifications, architecture requirements, and timeline constraints. A technical lead will follow up with detailed next steps within one business day.
 
-If you have additional technical documentation or need to update your scope, reply directly to this email or contact us via WhatsApp at +92 316 6007316.
+To share additional technical documentation or update your project scope, reply directly to this email or visit our contact portal at ${normalizedSiteUrl}/contact.
 
 Sincerely,
 DeepLayer Solutions Technical Architecture Team
@@ -140,13 +140,13 @@ Lahore, Pakistan
               <table role="presentation" cellpadding="0" cellspacing="0">
                 <tr>
                   <td style="padding-right: 10px;">
-                    <a href="mailto:deeplayersolutions@gmail.com?subject=Re:%20Inquiry%20${referenceNumber}" style="display: inline-block; background-color: #008F53; color: #FFFFFF; font-size: 13px; font-weight: 600; text-decoration: none; padding: 10px 20px; border-radius: 6px;">
-                      Reply via Email
+                    <a href="mailto:deeplayersolutions@gmail.com?subject=Inquiry%20${referenceNumber}" style="display: inline-block; background-color: #008F53; color: #FFFFFF; font-size: 13px; font-weight: 600; text-decoration: none; padding: 10px 22px; border-radius: 6px;">
+                      Reply to Email
                     </a>
                   </td>
                   <td>
-                    <a href="https://wa.me/923166007316" style="display: inline-block; background-color: #FFFFFF; color: #0F172A; border: 1px solid #CBD5E1; font-size: 13px; font-weight: 600; text-decoration: none; padding: 10px 20px; border-radius: 6px;">
-                      WhatsApp Contact
+                    <a href="${normalizedSiteUrl}/contact" style="display: inline-block; background-color: #FFFFFF; color: #0F172A; border: 1px solid #CBD5E1; font-size: 13px; font-weight: 600; text-decoration: none; padding: 10px 22px; border-radius: 6px;">
+                      Visit Contact Portal
                     </a>
                   </td>
                 </tr>
@@ -184,5 +184,6 @@ Lahore, Pakistan
     subject: emailSubject,
     html,
     text: plainText,
+    plainText,
   };
 }

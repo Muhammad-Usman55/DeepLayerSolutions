@@ -275,6 +275,7 @@ Lahore, Pakistan
   return {
     subject: emailSubject,
     plainText,
+    text: plainText,
     html,
   };
 }

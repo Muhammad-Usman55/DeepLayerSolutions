@@ -3,6 +3,7 @@ import { createAdminClient } from "@/lib/supabase/admin";
 import { sendContactInquiryEmails } from "@/lib/email/dispatch";
 import { checkRateLimit, getClientIp } from "@/lib/security/rateLimit";
 import { validateRequestOrigin } from "@/lib/security/csrf";
+import { isDisposableEmail, checkSpamContent } from "@/lib/security/spamProtection";
 
 // Basic HTML and script tag stripping to prevent XSS / malicious payloads
 function sanitize(str: string): string {
@@ -96,6 +97,8 @@ export async function POST(req: NextRequest) {
       errors.email = "Please provide a valid business email address.";
     } else if (trimmedEmail.length > 150) {
       errors.email = "Email address must be under 150 characters.";
+    } else if (isDisposableEmail(trimmedEmail)) {
+      errors.email = "Temporary or disposable email addresses are not accepted.";
     }
 
     if (!subject || typeof subject !== "string" || subject.trim().length < 3) {
@@ -109,6 +112,18 @@ export async function POST(req: NextRequest) {
         "Please provide at least 15 characters describing your project or architecture needs.";
     } else if (message.trim().length > 3000) {
       errors.message = "Message must be under 3000 characters.";
+    }
+
+    // Anti-spam content heuristic checks
+    if (typeof subject === "string" && typeof message === "string") {
+      const spamSubject = checkSpamContent(subject);
+      const spamMessage = checkSpamContent(message);
+      if (spamSubject.isSpam) {
+        errors.subject = spamSubject.reason || "Subject flagged by spam protection.";
+      }
+      if (spamMessage.isSpam) {
+        errors.message = spamMessage.reason || "Message flagged by spam protection.";
+      }
     }
 
     if (company && typeof company === "string" && company.trim().length > 150) {

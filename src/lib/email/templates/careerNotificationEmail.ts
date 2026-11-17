@@ -43,7 +43,7 @@ Submission Time: ${formattedDate} (UTC)
 
 CONTACT & PROFILE:
 - Email: ${email}
-- Phone/WhatsApp: ${phone}
+- Phone:    ${phone}
 - LinkedIn: ${linkedin}
 - Portfolio/GitHub: ${portfolio || "N/A"}
 
@@ -139,7 +139,7 @@ System ID: ${id || "Direct Upload"}
                     Phone
                   </td>
                   <td style="padding: 10px 14px; border-bottom: 1px solid #E2E8F0; font-size: 13px; color: #0F172A;">
-                    <a href="https://wa.me/${phone.replace(/[^0-9]/g, '')}" style="color: #0F172A; text-decoration: none;">${phone}</a>
+                    <a href="tel:${phone.replace(/[^0-9+]/g, '')}" style="color: #0F172A; text-decoration: none;">${phone}</a>
                   </td>
                 </tr>
                 <tr>
@@ -199,8 +199,8 @@ System ID: ${id || "Direct Upload"}
                     </a>
                   </td>
                   <td>
-                    <a href="https://wa.me/${phone.replace(/[^0-9]/g, '')}" target="_blank" style="display: inline-block; background-color: #FFFFFF; color: #0F172A; border: 1px solid #CBD5E1; font-size: 13px; font-weight: 600; text-decoration: none; padding: 10px 20px; border-radius: 6px;">
-                      WhatsApp Candidate
+                    <a href="tel:${phone.replace(/[^0-9+]/g, '')}" style="display: inline-block; background-color: #FFFFFF; color: #0F172A; border: 1px solid #CBD5E1; font-size: 13px; font-weight: 600; text-decoration: none; padding: 10px 20px; border-radius: 6px;">
+                      Call Candidate
                     </a>
                   </td>
                 </tr>

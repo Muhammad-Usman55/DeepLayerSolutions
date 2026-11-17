@@ -81,7 +81,7 @@ export function generateInquiryStatusUpdateEmail(params: InquiryStatusUpdatePara
   const normalizedSiteUrl = siteUrl.replace(/\/$/, "");
   const config = STATUS_CONFIGS[status] || STATUS_CONFIGS.in_review;
 
-  const emailSubject = `Inquiry Status Update: ${config.label} [${referenceNumber}] - DeepLayer Solutions`;
+  const emailSubject = `Status Update on Inquiry #${referenceNumber}: ${config.label} | DeepLayer Solutions`;
 
   const plainText = `
 DeepLayer Solutions
@@ -102,7 +102,7 @@ WHAT'S NEXT:
 ${config.nextSteps}
 
 If you have additional scope documents or questions:
-Reply directly to this email or reach us on WhatsApp at +92 316 6007316.
+Reply directly to this email or contact our technical team at ${normalizedSiteUrl}/contact.
 
 Sincerely,
 DeepLayer Solutions Technical Architecture Team
@@ -218,8 +218,8 @@ Lahore, Pakistan
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
                 <tr>
                   <td align="center" style="padding: 8px 0 16px 0;">
-                    <a href="https://wa.me/923166007316" target="_blank" style="display: inline-block; padding: 12px 28px; background-color: #008F53; color: #FFFFFF; font-size: 13px; font-weight: 600; text-decoration: none; border-radius: 8px;">
-                      Connect on WhatsApp
+                    <a href="${normalizedSiteUrl}/contact" style="display: inline-block; padding: 12px 28px; background-color: #008F53; color: #FFFFFF; font-size: 13px; font-weight: 600; text-decoration: none; border-radius: 8px;">
+                      Contact Engineering Team
                     </a>
                   </td>
                 </tr>
@@ -256,6 +256,7 @@ Lahore, Pakistan
   return {
     subject: emailSubject,
     plainText,
+    text: plainText,
     html,
   };
 }

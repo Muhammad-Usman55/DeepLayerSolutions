@@ -5,6 +5,7 @@ import { createAdminClient } from "@/lib/supabase/admin";
 import { getCompanyEmail, getSiteUrl, sendGmailMessage } from "@/lib/email/gmail";
 import { generateCareerNotificationEmail } from "@/lib/email/templates/careerNotificationEmail";
 import { generateCareerConfirmationEmail } from "@/lib/email/templates/careerConfirmationEmail";
+import { isDisposableEmail, checkSpamContent } from "@/lib/security/spamProtection";
 
 function sanitize(str: string): string {
   return str
@@ -116,10 +117,12 @@ export async function POST(req: NextRequest) {
       errors.email = "Please enter a valid email address.";
     } else if (email.trim().length > 150) {
       errors.email = "Email must be under 150 characters.";
+    } else if (isDisposableEmail(email.trim())) {
+      errors.email = "Temporary or disposable email addresses are not accepted.";
     }
 
     if (!phone || typeof phone !== "string" || phone.trim().length < 7) {
-      errors.phone = "Please enter a valid phone/WhatsApp number.";
+      errors.phone = "Please enter a valid phone number.";
     } else if (phone.trim().length > 30) {
       errors.phone = "Phone number must be under 30 characters.";
     }
@@ -150,8 +153,15 @@ export async function POST(req: NextRequest) {
       errors.resumeFile = "Please upload your Resume/CV (PDF, DOC, or DOCX up to 10MB).";
     }
 
-    if (coverNote && typeof coverNote === "string" && coverNote.trim().length > 2000) {
-      errors.coverNote = "Cover note must be under 2000 characters.";
+    if (coverNote && typeof coverNote === "string") {
+      if (coverNote.trim().length > 2000) {
+        errors.coverNote = "Cover note must be under 2000 characters.";
+      } else {
+        const spamCheck = checkSpamContent(coverNote);
+        if (spamCheck.isSpam) {
+          errors.coverNote = spamCheck.reason || "Cover note flagged by spam protection.";
+        }
+      }
     }
 
     if (Object.keys(errors).length > 0) {

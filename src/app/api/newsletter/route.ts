@@ -4,6 +4,7 @@ import { generateConfirmationToken } from "@/lib/email/tokens";
 import { sendNewsletterConfirmationEmail } from "@/lib/email/dispatch";
 import { checkRateLimit, getClientIp } from "@/lib/security/rateLimit";
 import { validateRequestOrigin } from "@/lib/security/csrf";
+import { isDisposableEmail } from "@/lib/security/spamProtection";
 
 const EMAIL_REGEX = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
 
@@ -68,6 +69,13 @@ export async function POST(req: NextRequest) {
     if (!email || !EMAIL_REGEX.test(email) || email.length > 100) {
       return NextResponse.json(
         { success: false, message: "Please enter a valid business or personal email address." },
+        { status: 422 }
+      );
+    }
+
+    if (isDisposableEmail(email)) {
+      return NextResponse.json(
+        { success: false, message: "Disposable or temporary email addresses are not accepted." },
         { status: 422 }
       );
     }
