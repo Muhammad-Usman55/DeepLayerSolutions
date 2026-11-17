@@ -89,18 +89,18 @@ export interface JobOpeningItem {
   id: string;
   slug: string;
   title: string;
-  department: "Engineering & AI" | "Growth & Marketing" | "Business & Sales" | "Design & Product";
-  type: "Internship" | "Full-time" | "Contract";
+  department: string;
+  type: string;
   location: string;
-  duration: string;
-  stipend: string;
-  iconName: string;
+  duration?: string;
+  stipend?: string;
+  iconName?: string;
   shortDescription: string;
   description: string;
   responsibilities: string[];
   requirements: string[];
   preferredQualifications?: string[];
-  perks: string[];
+  perks?: string[];
   isFeatured?: boolean;
 }
 

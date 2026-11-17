@@ -28,16 +28,20 @@ export function CareersContent() {
           setJobsList(data.jobs);
         }
       })
-      .catch(() => {});
+      .catch(() => { });
   }, []);
 
   const filteredJobs = jobsList.filter((job) => {
     const matchesDept =
       selectedDept === "All Openings" || job.department === selectedDept;
+    const query = searchQuery.toLowerCase();
+    const title = (job.title || "").toLowerCase();
+    const shortDesc = (job.shortDescription || job.description || "").toLowerCase();
+    const dept = (job.department || "").toLowerCase();
     const matchesSearch =
-      job.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      job.shortDescription.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      job.department.toLowerCase().includes(searchQuery.toLowerCase());
+      title.includes(query) ||
+      shortDesc.includes(query) ||
+      dept.includes(query);
     return matchesDept && matchesSearch;
   });
 
@@ -67,17 +71,15 @@ export function CareersContent() {
                 key={dept}
                 type="button"
                 onClick={() => setSelectedDept(dept)}
-                className={`px-4 py-2 rounded-full text-xs font-semibold transition-all duration-200 flex items-center gap-2 cursor-pointer ${
-                  isActive
-                    ? "bg-[#008F53] text-white shadow-xs"
-                    : "bg-[#FAFCF9] text-[#64736F] hover:text-[#142A27] hover:bg-white border border-transparent hover:border-[#DFEDE5]"
-                }`}
+                className={`px-4 py-2 rounded-full text-xs font-semibold transition-all duration-200 flex items-center gap-2 cursor-pointer ${isActive
+                  ? "bg-[#008F53] text-white shadow-xs"
+                  : "bg-[#FAFCF9] text-[#64736F] hover:text-[#142A27] hover:bg-white border border-transparent hover:border-[#DFEDE5]"
+                  }`}
               >
                 <span>{dept}</span>
                 <span
-                  className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono ${
-                    isActive ? "bg-white/20 text-white" : "bg-[#E9FFF2] text-[#008F53]"
-                  }`}
+                  className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono ${isActive ? "bg-white/20 text-white" : "bg-[#E9FFF2] text-[#008F53]"
+                    }`}
                 >
                   {count}
                 </span>

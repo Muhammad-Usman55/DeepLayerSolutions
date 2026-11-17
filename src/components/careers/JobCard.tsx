@@ -25,6 +25,13 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Code2,
 };
 
+const defaultPerks = [
+  "100% Remote Flexibility",
+  "Senior AI & Software Lead Mentorship",
+  "Competitive Paid Stipend + Fast-Track Offer",
+  "Direct Production Architecture Shipments",
+];
+
 interface JobCardProps {
   job: JobOpeningItem;
   onApply: (jobTitle: string) => void;
@@ -32,7 +39,38 @@ interface JobCardProps {
 
 export function JobCard({ job, onApply }: JobCardProps) {
   const [isExpanded, setIsExpanded] = useState(false);
-  const IconComponent = iconMap[job.iconName] || Brain;
+  const IconComponent = (job.iconName && iconMap[job.iconName]) || Brain;
+
+  const responsibilities =
+    Array.isArray(job.responsibilities) && job.responsibilities.length > 0
+      ? job.responsibilities
+      : typeof job.responsibilities === "string"
+      ? [job.responsibilities]
+      : [
+          "Collaborate with engineering leads and AI researchers on production systems.",
+          "Design, implement, and test modular, high-performance features.",
+          "Participate in technical reviews, sprint planning, and architecture refinement.",
+        ];
+
+  const requirements =
+    Array.isArray(job.requirements) && job.requirements.length > 0
+      ? job.requirements
+      : typeof job.requirements === "string"
+      ? [job.requirements]
+      : [
+          "Demonstrated problem-solving ability, technical initiative, and solid fundamentals.",
+          "Proactive written and verbal communication in a collaborative team setting.",
+        ];
+
+  const perks =
+    Array.isArray(job.perks) && job.perks.length > 0 ? job.perks : defaultPerks;
+
+  const preferredQualifications =
+    Array.isArray(job.preferredQualifications) && job.preferredQualifications.length > 0
+      ? job.preferredQualifications
+      : typeof job.preferredQualifications === "string"
+      ? [job.preferredQualifications]
+      : [];
 
   return (
     <div
@@ -117,7 +155,7 @@ export function JobCard({ job, onApply }: JobCardProps) {
               Role Overview
             </h4>
             <p className="text-sm text-[#142A27] leading-relaxed">
-              {job.description}
+              {job.description || job.shortDescription || "Join our team to build state-of-the-art AI systems and digital solutions."}
             </p>
           </div>
 
@@ -127,7 +165,7 @@ export function JobCard({ job, onApply }: JobCardProps) {
               Key Responsibilities
             </h4>
             <ul className="grid grid-cols-1 md:grid-cols-2 gap-2.5">
-              {job.responsibilities.map((resp, i) => (
+              {responsibilities.map((resp, i) => (
                 <li key={i} className="flex items-start gap-2.5 text-xs sm:text-sm text-[#64736F] leading-snug">
                   <CheckCircle2 className="w-4 h-4 text-[#00B86B] shrink-0 mt-0.5" />
                   <span>{resp}</span>
@@ -142,7 +180,7 @@ export function JobCard({ job, onApply }: JobCardProps) {
               Candidate Requirements
             </h4>
             <ul className="grid grid-cols-1 md:grid-cols-2 gap-2.5">
-              {job.requirements.map((req, i) => (
+              {requirements.map((req, i) => (
                 <li key={i} className="flex items-start gap-2.5 text-xs sm:text-sm text-[#142A27] font-medium leading-snug">
                   <div className="w-1.5 h-1.5 rounded-full bg-[#008F53] shrink-0 mt-2" />
                   <span>{req}</span>
@@ -152,13 +190,13 @@ export function JobCard({ job, onApply }: JobCardProps) {
           </div>
 
           {/* Preferred Qualifications (if any) */}
-          {job.preferredQualifications && job.preferredQualifications.length > 0 && (
+          {preferredQualifications.length > 0 && (
             <div>
               <h4 className="text-xs font-mono uppercase font-bold text-[#64736F] tracking-wider mb-2">
                 Bonus / Preferred
               </h4>
               <ul className="space-y-1.5">
-                {job.preferredQualifications.map((pref, i) => (
+                {preferredQualifications.map((pref, i) => (
                   <li key={i} className="text-xs text-[#64736F] flex items-center gap-2">
                     <span className="text-[#00B86B] font-bold">+</span>
                     <span>{pref}</span>
@@ -175,7 +213,7 @@ export function JobCard({ job, onApply }: JobCardProps) {
               <span>What You Receive</span>
             </h4>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-              {job.perks.map((perk, i) => (
+              {perks.map((perk, i) => (
                 <div key={i} className="flex items-center gap-2 text-xs text-[#142A27] font-semibold">
                   <Award className="w-3.5 h-3.5 text-[#008F53] shrink-0" />
                   <span>{perk}</span>

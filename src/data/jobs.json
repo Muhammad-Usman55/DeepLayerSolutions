@@ -9,7 +9,7 @@
     "duration": "3 – 6 Months",
     "stipend": "Competitive Paid Stipend + Fast-Track Offer",
     "iconName": "Brain",
-    "shortDescription": "Work alongside senior AI architects developing computer vision, neural models, LLM fine-tuning, and RAG pipelines.",
+    "shortDescription": "We are seeking an enthusiastic, intellectually curious AI/ML Engineer Intern to join our intelligence team. You will participate in developing production-grade AI pipelines, fine-tuning modern foundation models, experimenting with retrieval-augmented generation (RAG), and optimizing low-latency inference on edge and cloud clusters.",
     "description": "We are seeking an enthusiastic, intellectually curious AI/ML Engineer Intern to join our intelligence team. You will participate in developing production-grade AI pipelines, fine-tuning modern foundation models, experimenting with retrieval-augmented generation (RAG), and optimizing low-latency inference on edge and cloud clusters.",
     "responsibilities": [
       "Assist in training, evaluating, and quantizing machine learning models using PyTorch, TensorFlow, or ONNX.",
@@ -26,34 +26,8 @@
       "Enrolled in or graduate of Computer Science, Software Engineering, Data Science, or related STEM field."
     ],
     "status": "published",
-    "createdAt": "2026-11-01T00:00:00.000Z"
-  },
-  {
-    "id": "full-stack-intern",
-    "slug": "full-stack-developer-intern",
-    "title": "Full-Stack Developer Intern",
-    "department": "Engineering & AI",
-    "type": "Internship",
-    "location": "Remote (Global / Pakistan)",
-    "duration": "3 – 6 Months",
-    "stipend": "Competitive Paid Stipend + Fast-Track Offer",
-    "iconName": "Code2",
-    "shortDescription": "Build modern, high-performance web applications using Next.js 16, TypeScript, Supabase, and Tailwind CSS.",
-    "description": "Join our core engineering group to develop scalable, interactive web platforms. You will work on full-stack web applications, integrating PostgreSQL databases, designing responsive UI systems, and ensuring sub-second response times.",
-    "responsibilities": [
-      "Develop responsive, accessible UI components using Next.js App Router, React, and Tailwind CSS.",
-      "Build secure RESTful and Server Actions endpoints connecting with Supabase PostgreSQL.",
-      "Optimize frontend asset delivery, Core Web Vitals, and client-side caching.",
-      "Participate in code reviews, automated testing, and CI/CD deployment pipelines."
-    ],
-    "requirements": [
-      "Proficiency with JavaScript / TypeScript and modern React hooks.",
-      "Understanding of HTML5, CSS3, Flexbox, Grid, and Tailwind styling.",
-      "Familiarity with SQL databases, relational schemas, and API integration.",
-      "Enthusiasm for building clean, user-centric software architectures."
-    ],
-    "status": "published",
-    "createdAt": "2026-11-02T00:00:00.000Z"
+    "createdAt": "2026-11-01T00:00:00.000Z",
+    "updatedAt": "2026-11-17T23:43:23.471Z"
   },
   {
     "id": "digital-marketing-intern",
