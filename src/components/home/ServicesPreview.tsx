@@ -9,7 +9,7 @@ import useEmblaCarousel from "embla-carousel-react";
 import { Container } from "../common/Container";
 import { Eyebrow } from "../common/Eyebrow";
 import { ServiceCard } from "./services-preview/ServiceCard";
-import { previewServices, ServiceFilterCategory } from "./services-preview/types";
+import { previewServices } from "./services-preview/types";
 
 // Desktop-only dynamic import: zero bundle and SVG filter overhead on mobile devices
 const Central3DVisual = dynamic(
@@ -17,41 +17,15 @@ const Central3DVisual = dynamic(
   { ssr: false }
 );
 
-const filterCategories: { id: ServiceFilterCategory; label: string; count: number }[] = [
-  { id: "all", label: "All Services", count: previewServices.length },
-  {
-    id: "ai-automation",
-    label: "AI & Automation",
-    count: previewServices.filter((s) => s.categoryGroup === "ai-automation").length,
-  },
-  {
-    id: "enterprise-commerce",
-    label: "Platforms & Commerce",
-    count: previewServices.filter((s) => s.categoryGroup === "enterprise-commerce").length,
-  },
-  {
-    id: "cloud-growth",
-    label: "Cloud & Growth",
-    count: previewServices.filter((s) => s.categoryGroup === "cloud-growth").length,
-  },
-];
-
 export function ServicesPreview() {
-  const [activeCategory, setActiveCategory] = useState<ServiceFilterCategory>("all");
-
-  const filteredServices = useMemo(() => {
-    if (activeCategory === "all") return previewServices;
-    return previewServices.filter((s) => s.categoryGroup === activeCategory);
-  }, [activeCategory]);
-
   // Group into sets of 4 services per slide (2x2 grid on mobile, 4-in-a-row on desktop)
   const serviceChunks = useMemo(() => {
-    const chunks: (typeof filteredServices)[] = [];
-    for (let i = 0; i < filteredServices.length; i += 4) {
-      chunks.push(filteredServices.slice(i, i + 4));
+    const chunks: (typeof previewServices)[] = [];
+    for (let i = 0; i < previewServices.length; i += 4) {
+      chunks.push(previewServices.slice(i, i + 4));
     }
     return chunks;
-  }, [filteredServices]);
+  }, []);
 
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: "start",
@@ -100,7 +74,7 @@ export function ServicesPreview() {
     };
   }, [emblaApi, onSelect]);
 
-  // Re-sync on filter category change
+  // Re-sync the carousel when it mounts.
   useEffect(() => {
     if (emblaApi) {
       emblaApi.reInit();
@@ -110,20 +84,20 @@ export function ServicesPreview() {
       setCanScrollPrev(emblaApi.canScrollPrev());
       setCanScrollNext(emblaApi.canScrollNext());
     }
-  }, [activeCategory, emblaApi, serviceChunks]);
+  }, [emblaApi, serviceChunks]);
 
   return (
     <section
       className="relative overflow-hidden py-16 sm:py-20 lg:py-28 bg-gradient-to-b from-[#FAFCF9] via-[#F4FAF6] to-[#FAFCF9] border-t border-[#E3EDE5]"
       aria-label="Our Services Preview"
     >
-      {/* Background Ambient Lighting & Subtle Grid Lines */}
-      <div className="absolute top-0 left-1/6 -z-10 w-[600px] h-[500px] bg-gradient-to-br from-[#E8F5E9]/70 via-[#F4FAF6] to-transparent rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-10 right-10 -z-10 w-[450px] h-[450px] bg-[#34D399]/10 rounded-full blur-3xl pointer-events-none" />
+      {/* Background accents are deliberately restrained on small screens. */}
+      <div className="services-preview-glow absolute top-0 left-1/6 -z-10 w-[600px] h-[500px] bg-gradient-to-br from-[#E8F5E9]/70 via-[#F4FAF6] to-transparent rounded-full blur-3xl pointer-events-none" />
+      <div className="services-preview-glow absolute bottom-10 right-10 -z-10 w-[450px] h-[450px] bg-[#34D399]/10 rounded-full blur-3xl pointer-events-none" />
 
       {/* Subtle Orbital Background Grid Pattern */}
       <div
-        className="absolute inset-0 -z-10 opacity-35 pointer-events-none"
+        className="services-preview-pattern absolute inset-0 -z-10 opacity-35 pointer-events-none"
         style={{
           backgroundImage: `radial-gradient(#087A3D 0.75px, transparent 0.75px)`,
           backgroundSize: "32px 32px",
@@ -132,12 +106,15 @@ export function ServicesPreview() {
 
       <Container size="wide">
         {/* Mobile Section Heading */}
-        <div className="text-center mb-6 lg:hidden">
-          <h2 className="text-xl sm:text-2xl font-extrabold text-[#142A27] tracking-tight">
-            Our <span className="text-[#008F53]">Services</span>
+        <div className="services-preview-heading mb-6 lg:hidden">
+          <span className="block text-[11px] font-mono font-bold uppercase tracking-[0.16em] text-[#008F53]">
+            What we do
+          </span>
+          <h2 className="mt-2 text-[28px] sm:text-3xl font-bold text-[#142A27] tracking-tight leading-[1.12] max-w-[18ch]">
+            Technology that moves your business forward.
           </h2>
-          <p className="text-xs sm:text-sm text-[#64736F] mt-1 font-normal">
-            Innovative solutions for a smarter tomorrow.
+          <p className="text-sm text-[#64736F] mt-2 leading-relaxed max-w-lg">
+            Explore the ways we help teams build, improve, and grow.
           </p>
         </div>
 
@@ -207,43 +184,17 @@ export function ServicesPreview() {
 
         {/* Lower Zone: Premium Horizontal Card Carousel */}
         <div className="lg:mt-16">
-          {/* Controls Bar: Category Filter Pills + Navigation Arrows */}
-          <div className="mt-8 sm:mt-10 mb-6 sm:mb-8 flex items-center justify-between flex-wrap gap-4 border-b border-[#DFEDE5]/70 pb-4">
-            {/* Filter Pills */}
-            <div className="flex items-center gap-2 overflow-x-auto pb-1 max-w-full no-scrollbar">
-              {filterCategories.map((cat) => {
-                const isActive = activeCategory === cat.id;
-                return (
-                  <button
-                    key={cat.id}
-                    type="button"
-                    onClick={() => setActiveCategory(cat.id)}
-                    className={`inline-flex items-center gap-2 px-3.5 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 shrink-0 cursor-pointer ${
-                      isActive
-                        ? "bg-[#008F53] text-white shadow-xs border border-[#008F53]"
-                        : "bg-white/85 hover:bg-white text-[#142A27] hover:text-[#008F53] border border-[#DFEDE5]"
-                    }`}
-                  >
-                    <span>{cat.label}</span>
-                    <span
-                      className={`text-[10px] sm:text-[11px] font-mono px-1.5 py-0.5 rounded-full ${
-                        isActive ? "bg-white/20 text-white" : "bg-[#E9FFF2] text-[#008F53]"
-                      }`}
-                    >
-                      {cat.count}
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
-
-            {/* Right Action: View Catalog Link */}
-            <div className="flex items-center gap-3 ml-auto">
+          {/* Service count and route to the full catalog */}
+          <div className="services-preview-controls mt-8 sm:mt-10 mb-5 sm:mb-7 flex items-center justify-between gap-4">
+            <span className="text-xs sm:text-sm text-[#65736D]">
+              {previewServices.length} services
+            </span>
+            <div className="flex items-center gap-3">
               <Link
                 href="/services"
                 className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-[#008F53] hover:text-[#075B3E] transition-colors"
               >
-                <span>Full Catalog</span>
+                <span>View all services</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>
@@ -291,6 +242,11 @@ export function ServicesPreview() {
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
+            {scrollSnaps.length > 0 && (
+              <span className="services-preview-slide-count hidden sm:inline font-mono text-xs tabular-nums text-[#65736D]" aria-live="polite">
+                {String(selectedIndex + 1).padStart(2, "0")} / {String(scrollSnaps.length).padStart(2, "0")}
+              </span>
+            )}
             <button
               type="button"
               onClick={scrollNext}
@@ -308,7 +264,7 @@ export function ServicesPreview() {
 
           {/* Carousel Pagination Dots */}
           {scrollSnaps.length > 1 && (
-            <div className="mt-3 sm:mt-4 flex items-center justify-center gap-1.5 sm:gap-2" aria-label="Slide navigation">
+            <div className="services-preview-dots mt-3 sm:mt-4 flex items-center justify-center gap-1.5 sm:gap-2" aria-label="Slide navigation">
               {scrollSnaps.map((_, idx) => (
                 <button
                   key={idx}
@@ -333,7 +289,7 @@ export function ServicesPreview() {
           )}
 
           {/* Bottom Custom Architecture Banner */}
-          <div className="mt-10 sm:mt-14 rounded-2xl bg-white/80 backdrop-blur-xs border border-[#DFEDE5] p-5 sm:p-7 flex flex-col sm:flex-row items-center justify-between gap-5 shadow-xs">
+          <div className="services-preview-architecture mt-10 sm:mt-14 rounded-2xl bg-white/80 backdrop-blur-xs border border-[#DFEDE5] p-5 sm:p-7 flex flex-col sm:flex-row items-center justify-between gap-5 shadow-xs">
             <div className="text-center sm:text-left">
               <h3 className="text-sm sm:text-base lg:text-lg font-bold text-[#142A27]">
                 Need a bespoke multi-service architecture?

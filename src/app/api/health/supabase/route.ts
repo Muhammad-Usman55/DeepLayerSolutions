@@ -4,8 +4,7 @@ import { verifySupabaseConnection } from "@/lib/supabase/verify";
 /**
  * GET /api/health/supabase
  *
- * Safe diagnostic endpoint to verify Supabase client initialization
- * and backend connectivity without exposing credentials or database secrets.
+ * Public uptime signal. Keep configuration details and provider errors private.
  */
 export async function GET() {
   try {
@@ -14,39 +13,21 @@ export async function GET() {
     return NextResponse.json(
       {
         success: result.connected,
-        status: result.connected
-          ? "connected"
-          : result.config.isConfigured
-          ? "unreachable"
-          : "unconfigured",
-        details: {
-          clientInitialized: result.initialized,
-          backendConnected: result.connected,
-          latencyMs: result.latencyMs,
-          urlConfigured: result.config.hasUrl,
-          anonKeyConfigured: result.config.hasAnonKey,
-          serviceRoleKeyConfigured: result.config.hasServiceRoleKey,
-          urlPreview: result.config.urlPreview || "Not provided",
-          missingVariables: result.config.missingVariables,
-        },
-        message: result.message,
-        timestamp: result.timestamp,
-        instructions: !result.config.isConfigured
-          ? "Please populate NEXT_PUBLIC_SUPABASE_URL, NEXT_PUBLIC_SUPABASE_ANON_KEY, and SUPABASE_SERVICE_ROLE_KEY in .env.local"
-          : undefined,
+        status: result.connected ? "connected" : "unavailable",
+        latencyMs: result.connected ? result.latencyMs : undefined,
       },
-      { status: 200 }
+      {
+        status: result.connected ? 200 : 503,
+        headers: { "Cache-Control": "no-store" },
+      }
     );
-  } catch (error: any) {
+  } catch {
     return NextResponse.json(
       {
         success: false,
-        status: "error",
-        message: "An unexpected error occurred during Supabase connection verification.",
-        error: error?.message || "Unknown error",
-        timestamp: new Date().toISOString(),
+        status: "unavailable",
       },
-      { status: 500 }
+      { status: 503, headers: { "Cache-Control": "no-store" } }
     );
   }
 }

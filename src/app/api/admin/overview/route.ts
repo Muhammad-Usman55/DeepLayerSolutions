@@ -1,15 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getAuthenticatedAdmin } from "@/lib/auth/admin";
+import { authorizeAdmin } from "@/lib/auth/admin";
+import { hasPermission } from "@/lib/auth/permissions";
 import { createAdminClient } from "@/lib/supabase/admin";
 
 export async function GET(req: NextRequest) {
-  const admin = await getAuthenticatedAdmin();
-  if (!admin) {
-    return NextResponse.json(
-      { success: false, message: "Unauthorized. Admin session required." },
-      { status: 401 }
-    );
-  }
+  const { admin, response } = await authorizeAdmin();
+  if (response) return response;
 
   try {
     const { searchParams } = new URL(req.url);
@@ -218,17 +214,21 @@ export async function GET(req: NextRequest) {
     }
 
     // 5. Recent Activity
-    const { data: recentInquiries } = await supabase
-      .from("contact_submissions")
-      .select("id, reference_number, full_name, email, service, status, created_at")
-      .order("created_at", { ascending: false })
-      .limit(5);
+    const { data: recentInquiries } = hasPermission(admin.profile.role, "manage_inquiries")
+      ? await supabase
+          .from("contact_submissions")
+          .select("id, reference_number, full_name, email, service, status, created_at")
+          .order("created_at", { ascending: false })
+          .limit(5)
+      : { data: [] };
 
-    const { data: recentEmails } = await supabase
-      .from("email_logs")
-      .select("id, recipient, email_type, status, created_at, error_message")
-      .order("created_at", { ascending: false })
-      .limit(5);
+    const { data: recentEmails } = hasPermission(admin.profile.role, "view_email_logs")
+      ? await supabase
+          .from("email_logs")
+          .select("id, recipient, email_type, status, created_at, error_message")
+          .order("created_at", { ascending: false })
+          .limit(5)
+      : { data: [] };
 
     // Default popular pages fallback if no analytics logged yet
     if (popularPages.length === 0) {

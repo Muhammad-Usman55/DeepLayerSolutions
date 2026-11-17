@@ -12,7 +12,8 @@ export type AdminPermission =
   | "manage_media"
   | "manage_seo"
   | "view_analytics"
-  | "view_activity_logs";
+  | "view_activity_logs"
+  | "view_email_logs";
 
 /**
  * Role-Based Access Control Permission Matrix
@@ -31,6 +32,7 @@ const ROLE_PERMISSIONS: Record<AdminRole, AdminPermission[]> = {
     "manage_seo",
     "view_analytics",
     "view_activity_logs",
+    "view_email_logs",
   ],
   admin: [
     "manage_jobs",
@@ -43,6 +45,7 @@ const ROLE_PERMISSIONS: Record<AdminRole, AdminPermission[]> = {
     "manage_seo",
     "view_analytics",
     "view_activity_logs",
+    "view_email_logs",
   ],
   recruitment_manager: [
     "manage_jobs",
@@ -119,7 +122,7 @@ export function canAccessRoute(
     return hasPermission(role, "manage_settings");
   }
   if (pathname.startsWith("/admin/emails")) {
-    return role === "admin";
+    return hasPermission(role, "view_email_logs");
   }
 
   return true;

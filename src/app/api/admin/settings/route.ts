@@ -1,17 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getAuthenticatedAdmin } from "@/lib/auth/admin";
+import { authorizeAdmin } from "@/lib/auth/admin";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { siteConfig } from "@/config/site";
 
 // GET /api/admin/settings - Retrieve system health, company parameters, and admin status
 export async function GET() {
-  const admin = await getAuthenticatedAdmin();
-  if (!admin) {
-    return NextResponse.json(
-      { success: false, message: "Unauthorized. Admin session required." },
-      { status: 401 }
-    );
-  }
+  const { admin, response } = await authorizeAdmin("manage_settings");
+  if (response) return response;
 
   // 1. Check Supabase DB Health & Measure Latency
   let dbStatus = "healthy";
@@ -79,13 +74,8 @@ export async function GET() {
 
 // PATCH /api/admin/settings - Update current admin profile / change password
 export async function PATCH(req: NextRequest) {
-  const admin = await getAuthenticatedAdmin();
-  if (!admin) {
-    return NextResponse.json(
-      { success: false, message: "Unauthorized. Admin session required." },
-      { status: 401 }
-    );
-  }
+  const { admin, response } = await authorizeAdmin("manage_settings");
+  if (response) return response;
 
   try {
     const body = await req.json();

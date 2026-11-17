@@ -235,7 +235,7 @@ export default async function IndustryDetailPage({
       />
 
       {/* 1. SECTOR HERO SECTION (Two-Column Layout with 3D Platform Visual) */}
-      <section className="relative overflow-hidden pt-8 pb-14 lg:pt-14 lg:pb-22 bg-gradient-to-b from-[#E9FFF2]/60 via-[#FAFCF9] to-white border-b border-[#DFEDE5] select-none">
+      <section className="relative overflow-hidden pt-8 pb-14 lg:pt-14 lg:pb-22 bg-[#FAFCF9] border-b border-[#DFEDE5] select-none">
         {/* Soft Ambient Light Orbs */}
         <div className="absolute top-0 right-1/4 w-[500px] h-[400px] bg-gradient-to-bl from-[#E9FFF2] via-[#D5F9E6]/30 to-transparent rounded-full blur-3xl pointer-events-none -z-10" />
         <div className="absolute bottom-0 left-10 w-[400px] h-[400px] bg-[#34D399]/10 rounded-full blur-3xl pointer-events-none -z-10" />
@@ -324,7 +324,7 @@ export default async function IndustryDetailPage({
       </section>
 
       {/* 2. QUANTITATIVE SECTOR METRICS STRIP */}
-      <section className="py-10 bg-white border-b border-[#DFEDE5]">
+      <section className="py-10 bg-[#FAFCF9] border-b border-[#DFEDE5]">
         <Container size="wide">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
             {metrics.map((item, idx) => (
@@ -388,7 +388,7 @@ export default async function IndustryDetailPage({
       </section>
 
       {/* 4. DEEPLAYER TECHNICAL ARCHITECTURE & SOLUTIONS */}
-      <section className="py-16 sm:py-20 lg:py-24 bg-white border-b border-[#DFEDE5]">
+      <section className="py-16 sm:py-20 lg:py-24 bg-[#FAFCF9] border-b border-[#DFEDE5]">
         <Container size="wide">
           <div className="max-w-2xl mb-12 sm:mb-16">
             <span className="text-xs font-mono font-semibold uppercase tracking-wider text-[#008F53] bg-[#E9FFF2] px-3 py-1 rounded-full border border-[#BCE8CF]">
@@ -434,7 +434,7 @@ export default async function IndustryDetailPage({
       </section>
 
       {/* 5. SECTOR APPLICATIONS & SYSTEMS WE DELIVER */}
-      <section className="py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-[#FAFCF9] via-[#F4FAF6] to-[#FAFCF9] border-b border-[#DFEDE5]">
+      <section className="py-16 sm:py-20 lg:py-24 bg-[#FAFCF9] border-b border-[#DFEDE5]">
         <Container size="wide">
           <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
             <span className="text-xs font-mono font-semibold uppercase tracking-wider text-[#008F53] bg-[#E9FFF2] px-3 py-1 rounded-full border border-[#BCE8CF]">
@@ -485,7 +485,7 @@ export default async function IndustryDetailPage({
       </section>
 
       {/* 6. MEASURABLE BUSINESS IMPACT & ROI */}
-      <section className="py-16 sm:py-20 lg:py-24 bg-white border-b border-[#DFEDE5]">
+      <section className="py-16 sm:py-20 lg:py-24 bg-[#FAFCF9] border-b border-[#DFEDE5]">
         <Container size="wide">
           <div className="max-w-2xl mb-12 sm:mb-16">
             <span className="text-xs font-mono font-semibold uppercase tracking-wider text-[#008F53] bg-[#E9FFF2] px-3 py-1 rounded-full border border-[#BCE8CF]">
@@ -579,7 +579,7 @@ export default async function IndustryDetailPage({
       )}
 
       {/* 8. EXPLORE OTHER SPECIALIZED SECTORS */}
-      <section className="py-16 sm:py-20 bg-white border-b border-[#DFEDE5]">
+      <section className="py-16 sm:py-20 bg-[#FAFCF9] border-b border-[#DFEDE5]">
         <Container size="wide">
           <div className="flex items-center justify-between flex-wrap gap-4 mb-8 sm:mb-10">
             <div>

@@ -41,6 +41,8 @@ if (fs.existsSync(envPath)) {
 }
 
 const BASE_URL = process.env.TEST_BASE_URL || "http://localhost:3000";
+const TEST_ADMIN_EMAIL = process.env.TEST_ADMIN_EMAIL || "";
+const TEST_ADMIN_PASSWORD = process.env.TEST_ADMIN_PASSWORD || "";
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
@@ -307,7 +309,7 @@ async function run() {
   // --------------------------------------------------------------------------
   console.log("\n--- 8. Newsletter Unsubscribe System ---");
   try {
-    const signingSecret = process.env.SUPABASE_SERVICE_ROLE_KEY || "deeplayer-solutions-newsletter-secret";
+    const signingSecret = SUPABASE_SERVICE_ROLE_KEY;
     const unsubKey = crypto
       .createHmac("sha256", signingSecret)
       .update(newsletterEmail.toLowerCase().trim())
@@ -433,7 +435,7 @@ async function run() {
         "X-Forwarded-For": authIp,
       },
       body: JSON.stringify({
-        email: "admin@deeplayersolutions.com",
+        email: TEST_ADMIN_EMAIL || "invalid-admin@example.invalid",
         password: "WrongPassword999!",
       }),
     });
@@ -441,24 +443,28 @@ async function run() {
     report(badLoginRes.status === 401, "Invalid password rejected with HTTP 401 Unauthorized");
 
     // 11b. Valid admin credentials
-    const goodLoginRes = await fetch(`${BASE_URL}/api/admin/auth/login`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Origin: "http://localhost:3000",
-        "X-Forwarded-For": authIp,
-      },
-      body: JSON.stringify({
-        email: "admin@deeplayersolutions.com",
-        password: "DeepLayerAdmin2026!",
-      }),
-    });
+    if (!TEST_ADMIN_EMAIL || !TEST_ADMIN_PASSWORD) {
+      report(true, "Valid admin login check skipped (set TEST_ADMIN_EMAIL and TEST_ADMIN_PASSWORD to enable)");
+    } else {
+      const goodLoginRes = await fetch(`${BASE_URL}/api/admin/auth/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Origin: "http://localhost:3000",
+          "X-Forwarded-For": authIp,
+        },
+        body: JSON.stringify({
+          email: TEST_ADMIN_EMAIL,
+          password: TEST_ADMIN_PASSWORD,
+        }),
+      });
 
-    const goodLoginData = await goodLoginRes.json();
-    report(
-      goodLoginRes.status === 200 && goodLoginData.success === true && goodLoginData.user?.role === "superadmin",
-      `Authorized admin authentication successful (Role: ${goodLoginData.user?.role})`
-    );
+      const goodLoginData = await goodLoginRes.json();
+      report(
+        goodLoginRes.status === 200 && goodLoginData.success === true && goodLoginData.user?.role === "superadmin",
+        `Authorized admin authentication successful (Role: ${goodLoginData.user?.role})`
+      );
+    }
   } catch (err) {
     report(false, `Admin authentication test failed: ${err.message}`);
   }

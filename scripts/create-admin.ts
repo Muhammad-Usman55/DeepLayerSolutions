@@ -32,24 +32,18 @@ const supabase = createClient<Database>(supabaseUrl, serviceKey, {
 
 // Parse arguments
 const args = process.argv.slice(2);
-let email = "";
-let password = "";
-let role: AdminRole = "superadmin";
+let email = process.env.ADMIN_BOOTSTRAP_EMAIL || "";
+const password = process.env.ADMIN_BOOTSTRAP_PASSWORD || "";
+let role = (process.env.ADMIN_BOOTSTRAP_ROLE || "superadmin") as AdminRole;
 
 args.forEach((arg) => {
   if (arg.startsWith("email=")) email = arg.replace("email=", "").trim();
-  if (arg.startsWith("password=")) password = arg.replace("password=", "").trim();
   if (arg.startsWith("role=")) role = arg.replace("role=", "").trim() as AdminRole;
 });
 
-// Default fallback for development/testing if not specified
-if (!email || !password) {
-  email = email || "admin@deeplayersolutions.com";
-  password = password || "DeepLayerAdmin2026!";
-  console.log(`No credentials passed. Using default admin credentials:`);
-  console.log(`Email:    ${email}`);
-  console.log(`Password: ${password}`);
-  console.log(`(You can supply custom credentials: npx tsx scripts/create-admin.ts email=... password=... role=superadmin)\n`);
+if (!email || !password || password.length < 12) {
+  console.error("Set ADMIN_BOOTSTRAP_EMAIL and a 12+ character ADMIN_BOOTSTRAP_PASSWORD in the ignored .env.local file.");
+  process.exit(1);
 }
 
 async function provisionAdmin() {

@@ -2,8 +2,6 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import "./mobile.css";
-import "lenis/dist/lenis.css";
-import { SmoothScrollProvider } from "@/components/common/SmoothScrollProvider";
 import { PageTransition } from "@/components/layout/PageTransition";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
@@ -241,12 +239,10 @@ export default function RootLayout({
         <MotionProvider>
           <ConsentProvider>
             <GoogleAnalytics />
-            <SmoothScrollProvider>
-              <Navbar />
-              <PageTransition>{children}</PageTransition>
-              <Footer />
-              <CookieConsent />
-            </SmoothScrollProvider>
+            <Navbar />
+            <PageTransition>{children}</PageTransition>
+            <Footer />
+            <CookieConsent />
           </ConsentProvider>
         </MotionProvider>
       </body>

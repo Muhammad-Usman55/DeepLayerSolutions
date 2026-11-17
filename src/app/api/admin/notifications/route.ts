@@ -1,47 +1,53 @@
 import { NextResponse } from "next/server";
-import { getAuthenticatedAdmin } from "@/lib/auth/admin";
+import { authorizeAdmin } from "@/lib/auth/admin";
+import { hasPermission } from "@/lib/auth/permissions";
 import { createAdminClient } from "@/lib/supabase/admin";
 
 export async function GET() {
-  const admin = await getAuthenticatedAdmin();
-  if (!admin) {
-    return NextResponse.json(
-      { success: false, message: "Unauthorized. Admin session required." },
-      { status: 401 }
-    );
-  }
+  const { admin, response } = await authorizeAdmin();
+  if (response) return response;
 
   try {
     const supabase = createAdminClient();
 
-    // 1. Fetch unread inquiries
-    const { data: inquiries } = await supabase
-      .from("contact_submissions")
-      .select("id, reference_number, full_name, email, service, created_at, status")
-      .order("created_at", { ascending: false })
-      .limit(10);
+    // Only fetch and expose personal details to roles that can manage the records.
+    const canViewInquiries = hasPermission(admin.profile.role, "manage_inquiries");
+    const canViewApplications = hasPermission(admin.profile.role, "manage_applications");
+    const canViewSubscribers = hasPermission(admin.profile.role, "manage_newsletter");
+    const canViewEmailLogs = hasPermission(admin.profile.role, "view_email_logs");
 
-    // 2. Fetch new job applications
-    const { data: applications } = await supabase
-      .from("job_applications")
-      .select("id, full_name, applied_position, email, created_at, status")
-      .order("created_at", { ascending: false })
-      .limit(15);
+    const { data: inquiries } = canViewInquiries
+      ? await supabase
+          .from("contact_submissions")
+          .select("id, reference_number, full_name, email, service, created_at, status")
+          .order("created_at", { ascending: false })
+          .limit(10)
+      : { data: [] };
 
-    // 3. Fetch recent subscribers
-    const { data: subscribers } = await supabase
-      .from("subscribers")
-      .select("id, email, status, created_at")
-      .order("created_at", { ascending: false })
-      .limit(5);
+    const { data: applications } = canViewApplications
+      ? await supabase
+          .from("job_applications")
+          .select("id, full_name, applied_position, email, created_at, status")
+          .order("created_at", { ascending: false })
+          .limit(15)
+      : { data: [] };
 
-    // 4. Fetch recent email delivery errors (if any)
-    const { data: failedEmails } = await supabase
-      .from("email_logs")
-      .select("id, recipient, email_type, status, error_message, created_at")
-      .eq("status", "failed")
-      .order("created_at", { ascending: false })
-      .limit(5);
+    const { data: subscribers } = canViewSubscribers
+      ? await supabase
+          .from("subscribers")
+          .select("id, email, status, created_at")
+          .order("created_at", { ascending: false })
+          .limit(5)
+      : { data: [] };
+
+    const { data: failedEmails } = canViewEmailLogs
+      ? await supabase
+          .from("email_logs")
+          .select("id, recipient, email_type, status, error_message, created_at")
+          .eq("status", "failed")
+          .order("created_at", { ascending: false })
+          .limit(5)
+      : { data: [] };
 
     const notifications: Array<{
       id: string;

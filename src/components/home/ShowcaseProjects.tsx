@@ -85,8 +85,52 @@ function ProjectCard({ project }: ProjectCardProps) {
   );
 }
 
+function MobileProjectCard({ project, index }: ProjectCardProps) {
+  const keyMetric = project.resultsAndValidation.metrics[0];
+
+  return (
+    <Link
+      href={`/portfolio/${project.slug}`}
+      className="mobile-project-card"
+      aria-label={`Read the ${project.title} case study`}
+    >
+      <div className="mobile-project-card-top">
+        <span className="mobile-project-category">{project.category}</span>
+        <span className="mobile-project-index">{String((index ?? 0) + 1).padStart(2, "0")}</span>
+      </div>
+
+      <div className="mobile-project-copy">
+        <h3>{project.title}</h3>
+        <p>{project.tagline}</p>
+      </div>
+
+      <div className="mobile-project-problem">
+        <span>The challenge</span>
+        <p>{project.challenge.painPoints[0]}</p>
+      </div>
+
+      <div className="mobile-project-result">
+        <span className="mobile-project-result-label">Measured outcome</span>
+        <div className="mobile-project-result-value">
+          <strong>{keyMetric.value}</strong>
+          <span>{keyMetric.label}</span>
+        </div>
+      </div>
+
+      <div className="mobile-project-card-bottom">
+        <span>Read case study</span>
+        <span className="mobile-project-link" aria-hidden="true">
+          <ArrowRight className="h-4 w-4" />
+        </span>
+      </div>
+    </Link>
+  );
+}
+
 export function ShowcaseProjects() {
-  const featuredProjects = projectsData.filter((p) => p.featured);
+  const featuredProjects = projectsData.filter(
+    (project) => project.featured && project.slug !== "finsecure-ml"
+  );
 
   // Group projects into sets of 4 (2x2 grid on mobile, 4-in-a-row on desktop)
   const projectChunks = useMemo(() => {
@@ -177,24 +221,14 @@ export function ShowcaseProjects() {
 
       <Container size="wide">
         {/* Mobile Header (< sm) */}
-        <div className="text-center mb-6 sm:hidden">
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            <h2 className="text-xl sm:text-2xl font-extrabold text-[#142A27] tracking-tight">
-              Featured <span className="text-[#008F53]">Portfolio</span>
-            </h2>
-            <p className="text-xs sm:text-sm text-[#64736F] mt-1 font-normal">
-              A glimpse of our recent enterprise software & AI engineering.
-            </p>
-          </motion.div>
+        <div className="portfolio-mobile-header sm:hidden">
+          <span>Selected work</span>
+        <h2>Projects with a purpose.</h2>
+        <p>What the team needed, and what we delivered.</p>
         </div>
 
         {/* Tablet & Desktop Section Header (>= sm) */}
-        <div className="hidden sm:flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 sm:mb-14">
+        <div className="portfolio-desktop-header hidden sm:flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 sm:mb-14">
           <div className="max-w-2xl">
             <motion.div
               initial={{ opacity: 0, y: 12 }}
@@ -249,7 +283,7 @@ export function ShowcaseProjects() {
         </div>
 
         {/* Controls Bar: Overview Pill + View Full Catalog */}
-        <div className="mb-6 sm:mb-8 flex items-center justify-between flex-wrap gap-4 border-b border-[#DFEDE5]/70 pb-4">
+        <div className="portfolio-desktop-controls mb-6 sm:mb-8 flex items-center justify-between flex-wrap gap-4 border-b border-[#DFEDE5]/70 pb-4">
           <div className="flex items-center gap-2">
             <span className="text-xs sm:text-sm font-bold text-[#142A27]">
               Production Case Studies
@@ -269,8 +303,22 @@ export function ShowcaseProjects() {
         </div>
 
         {/* Embla Horizontal Card Carousel Viewport & Track */}
+        <p className="portfolio-mobile-hint sm:hidden">
+          <span aria-hidden="true">01—{String(featuredProjects.length).padStart(2, "0")}</span>
+          Swipe to explore
+        </p>
+        <div className="portfolio-mobile-list sm:hidden" aria-label="Featured project case studies">
+          {featuredProjects.map((project, index) => (
+            <MobileProjectCard key={project.id} project={project} index={index} />
+          ))}
+        </div>
+        <Link href="/portfolio" className="portfolio-mobile-cta sm:hidden">
+          View all {featuredProjects.length} projects
+          <ArrowRight className="h-4 w-4" />
+        </Link>
+
         <div
-          className="relative overflow-hidden py-2 touch-pan-y"
+          className="portfolio-desktop-carousel relative overflow-hidden py-2 touch-pan-y"
           ref={emblaRef}
           data-lenis-prevent-horizontal="true"
         >
@@ -296,7 +344,7 @@ export function ShowcaseProjects() {
         </div>
 
         {/* Navigation Controls: Horizontal Prev / Next Buttons Directly Below Cards (Desktop & Mobile) */}
-        <div className="flex items-center justify-center gap-3 sm:gap-4 mt-5 sm:mt-6">
+        <div className="portfolio-desktop-navigation flex items-center justify-center gap-3 sm:gap-4 mt-5 sm:mt-6">
           <button
             type="button"
             onClick={scrollPrev}
@@ -327,7 +375,7 @@ export function ShowcaseProjects() {
 
         {/* Carousel Pagination Indicators */}
         {scrollSnaps.length > 1 && (
-          <div className="mt-3 sm:mt-4 flex items-center justify-center gap-1.5 sm:gap-2" aria-label="Slide navigation">
+          <div className="portfolio-desktop-dots mt-3 sm:mt-4 flex items-center justify-center gap-1.5 sm:gap-2" aria-label="Slide navigation">
             {scrollSnaps.map((_, idx) => (
               <button
                 key={idx}

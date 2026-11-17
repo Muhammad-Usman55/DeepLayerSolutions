@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getAuthenticatedAdmin } from "@/lib/auth/admin";
+import { authorizeAdmin } from "@/lib/auth/admin";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { sendInquiryStatusUpdateEmail } from "@/lib/email/dispatch";
 import type { ContactSubmissionStatus } from "@/types/supabase";
@@ -16,13 +16,8 @@ export async function PATCH(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
-  const admin = await getAuthenticatedAdmin();
-  if (!admin) {
-    return NextResponse.json(
-      { success: false, message: "Unauthorized." },
-      { status: 401 }
-    );
-  }
+  const { admin, response } = await authorizeAdmin("manage_inquiries");
+  if (response) return response;
 
   try {
     const { id } = await params;
@@ -125,13 +120,8 @@ export async function DELETE(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
-  const admin = await getAuthenticatedAdmin();
-  if (!admin) {
-    return NextResponse.json(
-      { success: false, message: "Unauthorized." },
-      { status: 401 }
-    );
-  }
+  const { admin, response } = await authorizeAdmin("manage_inquiries");
+  if (response) return response;
 
   try {
     const { id } = await params;

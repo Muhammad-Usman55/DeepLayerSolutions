@@ -11,7 +11,7 @@ export function PageWrapper({ children, className }: PageWrapperProps) {
     <main
       id="main-content"
       tabIndex={-1}
-      className={cn("flex-1 w-full max-w-full overflow-x-clip outline-none", className)}
+      className={cn("public-page flex-1 w-full max-w-full overflow-x-clip outline-none", className)}
     >
       {children}
     </main>

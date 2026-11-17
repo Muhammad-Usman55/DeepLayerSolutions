@@ -200,7 +200,7 @@ export function CareerApplyForm({ selectedPosition }: CareerApplyFormProps) {
         }
         setServerError(
           data?.message ||
-            "Failed to submit application. Please try again or email your CV directly to deeplayersolutions@gmail.com."
+          "Failed to submit application. Please try again or email your CV directly to deeplayersolutions@gmail.com."
         );
         setIsSubmitting(false);
         return;
@@ -356,9 +356,8 @@ export function CareerApplyForm({ selectedPosition }: CareerApplyFormProps) {
                 placeholder="e.g. Usman Tariq"
                 value={form.fullName}
                 onChange={(e) => setForm({ ...form, fullName: e.target.value })}
-                className={`w-full px-4 py-3 rounded-xl bg-[#FAFCF9] border text-sm text-[#142A27] placeholder:text-[#A0AEA7] focus:outline-none focus:ring-2 focus:ring-[#008F53] transition-colors ${
-                  errors.fullName ? "border-red-400 bg-red-50/20" : "border-[#DFEDE5]"
-                }`}
+                className={`w-full px-4 py-3 rounded-xl bg-[#FAFCF9] border text-sm text-[#142A27] placeholder:text-[#A0AEA7] focus:outline-none focus:ring-2 focus:ring-[#008F53] transition-colors ${errors.fullName ? "border-red-400 bg-red-50/20" : "border-[#DFEDE5]"
+                  }`}
               />
               {errors.fullName && (
                 <p className="mt-1.5 text-xs text-red-600 flex items-center gap-1">
@@ -384,9 +383,8 @@ export function CareerApplyForm({ selectedPosition }: CareerApplyFormProps) {
                 placeholder="you@domain.com"
                 value={form.email}
                 onChange={(e) => setForm({ ...form, email: e.target.value })}
-                className={`w-full px-4 py-3 rounded-xl bg-[#FAFCF9] border text-sm text-[#142A27] placeholder:text-[#A0AEA7] focus:outline-none focus:ring-2 focus:ring-[#008F53] transition-colors ${
-                  errors.email ? "border-red-400 bg-red-50/20" : "border-[#DFEDE5]"
-                }`}
+                className={`w-full px-4 py-3 rounded-xl bg-[#FAFCF9] border text-sm text-[#142A27] placeholder:text-[#A0AEA7] focus:outline-none focus:ring-2 focus:ring-[#008F53] transition-colors ${errors.email ? "border-red-400 bg-red-50/20" : "border-[#DFEDE5]"
+                  }`}
               />
               {errors.email && (
                 <p className="mt-1.5 text-xs text-red-600 flex items-center gap-1">
@@ -415,9 +413,8 @@ export function CareerApplyForm({ selectedPosition }: CareerApplyFormProps) {
                 placeholder="+92 300 1234567"
                 value={form.phone}
                 onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                className={`w-full px-4 py-3 rounded-xl bg-[#FAFCF9] border text-sm text-[#142A27] placeholder:text-[#A0AEA7] focus:outline-none focus:ring-2 focus:ring-[#008F53] transition-colors ${
-                  errors.phone ? "border-red-400 bg-red-50/20" : "border-[#DFEDE5]"
-                }`}
+                className={`w-full px-4 py-3 rounded-xl bg-[#FAFCF9] border text-sm text-[#142A27] placeholder:text-[#A0AEA7] focus:outline-none focus:ring-2 focus:ring-[#008F53] transition-colors ${errors.phone ? "border-red-400 bg-red-50/20" : "border-[#DFEDE5]"
+                  }`}
               />
               {errors.phone && (
                 <p className="mt-1.5 text-xs text-red-600 flex items-center gap-1">
@@ -476,9 +473,8 @@ export function CareerApplyForm({ selectedPosition }: CareerApplyFormProps) {
                 placeholder="https://linkedin.com/in/username"
                 value={form.linkedin}
                 onChange={(e) => setForm({ ...form, linkedin: e.target.value })}
-                className={`w-full px-4 py-3 rounded-xl bg-[#FAFCF9] border text-sm text-[#142A27] placeholder:text-[#A0AEA7] focus:outline-none focus:ring-2 focus:ring-[#008F53] transition-colors ${
-                  errors.linkedin ? "border-red-400 bg-red-50/20" : "border-[#DFEDE5]"
-                }`}
+                className={`w-full px-4 py-3 rounded-xl bg-[#FAFCF9] border text-sm text-[#142A27] placeholder:text-[#A0AEA7] focus:outline-none focus:ring-2 focus:ring-[#008F53] transition-colors ${errors.linkedin ? "border-red-400 bg-red-50/20" : "border-[#DFEDE5]"
+                  }`}
               />
               {errors.linkedin && (
                 <p className="mt-1.5 text-xs text-red-600 flex items-center gap-1">
@@ -536,13 +532,12 @@ export function CareerApplyForm({ selectedPosition }: CareerApplyFormProps) {
                 onDragOver={handleDragOver}
                 onDragLeave={handleDragLeave}
                 onDrop={handleDrop}
-                className={`p-6 border-2 border-dashed rounded-2xl text-center cursor-pointer transition-all duration-200 ${
-                  isDragging
-                    ? "border-[#008F53] bg-[#E9FFF2]/60 scale-[1.01]"
-                    : errors.resumeFile
+                className={`p-6 border-2 border-dashed rounded-2xl text-center cursor-pointer transition-all duration-200 ${isDragging
+                  ? "border-[#008F53] bg-[#E9FFF2]/60 scale-[1.01]"
+                  : errors.resumeFile
                     ? "border-red-300 bg-red-50/20 hover:border-red-400"
                     : "border-[#CFE2D8] bg-[#FAFCF9] hover:border-[#008F53] hover:bg-[#F3F9F6]"
-                }`}
+                  }`}
               >
                 <div className="w-12 h-12 rounded-full bg-[#E9FFF2] text-[#008F53] flex items-center justify-center mx-auto mb-3">
                   <UploadCloud className="w-6 h-6 text-[#008F53]" />

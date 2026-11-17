@@ -360,10 +360,12 @@ npm run dev
 Navigate to [http://localhost:3000](http://localhost:3000) to view the live site. The application updates in real time with Turbopack Fast Refresh.
 
 ### 5. Create Initial Super Administrator
+Set `ADMIN_BOOTSTRAP_EMAIL`, `ADMIN_BOOTSTRAP_PASSWORD` (12+ characters), and optionally `ADMIN_BOOTSTRAP_ROLE` in your local `.env.local` file. Do not commit these values. Remove the bootstrap password after provisioning.
+
 ```bash
 npm run create-admin
 ```
-Follow the interactive prompts to create the initial Super Admin account for the `/admin` portal.
+The script fails closed when bootstrap credentials are missing; it does not create an account with a built-in password.
 
 ---
 

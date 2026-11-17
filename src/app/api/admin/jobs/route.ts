@@ -1,17 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getAuthenticatedAdmin } from "@/lib/auth/admin";
+import { authorizeAdmin } from "@/lib/auth/admin";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { getAllJobs, addJob, updateJob, deleteJob, type StoredJob } from "@/lib/jobs/store";
 
 // GET /api/admin/jobs - Fetch all jobs with live applicant statistics
 export async function GET() {
-  const admin = await getAuthenticatedAdmin();
-  if (!admin) {
-    return NextResponse.json(
-      { success: false, message: "Unauthorized. Admin session required." },
-      { status: 401 }
-    );
-  }
+  const { admin, response } = await authorizeAdmin("manage_jobs");
+  if (response) return response;
 
   try {
     const supabase = createAdminClient();
@@ -71,13 +66,8 @@ export async function GET() {
 
 // POST /api/admin/jobs - Create a new job vacancy
 export async function POST(req: NextRequest) {
-  const admin = await getAuthenticatedAdmin();
-  if (!admin) {
-    return NextResponse.json(
-      { success: false, message: "Unauthorized. Admin session required." },
-      { status: 401 }
-    );
-  }
+  const { admin, response } = await authorizeAdmin("manage_jobs");
+  if (response) return response;
 
   try {
     const body = await req.json();
@@ -122,13 +112,8 @@ export async function POST(req: NextRequest) {
 
 // PATCH /api/admin/jobs - Update an existing vacancy (title, department, status, etc.)
 export async function PATCH(req: NextRequest) {
-  const admin = await getAuthenticatedAdmin();
-  if (!admin) {
-    return NextResponse.json(
-      { success: false, message: "Unauthorized. Admin session required." },
-      { status: 401 }
-    );
-  }
+  const { admin, response } = await authorizeAdmin("manage_jobs");
+  if (response) return response;
 
   try {
     const body = await req.json();
@@ -164,13 +149,8 @@ export async function PATCH(req: NextRequest) {
 
 // DELETE /api/admin/jobs - Delete a job vacancy
 export async function DELETE(req: NextRequest) {
-  const admin = await getAuthenticatedAdmin();
-  if (!admin) {
-    return NextResponse.json(
-      { success: false, message: "Unauthorized. Admin session required." },
-      { status: 401 }
-    );
-  }
+  const { admin, response } = await authorizeAdmin("manage_jobs");
+  if (response) return response;
 
   try {
     const { searchParams } = new URL(req.url);

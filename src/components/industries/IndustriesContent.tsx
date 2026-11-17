@@ -168,7 +168,7 @@ export function IndustriesContent() {
   return (
     <>
       {/* 1. HERO SECTION */}
-      <section className="relative overflow-hidden pt-8 pb-16 lg:pt-14 lg:pb-22 bg-gradient-to-b from-[#E9FFF2]/60 via-[#FAFCF9] to-white border-b border-[#DFEDE5] select-none">
+      <section className="relative overflow-hidden pt-8 pb-16 lg:pt-14 lg:pb-22 bg-[#FAFCF9] border-b border-[#DFEDE5] select-none">
         {/* Soft Ambient Light Orbs */}
         <div className="absolute top-0 right-1/4 w-[500px] h-[400px] bg-gradient-to-bl from-[#E9FFF2] via-[#D5F9E6]/30 to-transparent rounded-full blur-3xl pointer-events-none -z-10" />
         <div className="absolute bottom-0 left-10 w-[400px] h-[400px] bg-[#34D399]/10 rounded-full blur-3xl pointer-events-none -z-10" />
@@ -331,7 +331,7 @@ export function IndustriesContent() {
       </section>
 
       {/* 3. ENTERPRISE ENGINEERING STANDARDS STRIP */}
-      <section className="py-14 sm:py-16 bg-white border-y border-[#DFEDE5] select-none">
+      <section className="py-14 sm:py-16 bg-[#FAFCF9] border-y border-[#DFEDE5] select-none">
         <Container size="wide">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6 divide-y md:divide-y-0 md:divide-x divide-[#DFEDE5]">
             <div className="flex items-start gap-4 md:pr-6">

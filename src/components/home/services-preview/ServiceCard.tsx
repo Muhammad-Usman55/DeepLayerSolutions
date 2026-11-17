@@ -18,7 +18,6 @@ import {
   SearchCheck,
 } from "lucide-react";
 import { PreviewService, VisualType } from "./types";
-import { Card3DVisual } from "./Card3DVisual";
 
 interface ServiceCardProps {
   service: PreviewService;
@@ -56,55 +55,39 @@ function getServiceIcon(type: VisualType) {
   }
 }
 
-export function ServiceCard({ service }: ServiceCardProps) {
+export function ServiceCard({ service, index = 0 }: ServiceCardProps) {
   const iconComponent = getServiceIcon(service.visualType);
 
   return (
     <div className="h-full select-none service-card-item">
       <Link
         href={`/services/${service.slug}`}
-        className="group relative flex flex-col justify-between h-full rounded-xl sm:rounded-2xl lg:rounded-[24px] bg-white/95 hover:bg-white backdrop-blur-xs border border-[#DFEDE5] hover:border-[#008F53]/50 shadow-xs hover:shadow-xl hover:shadow-[#008F53]/10 transition-all duration-300 hover:-translate-y-1.5 overflow-hidden p-3 sm:p-5 lg:p-6"
+        className="group relative flex flex-col h-full min-h-[208px] sm:min-h-0 rounded-xl sm:rounded-2xl lg:rounded-[24px] bg-white border border-[#DFEDE5] hover:border-[#87C9A4] shadow-xs hover:shadow-md transition-all duration-200 overflow-hidden p-3.5 sm:p-5 lg:p-6"
         aria-label={`Explore ${service.title}`}
       >
-        {/* Subtle Top Gradient Glass Accent on Hover */}
-        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#008F53] via-[#00B86B] to-[#075B3E] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-        {/* Top Header: Category Tag & Icon Badge */}
-        <div className="flex items-center justify-between w-full mb-1.5 sm:mb-2 gap-1">
-          <span className="text-[9px] sm:text-[10px] lg:text-[11px] font-mono uppercase tracking-wider text-[#008F53] font-semibold bg-[#E9FFF2] px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full border border-[#BCE8CF]/60 truncate max-w-[88px] xs:max-w-none">
-            {service.category}
+        <div className="flex items-start justify-between gap-3">
+          <span className="pt-1 font-mono text-[11px] sm:text-xs tracking-wide text-[#84918B]">
+            {String(index + 1).padStart(2, "0")}
           </span>
-          <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-[#E9FFF2] border border-[#BCE8CF] text-[#008F53] flex items-center justify-center shadow-2xs group-hover:scale-110 group-hover:bg-[#008F53] group-hover:text-white transition-all duration-300 shrink-0">
-            {React.createElement(iconComponent, { className: "w-3 h-3 sm:w-4 sm:h-4" })}
+          <div className="service-card-art flex h-12 w-12 sm:h-14 sm:w-14 shrink-0 items-center justify-center rounded-2xl border border-[#D5EBDD] bg-[#F2F8F3] text-[#087A3D] transition-colors duration-200 group-hover:bg-[#E8F5E9]">
+            {React.createElement(iconComponent, { className: "h-6 w-6 sm:h-7 sm:w-7", strokeWidth: 1.7 })}
           </div>
         </div>
 
-        {/* Card Center: 3D Illustration */}
-        <div className="w-full flex flex-col items-center justify-center py-0.5 sm:py-2 lg:py-3 transition-transform duration-500 ease-out group-hover:scale-105 h-20 sm:h-28 lg:h-32 overflow-hidden">
-          <div className="scale-[0.68] sm:scale-90 lg:scale-100 origin-center flex items-center justify-center">
-            <Card3DVisual type={service.visualType} />
-          </div>
-        </div>
-
-        {/* Card Bottom: Service Name, Description & Circular Arrow Button */}
-        <div className="pt-2 sm:pt-3 border-t border-[#DFEDE5]/60 flex flex-col justify-between mt-auto gap-1.5 sm:gap-2.5">
-          <div className="flex items-start justify-between gap-1.5 sm:gap-2">
-            <h3 className="text-xs sm:text-base lg:text-lg font-bold text-[#142A27] group-hover:text-[#008F53] transition-colors leading-snug line-clamp-2">
-              {service.title}
-            </h3>
-
-            {/* Circular Arrow Button */}
-            <div
-              className="w-6 h-6 sm:w-8 sm:h-8 lg:w-9 lg:h-9 rounded-full bg-[#E9FFF2] border border-[#DFEDE5] text-[#008F53] group-hover:bg-[#008F53] group-hover:text-white group-hover:border-[#008F53] flex items-center justify-center transition-all duration-300 shrink-0 shadow-2xs group-hover:scale-105 mt-0.5"
-              aria-hidden="true"
-            >
-              <ArrowRight className="w-3 h-3 sm:w-3.5 sm:h-3.5 lg:w-4 lg:h-4 transition-transform duration-300 group-hover:translate-x-0.5" />
-            </div>
-          </div>
-
-          <p className="text-[10px] sm:text-xs text-[#64736F] line-clamp-2 font-normal leading-relaxed hidden xs:block sm:block">
+        <div className="mt-3 sm:mt-4">
+          <h3 className="text-sm sm:text-base lg:text-lg font-bold text-[#142A27] group-hover:text-[#087A3D] transition-colors leading-snug line-clamp-2">
+            {service.title}
+          </h3>
+          <p className="mt-1.5 text-[11px] sm:text-xs text-[#65736D] line-clamp-2 leading-relaxed">
             {service.description}
           </p>
+        </div>
+
+        <div className="mt-auto flex items-center justify-between border-t border-[#E8EEE9] pt-3 sm:pt-4">
+          <span className="text-xs font-semibold text-[#087A3D]">Learn more</span>
+          <span className="flex h-7 w-7 items-center justify-center rounded-full border border-[#D5EBDD] text-[#087A3D] transition-all duration-200 group-hover:border-[#087A3D] group-hover:bg-[#087A3D] group-hover:text-white" aria-hidden="true">
+            <ArrowRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5" />
+          </span>
         </div>
       </Link>
     </div>

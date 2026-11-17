@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getAuthenticatedAdmin } from "@/lib/auth/admin";
+import { authorizeAdmin } from "@/lib/auth/admin";
 import { createAdminClient } from "@/lib/supabase/admin";
 import type { AdminRole } from "@/types/supabase";
 
@@ -13,13 +13,8 @@ const VALID_ROLES: AdminRole[] = [
 
 // GET /api/admin/users - List all admin and staff accounts
 export async function GET() {
-  const admin = await getAuthenticatedAdmin();
-  if (!admin) {
-    return NextResponse.json(
-      { success: false, message: "Unauthorized. Admin session required." },
-      { status: 401 }
-    );
-  }
+  const { admin, response } = await authorizeAdmin("manage_admins");
+  if (response) return response;
 
   try {
     const supabase = createAdminClient();
@@ -49,20 +44,21 @@ export async function GET() {
 
     // 3. Map users that have an admin profile
     const users = (authData.users || [])
-      .filter((u) => profileMap.has(u.id) || u.app_metadata?.role || u.user_metadata?.role)
+      .filter((u) => profileMap.has(u.id))
       .map((u) => {
         const prof = profileMap.get(u.id);
-        const role = (prof?.role || u.app_metadata?.role || u.user_metadata?.role || "editor") as AdminRole;
+        if (!prof) return null;
         return {
           id: u.id,
           email: u.email || "",
-          fullName: (u.user_metadata?.full_name as string) || (prof?.role ? u.email?.split("@")[0] : "Admin Staff"),
-          role,
-          createdAt: prof?.created_at || u.created_at,
+          fullName: (u.user_metadata?.full_name as string) || u.email?.split("@")[0] || "Admin Staff",
+          role: prof.role,
+          createdAt: prof.created_at || u.created_at,
           lastSignInAt: u.last_sign_in_at || null,
           isConfirmed: !!u.email_confirmed_at,
         };
       })
+      .filter((user): user is NonNullable<typeof user> => user !== null)
       .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
 
     return NextResponse.json({
@@ -81,13 +77,8 @@ export async function GET() {
 
 // POST /api/admin/users - Provision new admin or staff account
 export async function POST(req: NextRequest) {
-  const admin = await getAuthenticatedAdmin();
-  if (!admin) {
-    return NextResponse.json(
-      { success: false, message: "Unauthorized. Admin session required." },
-      { status: 401 }
-    );
-  }
+  const { admin, response } = await authorizeAdmin("manage_admins");
+  if (response) return response;
 
   // Only Superadmins can provision new staff accounts
   if (admin.profile.role !== "superadmin") {
@@ -121,7 +112,13 @@ export async function POST(req: NextRequest) {
     const supabase = createAdminClient();
 
     // Check if user already exists
-    const { data: listData } = await supabase.auth.admin.listUsers();
+    const { data: listData, error: listError } = await supabase.auth.admin.listUsers();
+    if (listError) {
+      return NextResponse.json(
+        { success: false, message: "Unable to verify whether this account already exists." },
+        { status: 502 }
+      );
+    }
     const existing = (listData?.users || []).find((u) => u.email?.toLowerCase() === email);
 
     let userId: string;
@@ -129,12 +126,18 @@ export async function POST(req: NextRequest) {
     if (existing) {
       userId = existing.id;
       // Update password and roles for existing user
-      await supabase.auth.admin.updateUserById(userId, {
+      const { error: updateError } = await supabase.auth.admin.updateUserById(userId, {
         password,
         email_confirm: true,
         user_metadata: { ...existing.user_metadata, role, full_name: fullName || existing.email?.split("@")[0] },
         app_metadata: { ...existing.app_metadata, role },
       });
+      if (updateError) {
+        return NextResponse.json(
+          { success: false, message: "Unable to update the existing account." },
+          { status: 502 }
+        );
+      }
     } else {
       // Create new user in Supabase Auth
       const { data: createData, error: createError } = await supabase.auth.admin.createUser({
@@ -182,13 +185,8 @@ export async function POST(req: NextRequest) {
 
 // PATCH /api/admin/users - Update an existing admin's role or password
 export async function PATCH(req: NextRequest) {
-  const admin = await getAuthenticatedAdmin();
-  if (!admin) {
-    return NextResponse.json(
-      { success: false, message: "Unauthorized. Admin session required." },
-      { status: 401 }
-    );
-  }
+  const { admin, response } = await authorizeAdmin("manage_admins");
+  if (response) return response;
 
   if (admin.profile.role !== "superadmin") {
     return NextResponse.json(
@@ -242,9 +240,15 @@ export async function PATCH(req: NextRequest) {
     }
 
     if (role) {
-      await supabase
+      const { error: profileUpdateError } = await supabase
         .from("admin_profiles")
         .upsert({ id: userId, role }, { onConflict: "id" });
+      if (profileUpdateError) {
+        return NextResponse.json(
+          { success: false, message: "Account updated, but the admin role could not be saved." },
+          { status: 500 }
+        );
+      }
     }
 
     return NextResponse.json({
@@ -261,13 +265,8 @@ export async function PATCH(req: NextRequest) {
 
 // DELETE /api/admin/users - Revoke staff access and remove account
 export async function DELETE(req: NextRequest) {
-  const admin = await getAuthenticatedAdmin();
-  if (!admin) {
-    return NextResponse.json(
-      { success: false, message: "Unauthorized. Admin session required." },
-      { status: 401 }
-    );
-  }
+  const { admin, response } = await authorizeAdmin("manage_admins");
+  if (response) return response;
 
   if (admin.profile.role !== "superadmin") {
     return NextResponse.json(
@@ -298,7 +297,16 @@ export async function DELETE(req: NextRequest) {
     const supabase = createAdminClient();
 
     // 1. Delete from admin_profiles
-    await supabase.from("admin_profiles").delete().eq("id", userId);
+    const { error: profileDeleteError } = await supabase
+      .from("admin_profiles")
+      .delete()
+      .eq("id", userId);
+    if (profileDeleteError) {
+      return NextResponse.json(
+        { success: false, message: "Unable to revoke admin access." },
+        { status: 500 }
+      );
+    }
 
     // 2. Delete user from Supabase Auth
     const { error: deleteError } = await supabase.auth.admin.deleteUser(userId);

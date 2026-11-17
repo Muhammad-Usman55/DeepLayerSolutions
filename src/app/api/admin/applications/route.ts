@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getAuthenticatedAdmin } from "@/lib/auth/admin";
+import { authorizeAdmin } from "@/lib/auth/admin";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { sendCareerStatusUpdateEmail } from "@/lib/email/dispatch";
 import type { Database, JobApplicationStatus } from "@/types/supabase";
@@ -7,13 +7,8 @@ import type { Database, JobApplicationStatus } from "@/types/supabase";
 type JobApplicationUpdate = Database["public"]["Tables"]["job_applications"]["Update"];
 
 export async function GET(req: NextRequest) {
-  const admin = await getAuthenticatedAdmin();
-  if (!admin) {
-    return NextResponse.json(
-      { success: false, message: "Unauthorized." },
-      { status: 401 }
-    );
-  }
+  const { admin, response } = await authorizeAdmin("manage_applications");
+  if (response) return response;
 
   try {
     const searchParams = req.nextUrl.searchParams;
@@ -83,13 +78,8 @@ export async function GET(req: NextRequest) {
 }
 
 export async function PATCH(req: NextRequest) {
-  const admin = await getAuthenticatedAdmin();
-  if (!admin) {
-    return NextResponse.json(
-      { success: false, message: "Unauthorized." },
-      { status: 401 }
-    );
-  }
+  const { admin, response } = await authorizeAdmin("manage_applications");
+  if (response) return response;
 
   try {
     const body = await req.json().catch(() => null);
@@ -166,13 +156,8 @@ export async function PATCH(req: NextRequest) {
 
 // DELETE /api/admin/applications?id=... - Delete candidate application
 export async function DELETE(req: NextRequest) {
-  const admin = await getAuthenticatedAdmin();
-  if (!admin) {
-    return NextResponse.json(
-      { success: false, message: "Unauthorized." },
-      { status: 401 }
-    );
-  }
+  const { admin, response } = await authorizeAdmin("manage_applications");
+  if (response) return response;
 
   try {
     const { searchParams } = new URL(req.url);

@@ -1,16 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getAuthenticatedAdmin } from "@/lib/auth/admin";
+import { authorizeAdmin } from "@/lib/auth/admin";
 import { createAdminClient } from "@/lib/supabase/admin";
 import type { EmailLogStatus, EmailType } from "@/types/supabase";
 
 export async function GET(req: NextRequest) {
-  const admin = await getAuthenticatedAdmin();
-  if (!admin) {
-    return NextResponse.json(
-      { success: false, message: "Unauthorized." },
-      { status: 401 }
-    );
-  }
+  const { admin, response } = await authorizeAdmin("view_email_logs");
+  if (response) return response;
 
   try {
     const searchParams = req.nextUrl.searchParams;
