@@ -16,6 +16,7 @@ import {
   Check,
 } from "lucide-react";
 import { Button } from "../common/Button";
+import { jobOpeningsData } from "@/data/careers";
 
 interface CareerFormState {
   fullName: string;
@@ -28,40 +29,83 @@ interface CareerFormState {
   botField: string;
 }
 
-const initialCareerForm: CareerFormState = {
-  fullName: "",
-  email: "",
-  phone: "",
-  position: "AI/ML Engineer Intern",
-  linkedin: "",
-  portfolioOrGithub: "",
-  coverNote: "",
-  botField: "",
-};
-
 interface CareerApplyFormProps {
   selectedPosition?: string;
+  availableRoles?: string[];
 }
 
-export function CareerApplyForm({ selectedPosition }: CareerApplyFormProps) {
-  const [form, setForm] = useState<CareerFormState>(initialCareerForm);
+export function CareerApplyForm({ selectedPosition, availableRoles }: CareerApplyFormProps) {
+  const [roles, setRoles] = useState<string[]>(() => {
+    if (availableRoles && availableRoles.length > 0) return availableRoles;
+    return jobOpeningsData.map((j) => j.title).filter(Boolean);
+  });
+
+  const [form, setForm] = useState<CareerFormState>(() => ({
+    fullName: "",
+    email: "",
+    phone: "",
+    position:
+      selectedPosition ||
+      (availableRoles && availableRoles[0]) ||
+      jobOpeningsData[0]?.title ||
+      "AI/ML Engineer Intern",
+    linkedin: "",
+    portfolioOrGithub: "",
+    coverNote: "",
+    botField: "",
+  }));
   const [resumeFile, setResumeFile] = useState<File | null>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [serverError, setServerError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-  const [submittedRole, setSubmittedRole] = useState<string>("AI/ML Engineer Intern");
+  const [submittedRole, setSubmittedRole] = useState<string>(
+    () =>
+      selectedPosition ||
+      (availableRoles && availableRoles[0]) ||
+      jobOpeningsData[0]?.title ||
+      "AI/ML Engineer Intern"
+  );
   const [applicationId, setApplicationId] = useState<string | null>(null);
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
-  // Update position if user selects from a job card
+  // Sync available roles when prop updates or fetch live fallback
+  useEffect(() => {
+    if (availableRoles && availableRoles.length > 0) {
+      setRoles(availableRoles);
+      return;
+    }
+
+    fetch("/api/careers")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success && Array.isArray(data.jobs)) {
+          const titles = data.jobs
+            .map((j: { title?: string }) => j.title)
+            .filter((t: unknown): t is string => Boolean(t));
+          if (titles.length > 0) {
+            setRoles(titles);
+          }
+        }
+      })
+      .catch(() => {});
+  }, [availableRoles]);
+
+  // Update position if user selects from a job card or when active roles change
   useEffect(() => {
     if (selectedPosition) {
       setForm((prev) => ({ ...prev, position: selectedPosition }));
+    } else if (roles.length > 0) {
+      setForm((prev) => {
+        if (!prev.position || !roles.includes(prev.position)) {
+          return { ...prev, position: roles[0] };
+        }
+        return prev;
+      });
     }
-  }, [selectedPosition]);
+  }, [selectedPosition, roles]);
 
   const formatFileSize = (bytes: number): string => {
     if (bytes < 1024) return `${bytes} B`;
@@ -209,7 +253,16 @@ export function CareerApplyForm({ selectedPosition }: CareerApplyFormProps) {
       setSubmittedRole(form.position);
       setApplicationId(data?.applicationId || null);
       setIsSuccess(true);
-      setForm(initialCareerForm);
+      setForm({
+        fullName: "",
+        email: "",
+        phone: "",
+        position: selectedPosition || roles[0] || "AI/ML Engineer Intern",
+        linkedin: "",
+        portfolioOrGithub: "",
+        coverNote: "",
+        botField: "",
+      });
       setResumeFile(null);
       if (fileInputRef.current) fileInputRef.current.value = "";
       setErrors({});
@@ -307,6 +360,10 @@ export function CareerApplyForm({ selectedPosition }: CareerApplyFormProps) {
             onClick={() => {
               setIsSuccess(false);
               setApplicationId(null);
+              setForm((prev) => ({
+                ...prev,
+                position: selectedPosition || roles[0] || prev.position,
+              }));
             }}
             className="mt-6 text-xs font-semibold text-[#64736F] hover:text-[#008F53] transition-colors cursor-pointer underline decoration-dotted"
           >
@@ -437,20 +494,32 @@ export function CareerApplyForm({ selectedPosition }: CareerApplyFormProps) {
               <select
                 id="cPosition"
                 value={form.position}
-                onChange={(e) => setForm({ ...form, position: e.target.value })}
-                className="w-full px-4 py-3 rounded-xl bg-[#FAFCF9] border border-[#DFEDE5] text-sm text-[#142A27] focus:outline-none focus:ring-2 focus:ring-[#008F53] transition-colors cursor-pointer"
+                onChange={(e) => {
+                  setForm({ ...form, position: e.target.value });
+                  if (errors.position) {
+                    setErrors((prev) => {
+                      const next = { ...prev };
+                      delete next.position;
+                      return next;
+                    });
+                  }
+                }}
+                className={`w-full px-4 py-3 rounded-xl bg-[#FAFCF9] border text-sm text-[#142A27] focus:outline-none focus:ring-2 focus:ring-[#008F53] transition-colors cursor-pointer ${
+                  errors.position ? "border-red-400 bg-red-50/20" : "border-[#DFEDE5]"
+                }`}
               >
-                <option value="AI/ML Engineer Intern">AI/ML Engineer Intern</option>
-                <option value="Digital Marketing Intern">Digital Marketing Intern</option>
-                <option value="Lead Generation & Business Development Intern">
-                  Lead Generation &amp; Business Development Intern
-                </option>
-                <option value="Full-Stack Software Engineer Intern">
-                  Full-Stack Software Engineer Intern
-                </option>
-                <option value="General Spontaneous Application">
-                  General Spontaneous Application
-                </option>
+                {form.position && !roles.includes(form.position) && (
+                  <option value={form.position}>{form.position}</option>
+                )}
+                {roles.length > 0 ? (
+                  roles.map((role) => (
+                    <option key={role} value={role}>
+                      {role}
+                    </option>
+                  ))
+                ) : (
+                  <option value="">No open positions available</option>
+                )}
               </select>
             </div>
           </div>

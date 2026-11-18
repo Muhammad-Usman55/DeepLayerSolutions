@@ -18,7 +18,9 @@ export function CareersContent() {
   const [jobsList, setJobsList] = useState<JobOpeningItem[]>(jobOpeningsData);
   const [selectedDept, setSelectedDept] = useState("All Openings");
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedPositionForForm, setSelectedPositionForForm] = useState<string>("AI/ML Engineer Intern");
+  const [selectedPositionForForm, setSelectedPositionForForm] = useState<string>(
+    () => jobOpeningsData[0]?.title || "AI/ML Engineer Intern"
+  );
 
   React.useEffect(() => {
     fetch("/api/careers")
@@ -26,6 +28,10 @@ export function CareersContent() {
       .then((data) => {
         if (data.success && Array.isArray(data.jobs) && data.jobs.length > 0) {
           setJobsList(data.jobs);
+          setSelectedPositionForForm((current) => {
+            const exists = data.jobs.some((j: JobOpeningItem) => j.title === current);
+            return exists ? current : data.jobs[0]?.title || current;
+          });
         }
       })
       .catch(() => { });
@@ -149,7 +155,10 @@ export function CareersContent() {
 
       {/* Applying Form Section */}
       <div className="pt-8">
-        <CareerApplyForm selectedPosition={selectedPositionForForm} />
+        <CareerApplyForm
+          selectedPosition={selectedPositionForForm}
+          availableRoles={jobsList.map((j) => j.title).filter(Boolean)}
+        />
       </div>
     </div>
   );
