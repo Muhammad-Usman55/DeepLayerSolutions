@@ -5,6 +5,7 @@ import { Search, Briefcase } from "lucide-react";
 import { jobOpeningsData } from "@/data/careers";
 import type { JobOpeningItem } from "@/types";
 import { JobCard } from "./JobCard";
+import { JobDescriptionModal } from "./JobDescriptionModal";
 import { CareerApplyForm } from "./CareerApplyForm";
 
 const departments = [
@@ -21,6 +22,7 @@ export function CareersContent() {
   const [selectedPositionForForm, setSelectedPositionForForm] = useState<string>(
     () => jobOpeningsData[0]?.title || "AI/ML Engineer Intern"
   );
+  const [selectedJobForModal, setSelectedJobForModal] = useState<JobOpeningItem | null>(null);
 
   React.useEffect(() => {
     fetch("/api/careers")
@@ -53,6 +55,7 @@ export function CareersContent() {
 
   const handleApplyClick = (jobTitle: string) => {
     setSelectedPositionForForm(jobTitle);
+    setSelectedJobForModal(null);
     const formElement = document.getElementById("apply-form");
     if (formElement) {
       formElement.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -147,11 +150,20 @@ export function CareersContent() {
                 key={job.id}
                 job={job}
                 onApply={handleApplyClick}
+                onViewDetails={setSelectedJobForModal}
               />
             ))}
           </div>
         )}
       </div>
+
+      {/* Job Description Popup Modal */}
+      <JobDescriptionModal
+        job={selectedJobForModal}
+        isOpen={Boolean(selectedJobForModal)}
+        onClose={() => setSelectedJobForModal(null)}
+        onApply={handleApplyClick}
+      />
 
       {/* Applying Form Section */}
       <div className="pt-8">

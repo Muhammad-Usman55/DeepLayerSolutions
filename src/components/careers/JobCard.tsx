@@ -9,6 +9,7 @@ import {
   ChevronDown,
   ChevronUp,
   ArrowRight,
+  ArrowUpRight,
   Globe,
   Clock,
   Sparkles,
@@ -35,9 +36,10 @@ const defaultPerks = [
 interface JobCardProps {
   job: JobOpeningItem;
   onApply: (jobTitle: string) => void;
+  onViewDetails?: (job: JobOpeningItem) => void;
 }
 
-export function JobCard({ job, onApply }: JobCardProps) {
+export function JobCard({ job, onApply, onViewDetails }: JobCardProps) {
   const [isExpanded, setIsExpanded] = useState(false);
   const IconComponent = (job.iconName && iconMap[job.iconName]) || Brain;
 
@@ -127,12 +129,24 @@ export function JobCard({ job, onApply }: JobCardProps) {
         <div className="mt-6 pt-5 border-t border-[#DFEDE5] flex flex-wrap items-center justify-between gap-4">
           <button
             type="button"
-            onClick={() => setIsExpanded(!isExpanded)}
-            className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-[#008F53] hover:text-[#075B3E] cursor-pointer transition-colors"
-            aria-expanded={isExpanded}
+            onClick={() => {
+              if (onViewDetails) {
+                onViewDetails(job);
+              } else {
+                setIsExpanded(!isExpanded);
+              }
+            }}
+            className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-[#008F53] hover:text-[#075B3E] cursor-pointer transition-colors group/view-btn"
+            aria-expanded={onViewDetails ? undefined : isExpanded}
           >
-            <span>{isExpanded ? "Hide Details & Requirements" : "View Full Job Description & Requirements"}</span>
-            {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+            <span>View Full Job Description &amp; Requirements</span>
+            {onViewDetails ? (
+              <ArrowUpRight className="w-4 h-4 text-[#00B86B] transition-transform group-hover/view-btn:translate-x-0.5 group-hover/view-btn:-translate-y-0.5" />
+            ) : isExpanded ? (
+              <ChevronUp className="w-4 h-4" />
+            ) : (
+              <ChevronDown className="w-4 h-4" />
+            )}
           </button>
 
           <button
@@ -146,8 +160,8 @@ export function JobCard({ job, onApply }: JobCardProps) {
         </div>
       </div>
 
-      {/* Expandable Details Section */}
-      {isExpanded && (
+      {/* Expandable Details Section (fallback if modal trigger not active) */}
+      {!onViewDetails && isExpanded && (
         <div className="px-6 pb-8 sm:px-8 border-t border-[#DFEDE5] bg-[#FAFCF9]/80 space-y-6 pt-6 animate-fadeIn">
           {/* Detailed Overview */}
           <div>
