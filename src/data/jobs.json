@@ -9,25 +9,87 @@
     "duration": "3 – 6 Months",
     "stipend": "Competitive Paid Stipend + Fast-Track Offer",
     "iconName": "Brain",
-    "shortDescription": "We are seeking an enthusiastic, intellectually curious AI/ML Engineer Intern to join our intelligence team. You will participate in developing production-grade AI pipelines, fine-tuning modern foundation models, experimenting with retrieval-augmented generation (RAG), and optimizing low-latency inference on edge and cloud clusters.",
-    "description": "We are seeking an enthusiastic, intellectually curious AI/ML Engineer Intern to join our intelligence team. You will participate in developing production-grade AI pipelines, fine-tuning modern foundation models, experimenting with retrieval-augmented generation (RAG), and optimizing low-latency inference on edge and cloud clusters.",
+    "shortDescription": "Build, benchmark, and deploy enterprise Retrieval-Augmented Generation (RAG) pipelines, multimodal vision systems, and autonomous agent networks alongside senior architects.",
+    "description": "We are seeking a driven, intellectually curious AI/ML Engineer Intern to join DeepLayer Solutions' core intelligence team. In this role, you will contribute directly to production-grade AI pipelines, fine-tune modern foundation models (Gemini 2.5, Claude, GPT-4o, and open-weights LLaMA 3), optimize low-latency RAG architectures using vector databases, and deploy scalable microservices that serve real client workloads.",
     "responsibilities": [
-      "Assist in training, evaluating, and quantizing machine learning models using PyTorch, TensorFlow, or ONNX.",
-      "Build and test Retrieval-Augmented Generation (RAG) pipelines using vector databases (Qdrant, Pinecone, Chroma).",
-      "Process, clean, and vectorize unstructured multimodal datasets (text, image, and tabular data).",
-      "Collaborate with senior engineers to deploy models via high-throughput FastAPI and Docker microservices.",
-      "Benchmark model accuracy, latency, and token consumption under rigorous test suites."
+      "Design, benchmark, and optimize Retrieval-Augmented Generation (RAG) architectures using hybrid dense-sparse search (Qdrant, BM25, and Text-Embedding-004).",
+      "Assist in fine-tuning, evaluating, and quantizing modern open-source LLMs and Vision-Language Models (VLMs) using PyTorch, Hugging Face, and vLLM.",
+      "Implement structured data extraction, document parsing, and layout-aware chunking for complex enterprise PDFs, tables, and multimodal datasets.",
+      "Develop, containerize, and deploy high-throughput asynchronous inference microservices using FastAPI, Docker, and Redis caching.",
+      "Implement rigorous evaluation matrices (faithfulness, hallucination detection, context recall, and latency telemetry) using automated test suites.",
+      "Collaborate in daily engineering scrums, peer code reviews, and architectural design discussions following clean production standards."
     ],
     "requirements": [
-      "Strong foundational knowledge of Python, NumPy, Pandas, and basic Linear Algebra / Calculus.",
-      "Hands-on experience with modern machine learning frameworks (PyTorch, Scikit-Learn, or TensorFlow).",
-      "Familiarity with Large Language Models (LLMs), prompt engineering, or Computer Vision concepts.",
-      "Good understanding of Git, version control, and collaborative software development.",
-      "Enrolled in or graduate of Computer Science, Software Engineering, Data Science, or related STEM field."
+      "Enrolled in or graduate of a Bachelor's or Master's degree in Computer Science, Software Engineering, AI, Data Science, or related STEM discipline.",
+      "Strong proficiency in Python 3.10+ and core numerical packages (NumPy, Pandas, SciPy).",
+      "Hands-on experience with modern machine learning frameworks (PyTorch, Scikit-learn, Hugging Face Transformers).",
+      "Solid understanding of fundamental AI concepts: Attention mechanisms, embeddings, vector indexing, loss functions, and optimization algorithms.",
+      "Experience with RESTful API development using Python frameworks (FastAPI or Flask) and containerization with Docker.",
+      "Proficiency with Git, GitHub version control, branch management, and collaborative development.",
+      "Strong analytical problem-solving mindset with the ability to read and implement modern research papers into working code."
+    ],
+    "preferredQualifications": [
+      "Experience with LangChain, LangGraph, LlamaIndex, or autonomous agent frameworks.",
+      "Familiarity with vector databases (Qdrant, Pinecone, Milvus, or Chroma).",
+      "Prior experience deploying machine learning services to cloud infrastructure (AWS EC2/S3, GCP, or RunPod).",
+      "Contributions to open-source machine learning repositories or participation in Kaggle / competitive hackathons."
+    ],
+    "perks": [
+      "100% Remote Flexibility & Asynchronous Work Culture",
+      "Competitive Monthly Paid Stipend + Fast-Track Full-Time Placement",
+      "Direct 1-on-1 Mentorship from Principal AI Architects & Machine Learning Leads",
+      "Hands-On Experience Shipping Real Enterprise Production AI Systems",
+      "Official Internship Completion Certificate & Executive LinkedIn Recommendation"
     ],
     "status": "published",
     "createdAt": "2026-11-01T00:00:00.000Z",
-    "updatedAt": "2026-11-17T23:43:23.471Z"
+    "updatedAt": "2026-11-21T07:55:00.000Z"
+  },
+  {
+    "id": "full-stack-intern",
+    "slug": "full-stack-software-engineer-intern",
+    "title": "Full-Stack Software Engineer Intern",
+    "department": "Engineering & AI",
+    "type": "Internship",
+    "location": "Remote (Global / Pakistan)",
+    "duration": "3 – 6 Months",
+    "stipend": "Competitive Paid Stipend + Fast-Track Offer",
+    "iconName": "Code2",
+    "shortDescription": "Build modern, high-performance web applications, responsive user interfaces, and scalable backend services using Next.js 16, TypeScript, Supabase, and Tailwind CSS.",
+    "description": "Join our core engineering group to develop robust, interactive web applications and enterprise portals. You will build user-centric interfaces using React 19 and Next.js App Router, design relational schemas and secure database policies on PostgreSQL/Supabase, connect scalable REST and Server Actions endpoints, and optimize Core Web Vitals to deliver sub-second performance.",
+    "responsibilities": [
+      "Develop responsive, accessible, pixel-perfect user interface components using Next.js 16 (App Router), React 19, TypeScript, and Tailwind CSS.",
+      "Design and implement secure database schemas, Row-Level Security (RLS) policies, and performant SQL queries using Supabase PostgreSQL.",
+      "Build clean, type-safe API routes, Server Actions, and webhook integrations with robust input validation and error handling.",
+      "Optimize frontend client performance, bundle sizes, image delivery, and Core Web Vitals across desktop and mobile devices.",
+      "Integrate third-party services, payment gateways, authentication flows (OAuth / Supabase Auth), and asynchronous email systems.",
+      "Write unit and integration tests, participate in daily code reviews, and ship features continuously via automated CI/CD pipelines."
+    ],
+    "requirements": [
+      "Enrolled in or graduate of a Bachelor's degree in Computer Science, Software Engineering, or related technical field.",
+      "Solid proficiency in modern JavaScript / TypeScript, ES6+ syntax, and fundamental asynchronous programming patterns.",
+      "Hands-on experience building web applications using React (hooks, component lifecycle, state management) and Next.js.",
+      "Proficiency with modern CSS, Flexbox, CSS Grid, Tailwind CSS, and mobile-first responsive design principles.",
+      "Understanding of relational database fundamentals (PostgreSQL or MySQL) and RESTful API architectures.",
+      "Familiarity with Git, GitHub pull request workflows, and collaborative software engineering practices.",
+      "Strong passion for writing clean, readable, maintainable, and well-documented code."
+    ],
+    "preferredQualifications": [
+      "Experience with Supabase (Auth, PostgreSQL, Storage, RLS) or Prisma / Drizzle ORM.",
+      "Familiarity with Next.js 15/16 App Router, Turbopack, Server Components, and Server Actions.",
+      "Experience with animation libraries (Framer Motion, Lenis) and accessible UI patterns.",
+      "Personal web development portfolio or live production projects demonstrating full-stack capability."
+    ],
+    "perks": [
+      "100% Remote Flexibility & Autonomous Workflow",
+      "Competitive Monthly Paid Stipend + Fast-Track Associate Engineer Promotion",
+      "Direct Mentorship from Senior Full-Stack Architects & Lead Engineers",
+      "Direct Experience Shipping Scalable Production Applications to Real Users",
+      "Official Internship Certificate & Verified Executive Recommendation"
+    ],
+    "status": "published",
+    "createdAt": "2026-11-02T00:00:00.000Z",
+    "updatedAt": "2026-11-21T07:55:00.000Z"
   },
   {
     "id": "digital-marketing-intern",
@@ -39,22 +101,40 @@
     "duration": "3 – 6 Months",
     "stipend": "Performance Stipend + Full-Time Placement",
     "iconName": "TrendingUp",
-    "shortDescription": "Scale our inbound brand awareness, technical content marketing, LinkedIn thought leadership, and organic traffic.",
-    "description": "We are seeking a driven Growth & Digital Marketing Intern to expand DeepLayer Solutions' global presence across enterprise B2B channels, search engines, and technical developer communities.",
+    "shortDescription": "Scale our inbound brand awareness, technical B2B content marketing, search engine optimization (SEO), and LinkedIn thought leadership across international developer ecosystems.",
+    "description": "DeepLayer Solutions is seeking an ambitious Digital Marketing & Growth Intern to accelerate our global organic footprint and position our studio at the forefront of AI and digital engineering. You will collaborate directly with our founding leadership and technical architects to craft compelling case studies, execute data-driven SEO campaigns, orchestrate developer-facing social initiatives, and build high-converting inbound marketing funnels.",
     "responsibilities": [
-      "Execute organic LinkedIn and social outreach campaigns showcasing architectural case studies.",
-      "Conduct keyword research, competitive analysis, and on-page technical SEO optimizations.",
-      "Coordinate engineering blog article dissemination across developer portals and tech communities.",
-      "Monitor analytics dashboards to evaluate acquisition funnels and subscriber growth."
+      "Develop and execute technical content marketing strategies that translate complex software and AI capabilities into engaging client case studies and articles.",
+      "Plan, draft, and schedule LinkedIn thought leadership posts showcasing architectural breakthroughs, client wins, and engineering culture.",
+      "Perform comprehensive technical SEO audits, keyword gap analyses, and on-page optimization to rank target service pages on search engines.",
+      "Track, analyze, and report on inbound web traffic, conversion funnels, and organic search metrics using Google Analytics 4 (GA4) and Google Search Console.",
+      "Collaborate with design and engineering teams to produce visual assets, infographics, and interactive carousels for social distribution.",
+      "Manage and distribute technical blog publications across developer portals, Medium, Dev.to, Reddit, and targeted industry tech forums."
     ],
     "requirements": [
-      "Strong written and verbal English communication skills.",
-      "Understanding of social media marketing, content strategy, and SEO fundamentals.",
-      "Analytical mindset with familiarity in Google Analytics or similar metrics platforms.",
-      "Self-directed worker capable of thriving in a fast-moving remote environment."
+      "Enrolled in or graduate of a Bachelor's degree in Marketing, Communications, Business Administration, Computer Science, or related discipline.",
+      "Exceptional written and verbal English communication skills with an eye for clear, persuasive B2B technology copy.",
+      "Solid foundational knowledge of on-page and technical SEO (meta tags, semantic keywords, search intent, internal linking structures).",
+      "Hands-on familiarity with digital marketing tools (Google Analytics 4, Google Search Console, Ahrefs/Semrush, Canva, or Buffer/Hootsuite).",
+      "Deep curiosity and eagerness to learn modern Artificial Intelligence, cloud computing, and software development concepts.",
+      "High attention to detail, proactive organizational skills, and self-motivated execution in a remote team environment."
+    ],
+    "preferredQualifications": [
+      "Prior experience managing a verified tech LinkedIn page, company newsletter, or tech blog.",
+      "Basic understanding of HTML/CSS and website content management workflows.",
+      "Experience with email marketing automation, audience segmentation, and lead magnets.",
+      "Familiarity with graphic design tools (Figma, Canva, or Adobe Photoshop/Illustrator)."
+    ],
+    "perks": [
+      "100% Remote Workflow with Flexible Schedule",
+      "Monthly Paid Stipend with Performance Bonuses for High-Converting Growth Milestones",
+      "Direct Collaboration with Technical Founders and Engineering Leads",
+      "Portfolio of Published Global Enterprise Case Studies & High-Impact Campaigns",
+      "Formal Certificate of Internship Completion & Verified Recommendation Letter"
     ],
     "status": "published",
-    "createdAt": "2026-11-03T00:00:00.000Z"
+    "createdAt": "2026-11-03T00:00:00.000Z",
+    "updatedAt": "2026-11-21T07:55:00.000Z"
   },
   {
     "id": "lead-generation-intern",
@@ -66,21 +146,39 @@
     "duration": "3 – 6 Months",
     "stipend": "Base Stipend + Commission on Qualified Deals",
     "iconName": "Target",
-    "shortDescription": "Identify enterprise decision-makers, execute tailored outbound email campaigns, and book high-value discovery calls.",
-    "description": "DeepLayer Solutions is expanding our enterprise consulting client roster. You will be responsible for identifying high-fit international companies, conducting market research, and executing high-deliverability outbound outreach.",
+    "shortDescription": "Identify enterprise decision-makers, execute tailored outbound email campaigns, and book high-value discovery consultations with international executives.",
+    "description": "We are expanding our international consulting practice across North America, Europe, and the GCC. As a B2B Lead Generation & Sales Intern at DeepLayer Solutions, you will be on the frontlines of our outbound pipeline—identifying companies seeking custom AI engineering, cloud modernization, and software development. You will learn modern consultative sales frameworks, harness enterprise prospecting tools, draft high-conversion cold sequences, and schedule discovery consultations with VP- and C-suite decision-makers.",
     "responsibilities": [
-      "Research prospective enterprise clients requiring AI engineering and software modernization.",
-      "Build targeted prospect lists using LinkedIn Sales Navigator, Apollo, or verified email tools.",
-      "Draft personalized, high-conversion cold outreach sequences and manage prospect follow-ups.",
-      "Schedule discovery calls with senior leadership and maintain pipeline CRM hygiene."
+      "Identify and research target enterprise accounts (SMBs, funded startups, and enterprise companies) requiring AI engineering and modern software development.",
+      "Build high-accuracy prospect contact lists using LinkedIn Sales Navigator, Apollo.io, Crunchbase, and verified email intelligence platforms.",
+      "Draft personalized, compelling cold outreach emails and multi-touch LinkedIn messaging sequences with strict spam-avoidance compliance.",
+      "Qualify incoming leads and outbound responses against Ideal Customer Profile (ICP) criteria, identifying technical scope and budget feasibility.",
+      "Coordinate and schedule introductory discovery calls between qualified prospects and DeepLayer Solutions' technical founders.",
+      "Maintain meticulous CRM records (HubSpot/Supabase), tracking lead statuses, follow-up touchpoints, objection handling, and pipeline analytics."
     ],
     "requirements": [
-      "Excellent research capabilities with strong attention to prospect qualification details.",
-      "Compelling business writing skills with the ability to articulate software value propositions.",
-      "Tenacity, high organizational skills, and persistence in follow-up workflows.",
-      "Eagerness to launch a high-impact career in technical B2B sales and business development."
+      "Enrolled in or graduate of a Bachelor's degree in Business Administration, Marketing, Economics, International Relations, or related field.",
+      "Outstanding written English communication skills capable of crafting concise, professional, value-driven executive outreach.",
+      "Comfortable navigating LinkedIn, business research directories, and professional prospecting databases.",
+      "High persistence, resilience, and methodical approach to multi-stage outreach follow-up cycles.",
+      "Quick learner with an appetite for understanding software architectures, AI value propositions, and consultative technology sales.",
+      "Strong organizational discipline and reliability in managing asynchronous remote deadlines."
+    ],
+    "preferredQualifications": [
+      "Prior experience or internships in B2B sales development (SDR), lead generation, or customer engagement.",
+      "Familiarity with modern outreach tools (Apollo, Lemlist, Instantly, or LinkedIn Sales Navigator).",
+      "Basic understanding of CRM hygiene and sales pipeline stages.",
+      "Experience in cold email deliverability best practices (domain warm-up, SPF/DKIM basics, and personalization tags)."
+    ],
+    "perks": [
+      "100% Remote Independence & Performance-Driven Culture",
+      "Base Monthly Stipend Plus Highly Lucrative Uncapped Deal Commission",
+      "Mastery of Modern Enterprise Sales, Lead Intelligence & Consultative Pitching",
+      "Direct Career Progression to Associate Account Executive / Sales Lead",
+      "Verified Internship Certificate & Executive Letter of Recommendation"
     ],
     "status": "published",
-    "createdAt": "2026-11-04T00:00:00.000Z"
+    "createdAt": "2026-11-04T00:00:00.000Z",
+    "updatedAt": "2026-11-21T07:55:00.000Z"
   }
 ]

@@ -16,6 +16,8 @@ export interface StoredJob {
   description: string;
   responsibilities: string[];
   requirements: string[];
+  preferredQualifications?: string[];
+  perks?: string[];
   status: "published" | "draft" | "closed";
   createdAt: string;
   updatedAt?: string;
