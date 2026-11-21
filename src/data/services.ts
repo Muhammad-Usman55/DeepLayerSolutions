@@ -108,6 +108,7 @@ export const servicesData: ServiceItem[] = [
       "vLLM",
       "OpenAI",
       "Anthropic",
+      "Google Gemini 2.5",
     ],
     process: [
       {

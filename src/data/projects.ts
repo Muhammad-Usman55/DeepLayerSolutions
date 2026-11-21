@@ -608,7 +608,7 @@ export const projectsData: CaseStudyProject[] = [
     technologyGroups: [
       {
         category: "LLM & Vector Intelligence",
-        items: ["Google Gemini 1.5", "LangChain", "Qdrant Vector Database", "Text-Embedding-004", "BM25 Hybrid Search"],
+        items: ["Google Gemini 2.5", "LangChain", "Qdrant Vector Database", "Text-Embedding-004", "BM25 Hybrid Search"],
       },
       {
         category: "Document Processing & OCR",
@@ -644,7 +644,7 @@ export const projectsData: CaseStudyProject[] = [
         {
           name: "Reasoning & Grounding Engine",
           role: "Faithful Synthesis",
-          technologies: ["Google Gemini 1.5", "LangChain Synthesizer"],
+          technologies: ["Google Gemini 2.5", "LangChain Synthesizer"],
           description:
             "Evaluates retrieved contexts, generating comprehensive explanations with verified page citation links.",
         },

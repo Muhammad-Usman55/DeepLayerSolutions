@@ -19,7 +19,7 @@ const track1: TechItem[] = [
   { name: "Next.js", category: "React Framework", icon: Code2 },
   { name: "TypeScript", category: "Type Safety", icon: Code2 },
   { name: "LangGraph", category: "Multi-Agent AI", icon: Cpu },
-  { name: "Google Gemini", category: "Foundation LLM", icon: Box },
+  { name: "Google Gemini 2.5", category: "Foundation LLM", icon: Box },
 ];
 
 const track2: TechItem[] = [

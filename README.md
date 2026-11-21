@@ -19,7 +19,7 @@ Engineered with Next.js App Router, Turbopack, Lenis smooth scrolling, Embla hor
 - **Production Website:** [www.deeplayersolutions.com](https://www.deeplayersolutions.com)
 - **GitHub Repository:** [Muhammad-Usman55/DeepLayerSolutions](https://github.com/Muhammad-Usman55/DeepLayerSolutions)
 - **LinkedIn:** [DeepLayer Solutions on LinkedIn](https://www.linkedin.com/company/deeplayersolutions/)
-- **Facebook:** [DeepLayer Solutions on Facebook](https://www.facebook.com/people/DeepLayer-Solutions/61596345801437/)
+- **Facebook:** [DeepLayer Solutions on Facebook](https://www.facebook.com/deeplayersolutions)
 - **WhatsApp:** [+92 316 6007316](https://wa.me/923166007316)
 - **Direct Inquiries:** [deeplayersolutions@gmail.com](mailto:deeplayersolutions@gmail.com)
 - **Headquarters:** Lahore, Pakistan
